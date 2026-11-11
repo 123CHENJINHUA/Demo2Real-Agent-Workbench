@@ -1,0 +1,22 @@
+import assert from 'node:assert/strict';
+import {selectLatestSimulationPanel,getSimulationValidationNotices} from '../../frontend/src/simulationPreviews.ts';
+const make=(id,stamp,frame)=>({id,path:`runs/test/simulation/isaac_${stamp}/trial_000/vision/visualization/frame_${frame}/panels.png`});
+const old=make('old','1794326652389997890','99.999');
+const early=make('early','1794326783548444122','9.9');
+const latest=make('latest','1794326783548444122','33.46');
+const misleading={id:'source',path:'runs/test/demo_import/dataset/simulation/isaac_9999999999999999999/trial_000/vision/visualization/frame_999/panels.png'};
+const contact={id:'contact',path:'runs/test/data_audit/video_00/contact_sheet.jpg'};
+const anotherRun={...make('other','9999999999999999999','999'),path:make('other','9999999999999999999','999').path.replace('runs/test/','runs/another/')};
+assert.equal(selectLatestSimulationPanel([old,early,latest,misleading,contact,anotherRun],'test').artifact.id,'latest');
+assert.equal(selectLatestSimulationPanel([old,early],'test').artifact.id,'early');
+assert.equal(selectLatestSimulationPanel([make('a','100','9'),make('b','100','10')],'test').artifact.id,'b');
+assert.equal(selectLatestSimulationPanel([make('a','1794326783548444121','99'),make('b','1794326783548444122','1')],'test').artifact.id,'b');
+assert.equal(selectLatestSimulationPanel([misleading,contact,anotherRun],'test'),null);
+assert.equal(selectLatestSimulationPanel([], 'test'),null);
+assert.equal(selectLatestSimulationPanel([latest],undefined),null);
+console.log(JSON.stringify({status:'passed',checks:7,numeric_stamp_precision:'BigInt',numeric_frame_order:true,source_demo_excluded:true,other_run_excluded:true,no_artifact_no_panel:true,gpu_jobs_started:0}));
+
+assert.deepEqual(getSimulationValidationNotices([{stage:'simulation',status:'succeeded',result:{result:{results:[{passed:true,released_from_fingers:true,post_release_retained:false}]}}}]),['插入及松手完成；松手后保持验证未通过']);
+assert.deepEqual(getSimulationValidationNotices([{stage:'simulation',result:{result:{results:[{passed:true,released_from_fingers:true}]}}}]),[]);
+assert.deepEqual(getSimulationValidationNotices([{stage:'simulation',result:{result:{results:[{passed:false,post_release_retained:false}]}}}]),['松手后保持验证未通过']);
+console.log(JSON.stringify({validation_notice_checks:3,status:'passed',succeeded_workflow_does_not_hide_failed_retention:true}));

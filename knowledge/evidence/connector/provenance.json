@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "snapshot_date": "2026-11-10",
+  "purpose": "Historical evidence for curated case seeds; no new experiments performed",
+  "external_paths_are_provenance_only": true,
+  "artifacts": [
+    {
+      "project_relative_path": "knowledge/evidence/connector/source_conversion.json",
+      "source_project": "TP-KMPs-nero-isaacsim",
+      "source_relative_path": "output/connector_dexmimic/source/conversion.json",
+      "sha256": "1952fda5b9c45375a01d415dccc6739474b549d752ee51e1e88016236fc09771",
+      "bytes": 4572,
+      "copy_kind": "verbatim_report_snapshot"
+    },
+    {
+      "project_relative_path": "knowledge/evidence/connector/functional_keying_audit.json",
+      "source_project": "TP-KMPs-nero-isaacsim",
+      "source_relative_path": "output/connector_keying/analysis_03/keying_audit.json",
+      "sha256": "cf14acb2d005bba8b432a5d34fca2ec2aa8299fb80e4da609152be153d774dd4",
+      "bytes": 6916,
+      "copy_kind": "verbatim_report_snapshot"
+    },
+    {
+      "project_relative_path": "knowledge/evidence/connector/keyed_bench_04.json",
+      "source_project": "TP-KMPs-nero-isaacsim",
+      "source_relative_path": "output/connector_keying/bench_04/bench_summary.json",
+      "sha256": "8ee793cff85c698dad80c18401e582199cef320f8bfc659121aef72422d395ab",
+      "bytes": 7698,
+      "copy_kind": "verbatim_report_snapshot"
+    },
+    {
+      "project_relative_path": "knowledge/evidence/connector/grasp_roll_failure.json",
+      "source_project": "TP-KMPs-nero-isaacsim",
+      "source_relative_path": "output/connector_keying/robot_varied_01/trial_000/result.json",
+      "sha256": "70c0fa7437e6e2558025806fd697fd962d61ce78017115daaec455ac79786bc2",
+      "bytes": 4518,
+      "copy_kind": "verbatim_report_snapshot"
+    },
+    {
+      "project_relative_path": "knowledge/evidence/connector/grasp_followup_partial.json",
+      "source_project": "TP-KMPs-nero-isaacsim",
+      "source_relative_path": "output/connector_keying/robot_varied_02/trial_000/result.json",
+      "sha256": "6b4e78cf9952ec77a0063b62a8f36d2ec17390b406758c5626e14eac3f79483b",
+      "bytes": 9188,
+      "copy_kind": "verbatim_report_snapshot"
+    },
+    {
+      "project_relative_path": "knowledge/evidence/connector/rgbd_contact_failure.json",
+      "source_project": "TP-KMPs-nero-isaacsim",
+      "source_relative_path": "output/connector_keying/rgbd_keyed_01/trial_000/result.json",
+      "sha256": "5b132f3719e432fa621fff4fa79056e2e3e95caa1b43c664cfe269bc4166b710",
+      "bytes": 4514,
+      "copy_kind": "verbatim_report_snapshot"
+    },
+    {
+      "project_relative_path": "knowledge/evidence/connector/depth_refinement_single_frame.json",
+      "source_project": "TP-KMPs-nero-isaacsim",
+      "source_relative_path": "output/connector_keying/depth_refinement_01/offline_evaluation.json",
+      "sha256": "0f30203f1ae7a2c492169e34ab0ee63b6c56d6b988b1ce9e7f6235b14caa76d2",
+      "bytes": 595,
+      "copy_kind": "verbatim_report_snapshot"
+    },
+    {
+      "project_relative_path": "knowledge/evidence/connector/preinsert_saturation_failure.json",
+      "source_project": "TP-KMPs-nero-isaacsim",
+      "source_relative_path": "output/connector_keying/robot_diagnostic_01/trial_000/result.json",
+      "sha256": "b7f1d7bfc0539f14960957352f82cb1e79d938caefb7aced7c10f758624efb87",
+      "bytes": 4730,
+      "copy_kind": "verbatim_report_snapshot"
+    },
+    {
+      "project_relative_path": "knowledge/evidence/connector/direct_release_validation.json",
+      "source_project": "TP-KMPs-nero-isaacsim",
+      "source_relative_path": "output/connector_keying/validation_summary.json",
+      "sha256": "3e9f92b2e8a4dac69020be6267f45520259a6387f480370411de237555612f9c",
+      "bytes": 3580,
+      "copy_kind": "verbatim_report_snapshot"
+    },
+    {
+      "project_relative_path": "knowledge/evidence/connector/preinsert_saturation_excerpt.json",
+      "source_project": "TP-KMPs-nero-isaacsim",
+      "source_relative_path": "output/connector_keying/robot_diagnostic_01/trial_000/cooperative_feedback.json",
+      "source_sha256": "77d7b97b446b7fe3c10df1e7aac5e15c780d5619fce2f35fafb83d261bcc7cb5",
+      "sha256": "b69d0b9fad8e327dbb1aa30a398bb14b6ac7d43d8aeb2bf337fbeb97586f643a",
+      "bytes": 3022,
+      "copy_kind": "derived_excerpt_and_counts",
+      "selection_indices": [
+        0,
+        340,
+        1549
+      ]
+    }
+  ]
+}

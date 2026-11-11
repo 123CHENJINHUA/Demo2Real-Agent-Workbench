@@ -1,0 +1,18 @@
+# 外置运行环境唯一入口；外置安装保持只读。
+schema_version: 1
+environments:
+  isaac_sim_root: /home/cjh/Downloads/isaacsim/_build/linux-x86_64/release
+  isaac_lab_root: /home/cjh/Downloads/IsaacLab
+  app_python: ${PROJECT_ROOT}/.runtime/app-venv/bin/python
+  vision_python: /home/cjh/Downloads/TP-KMPs-nero-isaacsim/real_tpkmp/vision/envs/foundationpose/bin/python
+  policy_python: ${PROJECT_ROOT}/.runtime/app-venv/bin/python
+  training_python: /home/cjh/anaconda3/envs/isaaclab/bin/python
+  node_executable: /usr/bin/node
+  cuda_home: /home/cjh/Downloads/TP-KMPs-nero-isaacsim/real_tpkmp/vision/envs/cuda_toolchain
+  ffmpeg_executable: /usr/bin/ffmpeg
+  data_python: /home/cjh/anaconda3/envs/lerobot/bin/python
+  codex_executable: /usr/bin/codex
+policy:
+  external_environments_read_only: true
+  project_local_writes: true
+  inherit_project_pythonpath: false

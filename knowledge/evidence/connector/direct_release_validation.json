@@ -1,0 +1,106 @@
+{
+  "workflow": "demonstration grasp -> cooperative keyed alignment -> 22.8mm insertion -> simultaneous jaw opening at fixed arm targets",
+  "lowering_or_carrying": false,
+  "unit_tests_passed": 33,
+  "engineering_approximation": true,
+  "measured_hardware_materials": false,
+  "mechanism_bench": {
+    "directory": "bench_04",
+    "passed": true
+  },
+  "trials": [
+    {
+      "directory": "direct_release_physics_01",
+      "input": "pose surrogate, position variation",
+      "insertion_and_jaw_release_completed": true,
+      "keyed_before_release": true,
+      "jaws_free": true,
+      "post_drop_both_latches_retained": true,
+      "insertion_before_release": {
+        "depth_m": 0.022792823340327707,
+        "lateral_error_m": 0.0002899324005112737,
+        "angle_rad": 0.0011647094479808901,
+        "roll_rad": 1.5698309663730676,
+        "roll_error_rad": -0.0009653604218291534,
+        "target_roll_rad": 1.5707963267948966,
+        "latch_engagement_m": 0.00039281513321264006,
+        "nominal_hooks_caught": true,
+        "retained_face_area_m2": [
+          8.451227352558879e-07,
+          1.1148929459195907e-06
+        ],
+        "retained_hooks_caught": true
+      },
+      "after_release": {
+        "depth_m": 0.02298895096788548,
+        "lateral_error_m": 0.00030945911879119893,
+        "angle_rad": 0.0009830323734954266,
+        "roll_rad": 1.3824194578215525,
+        "roll_error_rad": -0.18837686897334383,
+        "target_roll_rad": 1.5707963267948966,
+        "latch_engagement_m": 0.0005889451214524319,
+        "nominal_hooks_caught": true,
+        "retained_face_area_m2": [
+          1.113073362775021e-06,
+          1.072370892773925e-06
+        ],
+        "retained_hooks_caught": true
+      },
+      "phases": [
+        "cooperative_insert",
+        "dex_coordination_closed_loop",
+        "dex_grasp",
+        "initialize",
+        "release"
+      ],
+      "contains_lowering_or_transfer": false
+    },
+    {
+      "directory": "direct_release_rgbd_01",
+      "input": "rendered RGBD + SAM3 + FoundationPose + depth refinement",
+      "insertion_and_jaw_release_completed": true,
+      "keyed_before_release": true,
+      "jaws_free": true,
+      "post_drop_both_latches_retained": false,
+      "insertion_before_release": {
+        "depth_m": 0.02282609553151438,
+        "lateral_error_m": 8.600941503243052e-05,
+        "angle_rad": 0.0012015444416473868,
+        "roll_rad": 1.5701133404248513,
+        "roll_error_rad": -0.0006829863700454908,
+        "target_roll_rad": 1.5707963267948966,
+        "latch_engagement_m": 0.0004260867970757032,
+        "nominal_hooks_caught": true,
+        "retained_face_area_m2": [
+          1.1012455678772392e-06,
+          8.587726193632091e-07
+        ],
+        "retained_hooks_caught": true
+      },
+      "after_release": {
+        "depth_m": 0.022449033304801726,
+        "lateral_error_m": 0.00030725611396817203,
+        "angle_rad": 0.061495271782326895,
+        "roll_rad": 1.575719394451365,
+        "roll_error_rad": 0.00492306765646866,
+        "target_roll_rad": 1.5707963267948966,
+        "latch_engagement_m": 2.6161419856545604e-05,
+        "nominal_hooks_caught": false,
+        "retained_face_area_m2": [
+          1.2622917698478555e-06,
+          0.0
+        ],
+        "retained_hooks_caught": false
+      },
+      "phases": [
+        "cooperative_insert",
+        "dex_coordination_closed_loop",
+        "dex_grasp",
+        "initialize",
+        "release"
+      ],
+      "contains_lowering_or_transfer": false
+    }
+  ],
+  "all_post_drop_retention_trials_passed": false
+}

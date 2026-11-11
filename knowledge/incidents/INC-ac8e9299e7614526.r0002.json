@@ -1,0 +1,69 @@
+{
+  "summary": "USD导出带入内置OmniPBR绝对MDL依赖",
+  "observed_behavior": "ValueError: '/home/cjh/.cache/packman/chk/kit-kernel/107.3.3+isaac.229672.69cbf6ad.gl.manylinux_2_35_x86_64.release/mdl/core/Base/OmniPBR.mdl' is not in the subpath of '/home/cjh/Downloads/Demo2Real-Agent-Workbench' OR one path is relative and the other is absolute.",
+  "primary_category": "runtime_environment",
+  "stage": "scene_build",
+  "mode": "offline",
+  "run_id": "e648721d1192409c",
+  "task_id": "e648721d1192409c:scene_build",
+  "diagnosis": {
+    "state": "confirmed",
+    "root_cause": "URDF导入材质引用Kit内置OmniPBR.mdl；业务导出路径检查拒绝项目外依赖。"
+  },
+  "declared_failure_category": null,
+  "declared_failure_stage": null,
+  "validation_scope": "仅本次Connector和程序方块的导出结构、依赖、内部相机几何和局部稳定性；不含完整动作、锁止、泛化策略或真机。",
+  "incident_id": "INC-ac8e9299e7614526",
+  "title": "USD导出带入内置OmniPBR绝对MDL依赖",
+  "revision_reason": "保留原失败，追加修正及两个真实场景的独立复审证据。",
+  "resolved": true,
+  "resolution_state": "verified_in_scope",
+  "fix": "把已识别的内置OmniPBR表面转换为UsdPreviewSurface，保留颜色/粗糙度/金属度；未知外部MDL仍拒绝。此修正是可移植材质近似，不是外观完全一致。",
+  "reusable_checklist": [
+    "检查所有USD层、纹理、MDL与AssetPathArray，不只检查几何文件。",
+    "仅转换有明确定义的内置材质；其他外部业务依赖不得悄悄放行。",
+    "保留材质适配清单，独立重开导出USD复审。"
+  ],
+  "feature_tags": [
+    "usd_export",
+    "scene_portability",
+    "independent_validation"
+  ],
+  "evidence": [
+    {
+      "path": "knowledge/evidence/incidents/90/903684dc95a54bddf2767b12d861a8ed9b6c76432e0a3b9a8118471579f004df.json",
+      "source_reference": "knowledge/evidence/incidents/90/903684dc95a54bddf2767b12d861a8ed9b6c76432e0a3b9a8118471579f004df.json",
+      "sha256": "903684dc95a54bddf2767b12d861a8ed9b6c76432e0a3b9a8118471579f004df",
+      "bytes": 3186
+    },
+    {
+      "path": "knowledge/evidence/incidents/e3/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.log",
+      "source_reference": "knowledge/evidence/incidents/e3/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "knowledge/evidence/incidents/fe/fe1f31008a0781611e18ea478bf2f4450a719c7e2d14bcdcf71ffeb99613b81f.json",
+      "source_reference": "runs/acceptance/scenes/end_to_end_report.json",
+      "sha256": "fe1f31008a0781611e18ea478bf2f4450a719c7e2d14bcdcf71ffeb99613b81f",
+      "bytes": 4348
+    },
+    {
+      "path": "knowledge/evidence/incidents/95/950291b48e7b65e1fdf90a2c73216baff50cee5547c65d5bf8681b9945e3f0ad.json",
+      "source_reference": "runs/acceptance/scenes/final_7a2f6bd23eae482a/validation_report.json",
+      "sha256": "950291b48e7b65e1fdf90a2c73216baff50cee5547c65d5bf8681b9945e3f0ad",
+      "bytes": 33703
+    },
+    {
+      "path": "knowledge/evidence/incidents/bb/bbe791f31b638b32b0fa303fb4333531a9bf20b25451630359e6d0235620574d.json",
+      "source_reference": "runs/acceptance/scenes/final_c9784f26971a43f7/validation_report.json",
+      "sha256": "bbe791f31b638b32b0fa303fb4333531a9bf20b25451630359e6d0235620574d",
+      "bytes": 19549
+    }
+  ],
+  "schema_version": 1,
+  "record_type": "incident",
+  "revision": 2,
+  "timestamp_utc": "2026-11-11T02:36:13.939464+00:00",
+  "hardware_verified": false
+}

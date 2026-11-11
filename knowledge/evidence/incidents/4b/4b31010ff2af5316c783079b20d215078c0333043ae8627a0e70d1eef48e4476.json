@@ -1,0 +1,633 @@
+{
+  "status": "failed",
+  "action_passed": false,
+  "full_task_passed": false,
+  "retention_passed": null,
+  "report": {
+    "passed": false,
+    "expert_perception": "simulated_pose_estimate",
+    "scene_rebuilt": false,
+    "initial_object_poses": [
+      [
+        [
+          0.4751192068512984,
+          -0.49208166522400054,
+          -0.7294637578600929,
+          -0.4412265121936798
+        ],
+        [
+          -0.8799009150460686,
+          -0.26003426369155536,
+          -0.3976890260083653,
+          -0.03066207468509674
+        ],
+        [
+          0.006009906994683012,
+          0.8308055226445993,
+          -0.5565303806272843,
+          0.7889807820320129
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      [
+        [
+          -0.3503981576796473,
+          0.936599845152843,
+          0.0013642413201780973,
+          -0.43054136633872986
+        ],
+        [
+          -0.9365927877481937,
+          -0.35040081342062046,
+          0.0036359169730382,
+          0.12530790269374847
+        ],
+        [
+          0.003883430542228598,
+          -3.7199723981350043e-06,
+          0.9999924594482629,
+          0.7894125580787659
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    ],
+    "execution_goal": "release",
+    "assembly_attempted": true,
+    "placement_mode": "current simulator poses",
+    "initial_plan_pose_source": "Noisy delayed pose estimate",
+    "generator": {
+      "isaaclab_version": "2.3.2",
+      "generator_file": "/home/cjh/Downloads/IsaacLab/source/isaaclab_mimic/isaaclab_mimic/datagen/data_generator.py",
+      "generator_sha256": "586538ef89b774e6521c10c52980a72018884d9e9973f70a5ee46fc9c2c62c99",
+      "backend": "Official IsaacLab Mimic bimanual DataGenerator; project-specific Nero PhysX adapter",
+      "subtask_boundaries": {
+        "left": [
+          [
+            [
+              0,
+              240
+            ],
+            [
+              240,
+              355
+            ],
+            [
+              355,
+              555
+            ]
+          ]
+        ],
+        "right": [
+          [
+            [
+              0,
+              240
+            ],
+            [
+              240,
+              355
+            ],
+            [
+              355,
+              555
+            ]
+          ]
+        ]
+      },
+      "coordination_scheme": "Official TRANSLATE: same translation for both arms; source cooperative wrist orientations retained"
+    },
+    "grasp_reference": "Tabletop yaw and position for rear-barrel approach; measured full roll retained for keyed coordination",
+    "gripper_control": "Source closure timing; force closure command zero below 27mm (left),35mm (right); source widths are feedback, not motor targets",
+    "time_scale": 2.0,
+    "transit_adaptation": {
+      "method": "World-anchored far transit, smooth blend to official object-relative grasp targets",
+      "source_transition_frames": {
+        "left": [
+          120,
+          165
+        ],
+        "right": [
+          0,
+          75
+        ]
+      }
+    },
+    "camera_housing": "90x25x25 mm approximation, optical pose calibrated; actual housing/bracket geometry unavailable",
+    "grasps": [
+      {
+        "arm": 0,
+        "lift_m": 0.07623523473739624,
+        "jaw_gap_m": 0.019609346985816956,
+        "contact_forces_N": [
+          5.795928001403809,
+          5.676674842834473
+        ],
+        "passed": true
+      },
+      {
+        "arm": 1,
+        "lift_m": 0.07471930980682373,
+        "jaw_gap_m": 0.018508031964302063,
+        "contact_forces_N": [
+          5.4824042320251465,
+          5.470609664916992
+        ],
+        "passed": true
+      }
+    ],
+    "recovery_policy": {
+      "policy": "learned skill supervisor",
+      "policy_checkpoint": "deployments/recovery-97418110f98f4579/policy.npz",
+      "force_observations": false,
+      "pose_source": "Noisy delayed simulator pose surrogate; not RGB perception",
+      "pose_noise_m": 0.0,
+      "pose_delay_s": 0.0,
+      "held_pose_prediction": "Timestamp-matched FK compensation; disabled for empty/open/lost grasps",
+      "events": [
+        {
+          "time_s": 22.666666666666668,
+          "kind": "remove",
+          "arm": 1,
+          "shift_m": [
+            0.025,
+            0.015
+          ],
+          "intervention": "external force carrier + jaw release"
+        }
+      ],
+      "recoveries": [],
+      "requires_human": true,
+      "observation_guard_overrides": 2,
+      "counts": {
+        "continue": 76,
+        "wait": 227,
+        "regrasp_left": 0,
+        "regrasp_right": 0,
+        "needs_human": 1
+      },
+      "learning_scope": "High-level recovery skill decisions; low-level demonstration and visual servo skills remain deterministic"
+    },
+    "requires_human": true,
+    "tracking": {
+      "position_rmse_m": 0.0008693644171436514,
+      "position_max_m": 0.004644859111321567,
+      "rotation_rmse_rad": 0.005030258311895306
+    },
+    "error": "Needs human: object unavailable or outside supported workspace",
+    "error_type": "RuntimeError",
+    "traceback": "Traceback (most recent call last):\n  File \"/home/cjh/Downloads/Demo2Real-Agent-Workbench/modules/motion_expert/recovery_runtime.py\", line 237, in execute\n    try:execute_trial(sim,report,out,reset=False)\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/cjh/Downloads/Demo2Real-Agent-Workbench/tasks/connector/legacy/sim_bridge/connector_dexmimic.py\", line 346, in execute_trial\n    run_segment(1)\n  File \"/home/cjh/Downloads/Demo2Real-Agent-Workbench/tasks/connector/legacy/sim_bridge/connector_dexmimic.py\", line 294, in run_segment\n    feedback,targets,actual,qrefs = run_cooperative_feedback(sim,poses,source['joints'][frames],output)\n                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/cjh/Downloads/Demo2Real-Agent-Workbench/tasks/connector/legacy/sim_bridge/connector_coordinator.py\", line 271, in run_cooperative_feedback\n    status = control(reference,progress,joint_references[k])\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/cjh/Downloads/Demo2Real-Agent-Workbench/tasks/connector/legacy/sim_bridge/connector_coordinator.py\", line 231, in control\n    raise RuntimeError('Needs human: object unavailable or outside supported workspace')\nRuntimeError: Needs human: object unavailable or outside supported workspace\n"
+  },
+  "trajectory_path": "runs/ba4eb867d07040c5/expert_execution/execution_1794405021779668691/trajectory.npz",
+  "plan_path": "runs/ba4eb867d07040c5/expert_execution/execution_1794405021779668691/execution_plan.json",
+  "task_spec_hash": "6388dd7364e8b2a49a61b315c9ce758e8f75800f481e00094bc653135aca0e32",
+  "spec_revision": 2,
+  "scene_manifest_path": "runs/ba4eb867d07040c5/scene_build/build_1794404912435791929/scene_manifest.json",
+  "loaded_scene_path": "runs/ba4eb867d07040c5/expert_execution/execution_1794405021779668691/runtime_scene.usdc",
+  "source_scene_path": "runs/ba4eb867d07040c5/scene_build/build_1794404912435791929/scene.usda",
+  "scene_preparation": {
+    "source_scene_path": "runs/ba4eb867d07040c5/scene_build/build_1794404912435791929/scene.usda",
+    "prepared_scene_path": "runs/ba4eb867d07040c5/expert_execution/execution_1794405021779668691/runtime_scene.usdc",
+    "removed_runtime_graph_roots": [
+      "/Render",
+      "/Orchestrator"
+    ],
+    "method": "flatten_remove_only_transient_render_roots",
+    "original_scene_sha256": "8b343d09c6a3fff3cf8104ca097b9d4737cafe87c1830d8edd89625c70ff0f21",
+    "prepared_scene_sha256": "fcc664f2ce20416c29434d98f335a31ca4b084c0f74e49df5834f0c7e5087258"
+  },
+  "execution_scene_path": "runs/ba4eb867d07040c5/expert_execution/execution_1794405021779668691/execution_final.usdc",
+  "initial_execution_scene_path": "runs/ba4eb867d07040c5/expert_execution/execution_1794405021779668691/execution_initial.usdc",
+  "execution_overlay": {
+    "id": "connector_contact_execution/v1",
+    "finger_drive_type": "force",
+    "finger_stiffness_N_m": 600.0,
+    "finger_damping_Ns_m": 10.0,
+    "finger_max_force_N": 10.0,
+    "finger_contact_offset_m": 0.001,
+    "finger_friction": {
+      "static": 1.2,
+      "dynamic": 1.0
+    },
+    "finger_mesh_approximation": "convexDecomposition",
+    "body_angular_damping_per_s": 5.0,
+    "body_linear_damping_per_s": 0.1,
+    "body_sleep_threshold": 1e-05,
+    "gravity_compensation": true,
+    "solver_position_iterations": 64,
+    "solver_velocity_iterations": 16,
+    "geometry_rebuilt": false,
+    "object_pose_writes_during_execution": false
+  },
+  "initial_scene_audit": {
+    "loaded_scene_path": "runs/ba4eb867d07040c5/expert_execution/execution_1794405021779668691/runtime_scene.usdc",
+    "source_scene_path": "runs/ba4eb867d07040c5/scene_build/build_1794404912435791929/scene.usda",
+    "scene_preparation": {
+      "source_scene_path": "runs/ba4eb867d07040c5/scene_build/build_1794404912435791929/scene.usda",
+      "prepared_scene_path": "runs/ba4eb867d07040c5/expert_execution/execution_1794405021779668691/runtime_scene.usdc",
+      "removed_runtime_graph_roots": [
+        "/Render",
+        "/Orchestrator"
+      ],
+      "method": "flatten_remove_only_transient_render_roots",
+      "original_scene_sha256": "8b343d09c6a3fff3cf8104ca097b9d4737cafe87c1830d8edd89625c70ff0f21",
+      "prepared_scene_sha256": "fcc664f2ce20416c29434d98f335a31ca4b084c0f74e49df5834f0c7e5087258"
+    },
+    "loaded_layers": [
+      "runs/ba4eb867d07040c5/expert_execution/execution_1794405021779668691/runtime_scene.usdc"
+    ],
+    "object_poses": [
+      {
+        "id": "connector_male",
+        "path": "/World/Objects/connector_male",
+        "position_error_m": 1.862645149230957e-09,
+        "rotation_error_rad": 1.0663608417937895e-07,
+        "manifest_pose": {
+          "position_m": [
+            -0.44122689962387085,
+            -0.0306620541960001,
+            0.7889807820320129
+          ],
+          "quaternion_wxyz": [
+            0.40575551986694336,
+            0.7569162249565125,
+            -0.45315057039260864,
+            -0.23894555866718292
+          ]
+        },
+        "loaded_pose": [
+          [
+            0.47511930837559335,
+            -0.49208699206680806,
+            -0.7294600983243283,
+            -0.44122689962387085
+          ],
+          [
+            -0.8799008384322171,
+            -0.2600342289568658,
+            -0.39768921823088127,
+            -0.03066205605864525
+          ],
+          [
+            0.0060130969540685975,
+            0.8308023784327108,
+            -0.5565350399171389,
+            0.7889807820320129
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      {
+        "id": "connector_female",
+        "path": "/World/Objects/connector_female",
+        "position_error_m": 0.0,
+        "rotation_error_rad": 1.959101233245207e-07,
+        "manifest_pose": {
+          "position_m": [
+            -0.4305414855480194,
+            0.12530791759490967,
+            0.7894126176834106
+          ],
+          "quaternion_wxyz": [
+            -0.5699107646942139,
+            0.0015959731535986066,
+            0.0011063391575589776,
+            0.8217043876647949
+          ]
+        },
+        "loaded_pose": [
+          [
+            -0.350398628238874,
+            0.9365996726505355,
+            0.0013618073376674058,
+            -0.4305414855480194
+          ],
+          [
+            -0.936592609900269,
+            -0.3504012745267835,
+            0.003637291603346594,
+            0.12530791759490967
+          ],
+          [
+            0.003883865151807547,
+            -9.56700249831301e-07,
+            0.999992457766841,
+            0.7894126176834106
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      }
+    ],
+    "robot_initialization": "spec named joint state; no object pose initialization",
+    "robot_joint_positions": {
+      "left": [
+        -0.025010569021105766,
+        0.2410648763179779,
+        -0.4001341760158539,
+        2.0603089332580566,
+        0.20963150262832642,
+        0.3277902901172638,
+        -0.2878047823905945,
+        0.027499999850988388,
+        -0.027499999850988388
+      ],
+      "right": [
+        -0.23781856894493103,
+        0.6119298934936523,
+        0.968378484249115,
+        1.8059794902801514,
+        -0.36650168895721436,
+        0.2888694405555725,
+        0.24389231204986572,
+        0.019999999552965164,
+        -0.019999999552965164
+      ]
+    },
+    "existing_object_paths": [
+      "/World/Objects/connector_male",
+      "/World/Objects/connector_female"
+    ],
+    "existing_latch_paths": [
+      "/World/MaleLatch0",
+      "/World/MaleLatch1"
+    ],
+    "source_scene_scope": "scene_and_local_settling_only",
+    "source_contact_execution_authorized": false,
+    "plan_binding_scope": "offline_contact_expert_only",
+    "mesh_topology_unchanged": true,
+    "scene_rebuilt": false
+  },
+  "hardware_commands_sent": 0,
+  "expert_perception": "simulated_pose_estimate",
+  "source_sha256": {
+    "modules/motion_expert/recovery_runtime.py": "3de14df5c65c2be2ba65e420b560ca2d09eae948c9a85eae94c9ef069b169d87",
+    "tasks/connector/legacy/sim_bridge/__init__.py": "f3050843f9e5aa9e3051c24efe2a0e40ca905c5237b99acf838c8ce227a5afe3",
+    "tasks/connector/legacy/sim_bridge/connector_planner.py": "197971f236a148b1c8a5a11ee2e32720368760487d7d346ffd05ae16f23c3bff",
+    "tasks/connector/legacy/sim_bridge/connector_dexmimic.py": "a3fdc635006da110308689b568c844c4f9c72e0e817ebced49794a2f854d2b7e",
+    "tasks/connector/legacy/sim_bridge/grasp_parameters.py": "20a93b1938195f2697c5467be33a4216c31f937c0f0f1fd43b6076943e39d337",
+    "tasks/connector/legacy/sim_bridge/grasp_scene.py": "9241e1ac1a9a50a72f3222e7daf877475c00977284e5d6d1a90a114793c80dab",
+    "tasks/connector/components/__init__.py": "c5cf4968345882d1139ef7b0d32bff627fc6e2a20d7292edbbd93ddd543f829d",
+    "tasks/connector/components/keying_geometry.py": "ffb27b44eaf8016ae584a508bf460e7fb0b35edf6f169143231ab3e69b7f5680",
+    "tasks/connector/components/mechanics.py": "7cfb3b6fe79bc7c975475fad1887e21ba06e6f54093e97adb9bd0c23db30b7ac",
+    "tasks/connector/legacy/sim_bridge/connector_robust.py": "310ae2e722227c5cdd3458409cf60c2af8a0e8b83def59f81414f4b2b82af627",
+    "tasks/connector/legacy/sim_bridge/connector_coordinator.py": "90415a43438adc556fb0a73b7c77c9f99d1b9fbe3004a94212d6bc1d11e2b483",
+    "tasks/connector/legacy/sim_bridge/connector_keying.py": "73a02d68a6f943d6b05dc04f0fc8e2c146ec37a9008940e64d8ddbab15cc3f82"
+  },
+  "loaded_runtime_sha256": "3de14df5c65c2be2ba65e420b560ca2d09eae948c9a85eae94c9ef069b169d87",
+  "export_material_adaptations": {
+    "execution_initial.usdc": [
+      {
+        "shader_path": "/World/nero/gripper_link1/collisions/gripper_link1/node_STL_BINARY_/Looks/DefaultMaterial/DefaultMaterial",
+        "from_module": "OmniPBR.mdl",
+        "to": "UsdPreviewSurface",
+        "scope": "scalar appearance approximation; physics unchanged"
+      },
+      {
+        "shader_path": "/World/nero/gripper_link1/collisions/gripper_link1_0/node_STL_BINARY_/Looks/DefaultMaterial/DefaultMaterial",
+        "from_module": "OmniPBR.mdl",
+        "to": "UsdPreviewSurface",
+        "scope": "scalar appearance approximation; physics unchanged"
+      },
+      {
+        "shader_path": "/World/nero/gripper_link2/collisions/gripper_link2/node_STL_BINARY_/Looks/DefaultMaterial/DefaultMaterial",
+        "from_module": "OmniPBR.mdl",
+        "to": "UsdPreviewSurface",
+        "scope": "scalar appearance approximation; physics unchanged"
+      },
+      {
+        "shader_path": "/World/nero/gripper_link2/collisions/gripper_link2_0/node_STL_BINARY_/Looks/DefaultMaterial/DefaultMaterial",
+        "from_module": "OmniPBR.mdl",
+        "to": "UsdPreviewSurface",
+        "scope": "scalar appearance approximation; physics unchanged"
+      },
+      {
+        "shader_path": "/World/nero2/gripper_link1/collisions/gripper_link1/node_STL_BINARY_/Looks/DefaultMaterial/DefaultMaterial",
+        "from_module": "OmniPBR.mdl",
+        "to": "UsdPreviewSurface",
+        "scope": "scalar appearance approximation; physics unchanged"
+      },
+      {
+        "shader_path": "/World/nero2/gripper_link1/collisions/gripper_link1_0/node_STL_BINARY_/Looks/DefaultMaterial/DefaultMaterial",
+        "from_module": "OmniPBR.mdl",
+        "to": "UsdPreviewSurface",
+        "scope": "scalar appearance approximation; physics unchanged"
+      },
+      {
+        "shader_path": "/World/nero2/gripper_link2/collisions/gripper_link2/node_STL_BINARY_/Looks/DefaultMaterial/DefaultMaterial",
+        "from_module": "OmniPBR.mdl",
+        "to": "UsdPreviewSurface",
+        "scope": "scalar appearance approximation; physics unchanged"
+      },
+      {
+        "shader_path": "/World/nero2/gripper_link2/collisions/gripper_link2_0/node_STL_BINARY_/Looks/DefaultMaterial/DefaultMaterial",
+        "from_module": "OmniPBR.mdl",
+        "to": "UsdPreviewSurface",
+        "scope": "scalar appearance approximation; physics unchanged"
+      }
+    ],
+    "initial_checkpoint.usdc": [
+      {
+        "shader_path": "/World/nero/gripper_link1/collisions/gripper_link1/node_STL_BINARY_/Looks/DefaultMaterial/DefaultMaterial",
+        "from_module": "OmniPBR.mdl",
+        "to": "UsdPreviewSurface",
+        "scope": "scalar appearance approximation; physics unchanged"
+      },
+      {
+        "shader_path": "/World/nero/gripper_link1/collisions/gripper_link1_0/node_STL_BINARY_/Looks/DefaultMaterial/DefaultMaterial",
+        "from_module": "OmniPBR.mdl",
+        "to": "UsdPreviewSurface",
+        "scope": "scalar appearance approximation; physics unchanged"
+      },
+      {
+        "shader_path": "/World/nero/gripper_link2/collisions/gripper_link2/node_STL_BINARY_/Looks/DefaultMaterial/DefaultMaterial",
+        "from_module": "OmniPBR.mdl",
+        "to": "UsdPreviewSurface",
+        "scope": "scalar appearance approximation; physics unchanged"
+      },
+      {
+        "shader_path": "/World/nero/gripper_link2/collisions/gripper_link2_0/node_STL_BINARY_/Looks/DefaultMaterial/DefaultMaterial",
+        "from_module": "OmniPBR.mdl",
+        "to": "UsdPreviewSurface",
+        "scope": "scalar appearance approximation; physics unchanged"
+      },
+      {
+        "shader_path": "/World/nero2/gripper_link1/collisions/gripper_link1/node_STL_BINARY_/Looks/DefaultMaterial/DefaultMaterial",
+        "from_module": "OmniPBR.mdl",
+        "to": "UsdPreviewSurface",
+        "scope": "scalar appearance approximation; physics unchanged"
+      },
+      {
+        "shader_path": "/World/nero2/gripper_link1/collisions/gripper_link1_0/node_STL_BINARY_/Looks/DefaultMaterial/DefaultMaterial",
+        "from_module": "OmniPBR.mdl",
+        "to": "UsdPreviewSurface",
+        "scope": "scalar appearance approximation; physics unchanged"
+      },
+      {
+        "shader_path": "/World/nero2/gripper_link2/collisions/gripper_link2/node_STL_BINARY_/Looks/DefaultMaterial/DefaultMaterial",
+        "from_module": "OmniPBR.mdl",
+        "to": "UsdPreviewSurface",
+        "scope": "scalar appearance approximation; physics unchanged"
+      },
+      {
+        "shader_path": "/World/nero2/gripper_link2/collisions/gripper_link2_0/node_STL_BINARY_/Looks/DefaultMaterial/DefaultMaterial",
+        "from_module": "OmniPBR.mdl",
+        "to": "UsdPreviewSurface",
+        "scope": "scalar appearance approximation; physics unchanged"
+      }
+    ],
+    "both_grasped_checkpoint.usdc": [
+      {
+        "shader_path": "/World/nero/gripper_link1/collisions/gripper_link1/node_STL_BINARY_/Looks/DefaultMaterial/DefaultMaterial",
+        "from_module": "OmniPBR.mdl",
+        "to": "UsdPreviewSurface",
+        "scope": "scalar appearance approximation; physics unchanged"
+      },
+      {
+        "shader_path": "/World/nero/gripper_link1/collisions/gripper_link1_0/node_STL_BINARY_/Looks/DefaultMaterial/DefaultMaterial",
+        "from_module": "OmniPBR.mdl",
+        "to": "UsdPreviewSurface",
+        "scope": "scalar appearance approximation; physics unchanged"
+      },
+      {
+        "shader_path": "/World/nero/gripper_link2/collisions/gripper_link2/node_STL_BINARY_/Looks/DefaultMaterial/DefaultMaterial",
+        "from_module": "OmniPBR.mdl",
+        "to": "UsdPreviewSurface",
+        "scope": "scalar appearance approximation; physics unchanged"
+      },
+      {
+        "shader_path": "/World/nero/gripper_link2/collisions/gripper_link2_0/node_STL_BINARY_/Looks/DefaultMaterial/DefaultMaterial",
+        "from_module": "OmniPBR.mdl",
+        "to": "UsdPreviewSurface",
+        "scope": "scalar appearance approximation; physics unchanged"
+      },
+      {
+        "shader_path": "/World/nero2/gripper_link1/collisions/gripper_link1/node_STL_BINARY_/Looks/DefaultMaterial/DefaultMaterial",
+        "from_module": "OmniPBR.mdl",
+        "to": "UsdPreviewSurface",
+        "scope": "scalar appearance approximation; physics unchanged"
+      },
+      {
+        "shader_path": "/World/nero2/gripper_link1/collisions/gripper_link1_0/node_STL_BINARY_/Looks/DefaultMaterial/DefaultMaterial",
+        "from_module": "OmniPBR.mdl",
+        "to": "UsdPreviewSurface",
+        "scope": "scalar appearance approximation; physics unchanged"
+      },
+      {
+        "shader_path": "/World/nero2/gripper_link2/collisions/gripper_link2/node_STL_BINARY_/Looks/DefaultMaterial/DefaultMaterial",
+        "from_module": "OmniPBR.mdl",
+        "to": "UsdPreviewSurface",
+        "scope": "scalar appearance approximation; physics unchanged"
+      },
+      {
+        "shader_path": "/World/nero2/gripper_link2/collisions/gripper_link2_0/node_STL_BINARY_/Looks/DefaultMaterial/DefaultMaterial",
+        "from_module": "OmniPBR.mdl",
+        "to": "UsdPreviewSurface",
+        "scope": "scalar appearance approximation; physics unchanged"
+      }
+    ],
+    "execution_final.usdc": [
+      {
+        "shader_path": "/World/nero/gripper_link1/collisions/gripper_link1/node_STL_BINARY_/Looks/DefaultMaterial/DefaultMaterial",
+        "from_module": "OmniPBR.mdl",
+        "to": "UsdPreviewSurface",
+        "scope": "scalar appearance approximation; physics unchanged"
+      },
+      {
+        "shader_path": "/World/nero/gripper_link1/collisions/gripper_link1_0/node_STL_BINARY_/Looks/DefaultMaterial/DefaultMaterial",
+        "from_module": "OmniPBR.mdl",
+        "to": "UsdPreviewSurface",
+        "scope": "scalar appearance approximation; physics unchanged"
+      },
+      {
+        "shader_path": "/World/nero/gripper_link2/collisions/gripper_link2/node_STL_BINARY_/Looks/DefaultMaterial/DefaultMaterial",
+        "from_module": "OmniPBR.mdl",
+        "to": "UsdPreviewSurface",
+        "scope": "scalar appearance approximation; physics unchanged"
+      },
+      {
+        "shader_path": "/World/nero/gripper_link2/collisions/gripper_link2_0/node_STL_BINARY_/Looks/DefaultMaterial/DefaultMaterial",
+        "from_module": "OmniPBR.mdl",
+        "to": "UsdPreviewSurface",
+        "scope": "scalar appearance approximation; physics unchanged"
+      },
+      {
+        "shader_path": "/World/nero2/gripper_link1/collisions/gripper_link1/node_STL_BINARY_/Looks/DefaultMaterial/DefaultMaterial",
+        "from_module": "OmniPBR.mdl",
+        "to": "UsdPreviewSurface",
+        "scope": "scalar appearance approximation; physics unchanged"
+      },
+      {
+        "shader_path": "/World/nero2/gripper_link1/collisions/gripper_link1_0/node_STL_BINARY_/Looks/DefaultMaterial/DefaultMaterial",
+        "from_module": "OmniPBR.mdl",
+        "to": "UsdPreviewSurface",
+        "scope": "scalar appearance approximation; physics unchanged"
+      },
+      {
+        "shader_path": "/World/nero2/gripper_link2/collisions/gripper_link2/node_STL_BINARY_/Looks/DefaultMaterial/DefaultMaterial",
+        "from_module": "OmniPBR.mdl",
+        "to": "UsdPreviewSurface",
+        "scope": "scalar appearance approximation; physics unchanged"
+      },
+      {
+        "shader_path": "/World/nero2/gripper_link2/collisions/gripper_link2_0/node_STL_BINARY_/Looks/DefaultMaterial/DefaultMaterial",
+        "from_module": "OmniPBR.mdl",
+        "to": "UsdPreviewSurface",
+        "scope": "scalar appearance approximation; physics unchanged"
+      }
+    ]
+  },
+  "captures": [
+    {
+      "phase": "initial",
+      "path": null,
+      "state_path": "runs/ba4eb867d07040c5/expert_execution/execution_1794405021779668691/initial_checkpoint.usdc",
+      "simulation_time_s": 1.0,
+      "source": "physical_USD_checkpoint_RGB_not_rendered"
+    },
+    {
+      "phase": "both_grasped",
+      "path": null,
+      "state_path": "runs/ba4eb867d07040c5/expert_execution/execution_1794405021779668691/both_grasped_checkpoint.usdc",
+      "simulation_time_s": 20.166666666666668,
+      "source": "physical_USD_checkpoint_RGB_not_rendered"
+    }
+  ],
+  "rgbd_executed": false,
+  "learned_policy_executed": true,
+  "scene_rebuilt": false,
+  "recovery_config": {
+    "kind": "remove",
+    "arm": 1,
+    "after_s": 2.5,
+    "shift_m": [
+      0.025,
+      0.015
+    ],
+    "seed": 404234167,
+    "pose_noise_m": 0.0,
+    "pose_delay_s": 0.0,
+    "rotation_noise_rad": 0.0,
+    "policy_path": "deployments/recovery-97418110f98f4579/policy.npz"
+  },
+  "supervision_path": "runs/ba4eb867d07040c5/expert_execution/execution_1794405021779668691/supervision.npz",
+  "policy_observations_path": "runs/ba4eb867d07040c5/expert_execution/execution_1794405021779668691/policy_observations.npz"
+}

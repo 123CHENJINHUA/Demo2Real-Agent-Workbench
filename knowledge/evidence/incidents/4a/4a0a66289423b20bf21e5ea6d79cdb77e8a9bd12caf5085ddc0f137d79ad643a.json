@@ -1,0 +1,8 @@
+{
+  "symptom": "Isaac expert initialized app but did not produce initial_scene_audit or motion events for over 5 minutes",
+  "last_log_line": "[4.384s] app ready",
+  "motion_evidence_present": false,
+  "gpu_readonly_check": "driver available; 3052/16376 MiB, utilization8%; not proof of root cause",
+  "action": "cancel and retry the same training case without changing code, poses or success criteria",
+  "root_cause": "unknown; startup/material loading wait suspected"
+}

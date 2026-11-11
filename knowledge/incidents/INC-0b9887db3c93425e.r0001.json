@@ -1,0 +1,27 @@
+{
+  "summary": "worker退出码 1，没有有效result.json",
+  "observed_behavior": "worker退出码 1，没有有效result.json",
+  "primary_category": "workflow_integrity",
+  "stage": "runtime",
+  "mode": "offline",
+  "run_id": "5ae490795fcd4cef",
+  "task_id": "5ae490795fcd4cef:demo_import",
+  "diagnosis": {
+    "state": "unknown"
+  },
+  "evidence": [
+    {
+      "path": "knowledge/evidence/incidents/0e/0e04c3f48714237897cf24a32bef2d75d6e05cf084832f60628e6cb17d0dbe19.log",
+      "source_reference": "runs/5ae490795fcd4cef/demo_import/worker.log",
+      "sha256": "0e04c3f48714237897cf24a32bef2d75d6e05cf084832f60628e6cb17d0dbe19",
+      "bytes": 947
+    }
+  ],
+  "validation_scope": "worker_failure_only_no_hardware_inference",
+  "schema_version": 1,
+  "record_type": "incident",
+  "incident_id": "INC-0b9887db3c93425e",
+  "revision": 1,
+  "timestamp_utc": "2026-11-10T15:48:48.893918+00:00",
+  "hardware_verified": false
+}

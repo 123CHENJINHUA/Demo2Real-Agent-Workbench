@@ -1,0 +1,6 @@
+import {CheckCircle2,Clock3,RefreshCw,Terminal,TriangleAlert} from 'lucide-react';
+import {codexConnectionView} from './providerSettings';
+export default function CodexConnectionCard({status,busy,onRefresh}:{status:any,busy:boolean,onRefresh:()=>void}){
+ const view=codexConnectionView(status);
+ return <div className="codex-connection-card"><div className="codex-card-header"><span className={'codex-auth-badge '+view.state}>{view.ready?<CheckCircle2 size={14}/>:view.state==='checking'?<Clock3 size={14}/>:<TriangleAlert size={14}/>}<strong>{view.label}</strong></span><button type="button" className="icon-button" onClick={onRefresh} disabled={busy} aria-label="刷新项目Codex登录状态"><RefreshCw size={14}/></button></div><dl><div><dt>CLI 程序</dt><dd>{status?.executable||'尚未登记'}</dd></div><div><dt>CLI 版本</dt><dd>{status?.version||status?.cli_version||'后端尚未返回'}</dd></div><div><dt>项目登录目录</dt><dd>{status?.auth_home||'正在读取项目路径'}</dd></div><div><dt>配置模型</dt><dd>{status?.model&&status.model!=='CLI default'?status.model:'CLI 默认（真实返回后核验）'}</dd></div></dl>{status?.detail&&<p className="codex-status-detail"><Terminal size={13}/><span>{status.detail}</span></p>}<p className="codex-isolation-note">此状态仅针对本项目独立 CODEX_HOME。全局 Codex 登录与当前聊天上下文不会自动继承。</p></div>
+}

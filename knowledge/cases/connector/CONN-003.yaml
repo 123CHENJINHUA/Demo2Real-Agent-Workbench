@@ -1,0 +1,72 @@
+schema_version: 1
+record_type: curated_historical_case
+case_id: CONN-003
+revision: 1
+recorded_on: '2026-11-10'
+title: 桌面滚转把整个下抓参考翻侧，导致抓空
+status: partially_verified
+primary_category: planning_control
+secondary_categories:
+- geometry_function
+- perception_estimation
+stages:
+- simulation_test
+feature_tags:
+- roll_ambiguity
+- parallel_jaw
+- friction_grasp
+- bimanual
+evidence_scopes:
+- simulation
+hardware_verified: false
+facts:
+- robot_varied_01 左侧抓取子项失败、右侧通过，完整回合失败。
+- 相同请求位姿扰动的后续 robot_varied_02 两侧抓取子项通过，但后续保持失败，完整回合仍失败。
+diagnosis:
+  state: supported_by_diagnostics
+  explanation: 开发诊断为桌面不同 resting face 的完整 roll 变换了整个接近/下抓方向。
+  alternatives:
+  - 两回合软件版本不同，不是严格的单变量对照试验。
+source_mitigation:
+  actions:
+  - 本任务后部夹持参考按位置和水平朝向适配，保留上方接近。
+  - 感知仍保留完整 roll，供后续对键使用，不全局清除姿态。
+  implemented_in_new_project: false
+  attempts:
+  - change: 完整 roll 作用到桌面接近参考
+    outcome: left_grasp_failed
+  - change: 按本任务水平朝向适配上方抓持参考
+    outcome: both_grasp_subchecks_passed
+    limits: 后续保持失败，不能标完整任务成功
+  status: recorded_in_source_history
+verification:
+  scope: 历史抓取子阶段
+  passed_subchecks:
+  - 后续同请求扰动下两侧抓取通过
+  failed_or_unverified:
+  - 该后续回合整体保持仍失败
+  - 未验证任意非对称抓持面
+applicability:
+  when:
+  - 刚体可能滚到不同侧面
+  - 指定后部夹持区允许保持上方接近
+  not_when:
+  - 抓持面/机构要求特定 roll 时不能抹除
+  - 没有确认支持抓姿或物体不在可达表面
+  transferable_principles:
+  - 为每种技能声明合法的不变性，完整状态估计不能丢弃。
+  parameters_not_to_copy:
+  - 旧水平化规则直接套用所有零件
+  - 旧 grasp_frames 与夹持偏置
+preventive_checks:
+- 检查旋转后抓持区、接近侧和夹指/桌面。
+- 对多种 resting face 测抓取并保留后续阶段独立结果。
+regression_tests:
+- 抓取通过不能把后续保持失败覆盖成全回合通过。
+evidence:
+- knowledge/evidence/connector/grasp_roll_failure.json
+- knowledge/evidence/connector/grasp_followup_partial.json
+source_provenance: knowledge/evidence/connector/provenance.json
+notes:
+- 历史报告整理的知识种子，尚未在新框架复现或自动应用。
+- 来源路径仅为溯源，运行/检索使用本项目内快照。

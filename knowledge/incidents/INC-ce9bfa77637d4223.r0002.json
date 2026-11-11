@@ -1,0 +1,75 @@
+{
+  "summary": "USD引用World时遗漏根级PhysicsScene",
+  "observed_behavior": "场景局部验证失败；查看逐项checks",
+  "primary_category": "workflow_integrity",
+  "stage": "scene_build",
+  "mode": "offline",
+  "run_id": "e648721d1192409c",
+  "task_id": "e648721d1192409c:scene_validation",
+  "diagnosis": {
+    "state": "confirmed",
+    "root_cause": "导出入口只引用/World，而实际PhysicsScene位于同级/physicsScene；图像存在但导出USD不含PhysicsScene。"
+  },
+  "declared_failure_category": "physics_contact",
+  "declared_failure_stage": "scene_build",
+  "validation_scope": "仅本次Connector和程序方块的导出结构、依赖、内部相机几何和局部稳定性；不含完整动作、锁止、泛化策略或真机。",
+  "incident_id": "INC-ce9bfa77637d4223",
+  "title": "USD引用World时遗漏根级PhysicsScene",
+  "revision_reason": "保留原失败，追加修正及两个真实场景的独立复审证据。",
+  "resolved": true,
+  "resolution_state": "verified_in_scope",
+  "fix": "入口改为对本地scene_data.usdc的subLayer组合，保留所有根prim；独立重开USD检查PhysicsScene和实际刚体。",
+  "reusable_checklist": [
+    "检查导出后的完整USD组合，不把成功截图或manifest字段当成物理节点存在证据。",
+    "入口使用subLayer时验证全部根节点；定向引用必须明确保留PhysicsScene。",
+    "把图像、最终位姿与USD导出对齐到暂停后的同一仿真时刻。"
+  ],
+  "feature_tags": [
+    "usd_export",
+    "scene_portability",
+    "independent_validation"
+  ],
+  "evidence": [
+    {
+      "path": "knowledge/evidence/incidents/72/72b51a725fd008b623b5f153fe15243b9979e6e50b8d509ea80f16863a9e8ff3.json",
+      "source_reference": "knowledge/evidence/incidents/72/72b51a725fd008b623b5f153fe15243b9979e6e50b8d509ea80f16863a9e8ff3.json",
+      "sha256": "72b51a725fd008b623b5f153fe15243b9979e6e50b8d509ea80f16863a9e8ff3",
+      "bytes": 17654
+    },
+    {
+      "path": "knowledge/evidence/incidents/e3/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.log",
+      "source_reference": "knowledge/evidence/incidents/e3/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "knowledge/evidence/incidents/ff/ff15979bbe0828e2e2d12c783eae1908a6a714a1fa58c91371f1ad79a71e19e4.json",
+      "source_reference": "knowledge/evidence/incidents/ff/ff15979bbe0828e2e2d12c783eae1908a6a714a1fa58c91371f1ad79a71e19e4.json",
+      "sha256": "ff15979bbe0828e2e2d12c783eae1908a6a714a1fa58c91371f1ad79a71e19e4",
+      "bytes": 15914
+    },
+    {
+      "path": "knowledge/evidence/incidents/fe/fe1f31008a0781611e18ea478bf2f4450a719c7e2d14bcdcf71ffeb99613b81f.json",
+      "source_reference": "runs/acceptance/scenes/end_to_end_report.json",
+      "sha256": "fe1f31008a0781611e18ea478bf2f4450a719c7e2d14bcdcf71ffeb99613b81f",
+      "bytes": 4348
+    },
+    {
+      "path": "knowledge/evidence/incidents/95/950291b48e7b65e1fdf90a2c73216baff50cee5547c65d5bf8681b9945e3f0ad.json",
+      "source_reference": "runs/acceptance/scenes/final_7a2f6bd23eae482a/validation_report.json",
+      "sha256": "950291b48e7b65e1fdf90a2c73216baff50cee5547c65d5bf8681b9945e3f0ad",
+      "bytes": 33703
+    },
+    {
+      "path": "knowledge/evidence/incidents/bb/bbe791f31b638b32b0fa303fb4333531a9bf20b25451630359e6d0235620574d.json",
+      "source_reference": "runs/acceptance/scenes/final_c9784f26971a43f7/validation_report.json",
+      "sha256": "bbe791f31b638b32b0fa303fb4333531a9bf20b25451630359e6d0235620574d",
+      "bytes": 19549
+    }
+  ],
+  "schema_version": 1,
+  "record_type": "incident",
+  "revision": 2,
+  "timestamp_utc": "2026-11-11T02:36:13.953315+00:00",
+  "hardware_verified": false
+}

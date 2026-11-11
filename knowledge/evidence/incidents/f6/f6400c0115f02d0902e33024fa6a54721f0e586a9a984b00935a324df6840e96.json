@@ -1,0 +1,160 @@
+{
+  "status": "failed",
+  "checks": [
+    {
+      "id": "complete_trace_shapes",
+      "passed": true,
+      "details": {
+        "time": [
+          60
+        ],
+        "phase": [
+          60
+        ],
+        "objects": [
+          60,
+          2,
+          4,
+          4
+        ],
+        "joints": [
+          60,
+          2,
+          7
+        ],
+        "jaws": [
+          60,
+          2,
+          2
+        ],
+        "commanded_joints": [
+          60,
+          2,
+          7
+        ],
+        "contact_forces_N": [
+          60,
+          4,
+          2,
+          3
+        ],
+        "latch_deflections_m": [
+          60,
+          2
+        ]
+      }
+    },
+    {
+      "id": "finite_trace",
+      "passed": true,
+      "details": null
+    },
+    {
+      "id": "monotonic_simulation_clock",
+      "passed": true,
+      "details": {
+        "start_s": 0.016666666666666666,
+        "end_s": 1.0
+      }
+    },
+    {
+      "id": "rigid_object_transforms",
+      "passed": true,
+      "details": null
+    },
+    {
+      "id": "measured_joint_limits",
+      "passed": true,
+      "details": "URDF limits with 0.002rad numerical tolerance"
+    },
+    {
+      "id": "commanded_joint_limits",
+      "passed": true,
+      "details": null
+    },
+    {
+      "id": "no_lowering_phase",
+      "passed": true,
+      "details": {
+        "phases": [
+          "initialization"
+        ]
+      }
+    },
+    {
+      "id": "ground_truth_teacher_scope",
+      "passed": true,
+      "details": "Not a vision/student or hardware evaluation"
+    },
+    {
+      "id": "no_hardware_commands",
+      "passed": true,
+      "details": null
+    },
+    {
+      "id": "loaded_exact_scene",
+      "passed": true,
+      "details": null
+    },
+    {
+      "id": "binding_task_spec_hash",
+      "passed": true,
+      "details": null
+    },
+    {
+      "id": "binding_spec_revision",
+      "passed": true,
+      "details": null
+    },
+    {
+      "id": "execution_usd_no_object_attachment",
+      "passed": true,
+      "details": {
+        "forbidden_joints": [],
+        "actual_usd_audit": "runs/6c657e34fed542ad/expert_validation/execution_usd_audit.json"
+      }
+    }
+  ],
+  "stage_results": {
+    "grasp": {
+      "passed": null,
+      "details": "stage not reached or trace unavailable"
+    },
+    "insertion": {
+      "passed": null,
+      "details": "stage not reached or trace unavailable"
+    },
+    "release": {
+      "passed": null,
+      "details": "stage not reached or trace unavailable"
+    },
+    "retention": {
+      "passed": null,
+      "details": "stage not reached or trace unavailable"
+    }
+  },
+  "action_passed": false,
+  "retention_passed": null,
+  "full_task_passed": false,
+  "scope": "fixed_scene_ground_truth_scripted_expert_only",
+  "hardware_verified": false,
+  "hardware_commands_sent": 0,
+  "generalization_evaluated": false,
+  "policy_trained": false,
+  "task_spec_hash": "661666d4b45672c75e104d53e670163a6ba67eb0a335f59f4b1ac1bfc30c2c2c",
+  "spec_revision": 1,
+  "evidence_sha256": {
+    "runs/6c657e34fed542ad/expert_execution/execution_1794368671691568510/expert_result.json": "fc37a53f150ec3c5bc8abb407d345a2e6114420ea07eaf1400786f0a11570acd",
+    "runs/6c657e34fed542ad/expert_execution/execution_1794368671691568510/trajectory.npz": "96848c71e63e61a38380848eae279b44086b1f4a48a0966a07afb15c997e7c05"
+  },
+  "report_path": "runs/6c657e34fed542ad/expert_validation/expert_validation.json",
+  "expert_report_path": "runs/6c657e34fed542ad/expert_execution/execution_1794368671691568510/expert_result.json",
+  "trajectory_path": "runs/6c657e34fed542ad/expert_execution/execution_1794368671691568510/trajectory.npz",
+  "error": "离线专家尚未满足完整动作/保持或证据检查；查看分阶段结果",
+  "failure_category": "physics_contact",
+  "failure_stage": "simulation_test",
+  "evidence_paths": [
+    "runs/6c657e34fed542ad/expert_validation/expert_validation.json",
+    "runs/6c657e34fed542ad/expert_execution/execution_1794368671691568510/expert_result.json"
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "planner": "contact_center_regrasp/v2",
+  "passed": true,
+  "selected_tilt_deg": -15,
+  "contact_center_world_m": [
+    -0.40968943208397823,
+    -0.03227841062354858,
+    0.7948797170456108
+  ],
+  "approach_clearance_m": 0.05,
+  "jaw_closing_axis_preserved": true,
+  "contact_center_preserved": true,
+  "position_error_max_m": 4.019729427171722e-09,
+  "angle_error_max_rad": 9.629264744339354e-09,
+  "hand_table_clearance_min_m": 0.0015671266475861811,
+  "collision_scope": "actual hand mesh vertices/table + other connector cylinder; not complete robot/environment collision checking",
+  "waypoints": {
+    "approach": 61,
+    "descend": 117,
+    "lift": 92,
+    "return": 106
+  },
+  "rejected_candidates": [
+    {
+      "tilt_deg": 0,
+      "stage": "grasp",
+      "error": "Unreachable target for arm 0: [-0.48167091420220576, 0.25658870325025424, 0.058452517501553336], residual=0.04236"
+    },
+    {
+      "tilt_deg": -5,
+      "stage": "grasp",
+      "error": "Unreachable target for arm 0: [-0.47712973746297155, 0.2607798506731959, 0.06796204964573416], residual=0.02321"
+    },
+    {
+      "tilt_deg": 5,
+      "stage": "grasp",
+      "error": "Unreachable target for arm 0: [-0.485664268398913, 0.2530530790991915, 0.048443936751963346], residual=0.06585"
+    },
+    {
+      "tilt_deg": -10,
+      "stage": "grasp",
+      "error": "Unreachable target for arm 0: [-0.47207529927823344, 0.265594624205444, 0.07690015990287602], residual=0.00874"
+    },
+    {
+      "tilt_deg": 10,
+      "stage": "grasp",
+      "error": "Unreachable target for arm 0: [-0.4890794082164032, 0.25019988645466557, 0.03801247873981484], residual=0.09321"
+    }
+  ],
+  "path_joint_steps_max_rad": 0.014955517411574082
+}

@@ -1,0 +1,243 @@
+{
+  "schema_version": "placement-suite/v1",
+  "id": "connector_recovery_student_v2",
+  "baseline_spec_path": "runs/e7320b6960634a63/task_spec/revisions/r000001.json",
+  "baseline_spec_hash": "661666d4b45672c75e104d53e670163a6ba67eb0a335f59f4b1ac1bfc30c2c2c",
+  "evaluation_scope": "action_only",
+  "scope_reason": "Frozen held-out initial conditions replayed using the learned supervisor; no test-based retuning",
+  "max_axis_translation_m": 0.01,
+  "max_yaw_deg": 5,
+  "rotation_axis": "world_Z",
+  "perception": "simulated_pose_estimate",
+  "limitations": [
+    "20 actual episodes: train10/validation4/test6; sparse state-only supervisor prototype",
+    "Previous v1 test and regression cases excluded from training; new independent initial conditions and times",
+    "No perception noise/latency claim; post-release retention record-only"
+  ],
+  "cases": [
+    {
+      "id": "student_test_none_0_0",
+      "title": "v2 test / none / 左",
+      "split": "closed_loop",
+      "xy_offsets_m": [
+        [
+          -0.0033,
+          -0.0022
+        ],
+        [
+          0.0037,
+          0.0036
+        ]
+      ],
+      "yaw_offsets_deg": [
+        1.9,
+        1.9
+      ],
+      "recovery": {
+        "kind": "none",
+        "arm": 0,
+        "after_s": 2.27,
+        "shift_m": [
+          0.025,
+          0.015
+        ],
+        "seed": 422431650,
+        "pose_noise_m": 0.0,
+        "pose_delay_s": 0.0,
+        "rotation_noise_rad": 0.0,
+        "skill_version": "contact_center_v2",
+        "policy_path": "deployments/recovery-ef14d8adc1be490d/policy.npz"
+      }
+    },
+    {
+      "id": "student_test_occlude_0_1",
+      "title": "v2 test / occlude / 左",
+      "split": "closed_loop",
+      "xy_offsets_m": [
+        [
+          0.0023,
+          -0.0018
+        ],
+        [
+          -0.0019,
+          0.0002
+        ]
+      ],
+      "yaw_offsets_deg": [
+        -0.4,
+        1.9
+      ],
+      "recovery": {
+        "kind": "occlude",
+        "arm": 0,
+        "after_s": 2.12,
+        "shift_m": [
+          0.025,
+          0.015
+        ],
+        "seed": 961858499,
+        "pose_noise_m": 0.0,
+        "pose_delay_s": 0.0,
+        "rotation_noise_rad": 0.0,
+        "skill_version": "contact_center_v2",
+        "policy_path": "deployments/recovery-ef14d8adc1be490d/policy.npz"
+      }
+    },
+    {
+      "id": "student_test_drop_0_2",
+      "title": "v2 test / drop / 左",
+      "split": "closed_loop",
+      "xy_offsets_m": [
+        [
+          -0.0016,
+          -0.0006
+        ],
+        [
+          -0.0015,
+          -0.0008
+        ]
+      ],
+      "yaw_offsets_deg": [
+        -1.2,
+        -1.8
+      ],
+      "recovery": {
+        "kind": "drop",
+        "arm": 0,
+        "after_s": 2.69,
+        "shift_m": [
+          0.025,
+          0.015
+        ],
+        "seed": 507027698,
+        "pose_noise_m": 0.0,
+        "pose_delay_s": 0.0,
+        "rotation_noise_rad": 0.0,
+        "skill_version": "contact_center_v2",
+        "policy_path": "deployments/recovery-ef14d8adc1be490d/policy.npz"
+      }
+    },
+    {
+      "id": "student_test_drop_1_3",
+      "title": "v2 test / drop / 右",
+      "split": "closed_loop",
+      "xy_offsets_m": [
+        [
+          -0.0015,
+          -0.0034
+        ],
+        [
+          0.0032,
+          0.0022
+        ]
+      ],
+      "yaw_offsets_deg": [
+        -0.9,
+        1.9
+      ],
+      "recovery": {
+        "kind": "drop",
+        "arm": 1,
+        "after_s": 2.68,
+        "shift_m": [
+          0.025,
+          0.015
+        ],
+        "seed": 532165577,
+        "pose_noise_m": 0.0,
+        "pose_delay_s": 0.0,
+        "rotation_noise_rad": 0.0,
+        "skill_version": "contact_center_v2",
+        "policy_path": "deployments/recovery-ef14d8adc1be490d/policy.npz"
+      }
+    },
+    {
+      "id": "student_test_relocate_0_4",
+      "title": "v2 test / relocate / 左",
+      "split": "closed_loop",
+      "xy_offsets_m": [
+        [
+          0.0016,
+          -0.0037
+        ],
+        [
+          -0.0018,
+          0.0021
+        ]
+      ],
+      "yaw_offsets_deg": [
+        -1.5,
+        0.2
+      ],
+      "recovery": {
+        "kind": "relocate",
+        "arm": 0,
+        "after_s": 2.67,
+        "shift_m": [
+          0.025,
+          0.015
+        ],
+        "seed": 691542623,
+        "pose_noise_m": 0.0,
+        "pose_delay_s": 0.0,
+        "rotation_noise_rad": 0.0,
+        "skill_version": "contact_center_v2",
+        "policy_path": "deployments/recovery-ef14d8adc1be490d/policy.npz"
+      }
+    },
+    {
+      "id": "student_test_remove_1_5",
+      "title": "v2 test / remove / 右",
+      "split": "closed_loop",
+      "xy_offsets_m": [
+        [
+          -0.0037,
+          -0.0012
+        ],
+        [
+          0.002,
+          -0.0039
+        ]
+      ],
+      "yaw_offsets_deg": [
+        0.5,
+        -1.0
+      ],
+      "recovery": {
+        "kind": "remove",
+        "arm": 1,
+        "after_s": 2.25,
+        "shift_m": [
+          0.025,
+          0.015
+        ],
+        "seed": 462962326,
+        "pose_noise_m": 0.0,
+        "pose_delay_s": 0.0,
+        "rotation_noise_rad": 0.0,
+        "skill_version": "contact_center_v2",
+        "policy_path": "deployments/recovery-ef14d8adc1be490d/policy.npz"
+      }
+    }
+  ],
+  "protected_episode_ids": [
+    "35773cdbd0e84ddb",
+    "4ab3a34457374642",
+    "5f806e825a504d36",
+    "60b48b486c3c49c7",
+    "684d0c8ca2c44def",
+    "70a73f55781f4e7f",
+    "72aa51a91cb54b8f",
+    "761101410ffb4b65",
+    "80614304826249ef",
+    "94e13f33ec0a435e",
+    "9b8bf67caf42460d",
+    "aa009d827a8a4d1b",
+    "b6378a2642e6401c",
+    "bcdd1411e5614cf7",
+    "e875f9d2aed04286",
+    "ebfae62a28184f55",
+    "f3a97416daf94f06",
+    "f5976323b01a40a5"
+  ]
+}

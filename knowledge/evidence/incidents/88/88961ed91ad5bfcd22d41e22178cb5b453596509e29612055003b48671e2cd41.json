@@ -1,0 +1,216 @@
+{
+  "error": "本轮动作或证据检查未通过：Needs human: object unavailable or outside supported workspace",
+  "result": {
+    "status": "failed",
+    "checks": [
+      {
+        "id": "complete_trace_shapes",
+        "passed": true,
+        "details": {
+          "time": [
+            1816
+          ],
+          "phase": [
+            1816
+          ],
+          "objects": [
+            1816,
+            2,
+            4,
+            4
+          ],
+          "joints": [
+            1816,
+            2,
+            7
+          ],
+          "jaws": [
+            1816,
+            2,
+            2
+          ],
+          "commanded_joints": [
+            1816,
+            2,
+            7
+          ],
+          "contact_forces_N": [
+            1816,
+            4,
+            2,
+            3
+          ],
+          "latch_deflections_m": [
+            1816,
+            2
+          ]
+        }
+      },
+      {
+        "id": "finite_trace",
+        "passed": true,
+        "details": null
+      },
+      {
+        "id": "monotonic_simulation_clock",
+        "passed": true,
+        "details": {
+          "start_s": 0.016666666666666666,
+          "end_s": 30.266666666666666
+        }
+      },
+      {
+        "id": "rigid_object_transforms",
+        "passed": true,
+        "details": null
+      },
+      {
+        "id": "measured_joint_limits",
+        "passed": true,
+        "details": "URDF limits with 0.002rad numerical tolerance"
+      },
+      {
+        "id": "commanded_joint_limits",
+        "passed": true,
+        "details": null
+      },
+      {
+        "id": "no_lowering_phase",
+        "passed": true,
+        "details": {
+          "phases": [
+            "initialization",
+            "dex_grasp",
+            "dex_coordination_closed_loop",
+            "recovery_wait"
+          ]
+        }
+      },
+      {
+        "id": "ground_truth_teacher_scope",
+        "passed": true,
+        "details": "Not a vision/student or hardware evaluation"
+      },
+      {
+        "id": "no_hardware_commands",
+        "passed": true,
+        "details": null
+      },
+      {
+        "id": "loaded_exact_scene",
+        "passed": true,
+        "details": null
+      },
+      {
+        "id": "binding_task_spec_hash",
+        "passed": true,
+        "details": null
+      },
+      {
+        "id": "binding_spec_revision",
+        "passed": true,
+        "details": null
+      },
+      {
+        "id": "only_transient_renderer_changes",
+        "passed": true,
+        "details": {
+          "source_signature": "c0fc8a4c36abb88703369bb037626b334e063a21cf612ccecf94625f21ebcb79",
+          "prepared_signature": "c0fc8a4c36abb88703369bb037626b334e063a21cf612ccecf94625f21ebcb79"
+        }
+      },
+      {
+        "id": "execution_usd_no_object_attachment",
+        "passed": true,
+        "details": {
+          "forbidden_joints": [],
+          "actual_usd_audit": "runs/ba4eb867d07040c5/expert_validation/execution_usd_audit.json"
+        }
+      }
+    ],
+    "stage_results": {
+      "grasp": {
+        "passed": true,
+        "details": [
+          {
+            "arm": 0,
+            "lift_m": 0.07623517513275146,
+            "jaw_gap_m": 0.019609346985816956,
+            "contact_forces_N": [
+              5.795928001403809,
+              5.676674842834473
+            ],
+            "passed": true
+          },
+          {
+            "arm": 1,
+            "lift_m": 0.07471930980682373,
+            "jaw_gap_m": 0.018508031964302063,
+            "contact_forces_N": [
+              5.4824042320251465,
+              5.470609664916992
+            ],
+            "passed": true
+          }
+        ]
+      },
+      "insertion": {
+        "passed": null,
+        "details": "stage not reached or trace unavailable"
+      },
+      "release": {
+        "passed": null,
+        "details": "stage not reached or trace unavailable"
+      },
+      "retention": {
+        "passed": null,
+        "details": "stage not reached or trace unavailable"
+      }
+    },
+    "action_passed": false,
+    "retention_passed": null,
+    "full_task_passed": false,
+    "scope": "fixed_scene_ground_truth_scripted_expert_only",
+    "hardware_verified": false,
+    "hardware_commands_sent": 0,
+    "generalization_evaluated": false,
+    "policy_trained": false,
+    "task_spec_hash": "6388dd7364e8b2a49a61b315c9ce758e8f75800f481e00094bc653135aca0e32",
+    "spec_revision": 2,
+    "evidence_sha256": {
+      "runs/ba4eb867d07040c5/expert_execution/execution_1794405021779668691/expert_result.json": "4b31010ff2af5316c783079b20d215078c0333043ae8627a0e70d1eef48e4476",
+      "runs/ba4eb867d07040c5/expert_execution/execution_1794405021779668691/trajectory.npz": "fc4a483ae770f1e7a11f7abfb33c4a4c5441e917eac299c9af20b7dfb265a5a2"
+    },
+    "report_path": "runs/ba4eb867d07040c5/expert_validation/expert_validation.json",
+    "expert_report_path": "runs/ba4eb867d07040c5/expert_execution/execution_1794405021779668691/expert_result.json",
+    "trajectory_path": "runs/ba4eb867d07040c5/expert_execution/execution_1794405021779668691/trajectory.npz",
+    "error": "本轮动作或证据检查未通过：Needs human: object unavailable or outside supported workspace",
+    "failure_category": "physics_contact",
+    "failure_stage": "simulation_test",
+    "evidence_paths": [
+      "runs/ba4eb867d07040c5/expert_validation/expert_validation.json",
+      "runs/ba4eb867d07040c5/expert_execution/execution_1794405021779668691/expert_result.json"
+    ],
+    "evaluation_scope": "action_only",
+    "experiment_passed": false,
+    "retention_record_only": true,
+    "artifacts": [
+      {
+        "path": "runs/ba4eb867d07040c5/expert_validation/execution_usd_audit.json",
+        "name": "execution_usd_audit.json"
+      },
+      {
+        "path": "runs/ba4eb867d07040c5/expert_validation/prepared_usd_audit.json",
+        "name": "prepared_usd_audit.json"
+      },
+      {
+        "path": "runs/ba4eb867d07040c5/expert_validation/expert_validation.json",
+        "name": "expert_validation.json"
+      },
+      {
+        "path": "runs/ba4eb867d07040c5/expert_validation/usd_worker.log",
+        "name": "usd_worker.log"
+      }
+    ]
+  }
+}

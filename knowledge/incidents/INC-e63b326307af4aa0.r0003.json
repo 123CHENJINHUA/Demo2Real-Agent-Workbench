@@ -1,0 +1,83 @@
+{
+  "summary": "掉落后的固定重抓姿态未通过当前数值IK检查，专家与首版学生同案例均中断",
+  "primary_category": "planning_control",
+  "stage": "simulation_test",
+  "mode": "simulation",
+  "run_id": "903291b320594ec0",
+  "observed_behavior": "两次均在重抓above目标失败，日志组合残差0.01547；无已验证成功重抓。该残差不是以米计的位置误差。",
+  "diagnosis": {
+    "state": "supported_by_diagnostics",
+    "explanation": "原抓姿与固定倾角上方点在保存状态的多初值求解均未通过；部分小角度最终抓姿可解。保持夹持中心/闭合轴、接近时逐步转姿且抬升反向转姿，完整路径预检后在原失败条件通过。没有证明原目标全局无解，也没有放宽IK精度或限位。"
+  },
+  "resolved": true,
+  "status": "verified_in_scope",
+  "feature_tags": [
+    "bimanual",
+    "friction_grasp",
+    "recovery",
+    "ik_feasibility"
+  ],
+  "reusable_checklist": [
+    "重抓候选先检查接近路径、URDF限位和多初值IK，再执行；失败尝试替代抓姿或请求人工",
+    "分别报告平移误差、旋转误差和加权目标残差，不能把组合残差直接解释为mm",
+    "测试失败保持原案例；修复后新建实现/评测版本，不放宽精度或删除失败以提高成功率"
+  ],
+  "evidence": [
+    {
+      "path": "knowledge/evidence/incidents/30/3025730942ee0d3e95f694a058f0cb87dc5a8d4c0ee973bb70d55eb7144cbcb9.json",
+      "source_reference": "knowledge/evidence/incidents/30/3025730942ee0d3e95f694a058f0cb87dc5a8d4c0ee973bb70d55eb7144cbcb9.json",
+      "sha256": "3025730942ee0d3e95f694a058f0cb87dc5a8d4c0ee973bb70d55eb7144cbcb9",
+      "bytes": 26496
+    },
+    {
+      "path": "knowledge/evidence/incidents/7b/7b546b8ab71d12a92d96bb4a3c812b7939cd0731392ea0c74e851dd4cdbcf89a.json",
+      "source_reference": "knowledge/evidence/incidents/7b/7b546b8ab71d12a92d96bb4a3c812b7939cd0731392ea0c74e851dd4cdbcf89a.json",
+      "sha256": "7b546b8ab71d12a92d96bb4a3c812b7939cd0731392ea0c74e851dd4cdbcf89a",
+      "bytes": 26607
+    },
+    {
+      "path": "knowledge/evidence/incidents/7a/7accdcb045732ac98735eb63eb1b8c2ba9ea6991bf08ad4c7fa3536916a5ae65.json",
+      "source_reference": "knowledge/evidence/incidents/7a/7accdcb045732ac98735eb63eb1b8c2ba9ea6991bf08ad4c7fa3536916a5ae65.json",
+      "sha256": "7accdcb045732ac98735eb63eb1b8c2ba9ea6991bf08ad4c7fa3536916a5ae65",
+      "bytes": 35842
+    },
+    {
+      "path": "knowledge/evidence/incidents/86/86b782c767d257941463413b3350a0c8362eada9962973b367a0b14e453b6672.json",
+      "source_reference": "knowledge/evidence/incidents/86/86b782c767d257941463413b3350a0c8362eada9962973b367a0b14e453b6672.json",
+      "sha256": "86b782c767d257941463413b3350a0c8362eada9962973b367a0b14e453b6672",
+      "bytes": 35834
+    },
+    {
+      "path": "knowledge/evidence/incidents/af/afd64d567ca6df1eb3c39a374d659de33412dd736fa748d6d534ade1f7b176c4.json",
+      "source_reference": "knowledge/evidence/incidents/af/afd64d567ca6df1eb3c39a374d659de33412dd736fa748d6d534ade1f7b176c4.json",
+      "sha256": "afd64d567ca6df1eb3c39a374d659de33412dd736fa748d6d534ade1f7b176c4",
+      "bytes": 1710
+    },
+    {
+      "path": "knowledge/evidence/incidents/89/89e92ec1590f34d5f38bd240de96debf8a96c38e2231e6bce6ba62acd8589a07.json",
+      "source_reference": "knowledge/evidence/incidents/89/89e92ec1590f34d5f38bd240de96debf8a96c38e2231e6bce6ba62acd8589a07.json",
+      "sha256": "89e92ec1590f34d5f38bd240de96debf8a96c38e2231e6bce6ba62acd8589a07",
+      "bytes": 7732
+    }
+  ],
+  "verification": {
+    "scope": "新版本定向复测2例；不改v1失败成绩；未覆盖完整机器人/未建模相机障碍/任意位置或实机",
+    "action_passes": 2,
+    "cases": 2,
+    "left_selected_tilt_deg": -15,
+    "left_observed_jaw_gap_m": 0.018548615276813507,
+    "left_observed_object_height_above_table_m": 0.09320089340209958
+  },
+  "record_type": "incident",
+  "incident_id": "INC-e63b326307af4aa0",
+  "hardware_verified": false,
+  "revision_reason": "数量语义修正：93.2mm是物体中心距桌面高度，不等于从落桌位抬升的位移；原始物理结论不变",
+  "mitigation": [
+    "独立modules/planning/regrasp.py与modules/skills/connector_regrasp.py显式contact_center_v2版本",
+    "预检接近/下降/抬升/回程，按示教偏离选择候选，实际手部网格桌面间隙与其他Connector保守包络检查",
+    "用夹爪接触夹持，实际抬升/夹爪确认后才记成功，物体无瞬移或夹爪固定连接"
+  ],
+  "schema_version": 1,
+  "revision": 3,
+  "timestamp_utc": "2026-11-11T15:31:34.279370+00:00"
+}

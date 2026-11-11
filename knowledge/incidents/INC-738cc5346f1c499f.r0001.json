@@ -1,0 +1,47 @@
+{
+  "summary": "本轮动作或证据检查未通过：Needs human: object unavailable or outside supported workspace",
+  "observed_behavior": "本轮动作或证据检查未通过：Needs human: object unavailable or outside supported workspace",
+  "primary_category": "physics_contact",
+  "stage": "simulation_test",
+  "mode": "simulation",
+  "run_id": "852a4715a7fd46e2",
+  "task_id": "852a4715a7fd46e2:expert_validation",
+  "diagnosis": {
+    "state": "unknown"
+  },
+  "evidence": [
+    {
+      "path": "knowledge/evidence/incidents/9c/9c13d0722f7efb3275c4820cc6943d2c17f75455e39765543211eaa140e0b1f4.json",
+      "source_reference": "knowledge/evidence/incidents/cc04404b206c4e8caeca4852f7472b7f/failure_result.json",
+      "sha256": "9c13d0722f7efb3275c4820cc6943d2c17f75455e39765543211eaa140e0b1f4",
+      "bytes": 6137
+    },
+    {
+      "path": "knowledge/evidence/incidents/e3/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.log",
+      "source_reference": "knowledge/evidence/incidents/cc04404b206c4e8caeca4852f7472b7f/1_worker.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "knowledge/evidence/incidents/2d/2dbfedf9a0d019750fdf185436ba75ca99bdc08332ade3600d5834309328ca68.json",
+      "source_reference": "knowledge/evidence/incidents/cc04404b206c4e8caeca4852f7472b7f/2_expert_validation.json",
+      "sha256": "2dbfedf9a0d019750fdf185436ba75ca99bdc08332ade3600d5834309328ca68",
+      "bytes": 5042
+    },
+    {
+      "path": "knowledge/evidence/incidents/a9/a940a97b936d94ca7732ebaea42140ec80aeaf25266b497e17e459ad94a7866a.json",
+      "source_reference": "knowledge/evidence/incidents/cc04404b206c4e8caeca4852f7472b7f/3_expert_result.json",
+      "sha256": "a940a97b936d94ca7732ebaea42140ec80aeaf25266b497e17e459ad94a7866a",
+      "bytes": 25464
+    }
+  ],
+  "declared_failure_category": "physics_contact",
+  "declared_failure_stage": "simulation_test",
+  "validation_scope": "module_reported_failure_only_no_hardware_inference",
+  "schema_version": 1,
+  "record_type": "incident",
+  "incident_id": "INC-738cc5346f1c499f",
+  "revision": 1,
+  "timestamp_utc": "2026-11-11T13:22:38.527318+00:00",
+  "hardware_verified": false
+}

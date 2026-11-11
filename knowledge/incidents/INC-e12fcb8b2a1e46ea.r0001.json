@@ -1,0 +1,47 @@
+{
+  "summary": "本轮动作或证据检查未通过：'simulation_time_s'",
+  "observed_behavior": "本轮动作或证据检查未通过：'simulation_time_s'",
+  "primary_category": "physics_contact",
+  "stage": "simulation_test",
+  "mode": "simulation",
+  "run_id": "611641b8e4f64060",
+  "task_id": "611641b8e4f64060:expert_validation",
+  "diagnosis": {
+    "state": "unknown"
+  },
+  "evidence": [
+    {
+      "path": "knowledge/evidence/incidents/6b/6b0b29ce9f0279497d409149eb71e6f6e8af5c297115eec3e84d81af0f034155.json",
+      "source_reference": "knowledge/evidence/incidents/dbe5fda5b52c4eec9638d63ebc58f8ca/failure_result.json",
+      "sha256": "6b0b29ce9f0279497d409149eb71e6f6e8af5c297115eec3e84d81af0f034155",
+      "bytes": 6147
+    },
+    {
+      "path": "knowledge/evidence/incidents/e3/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.log",
+      "source_reference": "knowledge/evidence/incidents/dbe5fda5b52c4eec9638d63ebc58f8ca/1_worker.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "knowledge/evidence/incidents/e3/e3dfccd1baa71fd068bc489f5a0324b8d30518700f7dee0475d57dc60598d3c7.json",
+      "source_reference": "knowledge/evidence/incidents/dbe5fda5b52c4eec9638d63ebc58f8ca/2_expert_validation.json",
+      "sha256": "e3dfccd1baa71fd068bc489f5a0324b8d30518700f7dee0475d57dc60598d3c7",
+      "bytes": 5089
+    },
+    {
+      "path": "knowledge/evidence/incidents/6c/6c227fa86505b72ea091e2e8b6f9a513ad2d0b847b3cef15e345cd71b79710cc.json",
+      "source_reference": "knowledge/evidence/incidents/dbe5fda5b52c4eec9638d63ebc58f8ca/3_expert_result.json",
+      "sha256": "6c227fa86505b72ea091e2e8b6f9a513ad2d0b847b3cef15e345cd71b79710cc",
+      "bytes": 32046
+    }
+  ],
+  "declared_failure_category": "physics_contact",
+  "declared_failure_stage": "simulation_test",
+  "validation_scope": "module_reported_failure_only_no_hardware_inference",
+  "schema_version": 1,
+  "record_type": "incident",
+  "incident_id": "INC-e12fcb8b2a1e46ea",
+  "revision": 1,
+  "timestamp_utc": "2026-11-11T16:17:34.520276+00:00",
+  "hardware_verified": false
+}

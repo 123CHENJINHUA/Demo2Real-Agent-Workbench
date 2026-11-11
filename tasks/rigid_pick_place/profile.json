@@ -1,0 +1,241 @@
+{
+  "id": "rigid_pick_place_v1",
+  "title": "刚体抓放场景（程序生成接口验收）",
+  "schema_version": 1,
+  "synthetic_test_fixture": true,
+  "asset_signatures": {
+    "assets/cameras/connector_hand_eye.json": "9159fbb9dd7abc17066796989fd9abf2627758958bc451e5a67553b9f5b21b2a",
+    "assets/nero/nero.urdf": "869d6da45b778ecc4e63051c13ca88785c557a5739d7002837444cbe95ac9f5f",
+    "assets/nero/meshes/link5.stl": "dc497f5a9bab2d0d314250134d4ec86617abea7205d122db41b765acdb86ae7e",
+    "assets/nero/meshes/gripper_flange.stl": "186697a73e7cafd9fd41d96f1eea9b34b444c058b9561fb2e3ea439c835ae2e8",
+    "assets/nero/meshes/base_link.stl": "540462fb56e52091daa3cd1ad3acc3c19a43f120b2f11bae5a69b32b08c738b6",
+    "assets/nero/meshes/link3.stl": "44c70f731ad5067d608ebebc9e59f3c231988f992dfac6cb01ee7a6bb4b053f1",
+    "assets/nero/meshes/gripper_base.stl": "041b1c8ffa29bff9a5e9350ec9d3e1a0129a5abcba1f347b29b5ad7367ba5f5a",
+    "assets/nero/meshes/link6.stl": "66417d30596e33c890f4f141781023bd3ea15709a502e7f59b30f6676f556022",
+    "assets/nero/meshes/gripper_link1.stl": "475a7d8db056524d7659fadf5a2c307d62791047b6214d733dfc7846ed1c613d",
+    "assets/nero/meshes/gripper_link2.stl": "3f88d534a85e28a33ef7d2061adacbd1d25214aa9325f9e464aad0f9e4b74606",
+    "assets/nero/meshes/link7.stl": "70a2f415358f9e46088673c92bfe78ca5b1072dd73b7ea24464ba3ebb4c3e647",
+    "assets/nero/meshes/link4.stl": "47242e9b5d8b06c912261756f24dddb1e7f54ac6e718232a25889115298b966d",
+    "assets/nero/meshes/link2.stl": "fc9eb85db9fbd351c9f6e119f5fed33c6f0dd3bc3b11698a0f96aaeb2d36c721",
+    "assets/nero/meshes/link1.stl": "0e38bf33ce41f04d7e70e471768c00fa144ba4016a878b9a6d8303c319736e09"
+  },
+  "defaults": {
+    "robot": {
+      "id": "nero_single",
+      "arms": [
+        {
+          "id": "left",
+          "urdf_path": "assets/nero/nero.urdf",
+          "base_pose": {
+            "position_m": [
+              0.0,
+              -0.375,
+              0.802
+            ],
+            "quaternion_wxyz": [
+              1,
+              0,
+              0,
+              0
+            ]
+          },
+          "initial_joint_positions": {
+            "joint1": -0.025010569021105766,
+            "joint2": 0.2410648763179779,
+            "joint3": -0.4001341760158539,
+            "joint4": 2.0603089332580566,
+            "joint5": 0.20963150262832642,
+            "joint6": 0.3277902901172638,
+            "joint7": -0.2878047823905945,
+            "gripper_joint1": 0.0275,
+            "gripper_joint2": -0.0275
+          },
+          "camera": {
+            "calibration_path": "assets/cameras/connector_hand_eye.json",
+            "parent_link": "gripper_base",
+            "T_parent_sdk_flange": [
+              [
+                0,
+                -1,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                -1,
+                -0.0235
+              ],
+              [
+                1,
+                0,
+                0,
+                -0.0375
+              ],
+              [
+                0,
+                0,
+                0,
+                1
+              ]
+            ],
+            "housing_size_m": [
+              0.09,
+              0.025,
+              0.025
+            ],
+            "housing_measured": false
+          }
+        }
+      ],
+      "hardware_verified": false
+    },
+    "objects": [
+      {
+        "id": "block",
+        "asset_path": null,
+        "geometry_type": "box",
+        "size_m": [
+          0.04,
+          0.04,
+          0.04
+        ],
+        "unit": "m",
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "pose": {
+          "position_m": [
+            -0.3,
+            -0.12,
+            0.805
+          ],
+          "quaternion_wxyz": [
+            1,
+            0,
+            0,
+            0
+          ]
+        },
+        "mass_kg": 0.08,
+        "collision": {
+          "type": "box",
+          "measured": false
+        },
+        "provenance": {
+          "geometry": "explicit procedural fixture dimensions",
+          "pose": "synthetic fixture placement, not inferred from demonstration"
+        }
+      }
+    ],
+    "scene": {
+      "table": {
+        "size_m": [
+          0.9,
+          1.2,
+          0.05
+        ],
+        "position_m": [
+          -0.2,
+          0,
+          0.755
+        ]
+      },
+      "gravity_m_s2": [
+        0,
+        0,
+        -9.81
+      ],
+      "physics_hz": 240,
+      "settle_seconds": 1.5,
+      "floor": {
+        "size_m": [
+          3,
+          3,
+          0.05
+        ],
+        "position_m": [
+          0,
+          0,
+          -0.025
+        ]
+      },
+      "base_plates": true,
+      "obstacles": [],
+      "preview_camera": {
+        "eye_m": [
+          -1.45,
+          -1.45,
+          1.65
+        ],
+        "target_m": [
+          -0.25,
+          0,
+          0.91
+        ]
+      }
+    },
+    "frames": [
+      {
+        "id": "place_target",
+        "parent": "world",
+        "transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            -0.3
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.12
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.8
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "source": "procedural_fixture",
+        "validation_scope": "synthetic_scene_only"
+      }
+    ],
+    "evaluation": {
+      "action": {
+        "id": "rigid_pick_place_fixture/v1",
+        "description": "Move block to target and open jaws; not executed in scene preview",
+        "target_center_m": [
+          -0.3,
+          0.12,
+          0.8
+        ],
+        "verified": false
+      },
+      "retention": {
+        "id": "not_applicable",
+        "required": false,
+        "verified": false
+      }
+    },
+    "assumptions": [
+      "Synthetic scene fixture to test plugin reuse; not a second recorded demonstration reconstruction or policy success.",
+      "No robot motion is executed by scene building.",
+      "Robot/camera mounting assumptions retained from Nero profile."
+    ]
+  },
+  "unresolved": [
+    "No second recorded demo supplied",
+    "No grasp/place expert or learned policy validated"
+  ]
+}

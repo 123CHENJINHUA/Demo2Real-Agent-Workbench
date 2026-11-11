@@ -1,0 +1,11 @@
+{
+  "error": "保持失败按用户要求仅记录；动作实验通过，不等于完整任务通过",
+  "result": {
+    "failure_category": "physics_contact",
+    "failure_stage": "simulation_test",
+    "error": "保持失败按用户要求仅记录；动作实验通过，不等于完整任务通过",
+    "evidence_paths": [
+      "runs/ee7e73597a9d4820/expert_validation/expert_validation.json"
+    ]
+  }
+}

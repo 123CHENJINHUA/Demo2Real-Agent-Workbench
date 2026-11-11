@@ -1,0 +1,48 @@
+{
+  "summary": "掉落后的固定重抓姿态未通过当前数值IK检查，专家与首版学生同案例均中断",
+  "primary_category": "planning_control",
+  "stage": "simulation_test",
+  "mode": "simulation",
+  "run_id": "903291b320594ec0",
+  "observed_behavior": "两次均在重抓above目标失败，日志组合残差0.01547；无已验证成功重抓。该残差不是以米计的位置误差。",
+  "diagnosis": {
+    "state": "supported_by_diagnostics",
+    "explanation": "当前几何重抓姿态和局部求解路径未通过现有限位/精度检查；局部收敛、选定姿态与路径均可能参与，尚未证明全局无解。改变高层技能分类不能自动修复底层技能目标。"
+  },
+  "resolved": false,
+  "status": "open",
+  "feature_tags": [
+    "bimanual",
+    "friction_grasp",
+    "recovery",
+    "ik_feasibility"
+  ],
+  "reusable_checklist": [
+    "重抓候选先检查接近路径、URDF限位和多初值IK，再执行；失败尝试替代抓姿或请求人工",
+    "分别报告平移误差、旋转误差和加权目标残差，不能把组合残差直接解释为mm",
+    "测试失败保持原案例；修复后新建实现/评测版本，不放宽精度或删除失败以提高成功率"
+  ],
+  "evidence": [
+    {
+      "path": "knowledge/evidence/incidents/30/3025730942ee0d3e95f694a058f0cb87dc5a8d4c0ee973bb70d55eb7144cbcb9.json",
+      "source_reference": "runs/bcdd1411e5614cf7/expert_execution/execution_1794404095743633776/expert_result.json",
+      "sha256": "3025730942ee0d3e95f694a058f0cb87dc5a8d4c0ee973bb70d55eb7144cbcb9",
+      "bytes": 26496
+    },
+    {
+      "path": "knowledge/evidence/incidents/7b/7b546b8ab71d12a92d96bb4a3c812b7939cd0731392ea0c74e851dd4cdbcf89a.json",
+      "source_reference": "runs/903291b320594ec0/expert_execution/execution_1794404760297111731/expert_result.json",
+      "sha256": "7b546b8ab71d12a92d96bb4a3c812b7939cd0731392ea0c74e851dd4cdbcf89a",
+      "bytes": 26607
+    }
+  ],
+  "verification": {
+    "scope": "两个实际PhysX回合上的同症状复现，未修复，未验证全局无解，未涉及硬件"
+  },
+  "schema_version": 1,
+  "record_type": "incident",
+  "incident_id": "INC-e63b326307af4aa0",
+  "revision": 1,
+  "timestamp_utc": "2026-11-11T13:49:57.390860+00:00",
+  "hardware_verified": false
+}

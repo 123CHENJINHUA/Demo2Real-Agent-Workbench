@@ -1,0 +1,37 @@
+{
+  "incident_id": "INC-ROBUST-001",
+  "observed_behavior": "XY范围±30mm、yaw±12度、位姿噪声0.3mm/延迟66ms的seed712样例，双臂抓取通过，但协同参考右臂IK旋转残差0.0674rad导致失败。",
+  "primary_category": "planning_control",
+  "stage": "simulation_test",
+  "mode": "simulation",
+  "diagnosis": {
+    "state": "supported_by_diagnostics",
+    "hypothesis": "估计时效/精度和参考可达性需进一步分解；尚未确认唯一根因"
+  },
+  "feature_tags": [
+    "bimanual",
+    "keyed_insertion",
+    "tight_clearance",
+    "reference_saturation"
+  ],
+  "evidence": [
+    {
+      "path": "knowledge/evidence/incidents/93/932631c205073be2e3b7f3190bd1c640939e439a3f2a632c4fe9dfd8dbeac1b8.json",
+      "source_reference": "runs/connector_cli_20261110_235443/simulation/isaac_1794326083119799083/summary.json",
+      "sha256": "932631c205073be2e3b7f3190bd1c640939e439a3f2a632c4fe9dfd8dbeac1b8",
+      "bytes": 9442
+    }
+  ],
+  "resolved": false,
+  "resolution_state": "open",
+  "validation_scope": "单一位姿代理仿真样例；不是RGBD也不是真机",
+  "reusable_checklist": [
+    "对零噪声基线及测得噪声/时延分别报告，不混合成功率",
+    "留出初始变位与时延联合扰动；规划应处理IK不可达和插入超时而非放宽判据"
+  ],
+  "schema_version": 1,
+  "record_type": "incident",
+  "revision": 1,
+  "timestamp_utc": "2026-11-10T16:05:58.393025+00:00",
+  "hardware_verified": false
+}

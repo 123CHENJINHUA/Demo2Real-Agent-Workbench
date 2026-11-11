@@ -1,0 +1,48 @@
+{
+  "summary": "五类恢复分类准确率98.97%仍掩盖稀有决策低精度",
+  "primary_category": "policy_learning",
+  "stage": "training",
+  "mode": "offline",
+  "run_id": "97418110f98f4579",
+  "observed_behavior": "独立回合测试3509条决策，accuracy=0.9897407但macro_F1=0.5140912；wait被误分类为左重抓17条、右重抓3条、人工16条。训练重抓左2条、右1条、人工1条，类别均衡重复采样未增加独立恢复回合。",
+  "diagnosis": {
+    "state": "supported_by_diagnostics",
+    "explanation": "严重类别不均衡与稀有决策样本不足，验证宏F1和混淆矩阵揭示高准确率遗漏的问题。尚未证明仅增加网络规模或重复采样可以解决。"
+  },
+  "resolved": false,
+  "status": "open",
+  "feature_tags": [
+    "recovery",
+    "class_imbalance",
+    "episode_split"
+  ],
+  "reusable_checklist": [
+    "按回合冻结train/validation/test，禁止逐帧随机切分和使用测试反馈调参",
+    "报告各类独立样本/回合数、精确率、召回率、macro F1，不能仅报总体准确率",
+    "补充恢复转折点附近的成功与等待负例；验证集选择校准后，用新冻结测试版本核验",
+    "实际物理闭环另验，网络原始动作与守卫覆盖分开记录"
+  ],
+  "evidence": [
+    {
+      "path": "knowledge/evidence/incidents/2a/2ac724c0dff7a8d50b9e96c258bb53ad1c4f4a01630edfe55ad851d4f32c3601.json",
+      "source_reference": "runs/97418110f98f4579/recovery_evaluation/evaluation.json",
+      "sha256": "2ac724c0dff7a8d50b9e96c258bb53ad1c4f4a01630edfe55ad851d4f32c3601",
+      "bytes": 1967
+    },
+    {
+      "path": "knowledge/evidence/incidents/8c/8cc8bd1bcb113ef986868a6e3e47663f420224d933870a7c1a847fef3a064c6c.json",
+      "source_reference": "runs/97418110f98f4579/recovery_dataset/dataset_report.json",
+      "sha256": "8cc8bd1bcb113ef986868a6e3e47663f420224d933870a7c1a847fef3a064c6c",
+      "bytes": 11674
+    }
+  ],
+  "verification": {
+    "scope": "真实PhysX来源数据上的离线分类，不等同闭环或真机通过"
+  },
+  "schema_version": 1,
+  "record_type": "incident",
+  "incident_id": "INC-9ab3f178d8c64f29",
+  "revision": 1,
+  "timestamp_utc": "2026-11-11T13:49:57.395876+00:00",
+  "hardware_verified": false
+}

@@ -1,0 +1,41 @@
+{
+  "error": "ValueError: Unsupported expert plan version/scope/perception",
+  "result": {
+    "status": "failed",
+    "action_passed": false,
+    "full_task_passed": false,
+    "retention_passed": null,
+    "error": "ValueError: Unsupported expert plan version/scope/perception",
+    "report": {
+      "passed": false,
+      "error": "Unsupported expert plan version/scope/perception"
+    },
+    "hardware_commands_sent": 0,
+    "expert_perception": "simulated_pose_estimate",
+    "plan_path": "runs/7216db904c4e4bdb/expert_plan/expert_plan.json",
+    "task_spec_hash": "bc725d7da9b46c177ee82acdf75b4098fbccc955553879780d6541548d7ce543",
+    "spec_revision": 2,
+    "scene_manifest_path": "runs/7216db904c4e4bdb/scene_build/build_1794402370223797630/scene_manifest.json",
+    "report_path": "runs/7216db904c4e4bdb/expert_execution/execution_1794402401419905785/expert_result.json",
+    "failure_category": "runtime_environment",
+    "failure_stage": "simulation_test",
+    "evidence_paths": [
+      "runs/7216db904c4e4bdb/expert_execution/execution_1794402401419905785/expert_result.json",
+      "runs/7216db904c4e4bdb/expert_execution/execution_1794402401419905785/isaac_expert.log"
+    ],
+    "artifacts": [
+      {
+        "path": "runs/7216db904c4e4bdb/expert_execution/execution_1794402401419905785/expert_result.json",
+        "name": "expert_result.json"
+      },
+      {
+        "path": "runs/7216db904c4e4bdb/expert_execution/execution_1794402401419905785/kit.log",
+        "name": "kit.log"
+      },
+      {
+        "path": "runs/7216db904c4e4bdb/expert_execution/execution_1794402401419905785/isaac_expert.log",
+        "name": "isaac_expert.log"
+      }
+    ]
+  }
+}

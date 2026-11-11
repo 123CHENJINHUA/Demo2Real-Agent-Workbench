@@ -1,0 +1,108 @@
+{
+  "schema_version": "placement-suite/v1",
+  "id": "connector_small_v1",
+  "baseline_spec_path": "runs/e7320b6960634a63/task_spec/revisions/r000001.json",
+  "baseline_spec_hash": "661666d4b45672c75e104d53e670163a6ba67eb0a335f59f4b1ac1bfc30c2c2c",
+  "evaluation_scope": "action_only",
+  "scope_reason": "用户要求暂时忽略松手后保持；仅验收抓取、对键插入及原位松手。保持仍原样记录。",
+  "max_axis_translation_m": 0.01,
+  "max_yaw_deg": 5,
+  "rotation_axis": "world_Z",
+  "perception": "simulator_ground_truth",
+  "cases": [
+    {
+      "id": "control",
+      "title": "原位对照",
+      "xy_offsets_m": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "yaw_offsets_deg": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "male_only",
+      "title": "仅移动公头",
+      "xy_offsets_m": [
+        [
+          0.01,
+          -0.01
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "yaw_offsets_deg": [
+        5,
+        0
+      ]
+    },
+    {
+      "id": "female_only",
+      "title": "仅移动母头",
+      "xy_offsets_m": [
+        [
+          0,
+          0
+        ],
+        [
+          -0.01,
+          0.01
+        ]
+      ],
+      "yaw_offsets_deg": [
+        0,
+        -5
+      ]
+    },
+    {
+      "id": "opposed_a",
+      "title": "双物体反向变化A",
+      "xy_offsets_m": [
+        [
+          0.01,
+          0.01
+        ],
+        [
+          -0.01,
+          -0.01
+        ]
+      ],
+      "yaw_offsets_deg": [
+        -5,
+        5
+      ]
+    },
+    {
+      "id": "opposed_b",
+      "title": "双物体反向变化B",
+      "xy_offsets_m": [
+        [
+          -0.01,
+          -0.01
+        ],
+        [
+          0.01,
+          0.01
+        ]
+      ],
+      "yaw_offsets_deg": [
+        5,
+        -5
+      ]
+    }
+  ],
+  "limitations": [
+    "Five deterministic cases only; not a statistical success-rate estimate",
+    "No RGBD noise, drop, relocation or learned policy evaluation"
+  ]
+}

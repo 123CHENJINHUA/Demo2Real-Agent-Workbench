@@ -1,0 +1,62 @@
+{
+  "candidates": [
+    {
+      "roll_rad": 1.5707963267948966,
+      "score": 0.2583749961596166,
+      "feasible": true,
+      "ik": [
+        {
+          "arm": 0,
+          "reachable": true,
+          "position_error_m": 6.87294110639779e-09,
+          "rotation_error_rad": 1.7438329344952485e-05
+        },
+        {
+          "arm": 1,
+          "reachable": true,
+          "position_error_m": 1.6190504312733167e-08,
+          "rotation_error_rad": 4.1687497001256674e-05
+        }
+      ]
+    },
+    {
+      "roll_rad": -1.5707963267948966,
+      "score": null,
+      "feasible": false,
+      "ik": [
+        {
+          "arm": 0,
+          "reachable": true,
+          "position_error_m": 5.850902345241064e-06,
+          "rotation_error_rad": 0.00015749577895172635
+        },
+        {
+          "arm": 1,
+          "reachable": false,
+          "error": "Demo-retarget IK arm=1: position=0.0019m, rotation=0.4897rad"
+        }
+      ]
+    }
+  ],
+  "selected": {
+    "roll_rad": 1.5707963267948966,
+    "score": 0.2583749961596166,
+    "feasible": true,
+    "ik": [
+      {
+        "arm": 0,
+        "reachable": true,
+        "position_error_m": 6.87294110639779e-09,
+        "rotation_error_rad": 1.7438329344952485e-05
+      },
+      {
+        "arm": 1,
+        "reachable": true,
+        "position_error_m": 1.6190504312733167e-08,
+        "rotation_error_rad": 4.1687497001256674e-05
+      }
+    ]
+  },
+  "relative_roll_correction_rad": -0.5353848493367694,
+  "method": "Evaluate both key candidates independently; reject failed IK without relaxing limits"
+}

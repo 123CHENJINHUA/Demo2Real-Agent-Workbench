@@ -1,0 +1,116 @@
+[
+  {
+    "method": "Topology- and UV-boundary-preserving vertex decimation with accumulated error limit and protected seam neighborhoods",
+    "settings": {
+      "target_reduction": 0.9,
+      "feature_angle_degrees": 30,
+      "absolute_error_metric": 1e-08
+    },
+    "source": "1/Meshy_AI_Solar_Cable_Connector_1105093342_texture.obj",
+    "output": "1/Meshy_AI_Solar_Cable_Connector_1105093342_texture_lowpoly.obj",
+    "before": {
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "vertices": 188165,
+      "faces": 376342,
+      "components": 1,
+      "bounds": [
+        -0.028,
+        0.027975,
+        -0.0095,
+        0.0095,
+        -0.010102,
+        0.010103
+      ]
+    },
+    "after": {
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "vertices": 32213,
+      "faces": 64438,
+      "components": 1,
+      "bounds": [
+        -0.027992,
+        0.027975,
+        -0.0095,
+        0.0095,
+        -0.010102,
+        0.010103
+      ]
+    },
+    "reduction": 0.8287780795127836,
+    "original_bytes": 37453873,
+    "output_bytes": 8117550,
+    "distance_source_units": {
+      "original_to_reduced": {
+        "samples": 228165,
+        "max": 0.000180261551048556,
+        "p99": 5.725284817652129e-05,
+        "rms": 1.652175572252109e-05
+      },
+      "reduced_to_original": {
+        "samples": 72213,
+        "max": 0.00014621451726307756,
+        "p99": 4.105694641760501e-05,
+        "rms": 9.87594245823779e-06
+      }
+    }
+  },
+  {
+    "method": "Topology- and UV-boundary-preserving vertex decimation with accumulated error limit and protected seam neighborhoods",
+    "settings": {
+      "target_reduction": 0.9,
+      "feature_angle_degrees": 30,
+      "absolute_error_metric": 1e-08
+    },
+    "source": "2/Meshy_AI_Black_Cable_Connector_1105095505_texture.obj",
+    "output": "2/Meshy_AI_Black_Cable_Connector_1105095505_texture_lowpoly.obj",
+    "before": {
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "vertices": 83254,
+      "faces": 166540,
+      "components": 1,
+      "bounds": [
+        -0.028947,
+        0.028909,
+        -0.0095,
+        0.0095,
+        -0.009679,
+        0.009647
+      ]
+    },
+    "after": {
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "vertices": 16144,
+      "faces": 32320,
+      "components": 1,
+      "bounds": [
+        -0.028947,
+        0.028909,
+        -0.0095,
+        0.009496,
+        -0.009673,
+        0.009647
+      ]
+    },
+    "reduction": 0.805932508706617,
+    "original_bytes": 15871371,
+    "output_bytes": 4421585,
+    "distance_source_units": {
+      "original_to_reduced": {
+        "samples": 123254,
+        "max": 0.00023658529477930645,
+        "p99": 6.439358037175556e-05,
+        "rms": 1.8065228914759233e-05
+      },
+      "reduced_to_original": {
+        "samples": 48464,
+        "max": 0.0001769682632029919,
+        "p99": 4.8637936301526344e-05,
+        "rms": 1.2044454593331713e-05
+      }
+    }
+  }
+]

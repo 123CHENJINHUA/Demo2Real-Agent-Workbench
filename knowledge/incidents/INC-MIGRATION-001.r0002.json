@@ -1,0 +1,38 @@
+{
+  "incident_id": "INC-MIGRATION-001",
+  "observed_behavior": "迁移后完整Connector仿真启动失败：grasp_scene仅需三个指驱常量，但引入grasp.py触发未迁移nero_bridge.data依赖。局部台架未覆盖此导入路径。",
+  "primary_category": "workflow_integrity",
+  "stage": "simulation_test",
+  "mode": "simulation",
+  "diagnosis": {
+    "state": "confirmed",
+    "root_cause": "无关轨迹实现的传递依赖；批量复制不等于运行时业务闭包完整"
+  },
+  "attempts": [
+    {
+      "change": "将指驱常量抽成纯参数模块，删除未使用grasp.py副本",
+      "status": "implemented_pending_full_regression"
+    }
+  ],
+  "reusable_checklist": [
+    "迁移需覆盖完整入口传递依赖",
+    "只需参数时不要import含数据/硬件实现的模块"
+  ],
+  "resolved": true,
+  "schema_version": 1,
+  "record_type": "incident",
+  "revision": 2,
+  "timestamp_utc": "2026-11-10T16:05:58.384555+00:00",
+  "hardware_verified": false,
+  "revision_reason": "完整双臂PhysX基线已成功运行：import问题修复在该路径验证通过，不代表有噪声或RGBD任务通过。",
+  "resolution_state": "verified_in_scope",
+  "validation_scope": "完整双臂PhysX基线已成功运行：import问题修复在该路径验证通过，不代表有噪声或RGBD任务通过。",
+  "evidence": [
+    {
+      "path": "knowledge/evidence/incidents/7f/7fab7d5292d385b4a6bac007c9cb0a874cf7d45582485e5a31b75cf57ec493a7.json",
+      "source_reference": "runs/connector_cli_20261111_000106/simulation/simulation_report.json",
+      "sha256": "7fab7d5292d385b4a6bac007c9cb0a874cf7d45582485e5a31b75cf57ec493a7",
+      "bytes": 17135
+    }
+  ]
+}

@@ -1,0 +1,237 @@
+{
+  "status": "failed",
+  "checks": [
+    {
+      "id": "complete_trace_shapes",
+      "passed": true,
+      "details": {
+        "time": [
+          2812
+        ],
+        "phase": [
+          2812
+        ],
+        "objects": [
+          2812,
+          2,
+          4,
+          4
+        ],
+        "joints": [
+          2812,
+          2,
+          7
+        ],
+        "jaws": [
+          2812,
+          2,
+          2
+        ],
+        "commanded_joints": [
+          2812,
+          2,
+          7
+        ],
+        "contact_forces_N": [
+          2812,
+          4,
+          2,
+          3
+        ],
+        "latch_deflections_m": [
+          2812,
+          2
+        ]
+      }
+    },
+    {
+      "id": "finite_trace",
+      "passed": true,
+      "details": null
+    },
+    {
+      "id": "monotonic_simulation_clock",
+      "passed": true,
+      "details": {
+        "start_s": 0.016666666666666666,
+        "end_s": 46.86666666666667
+      }
+    },
+    {
+      "id": "rigid_object_transforms",
+      "passed": true,
+      "details": null
+    },
+    {
+      "id": "measured_joint_limits",
+      "passed": true,
+      "details": "URDF limits with 0.002rad numerical tolerance"
+    },
+    {
+      "id": "commanded_joint_limits",
+      "passed": true,
+      "details": null
+    },
+    {
+      "id": "no_lowering_phase",
+      "passed": true,
+      "details": {
+        "phases": [
+          "initialization",
+          "dex_grasp",
+          "dex_coordination_closed_loop",
+          "cooperative_insert",
+          "release"
+        ]
+      }
+    },
+    {
+      "id": "direct_release_arm_targets_hold",
+      "passed": true,
+      "details": "Both arm commands remain fixed while jaws open; no lowering"
+    },
+    {
+      "id": "ground_truth_teacher_scope",
+      "passed": true,
+      "details": "Not a vision/student or hardware evaluation"
+    },
+    {
+      "id": "no_hardware_commands",
+      "passed": true,
+      "details": null
+    },
+    {
+      "id": "loaded_exact_scene",
+      "passed": true,
+      "details": null
+    },
+    {
+      "id": "binding_task_spec_hash",
+      "passed": true,
+      "details": null
+    },
+    {
+      "id": "binding_spec_revision",
+      "passed": true,
+      "details": null
+    },
+    {
+      "id": "only_transient_renderer_changes",
+      "passed": true,
+      "details": {
+        "source_signature": "f0a1d43715f98df35a1a52bdeb450b9a3aad7905ca9e940ff17ac1ee5237e641",
+        "prepared_signature": "f0a1d43715f98df35a1a52bdeb450b9a3aad7905ca9e940ff17ac1ee5237e641"
+      }
+    },
+    {
+      "id": "execution_usd_no_object_attachment",
+      "passed": true,
+      "details": {
+        "forbidden_joints": [],
+        "actual_usd_audit": "runs/32568d8a19874d87/expert_validation/execution_usd_audit.json"
+      }
+    }
+  ],
+  "stage_results": {
+    "grasp": {
+      "passed": true,
+      "details": [
+        {
+          "arm": 0,
+          "lift_m": 0.07724636793136597,
+          "jaw_gap_m": 0.019213493913412094,
+          "contact_forces_N": [
+            5.665321350097656,
+            5.6295166015625
+          ],
+          "passed": true
+        },
+        {
+          "arm": 1,
+          "lift_m": 0.07353276014328003,
+          "jaw_gap_m": 0.01851487159729004,
+          "contact_forces_N": [
+            5.485747337341309,
+            5.4647650718688965
+          ],
+          "passed": true
+        }
+      ]
+    },
+    "insertion": {
+      "passed": true,
+      "details": {
+        "depth_m": 0.022821610231972815,
+        "lateral_error_m": 3.931319451477033e-05,
+        "angle_rad": 0.0004706583058024885,
+        "roll_rad": 1.5710224914451452,
+        "roll_error_rad": 0.00022616465024860588,
+        "target_roll_rad": 1.5707963267948966,
+        "latch_engagement_m": 0.00042160889178143035,
+        "nominal_hooks_caught": true,
+        "retained_face_area_m2": [
+          9.244030347846169e-07,
+          1.0355981972777063e-06
+        ],
+        "retained_hooks_caught": true,
+        "both_latches_flexed": true,
+        "both_latches_seated": true,
+        "engaged": true
+      }
+    },
+    "release": {
+      "passed": true,
+      "details": {
+        "jaw_gaps_m": [
+          0.06499866396188736,
+          0.06499868631362915
+        ],
+        "max_finger_object_force_N": 0.0
+      }
+    },
+    "retention": {
+      "passed": false,
+      "details": {
+        "depth_m": -0.33280518819904764,
+        "lateral_error_m": 0.06323338244008934,
+        "angle_rad": 2.300805692527202,
+        "roll_rad": 1.1540192491118966,
+        "roll_error_rad": -0.4167770776830002,
+        "target_roll_rad": 1.5707963267948966,
+        "latch_engagement_m": -0.37537439522939653,
+        "nominal_hooks_caught": false,
+        "retained_face_area_m2": [
+          0.0,
+          0.0
+        ],
+        "retained_hooks_caught": false,
+        "both_latches_seated": true,
+        "both_latches_flexed": true
+      }
+    }
+  },
+  "action_passed": true,
+  "retention_passed": false,
+  "full_task_passed": false,
+  "scope": "fixed_scene_ground_truth_scripted_expert_only",
+  "hardware_verified": false,
+  "hardware_commands_sent": 0,
+  "generalization_evaluated": false,
+  "policy_trained": false,
+  "task_spec_hash": "661666d4b45672c75e104d53e670163a6ba67eb0a335f59f4b1ac1bfc30c2c2c",
+  "spec_revision": 1,
+  "evidence_sha256": {
+    "runs/32568d8a19874d87/expert_execution/execution_1794384993395133404/expert_result.json": "111e1f43a44fd498a584f68d454e391e6125175377dc3135ac93a37600d64857",
+    "runs/32568d8a19874d87/expert_execution/execution_1794384993395133404/trajectory.npz": "91835b8c43512a87ffbf9c5dabd489a20ab4e40c626981a4e6b5c1448f9ae74c"
+  },
+  "report_path": "runs/32568d8a19874d87/expert_validation/expert_validation.json",
+  "expert_report_path": "runs/32568d8a19874d87/expert_execution/execution_1794384993395133404/expert_result.json",
+  "trajectory_path": "runs/32568d8a19874d87/expert_execution/execution_1794384993395133404/trajectory.npz",
+  "error": "离线专家尚未满足完整动作/保持或证据检查；查看分阶段结果",
+  "failure_category": "physics_contact",
+  "failure_stage": "simulation_test",
+  "evidence_paths": [
+    "runs/32568d8a19874d87/expert_validation/expert_validation.json",
+    "runs/32568d8a19874d87/expert_execution/execution_1794384993395133404/expert_result.json"
+  ]
+}

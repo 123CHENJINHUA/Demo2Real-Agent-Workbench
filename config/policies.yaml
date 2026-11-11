@@ -1,0 +1,15 @@
+schema_version: 1
+active:
+  supervisor: rule_supervisor_v1
+  motion: demo_motion_v1
+implementations:
+  rule_supervisor_v1:
+    entrypoint: modules.policies.scripted.rule_supervisor:RuleSupervisor
+    role: supervisor
+  state_mlp_v1:
+    entrypoint: modules.policies.neural.state_supervisor:StateSupervisor
+    role: supervisor
+    checkpoint: null
+  demo_motion_v1:
+    entrypoint: modules.policies.scripted.demo_motion:DemoMotion
+    role: motion

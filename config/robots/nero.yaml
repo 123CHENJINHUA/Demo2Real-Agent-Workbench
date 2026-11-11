@@ -1,0 +1,7 @@
+schema_version: 1
+backend: nero_sdk
+mode: disconnected
+allow_real_motion: false
+channels: []
+firmware: unverified
+calibration: assets/cameras/connector_hand_eye.json

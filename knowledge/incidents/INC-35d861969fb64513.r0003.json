@@ -1,0 +1,58 @@
+{
+  "summary": "插接阶段恢复已分离，但原位重夹尚缺双指接触确认",
+  "primary_category": "planning_control",
+  "stage": "simulation_test",
+  "mode": "simulation",
+  "run_id": "4291c82d53364932",
+  "observed_behavior": "首轮v3把圆柱自由滚转纳入完整6D手内误差，候选原位重夹超限并退出。更正插接入口锚点、轴向夹持带及保持当前腕部方向后，新回归566f6fe6500b4c8d完成严格插接与松手；其中一次重夹位姿/宽度确认通过，但独立双指接触力为0，不能算可靠物理重夹成功。",
+  "diagnosis": {
+    "state": "supported_by_diagnostics",
+    "explanation": "已定位桌面重抓阶段不匹配与圆柱滚转导致候选过大；新回合动作通过不能证明原失效根因完全修复，也未证明物理重夹可靠。"
+  },
+  "resolved": false,
+  "status": "partially_verified",
+  "feature_tags": [
+    "bimanual",
+    "friction_grasp",
+    "recovery",
+    "secondary_loss"
+  ],
+  "reusable_checklist": [
+    "记录夹持异常首次发生的阶段与时刻，区分恢复期间和恢复后插接",
+    "夹持异常时结合插接完成状态/物体相对几何选择阶段适合的恢复技能",
+    "未满足桌面重抓前置条件应明确信息反馈，不把它一律当作已落桌",
+    "局部通过和整回合通过分别记，只有已验证重抓决策可入监督",
+    "圆柱夹持按轴向带与半径漂移检查，避免将自由滚转直接转化为大幅TCP动作；插接对键角仍按严格几何判断",
+    "重夹静态位姿/宽度稳定可能是假阳性，必须独立核验实际物理接触与传力，不直接纳入成功重抓监督"
+  ],
+  "evidence": [
+    {
+      "path": "knowledge/evidence/incidents/cd/cdc3ed24e9363db4a610857c76620556bf3281831dd43848c375a25face4d969.json",
+      "source_reference": "runs/993e4c6c4e6e4a48/expert_execution/result.json",
+      "sha256": "cdc3ed24e9363db4a610857c76620556bf3281831dd43848c375a25face4d969",
+      "bytes": 36821
+    },
+    {
+      "path": "knowledge/evidence/incidents/29/29f0565b377f320f56a4ab4c176155ad9f07c37608982838ae8f2823ddead3be.json",
+      "source_reference": "runs/566f6fe6500b4c8d/expert_execution/result.json",
+      "sha256": "29f0565b377f320f56a4ab4c176155ad9f07c37608982838ae8f2823ddead3be",
+      "bytes": 43265
+    },
+    {
+      "path": "knowledge/evidence/incidents/46/4657634e55251ef39a8808cb3604aedfa3febba58fcf5d701ef6fea8a649789a.json",
+      "source_reference": "runs/566f6fe6500b4c8d/phase_validation/phase_validation.json",
+      "sha256": "4657634e55251ef39a8808cb3604aedfa3febba58fcf5d701ef6fea8a649789a",
+      "bytes": 7146
+    }
+  ],
+  "verification": {
+    "scope": "one known-condition development rollout action passed; independent recapture contact NOT verified; no new holdout or hardware"
+  },
+  "record_type": "incident",
+  "incident_id": "INC-35d861969fb64513",
+  "hardware_verified": false,
+  "revision_reason": "追加阶段恢复开发与动作通过证据，明确双指接触未通过，保持原失败和未解决范围",
+  "schema_version": 1,
+  "revision": 3,
+  "timestamp_utc": "2026-11-11T16:34:52.489253+00:00"
+}

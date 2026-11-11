@@ -1,0 +1,37 @@
+{
+  "incident_id": "INC-ROBUST-002",
+  "observed_behavior": "同旧基线XY±25mm/yaw±8度，加入位姿噪声0.3mm/延迟66ms后，双臂抓取通过但插入未收敛，最后深度约0.047mm、横向1.239mm。无噪声0延迟基线通过。",
+  "primary_category": "planning_control",
+  "stage": "simulation_test",
+  "mode": "simulation",
+  "diagnosis": {
+    "state": "supported_by_diagnostics",
+    "hypothesis": "估计时效/精度和参考可达性需进一步分解；尚未确认唯一根因"
+  },
+  "feature_tags": [
+    "bimanual",
+    "keyed_insertion",
+    "tight_clearance",
+    "reference_saturation"
+  ],
+  "evidence": [
+    {
+      "path": "knowledge/evidence/incidents/f1/f1340206be6794ca0e1f27bdda420390d6bae6ec41e27a6f7718d87d2359d02b.json",
+      "source_reference": "runs/connector_cli_20261110_235755/simulation/isaac_1794326275330800428/summary.json",
+      "sha256": "f1340206be6794ca0e1f27bdda420390d6bae6ec41e27a6f7718d87d2359d02b",
+      "bytes": 9740
+    }
+  ],
+  "resolved": false,
+  "resolution_state": "open",
+  "validation_scope": "单一位姿代理仿真样例；不是RGBD也不是真机",
+  "reusable_checklist": [
+    "对零噪声基线及测得噪声/时延分别报告，不混合成功率",
+    "留出初始变位与时延联合扰动；规划应处理IK不可达和插入超时而非放宽判据"
+  ],
+  "schema_version": 1,
+  "record_type": "incident",
+  "revision": 1,
+  "timestamp_utc": "2026-11-10T16:05:58.397079+00:00",
+  "hardware_verified": false
+}

@@ -1,0 +1,488 @@
+{
+  "id": "connector_keyed_v1",
+  "title": "双臂Connector对键插接（工程模板）",
+  "schema_version": 1,
+  "synthetic_test_fixture": false,
+  "asset_signatures": {
+    "assets/cameras/connector_hand_eye.json": "9159fbb9dd7abc17066796989fd9abf2627758958bc451e5a67553b9f5b21b2a",
+    "assets/connector_visuals/connector_1.usdc": "4337a5141535b5c03e90803d733a6658197023b3a147a0535f5ff44d644dd8b4",
+    "assets/connector_visuals/connector_2.usdc": "7699b34c1e68b5c124596402c38ae6ccc53f1bd3562ee0a8efa20d93ecbf11d3",
+    "assets/nero/meshes/base_link.stl": "540462fb56e52091daa3cd1ad3acc3c19a43f120b2f11bae5a69b32b08c738b6",
+    "assets/nero/meshes/gripper_base.stl": "041b1c8ffa29bff9a5e9350ec9d3e1a0129a5abcba1f347b29b5ad7367ba5f5a",
+    "assets/nero/meshes/gripper_flange.stl": "186697a73e7cafd9fd41d96f1eea9b34b444c058b9561fb2e3ea439c835ae2e8",
+    "assets/nero/meshes/gripper_link1.stl": "475a7d8db056524d7659fadf5a2c307d62791047b6214d733dfc7846ed1c613d",
+    "assets/nero/meshes/gripper_link2.stl": "3f88d534a85e28a33ef7d2061adacbd1d25214aa9325f9e464aad0f9e4b74606",
+    "assets/nero/meshes/link1.stl": "0e38bf33ce41f04d7e70e471768c00fa144ba4016a878b9a6d8303c319736e09",
+    "assets/nero/meshes/link2.stl": "fc9eb85db9fbd351c9f6e119f5fed33c6f0dd3bc3b11698a0f96aaeb2d36c721",
+    "assets/nero/meshes/link3.stl": "44c70f731ad5067d608ebebc9e59f3c231988f992dfac6cb01ee7a6bb4b053f1",
+    "assets/nero/meshes/link4.stl": "47242e9b5d8b06c912261756f24dddb1e7f54ac6e718232a25889115298b966d",
+    "assets/nero/meshes/link5.stl": "dc497f5a9bab2d0d314250134d4ec86617abea7205d122db41b765acdb86ae7e",
+    "assets/nero/meshes/link6.stl": "66417d30596e33c890f4f141781023bd3ea15709a502e7f59b30f6676f556022",
+    "assets/nero/meshes/link7.stl": "70a2f415358f9e46088673c92bfe78ca5b1072dd73b7ea24464ba3ebb4c3e647",
+    "assets/nero/nero.urdf": "869d6da45b778ecc4e63051c13ca88785c557a5739d7002837444cbe95ac9f5f",
+    "assets/nero/nero_dual_2.urdf": "65f4d8d1b95f51cb255f8e85baafa5689dcd45ab5b03667e14eb7efc816d2955",
+    "assets/objects/connector/keyed_physics.json": "e48395a5e6fcd6649c47fba952159b3b22204231113492444bc87c1211a554b5",
+    "assets/objects/connector/model/1/Meshy_AI_Solar_Cable_Connector_1105093342_texture.mtl": "f3a566930847236d07ceb744558196c0e40d4a3daa8f22670dd4021d032d567f",
+    "assets/objects/connector/model/1/Meshy_AI_Solar_Cable_Connector_1105093342_texture.png": "c2a751db5cd791d262e8dcf95d09d8b4d46f46f671f192d93477f33b8b77a2db",
+    "assets/objects/connector/model/1/Meshy_AI_Solar_Cable_Connector_1105093342_texture_lowpoly.obj": "9a4c50d610faefaaa91cdc99f6f0b8e3e142b458eef40983a6b64f865698346b",
+    "assets/objects/connector/model/2/Meshy_AI_Black_Cable_Connector_1105095505_texture.mtl": "dbc146ea3bba37a1a3261e952d7807e19b7246d0cc8ea6a87ce5c6d088a50fdc",
+    "assets/objects/connector/model/2/Meshy_AI_Black_Cable_Connector_1105095505_texture.png": "a0fe6ed71520ee02171b35d400b93fbcab08a01d002b2c59c65c96567a753af7",
+    "assets/objects/connector/model/2/Meshy_AI_Black_Cable_Connector_1105095505_texture_lowpoly.obj": "41c650a3b3689742e2d1d5c5e026096cece4033136746439f7b95ebec5a44d03",
+    "assets/objects/connector/model/comparison.png": "2b727f25085ff624e6880210fade6dce1cce9591e4946abc0876e30c351350d5",
+    "assets/objects/connector/model/comparison_wireframe.png": "b5ade60d258fa059efc3d948c0adb934a1132ba70b118909d586d9ba761e215c",
+    "data/reference/connector/converted/episode_000.npz": "475fcc0e7bfa4129b1a21c33c7a13993534cb02d3bb39fcabe45b0e6c802a8a6"
+  },
+  "defaults": {
+    "robot": {
+      "id": "nero_dual",
+      "arms": [
+        {
+          "id": "left",
+          "urdf_path": "assets/nero/nero.urdf",
+          "base_pose": {
+            "position_m": [
+              0.0,
+              -0.375,
+              0.802
+            ],
+            "quaternion_wxyz": [
+              1,
+              0,
+              0,
+              0
+            ]
+          },
+          "initial_joint_positions": {
+            "joint1": -0.025010569021105766,
+            "joint2": 0.2410648763179779,
+            "joint3": -0.4001341760158539,
+            "joint4": 2.0603089332580566,
+            "joint5": 0.20963150262832642,
+            "joint6": 0.3277902901172638,
+            "joint7": -0.2878047823905945,
+            "gripper_joint1": 0.0275,
+            "gripper_joint2": -0.0275
+          },
+          "camera": {
+            "calibration_path": "assets/cameras/connector_hand_eye.json",
+            "parent_link": "gripper_base",
+            "T_parent_sdk_flange": [
+              [
+                0,
+                -1,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                -1,
+                -0.0235
+              ],
+              [
+                1,
+                0,
+                0,
+                -0.0375
+              ],
+              [
+                0,
+                0,
+                0,
+                1
+              ]
+            ],
+            "housing_size_m": [
+              0.09,
+              0.025,
+              0.025
+            ],
+            "housing_measured": false
+          }
+        },
+        {
+          "id": "right",
+          "urdf_path": "assets/nero/nero_dual_2.urdf",
+          "base_pose": {
+            "position_m": [
+              0.0,
+              0.375,
+              0.802
+            ],
+            "quaternion_wxyz": [
+              1,
+              0,
+              0,
+              0
+            ]
+          },
+          "initial_joint_positions": {
+            "joint1": -0.23781856894493103,
+            "joint2": 0.6119298934936523,
+            "joint3": 0.968378484249115,
+            "joint4": 1.8059794902801514,
+            "joint5": -0.36650168895721436,
+            "joint6": 0.2888694405555725,
+            "joint7": 0.24389231204986572,
+            "gripper_joint1": 0.02,
+            "gripper_joint2": -0.02
+          },
+          "camera": {
+            "calibration_path": "assets/cameras/connector_hand_eye.json",
+            "parent_link": "gripper_base",
+            "T_parent_sdk_flange": [
+              [
+                0,
+                -1,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                -1,
+                -0.0235
+              ],
+              [
+                1,
+                0,
+                0,
+                -0.0375
+              ],
+              [
+                0,
+                0,
+                0,
+                1
+              ]
+            ],
+            "housing_size_m": [
+              0.09,
+              0.025,
+              0.025
+            ],
+            "housing_measured": false
+          }
+        }
+      ],
+      "hardware_verified": false
+    },
+    "objects": [
+      {
+        "id": "connector_male",
+        "asset_path": "assets/objects/connector/model/1/Meshy_AI_Solar_Cable_Connector_1105093342_texture_lowpoly.obj",
+        "visual_asset_path": "assets/connector_visuals/connector_1.usdc",
+        "geometry_type": "mesh",
+        "unit": "m",
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "pose": {
+          "position_m": [
+            -0.4231601462312934,
+            -0.020434199280837673,
+            0.793
+          ],
+          "quaternion_wxyz": [
+            0.8564106164704085,
+            0.0,
+            0.0,
+            -0.5162953185888624
+          ]
+        },
+        "mass_kg": 0.02,
+        "collision": {
+          "type": "connector_keyed_engineering",
+          "profile_path": "assets/objects/connector/keyed_physics.json",
+          "role": "male",
+          "measured": false
+        },
+        "functional_probe": {
+          "role": "external_latch",
+          "x_m": -0.015,
+          "source": "retained engineering cross-section audit"
+        },
+        "provenance": {
+          "asset": "user supplied Meshy scan, copied unchanged",
+          "pose": "source manual RGB/model fit XY and yaw; simulation table initialization Z=.793m",
+          "mass": "unmeasured simulation assumption",
+          "unit": "retained registered asset meter convention, not inferred from mesh"
+        }
+      },
+      {
+        "id": "connector_female",
+        "asset_path": "assets/objects/connector/model/2/Meshy_AI_Black_Cable_Connector_1105095505_texture_lowpoly.obj",
+        "visual_asset_path": "assets/connector_visuals/connector_2.usdc",
+        "geometry_type": "mesh",
+        "unit": "m",
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "pose": {
+          "position_m": [
+            -0.42905409948416245,
+            0.1259739524646144,
+            0.793
+          ],
+          "quaternion_wxyz": [
+            -0.5648821112764971,
+            0.0,
+            0.0,
+            0.8251716187314049
+          ]
+        },
+        "mass_kg": 0.025,
+        "collision": {
+          "type": "connector_keyed_engineering",
+          "profile_path": "assets/objects/connector/keyed_physics.json",
+          "role": "female",
+          "measured": false
+        },
+        "functional_probe": {
+          "role": "receiver",
+          "x_m": 0.024,
+          "source": "retained engineering cross-section audit"
+        },
+        "provenance": {
+          "asset": "user supplied Meshy scan, copied unchanged",
+          "pose": "source manual RGB/model fit XY and yaw; simulation table initialization Z=.793m",
+          "mass": "unmeasured simulation assumption",
+          "unit": "retained registered asset meter convention, not inferred from mesh"
+        }
+      }
+    ],
+    "scene": {
+      "table": {
+        "size_m": [
+          0.9,
+          1.2,
+          0.05
+        ],
+        "position_m": [
+          -0.2,
+          0,
+          0.755
+        ]
+      },
+      "gravity_m_s2": [
+        0,
+        0,
+        -9.81
+      ],
+      "physics_hz": 240,
+      "settle_seconds": 1.5,
+      "floor": {
+        "size_m": [
+          3,
+          3,
+          0.05
+        ],
+        "position_m": [
+          0,
+          0,
+          -0.025
+        ]
+      },
+      "base_plates": true,
+      "obstacles": [],
+      "preview_camera": {
+        "eye_m": [
+          -1.45,
+          -1.45,
+          1.65
+        ],
+        "target_m": [
+          -0.25,
+          0,
+          0.91
+        ]
+      }
+    },
+    "frames": [
+      {
+        "id": "male_tip",
+        "parent": "connector_male",
+        "transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            -0.028
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "source": "engineering collision profile",
+        "evidence_refs": [
+          "assets/objects/connector/keyed_physics.json"
+        ],
+        "validation_scope": "simulation_assumption_not_hardware"
+      },
+      {
+        "id": "female_mouth",
+        "parent": "connector_female",
+        "transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.029
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "source": "engineering collision profile",
+        "evidence_refs": [
+          "assets/objects/connector/keyed_physics.json"
+        ],
+        "validation_scope": "simulation_assumption_not_hardware"
+      },
+      {
+        "id": "male_grasp_center",
+        "parent": "connector_male",
+        "transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.016
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "source": "retained grasp reference",
+        "orientation_known": false,
+        "validation_scope": "candidate_center_only"
+      },
+      {
+        "id": "female_grasp_center",
+        "parent": "connector_female",
+        "transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            -0.019
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "source": "retained grasp reference",
+        "orientation_known": false,
+        "validation_scope": "candidate_center_only"
+      }
+    ],
+    "evaluation": {
+      "action": {
+        "id": "connector_direct_release/v1",
+        "description": "Object-relative insertion followed by both jaws opening in place; no lowering stage",
+        "source": "explicit user task goal + retained keyed_physics.json",
+        "depth_window_m": [
+          0.0222,
+          0.0236
+        ],
+        "roll_candidates_deg": [
+          90,
+          -90
+        ],
+        "required_observables": [
+          "estimated connector relative poses",
+          "both jaw widths",
+          "gripper contact release"
+        ],
+        "verified": false
+      },
+      "retention": {
+        "id": "both_latches_post_release/v1",
+        "description": "Independent mechanical retention check after losing gripper support",
+        "required": true,
+        "separate_from_action": true,
+        "known_failure_case": "CONN-006",
+        "verified": false
+      }
+    },
+    "assumptions": [
+      "Table height, arm base separation and scan poses remain source reconstruction estimates, not calibrated world geometry.",
+      "Initial joint references regenerated by bounded retained IK to match recorded tool poses; original joint vectors not silently clipped.",
+      "Connector functional dimensions and passive spring parameters are unmeasured engineering replacements, not verified physical CAD.",
+      "Camera intrinsics/hand-eye reuse authorized by user for both wrists; independent validation on recorded serials remains false.",
+      "Camera housing is a 90x25x25mm approximation; other external real obstacles are not modeled.",
+      "This profile authorizes scene drafting and local settling only; no controller execution or real robot commands.",
+      "Post-release dual-latch retention remains unresolved (CONN-006)."
+    ]
+  },
+  "unresolved": [
+    "world/base/camera calibration reuse needs independent measurement",
+    "unmodeled external obstacle geometry",
+    "post-release mechanical retention",
+    "noise/delay and placement coverage not validated"
+  ]
+}

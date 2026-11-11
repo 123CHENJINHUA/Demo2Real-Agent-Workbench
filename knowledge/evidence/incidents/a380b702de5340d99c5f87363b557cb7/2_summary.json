@@ -1,0 +1,490 @@
+{
+  "passed": true,
+  "successes": 1,
+  "trials": 1,
+  "results": [
+    {
+      "passed": true,
+      "index": 0,
+      "fixed_grasp_joints": false,
+      "randomized_spread_m": 0.0,
+      "execution_goal": "release",
+      "assembly_attempted": true,
+      "placement_mode": "randomized initialization",
+      "requested_placement_variation": {
+        "xy_offsets_m": [
+          [
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0
+          ]
+        ],
+        "yaw_offsets_deg": [
+          0.0,
+          0.0
+        ]
+      },
+      "initial_object_poses": [
+        [
+          [
+            0.48123930777431645,
+            0.12456159666739774,
+            -0.867694149622184,
+            -0.43513214588165283
+          ],
+          [
+            -0.8763484358851535,
+            0.09156535596242749,
+            -0.47289449617131185,
+            -0.026726681739091873
+          ],
+          [
+            0.02054623017834789,
+            0.9879778308358657,
+            0.1532242089302988,
+            0.7889782786369324
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        [
+          [
+            -0.36182060887947814,
+            0.9322466753038786,
+            0.0014083234530337608,
+            -0.4290415942668915
+          ],
+          [
+            -0.9322396499495623,
+            -0.36182334967961055,
+            0.003619211038849611,
+            0.1260072886943817
+          ],
+          [
+            0.0038835617673996774,
+            -3.389821132057441e-06,
+            0.9999924589398201,
+            0.7894124984741211
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      ],
+      "initial_plan_pose_source": "Rendered wrist RGBD -> automatic SAM3 masks -> FoundationPose; no object truth",
+      "generator": {
+        "isaaclab_version": "2.3.2",
+        "generator_file": "/home/cjh/Downloads/IsaacLab/source/isaaclab_mimic/isaaclab_mimic/datagen/data_generator.py",
+        "generator_sha256": "586538ef89b774e6521c10c52980a72018884d9e9973f70a5ee46fc9c2c62c99",
+        "backend": "Official IsaacLab Mimic bimanual DataGenerator; project-specific Nero PhysX adapter",
+        "subtask_boundaries": {
+          "left": [
+            [
+              [
+                0,
+                240
+              ],
+              [
+                240,
+                355
+              ],
+              [
+                355,
+                555
+              ]
+            ]
+          ],
+          "right": [
+            [
+              [
+                0,
+                240
+              ],
+              [
+                240,
+                355
+              ],
+              [
+                355,
+                555
+              ]
+            ]
+          ]
+        },
+        "coordination_scheme": "Official TRANSLATE: same translation for both arms; source cooperative wrist orientations retained"
+      },
+      "grasp_reference": "Tabletop yaw and position for rear-barrel approach; measured full roll retained for keyed coordination",
+      "gripper_control": "Source closure timing; force closure command zero below 27mm (left),35mm (right); source widths are feedback, not motor targets",
+      "time_scale": 2.0,
+      "transit_adaptation": {
+        "method": "World-anchored far transit, smooth blend to official object-relative grasp targets",
+        "source_transition_frames": {
+          "left": [
+            120,
+            165
+          ],
+          "right": [
+            0,
+            75
+          ]
+        }
+      },
+      "camera_housing": "90x25x25 mm approximation, optical pose calibrated; actual housing/bracket geometry unavailable",
+      "grasps": [
+        {
+          "arm": 0,
+          "lift_m": 0.07705676555633545,
+          "jaw_gap_m": 0.019447144120931625,
+          "contact_forces_N": [
+            5.745923042297363,
+            5.741002559661865
+          ],
+          "passed": true
+        },
+        {
+          "arm": 1,
+          "lift_m": 0.07521724700927734,
+          "jaw_gap_m": 0.018530815839767456,
+          "contact_forces_N": [
+            5.4897685050964355,
+            5.475722312927246
+          ],
+          "passed": true
+        }
+      ],
+      "cooperative_feedback": {
+        "method": "Continuous measured-object feedback during demonstrated coordination and insertion",
+        "feedback_hz": 30,
+        "reference_frame": "Frozen female demonstration path with prescribed male-relative goal",
+        "normal_fixed_backoff": false,
+        "recoveries": 0,
+        "insertion": {
+          "depth_m": 0.022837778005891707,
+          "lateral_error_m": 1.632746657596538e-05,
+          "angle_rad": 0.0009773264783710198,
+          "roll_rad": 1.5714689798439192,
+          "roll_error_rad": 0.0006726530490226423,
+          "target_roll_rad": 1.5707963267948966,
+          "latch_engagement_m": 0.00043777222713153874,
+          "nominal_hooks_caught": true
+        },
+        "passed": true,
+        "correction_limits": {
+          "translation_m": 0.06,
+          "rotation_rad": 0.6,
+          "tool_speed_m_s": 0.08,
+          "tool_angular_speed_rad_s": 0.6
+        },
+        "terminal_alignment_error": {
+          "depth_m": -0.007792261529612203,
+          "lateral_error_m": 0.0003487172454963519,
+          "angle_rad": 0.0021343194505254186,
+          "roll_rad": 1.5706686187455141,
+          "roll_error_rad": -0.00012770804938266878,
+          "target_roll_rad": 1.5707963267948966,
+          "latch_engagement_m": -0.03019228908928482,
+          "nominal_hooks_caught": false,
+          "retained_face_area_m2": [
+            0.0,
+            0.0
+          ],
+          "retained_hooks_caught": false,
+          "alignment_weight": 1.0,
+          "depth_command_m": -0.00789379618478996,
+          "progress": 1.0,
+          "pair_force_N": 0.0,
+          "recoveries": 0,
+          "recovering": false,
+          "inserting": true,
+          "correction_saturated": [
+            false,
+            false
+          ],
+          "keyed_alignment_ready": false,
+          "key_reference_rotation_rad": 0.17565597315314996,
+          "original_demo_translation_deviation_m": [
+            0.020866072353109635,
+            0.02949504772427662
+          ],
+          "simulation_time_s": 31.833333333333332
+        },
+        "cooperative_restarts": 0,
+        "insertion_started_during_coordination": true,
+        "demonstration_correction": {
+          "max_translation_m": 0.054535472464648925,
+          "max_rotation_rad": 0.2979506009622989
+        },
+        "mechanical_task": "90-degree keyed latch engagement",
+        "key_target_roll_rad": 1.5707963267948966,
+        "reference_roll_correction_rad": 0.3513119463062999,
+        "reference_deformation": "Necessary key rotation split between arms; residual .06m/.6rad limits around deformed reference"
+      },
+      "after_cooperative_motion": {
+        "depth_m": 0.022888403937457884,
+        "lateral_error_m": 2.519050212114341e-05,
+        "angle_rad": 0.00044373359267724547,
+        "roll_rad": 1.5705840601522119,
+        "roll_error_rad": -0.00021226664268469975,
+        "target_roll_rad": 1.5707963267948966,
+        "latch_engagement_m": 0.0004884027462159178,
+        "nominal_hooks_caught": true,
+        "retained_face_area_m2": [
+          1.0036979567134923e-06,
+          9.563048147317725e-07
+        ],
+        "retained_hooks_caught": true
+      },
+      "keyed_contact": {
+        "depth_m": 0.022888403937457884,
+        "lateral_error_m": 2.519050212114341e-05,
+        "angle_rad": 0.00044373359267724547,
+        "roll_rad": 1.5705840601522119,
+        "roll_error_rad": -0.00021226664268469975,
+        "target_roll_rad": 1.5707963267948966,
+        "latch_engagement_m": 0.0004884027462159178,
+        "nominal_hooks_caught": true,
+        "retained_face_area_m2": [
+          1.0036979567134923e-06,
+          9.563048147317725e-07
+        ],
+        "retained_hooks_caught": true,
+        "deflection_m": [
+          -1.496754656674093e-07,
+          5.856869538471005e-07
+        ],
+        "maximum_deflection_m": [
+          0.0006557474222555586,
+          0.0005473896028263311
+        ],
+        "both_latches_seated": true,
+        "both_latches_flexed": true,
+        "aligned_for_insertion": true,
+        "engaged": true,
+        "approximation": "Two radial prismatic springs and reconstructed convex contact geometry",
+        "connector_pair_joint": false
+      },
+      "after_release": {
+        "depth_m": 0.02185603719793671,
+        "lateral_error_m": 0.0139842068744296,
+        "angle_rad": 0.001351322776411402,
+        "roll_rad": 3.1032201653837124,
+        "roll_error_rad": 1.5324238385888158,
+        "target_roll_rad": 1.5707963267948966,
+        "latch_engagement_m": -0.0005439738498047506,
+        "nominal_hooks_caught": false,
+        "retained_face_area_m2": [
+          0.0,
+          0.0
+        ],
+        "retained_hooks_caught": false
+      },
+      "keyed_contact_after_release": {
+        "depth_m": 0.02185603719793671,
+        "lateral_error_m": 0.0139842068744296,
+        "angle_rad": 0.001351322776411402,
+        "roll_rad": 3.1032201653837124,
+        "roll_error_rad": 1.5324238385888158,
+        "target_roll_rad": 1.5707963267948966,
+        "latch_engagement_m": -0.0005439738498047506,
+        "nominal_hooks_caught": false,
+        "retained_face_area_m2": [
+          0.0,
+          0.0
+        ],
+        "retained_hooks_caught": false,
+        "deflection_m": [
+          0.0007353470458344741,
+          4.2703142816985507e-08
+        ],
+        "maximum_deflection_m": [
+          0.009327273004089637,
+          0.0007424004239083033
+        ],
+        "both_latches_seated": false,
+        "both_latches_flexed": true,
+        "aligned_for_insertion": false,
+        "engaged": false,
+        "approximation": "Two radial prismatic springs and reconstructed convex contact geometry",
+        "connector_pair_joint": false
+      },
+      "keyed_assembly_validated": false,
+      "keyed_validation_stage": "before_and_after_direct_release",
+      "before_release_keyed_validated": true,
+      "post_release_retained": false,
+      "released_from_fingers": true,
+      "release_jaw_gaps_m": [
+        0.06499865651130676,
+        0.06499867141246796
+      ],
+      "settled_on_table": false,
+      "release_extension": "Both jaws open at insertion pose; arms hold still; passive free fall",
+      "task_success_scope": "Keyed insertion followed by confirmed direct jaw release; post-drop assembly retention is a separate validation",
+      "post_release_validation": false,
+      "completed_stage": "release",
+      "recovery_policy": {
+        "policy": "scripted data-collection expert",
+        "policy_checkpoint": null,
+        "force_observations": false,
+        "pose_source": "Rendered wrist RGBD -> automatic SAM3 masks -> FoundationPose; no object truth",
+        "pose_noise_m": null,
+        "pose_delay_s": null,
+        "held_pose_prediction": "Timestamp-matched FK compensation; disabled for empty/open/lost grasps",
+        "events": [],
+        "recoveries": [],
+        "requires_human": false,
+        "observation_guard_overrides": 0,
+        "counts": {
+          "continue": 741,
+          "wait": 0,
+          "regrasp_left": 0,
+          "regrasp_right": 0,
+          "needs_human": 0
+        },
+        "learning_scope": "High-level recovery skill decisions; low-level demonstration and visual servo skills remain deterministic"
+      },
+      "requires_human": false,
+      "tracking": {
+        "position_rmse_m": 0.0007554878239554683,
+        "position_max_m": 0.004644861762188519,
+        "rotation_rmse_rad": 0.008110627545621356
+      }
+    }
+  ],
+  "physics": {
+    "object_pose_source": "RGBD vision",
+    "arm_bases_m": [
+      [
+        0.0,
+        -0.375,
+        0.802
+      ],
+      [
+        0.0,
+        0.375,
+        0.802
+      ]
+    ],
+    "physics_hz": 240,
+    "mass_kg": [
+      0.02,
+      0.025
+    ],
+    "static_friction": 0.6,
+    "dynamic_friction": 0.4,
+    "finger_max_force_N": 10.0,
+    "finger_stiffness_N_m": 600.0,
+    "finger_damping_Ns_m": 10.0,
+    "contact_offset_m": 0.0003,
+    "male_pin_radius_m": 0.0036,
+    "female_bore_radius_m": 0.00555,
+    "socket_depth_m": 0.058,
+    "nominal_insertion_depth_m": 0.0228,
+    "elastic_latch_simulated": true,
+    "cable_dynamics_simulated": false,
+    "grasp_center_local_x_m": [
+      0.016,
+      -0.019
+    ],
+    "rotation_control": "Full keyed relative pose; +/-90 degree key datum, not free axial roll",
+    "collision_model": "Reconstructed through bore, open key channels, retaining lip and two passive spring clips",
+    "fixed_grasp_joints": false,
+    "object_teleports_during_execution": false,
+    "controller": "dexmimic",
+    "connector_model": "keyed",
+    "angular_damping_per_s": 5.0,
+    "linear_damping_per_s": 0.1,
+    "robot_contact_paths": [
+      "/World/nero/base_link",
+      "/World/nero/link1",
+      "/World/nero/link2",
+      "/World/nero/link3",
+      "/World/nero/link4",
+      "/World/nero/link5",
+      "/World/nero/link6",
+      "/World/nero/link7",
+      "/World/nero/gripper_flange",
+      "/World/nero/gripper_base",
+      "/World/nero/gripper_link1",
+      "/World/nero/gripper_link2",
+      "/World/nero2/base_link",
+      "/World/nero2/link1",
+      "/World/nero2/link2",
+      "/World/nero2/link3",
+      "/World/nero2/link4",
+      "/World/nero2/link5",
+      "/World/nero2/link6",
+      "/World/nero2/link7",
+      "/World/nero2/gripper_flange",
+      "/World/nero2/gripper_base",
+      "/World/nero2/gripper_link1",
+      "/World/nero2/gripper_link2"
+    ],
+    "latch_model": "Two limited radial prismatic springs; unmeasured material parameters",
+    "keyed_physics": {
+      "version": 1,
+      "units": "m",
+      "description": "Engineering collision reconstruction from Meshy cross sections; spring/material parameters are simulation assumptions, not measured hardware properties",
+      "target_roll_deg": 90.0,
+      "roll_candidates_deg": [
+        90.0,
+        -90.0
+      ],
+      "nominal_tip_to_mouth_m": 0.057,
+      "lock_target_depth_m": 0.0228,
+      "lock_min_depth_m": 0.0222,
+      "lock_max_depth_m": 0.0236,
+      "ready_lateral_m": 0.0003,
+      "ready_axis_rad": 0.015,
+      "ready_roll_rad": 0.03490658504,
+      "evaluation_roll_rad": 0.0872664626,
+      "contact_offset_m": 5e-05,
+      "static_friction": 0.6,
+      "dynamic_friction": 0.4,
+      "pin_radius_m": 0.0036,
+      "pin_y_offset_m": 0.0007,
+      "collar_radius_m": 0.00525,
+      "barrel_front_x_m": -0.005,
+      "bore_radius_m": 0.00555,
+      "female_rear_x_m": -0.029,
+      "window_start_x_m": 0.016,
+      "retaining_lip_x_m": 0.0225,
+      "mouth_x_m": 0.029,
+      "front_outer_y_m": 0.0063,
+      "front_outer_z_m": 0.0095,
+      "slot_half_width_m": 0.00355,
+      "slot_inner_radius_m": 0.00595,
+      "slot_outer_radius_m": 0.00895,
+      "window_inner_radius_m": 0.0053,
+      "window_outer_z_m": 0.0058,
+      "collision_grid_m": 0.00025,
+      "latch_head_front_x_m": -0.01645,
+      "latch_head_back_x_m": -0.0121,
+      "latch_root_x_m": -0.005,
+      "latch_inner_radius_m": 0.00555,
+      "latch_outer_radius_m": 0.00825,
+      "latch_half_width_m": 0.0014,
+      "latch_travel_m": 0.00065,
+      "latch_mass_kg": 0.0003,
+      "latch_stiffness_N_m": 400.0,
+      "latch_damping_Ns_m": 0.2,
+      "latch_drive_max_force_N": 1.0,
+      "latch_seated_deflection_m": 0.0002
+    },
+    "connector_pair_joint": false,
+    "connector_contact_offset_m": 5e-05,
+    "gripper_material_friction": {
+      "static": 1.2,
+      "dynamic": 1.0
+    }
+  }
+}

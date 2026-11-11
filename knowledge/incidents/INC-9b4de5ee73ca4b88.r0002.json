@@ -1,0 +1,71 @@
+{
+  "summary": "单个对键候选IK异常中断其他候选检查",
+  "observed_behavior": "离线专家尚未满足完整动作/保持或证据检查；查看分阶段结果",
+  "primary_category": "planning_control",
+  "stage": "simulation_test",
+  "mode": "simulation",
+  "run_id": "aea753a4f01b4585",
+  "task_id": "aea753a4f01b4585:expert_validation",
+  "diagnosis": {
+    "state": "confirmed",
+    "root_cause": "候选循环未隔离solve_near_demo的不可达异常，首个候选失败后未尝试另一允许的键位。"
+  },
+  "declared_failure_category": "physics_contact",
+  "declared_failure_stage": "simulation_test",
+  "validation_scope": "仅对应误报或候选检查逻辑已修复；不证明保持、任意位置、RGBD、学习策略或真机可靠性。",
+  "incident_id": "INC-9b4de5ee73ca4b88",
+  "title": "单个对键候选IK异常中断其他候选检查",
+  "resolved": true,
+  "resolution_state": "verified_in_scope",
+  "revision_reason": "追加真实复核/定向复测；原失败与hash证据保留。",
+  "fix": "逐候选独立求解并记录不可达；仅在所有候选都不满足原限位/误差条件时停止。",
+  "evidence": [
+    {
+      "path": "knowledge/evidence/incidents/5f/5f8dcd18c2993ebf1b8d30256948e4326a6faeb4f3063e07c611dfa254944f32.json",
+      "source_reference": "knowledge/evidence/incidents/5f/5f8dcd18c2993ebf1b8d30256948e4326a6faeb4f3063e07c611dfa254944f32.json",
+      "sha256": "5f8dcd18c2993ebf1b8d30256948e4326a6faeb4f3063e07c611dfa254944f32",
+      "bytes": 6029
+    },
+    {
+      "path": "knowledge/evidence/incidents/e3/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.log",
+      "source_reference": "knowledge/evidence/incidents/e3/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "knowledge/evidence/incidents/a2/a2ae91e61362c5ab4dd929bab98d2595d9e24adc2c58c9969c7328df2b4c3e8b.json",
+      "source_reference": "knowledge/evidence/incidents/a2/a2ae91e61362c5ab4dd929bab98d2595d9e24adc2c58c9969c7328df2b4c3e8b.json",
+      "sha256": "a2ae91e61362c5ab4dd929bab98d2595d9e24adc2c58c9969c7328df2b4c3e8b",
+      "bytes": 4957
+    },
+    {
+      "path": "knowledge/evidence/incidents/cf/cfc0b3cf0e5621c26159ab0b0e1873be557443ee00808a3b5548c13efb7c2472.json",
+      "source_reference": "knowledge/evidence/incidents/cf/cfc0b3cf0e5621c26159ab0b0e1873be557443ee00808a3b5548c13efb7c2472.json",
+      "sha256": "cfc0b3cf0e5621c26159ab0b0e1873be557443ee00808a3b5548c13efb7c2472",
+      "bytes": 23935
+    },
+    {
+      "path": "knowledge/evidence/incidents/43/43998b88a322a0f1277609638560de6a292e9c494eabc66961cfd7b3991d4d4d.json",
+      "source_reference": "runs/ed40d6aad9f6447b/expert_validation/expert_validation.json",
+      "sha256": "43998b88a322a0f1277609638560de6a292e9c494eabc66961cfd7b3991d4d4d",
+      "bytes": 6499
+    },
+    {
+      "path": "knowledge/evidence/incidents/ae/aede616951c77bc33f8b256f678a91afe9da14e078089cbcc8f1beb86e2a2d84.json",
+      "source_reference": "runs/ed40d6aad9f6447b/expert_execution/execution_1794387567156197302/keyed_reference_plan.json",
+      "sha256": "aede616951c77bc33f8b256f678a91afe9da14e078089cbcc8f1beb86e2a2d84",
+      "bytes": 1576
+    },
+    {
+      "path": "knowledge/evidence/incidents/9c/9cb90bf36ecdc3c2646aa86d78dd0cc690a0071359cf6fdb09ed28f1865de535.json",
+      "source_reference": "runs/placement_1794386435542648456/final_report.json",
+      "sha256": "9cb90bf36ecdc3c2646aa86d78dd0cc690a0071359cf6fdb09ed28f1865de535",
+      "bytes": 7466
+    }
+  ],
+  "schema_version": 1,
+  "record_type": "incident",
+  "revision": 2,
+  "timestamp_utc": "2026-11-11T09:05:03.722222+00:00",
+  "hardware_verified": false
+}

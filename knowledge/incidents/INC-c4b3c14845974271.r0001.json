@@ -1,0 +1,47 @@
+{
+  "summary": "本轮动作或证据检查未通过：Unreachable target for arm 0: [-0.43178770547813666, 0.25182537792602416, 0.18727025151706334], residual=0.01547",
+  "observed_behavior": "本轮动作或证据检查未通过：Unreachable target for arm 0: [-0.43178770547813666, 0.25182537792602416, 0.18727025151706334], residual=0.01547",
+  "primary_category": "planning_control",
+  "stage": "simulation_test",
+  "mode": "simulation",
+  "run_id": "903291b320594ec0",
+  "task_id": "903291b320594ec0:expert_validation",
+  "diagnosis": {
+    "state": "unknown"
+  },
+  "evidence": [
+    {
+      "path": "knowledge/evidence/incidents/76/76a9ca7cea3e645dd7ba78cf3916d70201ba2cc40d1cffc55059078df6d7a2aa.json",
+      "source_reference": "knowledge/evidence/incidents/5c167df35eb1416ea6050b5c5c52806a/failure_result.json",
+      "sha256": "76a9ca7cea3e645dd7ba78cf3916d70201ba2cc40d1cffc55059078df6d7a2aa",
+      "bytes": 6271
+    },
+    {
+      "path": "knowledge/evidence/incidents/e3/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.log",
+      "source_reference": "knowledge/evidence/incidents/5c167df35eb1416ea6050b5c5c52806a/1_worker.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "knowledge/evidence/incidents/e3/e372e4e81726377a959d5076c4c084e1169046dc45563d2aea73b1675c785b14.json",
+      "source_reference": "knowledge/evidence/incidents/5c167df35eb1416ea6050b5c5c52806a/2_expert_validation.json",
+      "sha256": "e372e4e81726377a959d5076c4c084e1169046dc45563d2aea73b1675c785b14",
+      "bytes": 5124
+    },
+    {
+      "path": "knowledge/evidence/incidents/7b/7b546b8ab71d12a92d96bb4a3c812b7939cd0731392ea0c74e851dd4cdbcf89a.json",
+      "source_reference": "knowledge/evidence/incidents/5c167df35eb1416ea6050b5c5c52806a/3_expert_result.json",
+      "sha256": "7b546b8ab71d12a92d96bb4a3c812b7939cd0731392ea0c74e851dd4cdbcf89a",
+      "bytes": 26607
+    }
+  ],
+  "declared_failure_category": "planning_control",
+  "declared_failure_stage": "simulation_test",
+  "validation_scope": "module_reported_failure_only_no_hardware_inference",
+  "schema_version": 1,
+  "record_type": "incident",
+  "incident_id": "INC-c4b3c14845974271",
+  "revision": 1,
+  "timestamp_utc": "2026-11-11T13:46:49.591952+00:00",
+  "hardware_verified": false
+}

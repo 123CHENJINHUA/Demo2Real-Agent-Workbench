@@ -1,0 +1,12 @@
+{
+  "error": "RGBD回归插入及原位松手动作通过，但post_release_retained=false；双卡扣落桌后保持未通过。",
+  "result": {
+    "failure_category": "physics_contact",
+    "failure_stage": "simulation_test",
+    "evidence_paths": [
+      "runs/3035e6ca201844ef/simulation/isaac_1794326783548444122/summary.json"
+    ],
+    "scope": "partial_post_release_validation_only",
+    "related_case": "CONN-006"
+  }
+}

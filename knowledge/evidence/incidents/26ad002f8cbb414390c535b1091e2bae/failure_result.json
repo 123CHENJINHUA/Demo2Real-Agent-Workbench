@@ -1,0 +1,13 @@
+{
+  "error": "Partial validation failed",
+  "result": {
+    "code": "grasp_roll_ambiguity",
+    "primary_category": "planning_control",
+    "stage": "asset_modeling",
+    "severity": "review",
+    "status": "open",
+    "message": "Nearly equal transverse surface PCA moments leave axial roll poorly constrained. Preserve demonstration/table approach and verify opposing jaw patches; do not rotate a down-grasp to a side-grasp from PCA alone.",
+    "hardware_verified": false,
+    "asset_id": "connector_male"
+  }
+}

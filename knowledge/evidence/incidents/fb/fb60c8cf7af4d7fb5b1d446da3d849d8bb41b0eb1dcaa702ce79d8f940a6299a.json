@@ -1,0 +1,52 @@
+[
+  {
+    "run_id": "66a70a6995034ab6",
+    "collision_exact_min_z_m": 0.7798756738153649,
+    "visual_used_vertices_min_z_m": 0.7791727100289976,
+    "collision": [
+      {
+        "path": "/World/Objects/connector_male/KeyedBarrel",
+        "min_z_m": 0.7798756738153649
+      },
+      {
+        "path": "/World/Objects/connector_male/KeyedPin",
+        "min_z_m": 0.7862569818733436
+      },
+      {
+        "path": "/World/Objects/connector_male/KeyedCollar",
+        "min_z_m": 0.7844947419559104
+      }
+    ],
+    "visual": [
+      {
+        "path": "/World/Objects/connector_male/VisualAsset/Visual",
+        "min_z_m": 0.7791727100289976
+      }
+    ]
+  },
+  {
+    "run_id": "aea753a4f01b4585",
+    "collision_exact_min_z_m": 0.7794343740112298,
+    "visual_used_vertices_min_z_m": 0.7794943131877328,
+    "collision": [
+      {
+        "path": "/World/Objects/connector_male/KeyedBarrel",
+        "min_z_m": 0.7794343740112298
+      },
+      {
+        "path": "/World/Objects/connector_male/KeyedPin",
+        "min_z_m": 0.7857941213652905
+      },
+      {
+        "path": "/World/Objects/connector_male/KeyedCollar",
+        "min_z_m": 0.7836587531790354
+      }
+    ],
+    "visual": [
+      {
+        "path": "/World/Objects/connector_male/VisualAsset/Visual",
+        "min_z_m": 0.7794943131877328
+      }
+    ]
+  }
+]

@@ -1,0 +1,51 @@
+{
+  "summary": "Isaac启动后超过5分钟无初始场景审计/运动事件，同参数仅重试项目内训练作业",
+  "primary_category": "runtime_environment",
+  "stage": "simulation_test",
+  "mode": "simulation",
+  "run_id": "74b9812048ef4f0e",
+  "observed_behavior": "Isaac expert initialized app but did not produce initial_scene_audit or motion events for over 5 minutes",
+  "diagnosis": {
+    "state": "hypothesis",
+    "explanation": "日志停在app ready及材质加载，GPU驱动只读检查可用，未证实根因。未开始动作，不记为策略失败或采集完成。"
+  },
+  "resolved": false,
+  "status": "mitigation_recorded",
+  "evidence": [
+    {
+      "path": "knowledge/evidence/incidents/b3/b3050c46c22590dbed22e48c535544d4fc6ba09b8b7be746848d7df4d21e1ab8.log",
+      "source_reference": "knowledge/evidence/incidents/b3/b3050c46c22590dbed22e48c535544d4fc6ba09b8b7be746848d7df4d21e1ab8.log",
+      "sha256": "b3050c46c22590dbed22e48c535544d4fc6ba09b8b7be746848d7df4d21e1ab8",
+      "bytes": 37355
+    },
+    {
+      "path": "knowledge/evidence/incidents/4a/4a0a66289423b20bf21e5ea6d79cdb77e8a9bd12caf5085ddc0f137d79ad643a.json",
+      "source_reference": "knowledge/evidence/incidents/4a/4a0a66289423b20bf21e5ea6d79cdb77e8a9bd12caf5085ddc0f137d79ad643a.json",
+      "sha256": "4a0a66289423b20bf21e5ea6d79cdb77e8a9bd12caf5085ddc0f137d79ad643a",
+      "bytes": 472
+    },
+    {
+      "path": "knowledge/evidence/incidents/c8/c895e723a13dd469e843a5e2ae8aef9b4c913cd73899a3f21d93212c6564dd2b.json",
+      "source_reference": "runs/74b9812048ef4f0e/expert_execution/execution_1794408369769323436/expert_result.json",
+      "sha256": "c895e723a13dd469e843a5e2ae8aef9b4c913cd73899a3f21d93212c6564dd2b",
+      "bytes": 35697
+    }
+  ],
+  "reusable_checklist": [
+    "将环境启动超时与物理/策略动作失败分开记录",
+    "仅取消本项目具体作业并原参数重试，不能停止其他项目或重置共享GPU"
+  ],
+  "record_type": "incident",
+  "incident_id": "INC-6386f845b135445e",
+  "hardware_verified": false,
+  "revision_reason": "同源代码/初始条件重试后实际采集及独立动作通过；根因仍未确认",
+  "verification": {
+    "scope": "single unchanged training-case retry",
+    "action_passed": true,
+    "root_cause_confirmed": false,
+    "new_source_or_pose_tuning": false
+  },
+  "schema_version": 1,
+  "revision": 2,
+  "timestamp_utc": "2026-11-11T14:56:55.259444+00:00"
+}

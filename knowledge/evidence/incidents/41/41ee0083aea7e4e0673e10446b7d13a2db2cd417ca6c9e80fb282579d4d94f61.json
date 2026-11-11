@@ -1,0 +1,13 @@
+{
+  "error": "Partial validation failed",
+  "result": {
+    "code": "functional_frame_unverified",
+    "primary_category": "geometry_function",
+    "stage": "asset_modeling",
+    "severity": "review",
+    "status": "open",
+    "message": "PCA axes, contours and grasp regions are geometric candidates; assembly axis, keyed roll, grasp accessibility and hidden lock remain unverified.",
+    "hardware_verified": false,
+    "asset_id": "block"
+  }
+}

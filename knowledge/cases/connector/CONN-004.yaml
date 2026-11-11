@@ -1,0 +1,76 @@
+schema_version: 1
+record_type: curated_historical_case
+case_id: CONN-004
+revision: 1
+recorded_on: '2026-11-10'
+title: 图像支持良好仍可能达不到紧配合所需姿态精度
+status: partially_verified
+primary_category: perception_estimation
+secondary_categories:
+- physics_contact
+- frames_calibration
+stages:
+- perception_validation
+- simulation_test
+feature_tags:
+- wrist_rgbd
+- tight_clearance
+- snap_fit
+evidence_scopes:
+- simulation
+hardware_verified: false
+facts:
+- rgbd_keyed_01 抓取通过，接触阶段最终跟踪/可用性失败。
+- 一帧接触前离线核验中 FP 位置误差约0.47/0.70mm，完整旋转误差约3.85/4.02°。
+- 该帧双视角精修后约0.05/0.02mm、0.08/0.08°；真值只用于独立评价。
+diagnosis:
+  state: supported_by_diagnostics
+  explanation: 图像拟合质量不是装配精度保证；局部估计误差可能超过配合预算。
+  alternatives:
+  - 接触几何、时序和控制误差也须独立核验，不能只归咎单一网络。
+source_mitigation:
+  actions:
+  - 使用实际采集时刻 FK、手眼和米制深度。
+  - 在双视角刚性后部表面做有界点到面精修，排除活动件和接触重叠区。
+  - 按间隙预算门控推进，丢失不回退物体真值。
+  implemented_in_new_project: false
+  attempts:
+  - change: 原 FP 接触闭环回合
+    outcome: tracking_or_availability_failure
+  - change: 保存帧上的双视角刚性后部精修
+    outcome: single_frame_error_reduced
+    limits: 不是全程或实机精度承诺
+  status: recorded_in_source_history
+verification:
+  scope: 单帧离线精修及后续仿真原型
+  passed_subchecks:
+  - 该保存帧局部误差降低
+  failed_or_unverified:
+  - 没有全程/真机精度保证
+  - 释放后快速运动可能失跟，最终保持另有失败
+applicability:
+  when:
+  - 紧配合与亚毫米间隙
+  - 已知几何且有可用 RGBD/标定
+  not_when:
+  - 无可靠度量深度或刚性几何对应时不能直接用该精修
+  - 不能对活动卡扣套刚体拟合
+  transferable_principles:
+  - 把感知/标定/时延误差与功能间隙比较。
+  - 质量分数与实测误差分布分别记录。
+  parameters_not_to_copy:
+  - 单帧0.05mm作为普遍性能
+  - 旧阈值、ICP掩码或表面范围
+preventive_checks:
+- 多视角/阶段/遮挡下核验完整姿态与真实时延。
+- 精修后重算图像支持与独立误差，记录不可见和预测标记。
+regression_tests:
+- 高 inlier 分数但超公差的样例不能判精度合格。
+evidence:
+- knowledge/evidence/connector/rgbd_contact_failure.json
+- knowledge/evidence/connector/depth_refinement_single_frame.json
+- knowledge/evidence/connector/direct_release_validation.json
+source_provenance: knowledge/evidence/connector/provenance.json
+notes:
+- 历史报告整理的知识种子，尚未在新框架复现或自动应用。
+- 来源路径仅为溯源，运行/检索使用本项目内快照。

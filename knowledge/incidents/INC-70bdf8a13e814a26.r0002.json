@@ -1,0 +1,33 @@
+{
+  "summary": "RGBD worker: ModuleNotFoundError: No module named 'sim_bridge'; see /home/cjh/Downloads/Demo2Real-Agent-Workbench/runs/3035e6ca201844ef/simulation/isaac_1794326652389997890/trial_000/vision/worker.log",
+  "observed_behavior": "RGBD worker: ModuleNotFoundError: No module named 'sim_bridge'; see /home/cjh/Downloads/Demo2Real-Agent-Workbench/runs/3035e6ca201844ef/simulation/isaac_1794326652389997890/trial_000/vision/worker.log",
+  "primary_category": "runtime_environment",
+  "stage": "simulation_test",
+  "mode": "simulation",
+  "run_id": "3035e6ca201844ef",
+  "task_id": "3035e6ca201844ef:simulation",
+  "diagnosis": {
+    "state": "confirmed",
+    "root_cause": "隔离vision_bootstrap遗漏本项目tasks/connector/legacy导入根"
+  },
+  "declared_failure_category": "physics_contact",
+  "declared_failure_stage": "simulation_test",
+  "validation_scope": "视觉模块导入/运行；不覆盖接触与落桌保持",
+  "schema_version": 1,
+  "record_type": "incident",
+  "incident_id": "INC-70bdf8a13e814a26",
+  "revision": 2,
+  "timestamp_utc": "2026-11-10T16:19:18.944456+00:00",
+  "hardware_verified": false,
+  "revision_reason": "隔离-S视觉启动已加入本项目legacy导入根；真实RGBD完整回归证明深度精修/跟踪可执行。该修复不代表落桌保持通过。",
+  "resolved": true,
+  "resolution_state": "verified_in_scope",
+  "evidence": [
+    {
+      "path": "knowledge/evidence/incidents/10/103cb6b3602c356fd07d38dea0ca43d397dd71e79b58e1348dece5e20d1d5165.json",
+      "source_reference": "runs/acceptance/vision/end_to_end_report.json",
+      "sha256": "103cb6b3602c356fd07d38dea0ca43d397dd71e79b58e1348dece5e20d1d5165",
+      "bytes": 519
+    }
+  ]
+}

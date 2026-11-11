@@ -1,0 +1,41 @@
+{
+  "summary": "RGBD回归插入及原位松手动作通过，但post_release_retained=false；双卡扣落桌后保持未通过。",
+  "observed_behavior": "RGBD回归插入及原位松手动作通过，但post_release_retained=false；双卡扣落桌后保持未通过。",
+  "primary_category": "physics_contact",
+  "stage": "simulation_test",
+  "mode": "simulation",
+  "run_id": "3035e6ca201844ef",
+  "task_id": "simulation",
+  "diagnosis": {
+    "state": "unknown"
+  },
+  "evidence": [
+    {
+      "path": "knowledge/evidence/incidents/78/7808797bb26df5cf0c46dd321ec358ffacc2a2a52991d7d85207ba464b5b5656.json",
+      "source_reference": "knowledge/evidence/incidents/a380b702de5340d99c5f87363b557cb7/failure_result.json",
+      "sha256": "7808797bb26df5cf0c46dd321ec358ffacc2a2a52991d7d85207ba464b5b5656",
+      "bytes": 429
+    },
+    {
+      "path": "knowledge/evidence/incidents/f7/f78f7171ba3729e72cf27510abc6f2bb8f7e57f0fdf2fdeba3a95a1c4a04a0f9.log",
+      "source_reference": "knowledge/evidence/incidents/a380b702de5340d99c5f87363b557cb7/1_isaac_worker.log",
+      "sha256": "f78f7171ba3729e72cf27510abc6f2bb8f7e57f0fdf2fdeba3a95a1c4a04a0f9",
+      "bytes": 449382
+    },
+    {
+      "path": "knowledge/evidence/incidents/e9/e9c4895584da9b1ad33c266827a0c62fb361655528bd3491484700a87bc97a69.json",
+      "source_reference": "knowledge/evidence/incidents/a380b702de5340d99c5f87363b557cb7/2_summary.json",
+      "sha256": "e9c4895584da9b1ad33c266827a0c62fb361655528bd3491484700a87bc97a69",
+      "bytes": 15764
+    }
+  ],
+  "declared_failure_category": "physics_contact",
+  "declared_failure_stage": "simulation_test",
+  "validation_scope": "module_reported_failure_only_no_hardware_inference",
+  "schema_version": 1,
+  "record_type": "incident",
+  "incident_id": "INC-5c50c992361141dd",
+  "revision": 1,
+  "timestamp_utc": "2026-11-10T16:17:04.509676+00:00",
+  "hardware_verified": false
+}

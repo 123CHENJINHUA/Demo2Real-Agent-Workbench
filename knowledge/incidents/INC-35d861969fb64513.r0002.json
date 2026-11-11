@@ -1,0 +1,56 @@
+{
+  "summary": "左侧恢复成功后另一侧丢失并触发不支持的桌面抓姿，整回合失败",
+  "primary_category": "planning_control",
+  "stage": "simulation_test",
+  "mode": "simulation",
+  "run_id": "4291c82d53364932",
+  "observed_behavior": "左恢复于40.733s完成；右侧首次间距/相对漂移异常在72.5s cooperative_insert，物体仍高于桌面约0.134m；随后被按桌面重抓条件拒绝。",
+  "diagnosis": {
+    "state": "supported_by_diagnostics",
+    "explanation": "确定异常发生阶段与当前仅支持水平桌面重抓的前置条件不匹配；未证明世界坐标自由落桌或重抓期间碰撞，具体接触/夹持失效原因未确认。"
+  },
+  "resolved": false,
+  "status": "open",
+  "feature_tags": [
+    "bimanual",
+    "friction_grasp",
+    "recovery",
+    "secondary_loss"
+  ],
+  "reusable_checklist": [
+    "记录夹持异常首次发生的阶段与时刻，区分恢复期间和恢复后插接",
+    "夹持异常时结合插接完成状态/物体相对几何选择阶段适合的恢复技能",
+    "未满足桌面重抓前置条件应明确信息反馈，不把它一律当作已落桌",
+    "局部通过和整回合通过分别记，只有已验证重抓决策可入监督"
+  ],
+  "evidence": [
+    {
+      "path": "knowledge/evidence/incidents/e9/e9b9768466a022426bfcc679f5200260ea4b40cd37632b8f1143967e6c551827.json",
+      "source_reference": "knowledge/evidence/incidents/e9/e9b9768466a022426bfcc679f5200260ea4b40cd37632b8f1143967e6c551827.json",
+      "sha256": "e9b9768466a022426bfcc679f5200260ea4b40cd37632b8f1143967e6c551827",
+      "bytes": 26288
+    },
+    {
+      "path": "knowledge/evidence/incidents/83/83aa13a84fdef21953da595430fb15a3172db0ba08ebd56078f12e4d186a86a1.json",
+      "source_reference": "knowledge/evidence/incidents/83/83aa13a84fdef21953da595430fb15a3172db0ba08ebd56078f12e4d186a86a1.json",
+      "sha256": "83aa13a84fdef21953da595430fb15a3172db0ba08ebd56078f12e4d186a86a1",
+      "bytes": 778
+    },
+    {
+      "path": "knowledge/evidence/incidents/31/31df460c0d0d49cabc0e6f032d228a5a4bde7a510bc58f45e4bfbfd2b29fe915.json",
+      "source_reference": "runs/4291c82d53364932/diagnostics/secondary_loss_followup.json",
+      "sha256": "31df460c0d0d49cabc0e6f032d228a5a4bde7a510bc58f45e4bfbfd2b29fe915",
+      "bytes": 487
+    }
+  ],
+  "verification": {
+    "scope": "observed in one new training rollout; not repaired; source/initial conditions unchanged"
+  },
+  "record_type": "incident",
+  "incident_id": "INC-35d861969fb64513",
+  "hardware_verified": false,
+  "revision_reason": "按轨迹定位首次异常在恢复后的cooperative_insert阶段，不能归因恢复中的另一侧丢失",
+  "schema_version": 1,
+  "revision": 2,
+  "timestamp_utc": "2026-11-11T15:02:52.768940+00:00"
+}

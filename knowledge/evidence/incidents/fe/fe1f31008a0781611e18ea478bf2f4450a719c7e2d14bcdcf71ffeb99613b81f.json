@@ -1,0 +1,117 @@
+{
+  "timestamp_utc": "2026-11-11T02:36:13.917640+00:00",
+  "milestone": "demo_task_spec_functional_geometry_scene_preview_local_validation",
+  "status": "passed_in_scope",
+  "scope": "scene_structure_camera_and_local_settling_only",
+  "backend_tests": {
+    "passed": 87,
+    "skipped": 1,
+    "warnings": 1,
+    "output": "runs/acceptance/scenes/test_output.txt",
+    "skip_reason": "app Python has no pyarrow; registered data Python independently verified episode metadata"
+  },
+  "frontend_component_groups": 18,
+  "scenes": [
+    {
+      "run_id": "7a2f6bd23eae482a",
+      "source_run_id": "e7320b6960634a63",
+      "workflow_status": "succeeded",
+      "stages": {
+        "experience": "succeeded",
+        "functional_geometry": "succeeded",
+        "scene_build": "succeeded",
+        "scene_validation": "succeeded"
+      },
+      "task_spec_hash": "661666d4b45672c75e104d53e670163a6ba67eb0a335f59f4b1ac1bfc30c2c2c",
+      "spec_revision": 1,
+      "source_current_hash_matches": true,
+      "source_current_revision_matches": true,
+      "synthetic_test_fixture": false,
+      "manifest_path": "runs/7a2f6bd23eae482a/scene_build/build_1794364130501746663/scene_manifest.json",
+      "scene_path": "runs/7a2f6bd23eae482a/scene_build/build_1794364130501746663/scene.usda",
+      "independent_validation": {
+        "run_id": "7a2f6bd23eae482a",
+        "status": "succeeded",
+        "checks_passed": 78,
+        "checks_total": 78,
+        "report_path": "runs/acceptance/scenes/final_7a2f6bd23eae482a/validation_report.json",
+        "failed": []
+      },
+      "frontend_status": "passed",
+      "full_task_evaluated": false,
+      "hardware_commands_sent": 0,
+      "implementation": {
+        "builder_version": "scene_building/v1",
+        "loaded_builder_sha256": "c2e659ab5ae92d6add077c64f18e78e137c55a9745fa3f112ad07469f8fa5833",
+        "initial_joint_pose_hold_only": true
+      },
+      "material_adaptations": 72
+    },
+    {
+      "run_id": "c9784f26971a43f7",
+      "source_run_id": "7a640a7ef3e6477b",
+      "workflow_status": "succeeded",
+      "stages": {
+        "experience": "succeeded",
+        "functional_geometry": "succeeded",
+        "scene_build": "succeeded",
+        "scene_validation": "succeeded"
+      },
+      "task_spec_hash": "217f624d55ea0c3a117df76ed41209a60c5cb36c838c1a086eaee77c3286a8e0",
+      "spec_revision": 1,
+      "source_current_hash_matches": true,
+      "source_current_revision_matches": true,
+      "synthetic_test_fixture": true,
+      "manifest_path": "runs/c9784f26971a43f7/scene_build/build_1794364119015634251/scene_manifest.json",
+      "scene_path": "runs/c9784f26971a43f7/scene_build/build_1794364119015634251/scene.usda",
+      "independent_validation": {
+        "run_id": "c9784f26971a43f7",
+        "status": "succeeded",
+        "checks_passed": 37,
+        "checks_total": 37,
+        "report_path": "runs/acceptance/scenes/final_c9784f26971a43f7/validation_report.json",
+        "failed": []
+      },
+      "frontend_status": "passed",
+      "full_task_evaluated": false,
+      "hardware_commands_sent": 0,
+      "implementation": {
+        "builder_version": "scene_building/v1",
+        "loaded_builder_sha256": "c2e659ab5ae92d6add077c64f18e78e137c55a9745fa3f112ad07469f8fa5833",
+        "initial_joint_pose_hold_only": true
+      },
+      "material_adaptations": 36
+    }
+  ],
+  "service_health": {
+    "status": "ok",
+    "project_root": "/home/cjh/Downloads/Demo2Real-Agent-Workbench",
+    "hardware_commands_enabled": false,
+    "version": "0.1.0"
+  },
+  "robot_status": {
+    "backend": "nero_sdk",
+    "mode": "disconnected",
+    "connected": false,
+    "enabled": false,
+    "hardware_commands_sent": 0,
+    "available_modes": [
+      "mock",
+      "shadow"
+    ],
+    "real_motion_available": false,
+    "sdk": {
+      "copied": true,
+      "version": "1.0.0"
+    },
+    "reason": "SDK已隔离；尚未核验固件/通道/反馈与现场停止条件，不建立真实硬件连接"
+  },
+  "remaining": [
+    "Task-bound executable expert and full contact/action evaluation",
+    "Perturbation recovery data and held-out generalized student policy",
+    "Independent real calibration/contact/obstacle measurement",
+    "Connector post-release retention CONN-006",
+    "Real SDK feedback, shadow and authorized hardware tests"
+  ],
+  "hardware_commands_sent": 0
+}

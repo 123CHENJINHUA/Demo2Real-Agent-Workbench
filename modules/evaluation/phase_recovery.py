@@ -1,0 +1,17 @@
+"""Recompute phase handling and release/home outcomes from physical traces."""
+from pathlib import Path
+import json,hashlib,numpy as np
+from modules.expert_validation.service import evaluate_trace
+
+def run(ctx):
+ root=Path(ctx['root']).resolve();execution=ctx['dependencies']['expert_execution'];raw=json.loads((root/execution['report_path']).read_text());plan=json.loads((root/raw['plan_path']).read_text());spec=json.loads((root/plan['spec_path']).read_text());case=spec['simulation_variant']['case'];c=json.loads((root/'config/phase_recovery_v3.json').read_text());out=Path(ctx['output_dir']);out.mkdir(parents=True,exist_ok=True)
+ with np.load(root/raw['trajectory_path'],allow_pickle=False) as f:
+  trace={k:f[k] for k in f.files}
+ action=evaluate_trace(root,plan,raw,trace);phase=raw.get('report',{}).get('recovery_policy',{}).get('phase_recovery',{});checks={};checks['phase_version_bound']=plan['recovery'].get('phase_version')=='insertion_guard_v3' and raw.get('phase_guard_executed') is True;checks['no_human_request']=phase.get('requires_human') is False and raw['report'].get('requires_human') is False;checks['no_object_teleport']=raw['execution_overlay']['object_pose_writes_during_execution'] is False;checks['no_hardware_commands']=raw['hardware_commands_sent']==0
+ checks['source_weights_bound']=all((root/rel).is_file() and hashlib.sha256((root/rel).read_bytes()).hexdigest()==h for rel,h in plan['input_hashes'].items());abandoned=phase.get('abandoned') is True;reset={};reset_passed=False
+ if abandoned:
+  home=np.array([[arm['initial_joint_positions']['joint'+str(j)] for j in range(1,8)] for arm in spec['robot']['arms']]);error=np.max(np.abs(trace['joints'][-1]-home),axis=1);gap=trace['jaws'][-1,:,0]-trace['jaws'][-1,:,1];phases=trace['phase'].astype(str);force=float(np.linalg.norm(trace['contact_forces_N'][-1],axis=-1).max());reset={'initial_joint_error_max_rad':error.tolist(),'final_jaw_gaps_m':gap.tolist(),'finger_object_force_max_N':force,'open_phase_seen':bool(np.any(phases=='abort_open_grippers')),'home_phase_seen':bool(np.any(phases=='abort_return_home'))};reset_passed=bool(np.max(error)<=c['home_tolerance_rad'] and np.min(gap)>=c['failure_min_open_gap_m'] and force<.1 and reset['open_phase_seen'] and reset['home_phase_seen'] and phase.get('failure_exit',{}).get('passed') is True)
+ actual='abandon_reset' if abandoned and reset_passed else 'abandon_reset_failed' if abandoned else 'action' if action.get('action_passed') is True else 'failed'
+ allowed=case.get('expected_outcomes',['action']);checks['expected_terminal_outcome']=actual in allowed
+ if case.get('require_phase_recovery_attempt'):checks['phase_recovery_attempt']=any(e.get('kind') in ('recapture','unload') for e in phase.get('events',[]))
+ report={'schema_version':'phase-recovery-evaluation/v3','status':'succeeded' if all(checks.values()) else 'failed','checks':checks,'expected_outcomes':allowed,'actual_outcome':actual,'phase_behavior_passed':all(checks.values()),'action_passed':bool(action.get('action_passed')),'full_task_passed':bool(action.get('full_task_passed')),'retention_passed':action.get('retention_passed'),'task_action_evaluation':action,'failure_exit_passed':reset_passed,'failure_exit':reset,'phase_recovery':phase,'not_a_new_learned_v3_model':True,'hardware_commands_sent':0,'report_path':str((out/'phase_validation.json').relative_to(root))};(out/'phase_validation.json').write_text(json.dumps(report,ensure_ascii=False,indent=2));return report

@@ -1,0 +1,37 @@
+schema_version: 1
+record_type: incident_template
+incident_id: null
+run_id: null
+task_id: null
+stage: null
+module_id: null
+agent_id: null
+timestamp_utc: null
+mode: null
+primary_category: null
+feature_tags: []
+severity: null
+status: reported
+expected_behavior: null
+observed_behavior: null
+trigger_conditions: []
+reproduction_steps: []
+versions:
+  task: null
+  asset: null
+  physics: null
+  calibration: null
+  observation: null
+  action: null
+  policy: null
+  software: null
+  evaluation: null
+  robot_firmware: null
+evidence: []
+hypotheses: []
+attempts: []
+case_links: []
+recording_health:
+  dropped_events: null
+  evidence_complete: null
+notes: 设计期模板，不是已实现的自动记录服务。

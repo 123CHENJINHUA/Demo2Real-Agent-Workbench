@@ -1,0 +1,32 @@
+{
+  "incident_id": "INC-MIGRATION-002",
+  "observed_behavior": "复制USD可视资产后移动目录层级，纹理相对路径仍带../../../assets，解析到新项目之外并且文件不存在。几何可加载所以物理启动未暴露该问题。",
+  "primary_category": "workflow_integrity",
+  "stage": "scene_build",
+  "mode": "offline",
+  "diagnosis": {
+    "state": "confirmed",
+    "root_cause": "USD相对引用与原目录深度绑定，迁移未重写纹理引用"
+  },
+  "reusable_checklist": [
+    "实体复制后审计USD所有层/纹理引用而不仅是文件存在",
+    "更改目录深度要重写相对引用并重新验证"
+  ],
+  "resolved": true,
+  "schema_version": 1,
+  "record_type": "incident",
+  "revision": 2,
+  "timestamp_utc": "2026-11-10T16:05:58.388868+00:00",
+  "hardware_verified": false,
+  "revision_reason": "重写两条相对纹理引用后，USD层及纹理引用审计全部位于新项目且文件存在。",
+  "resolution_state": "verified_in_scope",
+  "validation_scope": "重写两条相对纹理引用后，USD层及纹理引用审计全部位于新项目且文件存在。",
+  "evidence": [
+    {
+      "path": "knowledge/evidence/incidents/75/75b8c8b89a591b8826cc34a335b47ce1cd7039ce5d31a20791d40609cccd3d73.json",
+      "source_reference": "runs/acceptance/isolation/usd_asset_audit.json",
+      "sha256": "75b8c8b89a591b8826cc34a335b47ce1cd7039ce5d31a20791d40609cccd3d73",
+      "bytes": 736
+    }
+  ]
+}

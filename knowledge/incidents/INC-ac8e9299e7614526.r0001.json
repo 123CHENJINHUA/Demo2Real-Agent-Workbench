@@ -1,0 +1,35 @@
+{
+  "summary": "ValueError: '/home/cjh/.cache/packman/chk/kit-kernel/107.3.3+isaac.229672.69cbf6ad.gl.manylinux_2_35_x86_64.release/mdl/core/Base/OmniPBR.mdl' is not in the subpath of '/home/cjh/Downloads/Demo2Real-Agent-Workbench' OR one path is relative and the other is absolute.",
+  "observed_behavior": "ValueError: '/home/cjh/.cache/packman/chk/kit-kernel/107.3.3+isaac.229672.69cbf6ad.gl.manylinux_2_35_x86_64.release/mdl/core/Base/OmniPBR.mdl' is not in the subpath of '/home/cjh/Downloads/Demo2Real-Agent-Workbench' OR one path is relative and the other is absolute.",
+  "primary_category": "workflow_integrity",
+  "stage": "runtime",
+  "mode": "offline",
+  "run_id": "e648721d1192409c",
+  "task_id": "e648721d1192409c:scene_build",
+  "diagnosis": {
+    "state": "unknown"
+  },
+  "evidence": [
+    {
+      "path": "knowledge/evidence/incidents/90/903684dc95a54bddf2767b12d861a8ed9b6c76432e0a3b9a8118471579f004df.json",
+      "source_reference": "knowledge/evidence/incidents/577ec590fab8423fb7d4dbbad64e5257/failure_result.json",
+      "sha256": "903684dc95a54bddf2767b12d861a8ed9b6c76432e0a3b9a8118471579f004df",
+      "bytes": 3186
+    },
+    {
+      "path": "knowledge/evidence/incidents/e3/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.log",
+      "source_reference": "knowledge/evidence/incidents/577ec590fab8423fb7d4dbbad64e5257/1_worker.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  ],
+  "declared_failure_category": null,
+  "declared_failure_stage": null,
+  "validation_scope": "module_reported_failure_only_no_hardware_inference",
+  "schema_version": 1,
+  "record_type": "incident",
+  "incident_id": "INC-ac8e9299e7614526",
+  "revision": 1,
+  "timestamp_utc": "2026-11-10T19:38:43.839911+00:00",
+  "hardware_verified": false
+}

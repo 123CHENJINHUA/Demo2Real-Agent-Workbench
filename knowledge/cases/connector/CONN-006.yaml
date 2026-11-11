@@ -1,0 +1,74 @@
+schema_version: 1
+record_type: curated_historical_case
+case_id: CONN-006
+revision: 1
+recorded_on: '2026-11-10'
+title: 插入与开爪完成，但落桌后双卡扣保持失败
+status: open
+primary_category: physics_contact
+secondary_categories:
+- evaluation_metrics
+- perception_estimation
+stages:
+- simulation_test
+feature_tags:
+- snap_fit
+- hidden_lock
+- post_release_impact
+- bimanual
+- wrist_rgbd
+evidence_scopes:
+- simulation
+hardware_verified: false
+facts:
+- RGBD 回合插入约22.83mm、对键误差约0.04°，随后原位开爪完成。
+- 同回合自由落桌后一个卡齿承力重叠面积为0，双卡扣保持检查失败。
+- 位姿代理的另一变位回合释放后保持通过，不能覆盖该 RGBD 负例。
+diagnosis:
+  state: hypothesis
+  explanation: 保持失败已观察到，但导致失效的唯一物理/估计根因尚未证实。
+  alternatives:
+  - 释放/冲击及配合间隙可能影响捕获。
+  - 几何、弹性、数值接触、初始姿态和估计偏差需要分开试验。
+source_mitigation:
+  actions:
+  - 保留未解决状态，拆开动作完成、释放前锁止和落桌后保持。
+  - 复核功能几何、实际挠曲/回弹和数值稳定性，并设计受控释放/保持试验。
+  - 以可靠 CAD/实测核验机构和材料，而非任意提高摩擦/刚度。
+  implemented_in_new_project: false
+  attempts:
+  - change: 插入后双爪原位释放
+    outcome: action_complete_but_post_drop_retention_failed
+    limits: 仅当前工程模型判据，不是实物脱扣试验
+  status: proposed_or_unverified_for_open_issue
+verification:
+  scope: 历史仿真负例
+  passed_subchecks:
+  - 插入和直接松手动作完成
+  failed_or_unverified:
+  - 落桌后双卡扣保持失败
+  - 没有可靠修复和真机验证
+applicability:
+  when:
+  - 任务要求释放后仍装配或承受扰动
+  - 隐藏卡扣、弹性夹持和落下冲击
+  not_when:
+  - 只要求瞬时动作的任务应明确其终止范围，但不能伪称保持成功
+  transferable_principles:
+  - 动作完成与机械保持分开验收。
+  - 失败结论不随接口 passed 字段为真而消失。
+  parameters_not_to_copy:
+  - 未经测量的刚度/阻尼/间隙
+  - 旧拉力台架结果当冲击强度证明
+preventive_checks:
+- 在新任务定义释放后是否必须保持，并建立可观测或独立评价证据。
+- 按不同释放高度/姿态/动力学/时延做受控测试，保留未恢复与无法观测。
+regression_tests:
+- 该负例必须保持 post_drop_retained=false，不得用完成开爪自动覆盖。
+evidence:
+- knowledge/evidence/connector/direct_release_validation.json
+- knowledge/evidence/connector/keyed_bench_04.json
+source_provenance: knowledge/evidence/connector/provenance.json
+notes:
+- 历史报告整理的知识种子，尚未在新框架复现或自动应用。
+- 来源路径仅为溯源，运行/检索使用本项目内快照。

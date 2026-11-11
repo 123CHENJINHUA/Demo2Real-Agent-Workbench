@@ -1,0 +1,38 @@
+schema_version: 1
+record_type: case_template
+case_id: null
+revision: 1
+title: null
+status: open
+primary_category: null
+secondary_categories: []
+stages: []
+feature_tags: []
+evidence_scopes: []
+hardware_verified: false
+facts: []
+diagnosis:
+  state: unknown
+  explanation: null
+  alternatives: []
+  supporting_evidence: []
+source_mitigation:
+  actions: []
+  attempts: []
+  implemented_in_new_project: false
+verification:
+  scope: null
+  passed_subchecks: []
+  failed_or_unverified: []
+  evidence: []
+applicability:
+  when: []
+  not_when: []
+  transferable_principles: []
+  parameters_not_to_copy: []
+preventive_checks: []
+regression_tests: []
+related_cases: []
+supersedes: []
+source_provenance: null
+notes: 设计期模板，案例修订和验证需证据，不能按自然语言结论自动关闭。

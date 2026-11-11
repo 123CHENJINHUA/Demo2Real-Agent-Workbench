@@ -1,0 +1,48 @@
+{
+  "summary": "左侧恢复成功后另一侧丢失并触发不支持的桌面抓姿，整回合失败",
+  "primary_category": "planning_control",
+  "stage": "simulation_test",
+  "mode": "simulation",
+  "run_id": "4291c82d53364932",
+  "observed_behavior": "Dropped object has no supported tabletop grasp; needs human",
+  "diagnosis": {
+    "state": "supported_by_diagnostics",
+    "explanation": "只确认左侧局部抬升/间距验证成功以及后续右侧丢失/姿态超出当前水平桌面抓取条件。其他侧丢失的具体原因未确认；不能将局部重抓通过算作整回合通过。"
+  },
+  "resolved": false,
+  "status": "open",
+  "feature_tags": [
+    "bimanual",
+    "friction_grasp",
+    "recovery",
+    "secondary_loss"
+  ],
+  "reusable_checklist": [
+    "长时恢复技能期间持续核验另一只手的夹持状态，记录首次丢失时刻",
+    "将技能适用姿态和恢复前置条件显式反馈，不支持的姿态需要中止/重新规划",
+    "失败回合保留，只有已物理验证的对应重抓决策可入监督"
+  ],
+  "evidence": [
+    {
+      "path": "knowledge/evidence/incidents/e9/e9b9768466a022426bfcc679f5200260ea4b40cd37632b8f1143967e6c551827.json",
+      "source_reference": "runs/4291c82d53364932/expert_execution/execution_1794408836077833139/expert_result.json",
+      "sha256": "e9b9768466a022426bfcc679f5200260ea4b40cd37632b8f1143967e6c551827",
+      "bytes": 26288
+    },
+    {
+      "path": "knowledge/evidence/incidents/83/83aa13a84fdef21953da595430fb15a3172db0ba08ebd56078f12e4d186a86a1.json",
+      "source_reference": "runs/4291c82d53364932/diagnostics/secondary_loss.json",
+      "sha256": "83aa13a84fdef21953da595430fb15a3172db0ba08ebd56078f12e4d186a86a1",
+      "bytes": 778
+    }
+  ],
+  "verification": {
+    "scope": "observed in one new training rollout; not repaired; source/initial conditions unchanged"
+  },
+  "schema_version": 1,
+  "record_type": "incident",
+  "incident_id": "INC-35d861969fb64513",
+  "revision": 1,
+  "timestamp_utc": "2026-11-11T15:01:09.935220+00:00",
+  "hardware_verified": false
+}

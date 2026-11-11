@@ -1,0 +1,8 @@
+{
+  "first_loss_phase": "cooperative_insert",
+  "first_indicator_time_s": 72.5,
+  "left_recovery_completed_s": 40.733333333333334,
+  "right_object_height_above_table_m": 0.13388934850692746,
+  "interpretation": "First right jaw/drift loss indicator occurred during insertion about32s after left recovery; not established as loss during the blocking recovery skill or a free fall to table",
+  "cause": "unconfirmed; recovery policy assumes a supported tabletop grasp after generic loss"
+}

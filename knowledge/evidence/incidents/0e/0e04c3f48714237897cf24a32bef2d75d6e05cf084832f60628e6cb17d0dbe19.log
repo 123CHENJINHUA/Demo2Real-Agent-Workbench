@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/usr/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "/home/cjh/Downloads/Demo2Real-Agent-Workbench/workers/run_stage.py", line 5, in <module>
+    from application.registry import execute_stage
+  File "/home/cjh/Downloads/Demo2Real-Agent-Workbench/application/registry.py", line 47
+    except ValueError:return {'status':'failed','error':'模型未返回合法JSON任务提案；原始响应已保留。','artifacts':[{'path':str((ctx['output_dir']/'model_response.json').relative_to(ctx['root'))}]}
+                                                                                                                                                                            ^
+SyntaxError: closing parenthesis ')' does not match opening parenthesis '['

@@ -1,0 +1,85 @@
+schema_version: 1
+record_type: curated_historical_case
+case_id: CONN-002
+revision: 1
+recorded_on: '2026-11-10'
+title: 圆柱轴线和短行程遗漏真实对键与卡扣锁止
+status: partially_verified
+primary_category: geometry_function
+secondary_categories:
+- physics_contact
+- evaluation_metrics
+stages:
+- asset_modeling
+- scene_build
+- simulation_test
+feature_tags:
+- keyed_insertion
+- snap_fit
+- through_bore
+- hidden_lock
+- tight_clearance
+evidence_scopes:
+- simulation
+- mechanism_bench
+hardware_verified: false
+facts:
+- 剖面审查发现公头卡扣与母头通道特征线约相差 90°；此结论限于该组模型。
+- 旧圆柱代理缺方向槽/卡扣，短插深的通过不能表示卡扣跨过锁止肩。
+- bench_04 的 0° 负例及 ±90° 正例符合预期；弹性和配合参数未实测。
+diagnosis:
+  state: supported_by_diagnostics
+  explanation: 几何功能与成功判据建模不完整，忽略了关键自由度和锁止事件。
+  alternatives:
+  - 原始外观重建也有干涉，不能将配合问题全部归因于减面。
+source_mitigation:
+  actions:
+  - 分别建立功能轴、键线、入口和锁止肩。
+  - 补通孔、通道、锁止边与被动弹性近似，区分工程替代模型和实物。
+  - 加入错误角度/浅插/单边捕获的负例。
+  implemented_in_new_project: false
+  attempts:
+  - change: 旧圆柱/轴线与短插深判据
+    outcome: insufficient_functional_validation
+    limits: 不验证真实键槽和锁止
+  - change: 重建方向槽/锁止边/被动卡扣并做正负台架
+    outcome: scoped_bench_passed
+    limits: 参数未实测，释放冲击保持仍有失败
+  status: recorded_in_source_history
+verification:
+  scope: 当前重建模型的台架与几何审查
+  passed_subchecks:
+  - 0°/±90°台架符合预期
+  - 正例经 0.15N、0.5s 轴向拉力保持
+  failed_or_unverified:
+  - 未证明实物对称性、材料与寿命
+  - 未解决最终 RGBD 自由落桌保持
+applicability:
+  when:
+  - 带键、孔槽、卡扣或隐藏锁止的插接
+  - 粗外观模型用于接触配合
+  not_when:
+  - 无方向性自由圆柱配合不可直接假定具有相同键位
+  - 几何不同即使名称相同也要重建功能 frame
+  transferable_principles:
+  - 从功能特征定义任务，不只对齐外观主轴。
+  - 分别验证入槽、跨肩、回弹、保持，保留反例。
+  parameters_not_to_copy:
+  - 90° 候选
+  - 22.8mm 目标
+  - 5.25/5.55mm 导向尺寸
+  - 400N/m 刚度
+preventive_checks:
+- 检测并验证键线、孔槽通断及配合基准。
+- 确认正确/错误姿态，检查数值稳定性并对照可靠 CAD/实测。
+regression_tests:
+- 错误方向不能通过锁止判据。
+- 浅插和单边捕获不能作为双卡扣完成。
+evidence:
+- knowledge/evidence/connector/functional_keying_audit.json
+- knowledge/evidence/connector/keyed_bench_04.json
+- knowledge/evidence/connector/direct_release_validation.json
+source_provenance: knowledge/evidence/connector/provenance.json
+notes:
+- 历史报告整理的知识种子，尚未在新框架复现或自动应用。
+- 来源路径仅为溯源，运行/检索使用本项目内快照。

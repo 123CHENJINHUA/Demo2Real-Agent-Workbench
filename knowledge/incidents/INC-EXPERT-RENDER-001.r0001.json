@@ -1,0 +1,52 @@
+{
+  "incident_id": "INC-EXPERT-RENDER-001",
+  "title": "运动专家执行期间渲染生命周期破坏物理句柄",
+  "observed_behavior": "旧USD中的渲染图重载时出现Invalid object in Py_Graph；清理后Replicator截图成功但使辅助Articulation的_physics_view失效，抓取未开始。直接reinitialize辅助view仍因缺失属性失败。",
+  "primary_category": "runtime_environment",
+  "stage": "simulation_test",
+  "mode": "simulation",
+  "diagnosis": {
+    "state": "supported_by_diagnostics",
+    "root_cause": "导出运行期渲染图与跨timeline tensor view生命周期不兼容，截图不应与高频物理控制共享生命周期"
+  },
+  "resolved": false,
+  "resolution_state": "mitigation_recorded",
+  "fix": "私有USD删除运行期渲染图并独立核验其余场景签名；控制期间只导出阶段USD和轨迹，图像渲染独立于运动。",
+  "validation_scope": "仅离线专家运动流程已跑通；执行期实时截图问题未被宣称根治，保持仍失败。",
+  "reusable_checklist": [
+    "场景物理/视觉资产与进程内渲染图分开导出。",
+    "截图不得推进物理时钟、重置状态或使控制句柄失效。",
+    "动作、保持与截图分别报告；未生成图像不得显示成功。"
+  ],
+  "evidence": [
+    {
+      "path": "knowledge/evidence/incidents/fc/fc37a53f150ec3c5bc8abb407d345a2e6114420ea07eaf1400786f0a11570acd.json",
+      "source_reference": "runs/6c657e34fed542ad/expert_execution/execution_1794368671691568510/expert_result.json",
+      "sha256": "fc37a53f150ec3c5bc8abb407d345a2e6114420ea07eaf1400786f0a11570acd",
+      "bytes": 16605
+    },
+    {
+      "path": "knowledge/evidence/incidents/f5/f5d684f32f5fd05c758f73a1cd14fdf0cda8d68ea720251f15855c6b528cb0be.json",
+      "source_reference": "runs/ffb4837f85184642/expert_execution/execution_1794384747077962391/expert_result.json",
+      "sha256": "f5d684f32f5fd05c758f73a1cd14fdf0cda8d68ea720251f15855c6b528cb0be",
+      "bytes": 18049
+    },
+    {
+      "path": "knowledge/evidence/incidents/aa/aadcd40dc932aaebeb78d39ce9dd13d302a2904b0adc67a3b3b5ecc3bb14adda.json",
+      "source_reference": "runs/ff013090435848b8/expert_execution/execution_1794384871907049160/expert_result.json",
+      "sha256": "aadcd40dc932aaebeb78d39ce9dd13d302a2904b0adc67a3b3b5ecc3bb14adda",
+      "bytes": 17717
+    },
+    {
+      "path": "knowledge/evidence/incidents/33/330bbd9c6b497b9638310b13cc7f55b9bdb979551bbdc83e6fbd6466fddb338d.json",
+      "source_reference": "runs/32568d8a19874d87/expert_validation/expert_validation.json",
+      "sha256": "330bbd9c6b497b9638310b13cc7f55b9bdb979551bbdc83e6fbd6466fddb338d",
+      "bytes": 6309
+    }
+  ],
+  "schema_version": 1,
+  "record_type": "incident",
+  "revision": 1,
+  "timestamp_utc": "2026-11-11T08:19:34.170788+00:00",
+  "hardware_verified": false
+}

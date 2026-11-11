@@ -1,0 +1,8 @@
+{
+  "error": "'trajectory_path'",
+  "result": {
+    "status": "failed",
+    "error": "'trajectory_path'",
+    "exception": "KeyError"
+  }
+}

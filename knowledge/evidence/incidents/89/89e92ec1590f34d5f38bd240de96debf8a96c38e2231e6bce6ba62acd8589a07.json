@@ -1,0 +1,244 @@
+{
+  "batch_id": "placement_1794407461683508709",
+  "suite_id": "connector_recovery_regression_v2",
+  "suite_sha256": "d0c4d7a8aa7cb61739c60dd9260a3003a14fc60248e4febf1b1d94ebb1685c3a",
+  "runs": [
+    {
+      "case_id": "known_left_drop_failure",
+      "title": "known_left_drop_failure",
+      "split": "regression",
+      "run_id": "60b48b486c3c49c7"
+    },
+    {
+      "case_id": "right_drop_regression",
+      "title": "right_drop_regression",
+      "split": "regression",
+      "run_id": "4ab3a34457374642"
+    }
+  ],
+  "selected_case_ids": [
+    "known_left_drop_failure",
+    "right_drop_regression"
+  ],
+  "evaluation_scope": "action_only",
+  "retention_record_only": true,
+  "hardware_commands_sent": 0,
+  "status": "completed",
+  "results": [
+    {
+      "case_id": "known_left_drop_failure",
+      "title": "known_left_drop_failure",
+      "split": "regression",
+      "run_id": "60b48b486c3c49c7",
+      "status": "succeeded",
+      "stages": {
+        "experience": "succeeded",
+        "placement_variant": "succeeded",
+        "functional_geometry": "succeeded",
+        "scene_build": "succeeded",
+        "scene_validation": "succeeded",
+        "expert_plan": "succeeded",
+        "expert_execution": "succeeded",
+        "expert_validation": "succeeded"
+      },
+      "experiment_passed": true,
+      "action_passed": true,
+      "retention_passed": false,
+      "full_task_passed": false,
+      "stage_results": {
+        "grasp": {
+          "passed": true,
+          "details": [
+            {
+              "arm": 0,
+              "lift_m": 0.07625216245651245,
+              "jaw_gap_m": 0.019611459225416183,
+              "contact_forces_N": [
+                5.793193817138672,
+                5.680538177490234
+              ],
+              "passed": true
+            },
+            {
+              "arm": 1,
+              "lift_m": 0.07445383071899414,
+              "jaw_gap_m": 0.018508180975914,
+              "contact_forces_N": [
+                5.468909740447998,
+                5.471286773681641
+              ],
+              "passed": true
+            }
+          ]
+        },
+        "insertion": {
+          "passed": true,
+          "details": {
+            "depth_m": 0.022864724012045805,
+            "lateral_error_m": 3.387022928150381e-05,
+            "angle_rad": 0.0005989938750986976,
+            "roll_rad": -1.5707696437340632,
+            "roll_error_rad": 2.668306083331018e-05,
+            "target_roll_rad": -1.5707963267948966,
+            "latch_engagement_m": 0.00046472184134421085,
+            "nominal_hooks_caught": true,
+            "retained_face_area_m2": [
+              9.212043403445338e-07,
+              1.0387982452235079e-06
+            ],
+            "retained_hooks_caught": true,
+            "both_latches_flexed": true,
+            "both_latches_seated": true,
+            "engaged": true
+          }
+        },
+        "release": {
+          "passed": true,
+          "details": {
+            "jaw_gaps_m": [
+              0.06499867886304855,
+              0.06499868631362915
+            ],
+            "max_finger_object_force_N": 0.0
+          }
+        },
+        "retention": {
+          "passed": false,
+          "details": {
+            "depth_m": 0.03903727294682855,
+            "lateral_error_m": 0.015577187848164652,
+            "angle_rad": 1.0000103571079026,
+            "roll_rad": 0.21178239709489263,
+            "roll_error_rad": -1.359013929700004,
+            "target_roll_rad": 1.5707963267948966,
+            "latch_engagement_m": 0.011074825393492376,
+            "nominal_hooks_caught": false,
+            "retained_face_area_m2": [
+              0.0,
+              0.0
+            ],
+            "retained_hooks_caught": false,
+            "both_latches_seated": false,
+            "both_latches_flexed": true
+          }
+        }
+      },
+      "validation_report": "runs/60b48b486c3c49c7/expert_validation/expert_validation.json",
+      "execution_report": "runs/60b48b486c3c49c7/expert_execution/execution_1794407495301849709/expert_result.json",
+      "errors": []
+    },
+    {
+      "case_id": "right_drop_regression",
+      "title": "right_drop_regression",
+      "split": "regression",
+      "run_id": "4ab3a34457374642",
+      "status": "succeeded",
+      "stages": {
+        "experience": "succeeded",
+        "placement_variant": "succeeded",
+        "functional_geometry": "succeeded",
+        "scene_build": "succeeded",
+        "scene_validation": "succeeded",
+        "expert_plan": "succeeded",
+        "expert_execution": "succeeded",
+        "expert_validation": "succeeded"
+      },
+      "experiment_passed": true,
+      "action_passed": true,
+      "retention_passed": false,
+      "full_task_passed": false,
+      "stage_results": {
+        "grasp": {
+          "passed": true,
+          "details": [
+            {
+              "arm": 0,
+              "lift_m": 0.07624596357345581,
+              "jaw_gap_m": 0.02014279179275036,
+              "contact_forces_N": [
+                5.961308002471924,
+                5.828642845153809
+              ],
+              "passed": true
+            },
+            {
+              "arm": 1,
+              "lift_m": 0.07493793964385986,
+              "jaw_gap_m": 0.01850881054997444,
+              "contact_forces_N": [
+                5.490092754364014,
+                5.461581707000732
+              ],
+              "passed": true
+            }
+          ]
+        },
+        "insertion": {
+          "passed": true,
+          "details": {
+            "depth_m": 0.022806143633682413,
+            "lateral_error_m": 3.4306304825527755e-05,
+            "angle_rad": 0.0005792540682810863,
+            "roll_rad": 1.5710703651145947,
+            "roll_error_rad": 0.0002740383196981888,
+            "target_roll_rad": 1.5707963267948966,
+            "latch_engagement_m": 0.00040614160369404836,
+            "nominal_hooks_caught": true,
+            "retained_face_area_m2": [
+              1.074933193023925e-06,
+              8.850735188024354e-07
+            ],
+            "retained_hooks_caught": true,
+            "both_latches_flexed": true,
+            "both_latches_seated": true,
+            "engaged": true
+          }
+        },
+        "release": {
+          "passed": true,
+          "details": {
+            "jaw_gaps_m": [
+              0.06499867141246796,
+              0.06499868631362915
+            ],
+            "max_finger_object_force_N": 0.0
+          }
+        },
+        "retention": {
+          "passed": false,
+          "details": {
+            "depth_m": -0.5190415229605135,
+            "lateral_error_m": 1.4641488402671343,
+            "angle_rad": 1.0590832421447622,
+            "roll_rad": 1.3379671027828473,
+            "roll_error_rad": -0.23282922401204953,
+            "target_roll_rad": 1.5707963267948966,
+            "latch_engagement_m": -0.5476164964183544,
+            "nominal_hooks_caught": false,
+            "retained_face_area_m2": [
+              0.0,
+              0.0
+            ],
+            "retained_hooks_caught": false,
+            "both_latches_seated": true,
+            "both_latches_flexed": true
+          }
+        }
+      },
+      "validation_report": "runs/4ab3a34457374642/expert_validation/expert_validation.json",
+      "execution_report": "runs/4ab3a34457374642/expert_execution/execution_1794407608080854731/expert_result.json",
+      "errors": []
+    }
+  ],
+  "action_successes": 2,
+  "experiment_successes": 2,
+  "case_count": 2,
+  "generalization_scope": "predeclared PhysX perturbations; simulated-pose high-level recovery; no RGBD/hardware claim",
+  "split_results": {
+    "regression": {
+      "cases": 2,
+      "action_passes": 2,
+      "experiment_passes": 2
+    }
+  }
+}

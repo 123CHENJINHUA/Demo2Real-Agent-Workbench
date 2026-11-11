@@ -1,0 +1,187 @@
+{
+  "passed": false,
+  "index": 0,
+  "fixed_grasp_joints": false,
+  "randomized_spread_m": 0.0,
+  "execution_goal": "place",
+  "assembly_attempted": true,
+  "placement_mode": "randomized initialization",
+  "requested_placement_variation": {
+    "xy_offsets_m": [
+      [
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0
+      ]
+    ],
+    "yaw_offsets_deg": [
+      0.0,
+      0.0
+    ]
+  },
+  "initial_object_poses": [
+    [
+      [
+        0.4679595313916358,
+        0.869309666400822,
+        -0.15910556521320096,
+        -0.4247232675552368
+      ],
+      [
+        -0.883747559160974,
+        0.4598980516072987,
+        -0.08651031039610968,
+        -0.02127564139664173
+      ],
+      [
+        -0.00203190962924453,
+        0.18109247921960198,
+        0.9834639725548449,
+        0.7897622585296631
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    [
+      [
+        -0.36182060887947814,
+        0.9322466753038786,
+        0.0014083234530337608,
+        -0.4290415942668915
+      ],
+      [
+        -0.9322396499495623,
+        -0.36182334967961055,
+        0.003619211038849611,
+        0.1260072886943817
+      ],
+      [
+        0.0038835617673996774,
+        -3.389821132057441e-06,
+        0.9999924589398201,
+        0.7894124984741211
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ]
+  ],
+  "initial_plan_pose_source": "Rendered wrist RGBD -> automatic SAM3 masks -> FoundationPose; no object truth",
+  "generator": {
+    "isaaclab_version": "2.3.2",
+    "generator_file": "/home/cjh/Downloads/IsaacLab/source/isaaclab_mimic/isaaclab_mimic/datagen/data_generator.py",
+    "generator_sha256": "586538ef89b774e6521c10c52980a72018884d9e9973f70a5ee46fc9c2c62c99",
+    "backend": "Official IsaacLab Mimic bimanual DataGenerator; project-specific Nero PhysX adapter",
+    "subtask_boundaries": {
+      "left": [
+        [
+          [
+            0,
+            240
+          ],
+          [
+            240,
+            355
+          ],
+          [
+            355,
+            555
+          ]
+        ]
+      ],
+      "right": [
+        [
+          [
+            0,
+            240
+          ],
+          [
+            240,
+            355
+          ],
+          [
+            355,
+            555
+          ]
+        ]
+      ]
+    },
+    "coordination_scheme": "Official TRANSLATE: same translation for both arms; source cooperative wrist orientations retained"
+  },
+  "gripper_control": "Source closure timing; force closure command zero below 27mm (left),35mm (right); source widths are feedback, not motor targets",
+  "time_scale": 2.0,
+  "transit_adaptation": {
+    "method": "World-anchored far transit, smooth blend to official object-relative grasp targets",
+    "source_transition_frames": {
+      "left": [
+        120,
+        165
+      ],
+      "right": [
+        0,
+        75
+      ]
+    }
+  },
+  "camera_housing": "90x25x25 mm approximation, optical pose calibrated; actual housing/bracket geometry unavailable",
+  "grasps": [
+    {
+      "arm": 0,
+      "lift_m": 0.0899806022644043,
+      "jaw_gap_m": 0.019022949039936066,
+      "contact_forces_N": [
+        5.453334808349609,
+        5.675585746765137
+      ],
+      "passed": true
+    },
+    {
+      "arm": 1,
+      "lift_m": 0.07090884447097778,
+      "jaw_gap_m": 0.01852298714220524,
+      "contact_forces_N": [
+        5.4807820320129395,
+        5.481232643127441
+      ],
+      "passed": true
+    }
+  ],
+  "recovery_policy": {
+    "policy": "scripted data-collection expert",
+    "policy_checkpoint": null,
+    "force_observations": false,
+    "pose_source": "Rendered wrist RGBD -> automatic SAM3 masks -> FoundationPose; no object truth",
+    "pose_noise_m": null,
+    "pose_delay_s": null,
+    "held_pose_prediction": "Timestamp-matched FK compensation; disabled for empty/open/lost grasps",
+    "events": [],
+    "recoveries": [],
+    "requires_human": true,
+    "observation_guard_overrides": 0,
+    "counts": {
+      "continue": 626,
+      "wait": 241,
+      "regrasp_left": 0,
+      "regrasp_right": 0,
+      "needs_human": 1
+    },
+    "learning_scope": "High-level recovery skill decisions; low-level demonstration and visual servo skills remain deterministic"
+  },
+  "requires_human": true,
+  "tracking": {
+    "position_rmse_m": 0.0009083939374687713,
+    "position_max_m": 0.004644861762188519,
+    "rotation_rmse_rad": 0.006315308481731162
+  },
+  "error": "Needs human: object unavailable or outside supported workspace"
+}

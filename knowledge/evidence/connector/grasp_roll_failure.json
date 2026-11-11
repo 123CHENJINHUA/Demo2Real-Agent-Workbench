@@ -1,0 +1,187 @@
+{
+  "passed": false,
+  "index": 0,
+  "fixed_grasp_joints": false,
+  "randomized_spread_m": 0.025,
+  "execution_goal": "place",
+  "assembly_attempted": false,
+  "placement_mode": "randomized initialization",
+  "requested_placement_variation": {
+    "xy_offsets_m": [
+      [
+        -0.0064394399625923825,
+        -0.018372442927163935
+      ],
+      [
+        -0.010287263125971925,
+        0.008158428403189338
+      ]
+    ],
+    "yaw_offsets_deg": [
+      1.990975648445998,
+      -4.926718747667104
+    ]
+  },
+  "initial_object_poses": [
+    [
+      [
+        0.514843862659955,
+        0.12093705518212816,
+        -0.848710802196633,
+        -0.4413393437862396
+      ],
+      [
+        -0.8570377446376225,
+        0.0963338492416439,
+        -0.5061680489291532,
+        -0.04552282392978668
+      ],
+      [
+        0.020545105203789993,
+        0.987974705229928,
+        0.1532445120648765,
+        0.7889782190322876
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    [
+      [
+        -0.4405515432077758,
+        0.8977256873002258,
+        0.0017111804651163852,
+        -0.439326673746109
+      ],
+      [
+        -0.8977189166737966,
+        -0.440554866459693,
+        0.003486586397488812,
+        0.13416452705860138
+      ],
+      [
+        0.003883867051315047,
+        -1.3805543670883033e-07,
+        0.9999924577599115,
+        0.7894125580787659
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ]
+  ],
+  "initial_plan_pose_source": "Noisy delayed pose estimate",
+  "generator": {
+    "isaaclab_version": "2.3.2",
+    "generator_file": "/home/cjh/Downloads/IsaacLab/source/isaaclab_mimic/isaaclab_mimic/datagen/data_generator.py",
+    "generator_sha256": "586538ef89b774e6521c10c52980a72018884d9e9973f70a5ee46fc9c2c62c99",
+    "backend": "Official IsaacLab Mimic bimanual DataGenerator; project-specific Nero PhysX adapter",
+    "subtask_boundaries": {
+      "left": [
+        [
+          [
+            0,
+            240
+          ],
+          [
+            240,
+            355
+          ],
+          [
+            355,
+            555
+          ]
+        ]
+      ],
+      "right": [
+        [
+          [
+            0,
+            240
+          ],
+          [
+            240,
+            355
+          ],
+          [
+            355,
+            555
+          ]
+        ]
+      ]
+    },
+    "coordination_scheme": "Official TRANSLATE: same translation for both arms; source cooperative wrist orientations retained"
+  },
+  "gripper_control": "Source closure timing; force closure command zero below 27mm (left),35mm (right); source widths are feedback, not motor targets",
+  "time_scale": 2.0,
+  "transit_adaptation": {
+    "method": "World-anchored far transit, smooth blend to official object-relative grasp targets",
+    "source_transition_frames": {
+      "left": [
+        120,
+        165
+      ],
+      "right": [
+        0,
+        75
+      ]
+    }
+  },
+  "camera_housing": "90x25x25 mm approximation, optical pose calibrated; actual housing/bracket geometry unavailable",
+  "grasps": [
+    {
+      "arm": 0,
+      "lift_m": 5.960464477539063e-08,
+      "jaw_gap_m": 3.716757646543556e-06,
+      "contact_forces_N": [
+        0.0,
+        0.0
+      ],
+      "passed": false
+    },
+    {
+      "arm": 1,
+      "lift_m": 0.0753554105758667,
+      "jaw_gap_m": 0.018514588475227356,
+      "contact_forces_N": [
+        5.496783256530762,
+        5.49274206161499
+      ],
+      "passed": true
+    }
+  ],
+  "recovery_policy": {
+    "policy": "scripted data-collection expert",
+    "policy_checkpoint": null,
+    "force_observations": false,
+    "pose_source": "Noisy delayed simulator pose surrogate; not RGB perception",
+    "pose_noise_m": 0.0,
+    "pose_delay_s": 0.0,
+    "held_pose_prediction": "Timestamp-matched FK compensation; disabled for empty/open/lost grasps",
+    "events": [],
+    "recoveries": [],
+    "requires_human": false,
+    "observation_guard_overrides": 0,
+    "counts": {
+      "continue": 0,
+      "wait": 0,
+      "regrasp_left": 0,
+      "regrasp_right": 0,
+      "needs_human": 0
+    },
+    "learning_scope": "High-level recovery skill decisions; low-level demonstration and visual servo skills remain deterministic"
+  },
+  "requires_human": false,
+  "tracking": {
+    "position_rmse_m": 0.01763807458278332,
+    "position_max_m": 0.05344797586628216,
+    "rotation_rmse_rad": 0.17886133448517977
+  },
+  "error": "Demonstration-derived physical grasp failed; inspect contact diagnostics"
+}

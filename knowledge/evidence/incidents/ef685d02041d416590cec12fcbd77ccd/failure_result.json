@@ -1,0 +1,12 @@
+{
+  "error": "Partial validation failed",
+  "result": {
+    "code": "engineering_profile_unmeasured",
+    "primary_category": "physics_contact",
+    "stage": "asset_modeling",
+    "severity": "review",
+    "status": "open",
+    "message": "Declared profile values are simulation engineering assumptions; visual correspondence cannot establish real spring constants, tolerances, lock stroke or retention.",
+    "hardware_verified": false
+  }
+}

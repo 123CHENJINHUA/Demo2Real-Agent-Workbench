@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Functional geometry worker input v1",
+  "type": "object",
+  "description": "Assets may instead be read from the immutable dependencies.task_spec.spec_path. These are declarations, not verified real geometry.",
+  "properties": {
+    "assets": {
+      "type": "array",
+      "maxItems": 32,
+      "items": {
+        "type": "object",
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "asset_path": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "mesh_path": {
+            "type": "string"
+          },
+          "unit": {
+            "enum": [
+              "m",
+              "mm",
+              "cm",
+              null
+            ]
+          },
+          "scale": {
+            "oneOf": [
+              {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "number",
+                  "exclusiveMinimum": 0
+                },
+                "minItems": 3,
+                "maxItems": 3
+              }
+            ]
+          },
+          "geometry_type": {
+            "type": "string"
+          },
+          "size_m": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "minItems": 3,
+            "maxItems": 3
+          },
+          "collision": {
+            "type": "object"
+          },
+          "functional_probe": {
+            "type": "object",
+            "properties": {
+              "role": {
+                "type": "string"
+              },
+              "x_m": {
+                "type": "number"
+              },
+              "source": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "physics_profile_path": {
+      "type": "string"
+    },
+    "spec_hash": {
+      "type": "string"
+    },
+    "spec_revision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "asset_paths": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

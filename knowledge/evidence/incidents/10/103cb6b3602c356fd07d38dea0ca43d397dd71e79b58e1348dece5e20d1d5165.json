@@ -1,0 +1,12 @@
+{
+  "run_id": "3035e6ca201844ef",
+  "status": "succeeded",
+  "summary": "runs/3035e6ca201844ef/simulation/isaac_1794326783548444122/summary.json",
+  "task_action_passed": true,
+  "post_release_retained": false,
+  "released_from_fingers": true,
+  "pose_source": "Rendered wrist RGBD -> automatic SAM3 masks -> FoundationPose; no object truth",
+  "hardware_verified": false,
+  "artifacts": 646,
+  "scope": "Keyed insertion followed by confirmed direct jaw release; post-drop assembly retention is a separate validation"
+}

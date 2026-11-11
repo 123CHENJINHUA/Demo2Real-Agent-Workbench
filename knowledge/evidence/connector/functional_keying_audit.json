@@ -1,0 +1,257 @@
+{
+  "male_section_x_mm": -15.0,
+  "female_section_x_mm": 24.0,
+  "male_latch_sections": [
+    {
+      "area_mm2": 3.598939178308942,
+      "centroid_mm": [
+        -6.604603155984543,
+        0.000513970908214069
+      ],
+      "bounds_mm": [
+        [
+          -7.519872180451128,
+          -1.9317549019607851
+        ],
+        [
+          -5.650626666666667,
+          1.937469879518072
+        ]
+      ],
+      "nesting": 0,
+      "hole": false
+    },
+    {
+      "area_mm2": 3.292481085248224,
+      "centroid_mm": [
+        7.286514873642871,
+        -0.00606314474620821
+      ],
+      "bounds_mm": [
+        [
+          5.488107078039928,
+          -1.4819531250000002
+        ],
+        [
+          8.417533596837945,
+          1.4619908256880736
+        ]
+      ],
+      "nesting": 0,
+      "hole": false
+    }
+  ],
+  "female_channel_sections": [
+    {
+      "area_mm2": 18.12188738366327,
+      "centroid_mm": [
+        -0.015166334268294028,
+        -7.363912031385588
+      ],
+      "bounds_mm": [
+        [
+          -3.5622722820763957,
+          -8.683913580246914
+        ],
+        [
+          3.4866941580756015,
+          -6.054187499999999
+        ]
+      ],
+      "nesting": 1,
+      "hole": true
+    },
+    {
+      "area_mm2": 18.341551956194955,
+      "centroid_mm": [
+        -0.01433355734097943,
+        7.3107740949068
+      ],
+      "bounds_mm": [
+        [
+          -3.575,
+          5.9808790882061444
+        ],
+        [
+          3.4883015236567765,
+          8.640722866174922
+        ]
+      ],
+      "nesting": 1,
+      "hole": true
+    }
+  ],
+  "male_feature_line_deg": 179.9728718063295,
+  "female_feature_line_deg": 89.99674850945709,
+  "inferred_relative_roll_mod180_deg": 90.0238767031276,
+  "relative_roll_candidates_deg": [
+    90.0238767031276,
+    270.0238767031276
+  ],
+  "symmetry_caveat": "Two opposed features define a LINE; this does not prove exact 180-degree mechanical symmetry",
+  "axial_geometry": {
+    "male_latch_leading_x_mm": -16.451,
+    "female_front_x_mm": 28.909,
+    "nominal_depth_for_first_latch_entry_mm": 11.640000000000004,
+    "caveat": "First geometric entry only; this is not a snap-lock depth"
+  },
+  "pin_and_bore_sections": {
+    "male_core_at_x_minus15mm": [
+      {
+        "area_mm2": 40.46579013507644,
+        "centroid_mm": [
+          0.6814424793737998,
+          0.004085456853955991
+        ],
+        "bounds_mm": [
+          [
+            -2.954029288702929,
+            -3.58788575780655
+          ],
+          [
+            4.317667910447761,
+            3.5866238458450423
+          ]
+        ],
+        "nesting": 0,
+        "hole": false
+      }
+    ],
+    "female_bore_at_x_plus24mm": [
+      {
+        "area_mm2": 92.38489292771472,
+        "centroid_mm": [
+          0.009180816899476385,
+          -0.014514677535707315
+        ],
+        "bounds_mm": [
+          [
+            -5.474005365526493,
+            -5.496510729613734
+          ],
+          [
+            5.472228144989339,
+            5.46679272517321
+          ]
+        ],
+        "nesting": 1,
+        "hole": true
+      }
+    ]
+  },
+  "rigid_mesh_overlap_sampling": {
+    "grid_pitch_mm": 0.05,
+    "axial_pitch_mm": 0.5,
+    "results": [
+      {
+        "nominal_depth_mm": 10.37,
+        "relative_roll_deg": 0.0,
+        "approximate_overlap_mm3": 0.0,
+        "maximum_section_overlap_mm2": 0.0
+      },
+      {
+        "nominal_depth_mm": 10.37,
+        "relative_roll_deg": 90.0238767031276,
+        "approximate_overlap_mm3": 0.0,
+        "maximum_section_overlap_mm2": 0.0
+      },
+      {
+        "nominal_depth_mm": 10.37,
+        "relative_roll_deg": 270.0238767031276,
+        "approximate_overlap_mm3": 0.0,
+        "maximum_section_overlap_mm2": 0.0
+      },
+      {
+        "nominal_depth_mm": 14.0,
+        "relative_roll_deg": 0.0,
+        "approximate_overlap_mm3": 2.40125,
+        "maximum_section_overlap_mm2": 1.7800000000000002
+      },
+      {
+        "nominal_depth_mm": 14.0,
+        "relative_roll_deg": 90.0238767031276,
+        "approximate_overlap_mm3": 1.83,
+        "maximum_section_overlap_mm2": 1.3825000000000003
+      },
+      {
+        "nominal_depth_mm": 14.0,
+        "relative_roll_deg": 270.0238767031276,
+        "approximate_overlap_mm3": 1.7937500000000004,
+        "maximum_section_overlap_mm2": 1.3775000000000002
+      },
+      {
+        "nominal_depth_mm": 18.0,
+        "relative_roll_deg": 0.0,
+        "approximate_overlap_mm3": 4.2737500000000015,
+        "maximum_section_overlap_mm2": 1.8400000000000003
+      },
+      {
+        "nominal_depth_mm": 18.0,
+        "relative_roll_deg": 90.0238767031276,
+        "approximate_overlap_mm3": 4.880000000000001,
+        "maximum_section_overlap_mm2": 2.8475000000000006
+      },
+      {
+        "nominal_depth_mm": 18.0,
+        "relative_roll_deg": 270.0238767031276,
+        "approximate_overlap_mm3": 4.702500000000001,
+        "maximum_section_overlap_mm2": 2.942500000000001
+      },
+      {
+        "nominal_depth_mm": 20.0,
+        "relative_roll_deg": 0.0,
+        "approximate_overlap_mm3": 5.3675000000000015,
+        "maximum_section_overlap_mm2": 1.9275000000000004
+      },
+      {
+        "nominal_depth_mm": 20.0,
+        "relative_roll_deg": 90.0238767031276,
+        "approximate_overlap_mm3": 19.730000000000004,
+        "maximum_section_overlap_mm2": 14.162500000000003
+      },
+      {
+        "nominal_depth_mm": 20.0,
+        "relative_roll_deg": 270.0238767031276,
+        "approximate_overlap_mm3": 19.60375,
+        "maximum_section_overlap_mm2": 14.137500000000003
+      },
+      {
+        "nominal_depth_mm": 22.0,
+        "relative_roll_deg": 0.0,
+        "approximate_overlap_mm3": 11.856250000000001,
+        "maximum_section_overlap_mm2": 10.652500000000002
+      },
+      {
+        "nominal_depth_mm": 22.0,
+        "relative_roll_deg": 90.0238767031276,
+        "approximate_overlap_mm3": 20.455000000000005,
+        "maximum_section_overlap_mm2": 11.065000000000001
+      },
+      {
+        "nominal_depth_mm": 22.0,
+        "relative_roll_deg": 270.0238767031276,
+        "approximate_overlap_mm3": 20.155000000000005,
+        "maximum_section_overlap_mm2": 10.840000000000002
+      }
+    ],
+    "caveat": "Voxel/section estimate, not exact collision or clearance; includes boundary pixels, no elastic deflection"
+  },
+  "recorded_pose_audit": [
+    {
+      "run": "vision_full_01",
+      "time_s": 35.4,
+      "body_relative_roll_deg": -5.132034799713349,
+      "error_to_latch_line_deg": 84.84408849715905,
+      "latch_front_gap_from_female_front_mm": 0.5765012567002896,
+      "axis_angle_deg": 1.3487676677509253
+    },
+    {
+      "run": "visualization_full_01",
+      "time_s": 35.3,
+      "body_relative_roll_deg": -3.3778370416956838,
+      "error_to_latch_line_deg": 86.59828625517673,
+      "latch_front_gap_from_female_front_mm": 0.5015674349926682,
+      "axis_angle_deg": 1.2922353114150296
+    }
+  ]
+}

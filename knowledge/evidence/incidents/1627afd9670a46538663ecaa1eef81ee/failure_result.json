@@ -1,0 +1,13 @@
+{
+  "error": "Partial validation failed",
+  "result": {
+    "code": "engineering_profile_geometry_difference",
+    "primary_category": "geometry_function",
+    "stage": "asset_modeling",
+    "severity": "review",
+    "status": "open",
+    "message": "Mesh section area-equivalent radius differs from the declared engineering radius by up to 0.000127176m. This diagnostic is not a CAD tolerance test; preserve both sources and do not resize the functional model automatically.",
+    "hardware_verified": false,
+    "asset_id": "connector_female"
+  }
+}

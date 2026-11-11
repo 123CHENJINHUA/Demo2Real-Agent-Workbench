@@ -1,0 +1,226 @@
+{
+  "passed": true,
+  "cases": [
+    {
+      "relative_roll_deg": 0.0,
+      "expected_keyed": false,
+      "passed": true,
+      "before_pull": {
+        "depth_m": 0.022575210750103,
+        "lateral_error_m": 6.366462912410498e-12,
+        "angle_rad": 0.0,
+        "roll_rad": 0.0,
+        "roll_error_rad": -1.5707963267948966,
+        "target_roll_rad": 1.5707963267948966,
+        "latch_engagement_m": 0.00017521075010299564,
+        "nominal_hooks_caught": false,
+        "deflection_m": [
+          0.0007588852759115982,
+          0.0007554598842150883
+        ],
+        "maximum_deflection_m": [
+          0.0007832728897599738,
+          0.000786770948264166
+        ],
+        "both_latches_seated": false,
+        "both_latches_flexed": true,
+        "aligned_for_insertion": false,
+        "engaged": false,
+        "approximation": "Two radial prismatic springs and reconstructed convex contact geometry",
+        "connector_pair_joint": false
+      },
+      "after_pull": {
+        "depth_m": 0.022382106602191927,
+        "lateral_error_m": 9.094947017729282e-13,
+        "angle_rad": 0.0,
+        "roll_rad": 0.0,
+        "roll_error_rad": -1.5707963267948966,
+        "target_roll_rad": 1.5707963267948966,
+        "latch_engagement_m": -1.789339780807614e-05,
+        "nominal_hooks_caught": false,
+        "deflection_m": [
+          0.0007446313911830659,
+          0.000718629794403387
+        ],
+        "maximum_deflection_m": [
+          0.0007832728897599738,
+          0.000786770948264166
+        ],
+        "both_latches_seated": false,
+        "both_latches_flexed": true,
+        "aligned_for_insertion": false,
+        "engaged": false,
+        "approximation": "Two radial prismatic springs and reconstructed convex contact geometry",
+        "connector_pair_joint": false
+      },
+      "axial_pull_N": 0.15,
+      "pull_duration_s": 0.5,
+      "retained": false
+    },
+    {
+      "relative_roll_deg": 90.0,
+      "expected_keyed": true,
+      "passed": true,
+      "before_pull": {
+        "depth_m": 0.022799909085035326,
+        "lateral_error_m": 8.753331102929825e-12,
+        "angle_rad": 1.4901161193847656e-08,
+        "roll_rad": 1.5707962425012016,
+        "roll_error_rad": -8.429369469098447e-08,
+        "target_roll_rad": 1.5707963267948966,
+        "latch_engagement_m": 0.0003999090850353229,
+        "nominal_hooks_caught": true,
+        "deflection_m": [
+          4.1990178288684593e-07,
+          2.4108988593962016e-07
+        ],
+        "maximum_deflection_m": [
+          0.00040573148619068525,
+          0.0004054930697910226
+        ],
+        "both_latches_seated": true,
+        "both_latches_flexed": true,
+        "aligned_for_insertion": true,
+        "engaged": true,
+        "approximation": "Two radial prismatic springs and reconstructed convex contact geometry",
+        "connector_pair_joint": false
+      },
+      "after_pull": {
+        "depth_m": 0.022401820838451388,
+        "lateral_error_m": 8.753331102929825e-12,
+        "angle_rad": 1.4901161193847656e-08,
+        "roll_rad": 1.5707962425012016,
+        "roll_error_rad": -8.429369469098447e-08,
+        "target_roll_rad": 1.5707963267948966,
+        "latch_engagement_m": 1.8208384513843101e-06,
+        "nominal_hooks_caught": true,
+        "deflection_m": [
+          7.775296348927832e-07,
+          7.775316873690277e-07
+        ],
+        "maximum_deflection_m": [
+          0.00040573148619068525,
+          0.0004054930697910226
+        ],
+        "both_latches_seated": true,
+        "both_latches_flexed": true,
+        "aligned_for_insertion": true,
+        "engaged": true,
+        "approximation": "Two radial prismatic springs and reconstructed convex contact geometry",
+        "connector_pair_joint": false
+      },
+      "axial_pull_N": 0.15,
+      "pull_duration_s": 0.5,
+      "retained": true
+    },
+    {
+      "relative_roll_deg": -90.0,
+      "expected_keyed": true,
+      "passed": true,
+      "before_pull": {
+        "depth_m": 0.022799909085035326,
+        "lateral_error_m": 7.27431333566419e-12,
+        "angle_rad": 1.4901161193847656e-08,
+        "roll_rad": -1.5707964110885917,
+        "roll_error_rad": -8.429369513507368e-08,
+        "target_roll_rad": -1.5707963267948966,
+        "latch_engagement_m": 0.0003999090850353229,
+        "nominal_hooks_caught": true,
+        "deflection_m": [
+          1.8148829710688125e-07,
+          1.218755028339208e-07
+        ],
+        "maximum_deflection_m": [
+          0.00040620832857392927,
+          0.0004062679249369622
+        ],
+        "both_latches_seated": true,
+        "both_latches_flexed": true,
+        "aligned_for_insertion": true,
+        "engaged": true,
+        "approximation": "Two radial prismatic springs and reconstructed convex contact geometry",
+        "connector_pair_joint": false
+      },
+      "after_pull": {
+        "depth_m": 0.02240184319019318,
+        "lateral_error_m": 7.27431333566419e-12,
+        "angle_rad": 1.4901161193847656e-08,
+        "roll_rad": -1.5707964110885917,
+        "roll_error_rad": -8.429369513507368e-08,
+        "target_roll_rad": -1.5707963267948966,
+        "latch_engagement_m": 1.8431901931750816e-06,
+        "nominal_hooks_caught": true,
+        "deflection_m": [
+          3.6030222735905504e-07,
+          3.006894400388663e-07
+        ],
+        "maximum_deflection_m": [
+          0.00040620832857392927,
+          0.0004062679249369622
+        ],
+        "both_latches_seated": true,
+        "both_latches_flexed": true,
+        "aligned_for_insertion": true,
+        "engaged": true,
+        "approximation": "Two radial prismatic springs and reconstructed convex contact geometry",
+        "connector_pair_joint": false
+      },
+      "axial_pull_N": 0.15,
+      "pull_duration_s": 0.5,
+      "retained": true
+    }
+  ],
+  "config": {
+    "version": 1,
+    "units": "m",
+    "description": "Engineering collision reconstruction from Meshy cross sections; spring/material parameters are simulation assumptions, not measured hardware properties",
+    "target_roll_deg": 90.0,
+    "roll_candidates_deg": [
+      90.0,
+      -90.0
+    ],
+    "nominal_tip_to_mouth_m": 0.057,
+    "lock_target_depth_m": 0.0228,
+    "lock_min_depth_m": 0.0222,
+    "lock_max_depth_m": 0.0236,
+    "ready_lateral_m": 0.0003,
+    "ready_axis_rad": 0.015,
+    "ready_roll_rad": 0.03490658504,
+    "evaluation_roll_rad": 0.0872664626,
+    "contact_offset_m": 5e-05,
+    "static_friction": 0.6,
+    "dynamic_friction": 0.4,
+    "pin_radius_m": 0.0036,
+    "pin_y_offset_m": 0.0007,
+    "collar_radius_m": 0.00525,
+    "barrel_front_x_m": -0.005,
+    "bore_radius_m": 0.00555,
+    "female_rear_x_m": -0.029,
+    "window_start_x_m": 0.016,
+    "retaining_lip_x_m": 0.0225,
+    "mouth_x_m": 0.029,
+    "front_outer_y_m": 0.0063,
+    "front_outer_z_m": 0.0095,
+    "slot_half_width_m": 0.00355,
+    "slot_inner_radius_m": 0.00595,
+    "slot_outer_radius_m": 0.00895,
+    "window_inner_radius_m": 0.0053,
+    "window_outer_z_m": 0.0058,
+    "collision_grid_m": 0.00025,
+    "latch_head_front_x_m": -0.01645,
+    "latch_head_back_x_m": -0.0121,
+    "latch_root_x_m": -0.005,
+    "latch_inner_radius_m": 0.00555,
+    "latch_outer_radius_m": 0.00825,
+    "latch_half_width_m": 0.0014,
+    "latch_travel_m": 0.00065,
+    "latch_mass_kg": 0.0003,
+    "latch_stiffness_N_m": 400.0,
+    "latch_damping_Ns_m": 0.2,
+    "latch_drive_max_force_N": 1.0,
+    "latch_seated_deflection_m": 0.0002
+  },
+  "fixtures": "TEST ONLY: static receiver and world axial prismatic drive; no such fixtures in robot scene",
+  "mechanical_model": "Two passive radial spring latches; no connector-pair latch joint or adhesive",
+  "measured_hardware_parameters": false
+}

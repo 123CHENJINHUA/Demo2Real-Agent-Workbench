@@ -1,0 +1,47 @@
+{
+  "summary": "本轮动作或证据检查未通过：Dropped object has no supported tabletop grasp; needs human",
+  "observed_behavior": "本轮动作或证据检查未通过：Dropped object has no supported tabletop grasp; needs human",
+  "primary_category": "physics_contact",
+  "stage": "simulation_test",
+  "mode": "simulation",
+  "run_id": "4291c82d53364932",
+  "task_id": "4291c82d53364932:expert_validation",
+  "diagnosis": {
+    "state": "unknown"
+  },
+  "evidence": [
+    {
+      "path": "knowledge/evidence/incidents/f7/f7acf4e14876b0302c433a047f9d496020b57f955a7a9e39523eb0f125014755.json",
+      "source_reference": "knowledge/evidence/incidents/8681168394974383b7a3e7a68b5d9857/failure_result.json",
+      "sha256": "f7acf4e14876b0302c433a047f9d496020b57f955a7a9e39523eb0f125014755",
+      "bytes": 6232
+    },
+    {
+      "path": "knowledge/evidence/incidents/e3/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.log",
+      "source_reference": "knowledge/evidence/incidents/8681168394974383b7a3e7a68b5d9857/1_worker.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "knowledge/evidence/incidents/82/829cf3a2ec8b84ef69d7911c47de826ac046eaaecfc9d5fab274a59409391bd9.json",
+      "source_reference": "knowledge/evidence/incidents/8681168394974383b7a3e7a68b5d9857/2_expert_validation.json",
+      "sha256": "829cf3a2ec8b84ef69d7911c47de826ac046eaaecfc9d5fab274a59409391bd9",
+      "bytes": 5134
+    },
+    {
+      "path": "knowledge/evidence/incidents/e9/e9b9768466a022426bfcc679f5200260ea4b40cd37632b8f1143967e6c551827.json",
+      "source_reference": "knowledge/evidence/incidents/8681168394974383b7a3e7a68b5d9857/3_expert_result.json",
+      "sha256": "e9b9768466a022426bfcc679f5200260ea4b40cd37632b8f1143967e6c551827",
+      "bytes": 26288
+    }
+  ],
+  "declared_failure_category": "physics_contact",
+  "declared_failure_stage": "simulation_test",
+  "validation_scope": "module_reported_failure_only_no_hardware_inference",
+  "schema_version": 1,
+  "record_type": "incident",
+  "incident_id": "INC-29b161d6f67643d9",
+  "revision": 1,
+  "timestamp_utc": "2026-11-11T14:55:51.437226+00:00",
+  "hardware_verified": false
+}

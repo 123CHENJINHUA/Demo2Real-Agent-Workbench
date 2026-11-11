@@ -1,0 +1,26 @@
+{
+  "scope": "One saved contact-approach frame; truth used only for this separate offline evaluation",
+  "time_s": 38.970835365820676,
+  "metrics": {
+    "foundationpose": {
+      "translation_error_mm": [
+        0.4669034851935987,
+        0.6975860831665923
+      ],
+      "rotation_error_deg": [
+        3.847218613796073,
+        4.023206196659441
+      ]
+    },
+    "rgbd_refined": {
+      "translation_error_mm": [
+        0.04957599335301853,
+        0.021895686471256826
+      ],
+      "rotation_error_deg": [
+        0.07976022043340686,
+        0.08342819472149196
+      ]
+    }
+  }
+}

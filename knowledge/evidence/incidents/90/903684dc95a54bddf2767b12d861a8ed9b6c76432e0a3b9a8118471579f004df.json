@@ -1,0 +1,75 @@
+{
+  "error": "ValueError: '/home/cjh/.cache/packman/chk/kit-kernel/107.3.3+isaac.229672.69cbf6ad.gl.manylinux_2_35_x86_64.release/mdl/core/Base/OmniPBR.mdl' is not in the subpath of '/home/cjh/Downloads/Demo2Real-Agent-Workbench' OR one path is relative and the other is absolute.",
+  "result": {
+    "status": "failed",
+    "error": "ValueError: '/home/cjh/.cache/packman/chk/kit-kernel/107.3.3+isaac.229672.69cbf6ad.gl.manylinux_2_35_x86_64.release/mdl/core/Base/OmniPBR.mdl' is not in the subpath of '/home/cjh/Downloads/Demo2Real-Agent-Workbench' OR one path is relative and the other is absolute.",
+    "task_spec_hash": "661666d4b45672c75e104d53e670163a6ba67eb0a335f59f4b1ac1bfc30c2c2c",
+    "spec_revision": 1,
+    "spec_path": "runs/e7320b6960634a63/task_spec/revisions/r000001.json",
+    "build_output": "runs/e648721d1192409c/scene_build/build_1794339410516009071",
+    "hardware_verified": false,
+    "contact_execution_authorized": false,
+    "artifacts": [
+      {
+        "path": "runs/e648721d1192409c/scene_build/build_1794339410516009071/kit.log",
+        "name": "kit.log"
+      },
+      {
+        "path": "runs/e648721d1192409c/scene_build/build_1794339410516009071/isaac_build.log",
+        "name": "isaac_build.log"
+      },
+      {
+        "path": "runs/e648721d1192409c/scene_build/build_1794339410516009071/camera_0_depth_m.npy",
+        "name": "camera_0_depth_m.npy"
+      },
+      {
+        "path": "runs/e648721d1192409c/scene_build/build_1794339410516009071/camera_0_depth.png",
+        "name": "camera_0_depth.png"
+      },
+      {
+        "path": "runs/e648721d1192409c/scene_build/build_1794339410516009071/scene.png",
+        "name": "scene.png"
+      },
+      {
+        "path": "runs/e648721d1192409c/scene_build/build_1794339410516009071/camera_0_rgb.png",
+        "name": "camera_0_rgb.png"
+      },
+      {
+        "path": "runs/e648721d1192409c/scene_build/build_1794339410516009071/task_spec.json",
+        "name": "task_spec.json"
+      },
+      {
+        "path": "runs/e648721d1192409c/scene_build/build_1794339410516009071/camera_1_depth.png",
+        "name": "camera_1_depth.png"
+      },
+      {
+        "path": "runs/e648721d1192409c/scene_build/build_1794339410516009071/camera_0_axes.png",
+        "name": "camera_0_axes.png"
+      },
+      {
+        "path": "runs/e648721d1192409c/scene_build/build_1794339410516009071/build_report.json",
+        "name": "build_report.json"
+      },
+      {
+        "path": "runs/e648721d1192409c/scene_build/build_1794339410516009071/camera_1_rgb.png",
+        "name": "camera_1_rgb.png"
+      },
+      {
+        "path": "runs/e648721d1192409c/scene_build/build_1794339410516009071/scene_data.usdc",
+        "name": "scene_data.usdc"
+      },
+      {
+        "path": "runs/e648721d1192409c/scene_build/build_1794339410516009071/camera_1_axes.png",
+        "name": "camera_1_axes.png"
+      },
+      {
+        "path": "runs/e648721d1192409c/scene_build/build_1794339410516009071/camera_1_depth_m.npy",
+        "name": "camera_1_depth_m.npy"
+      },
+      {
+        "path": "runs/e648721d1192409c/scene_build/build_1794339410516009071/scene_axes.png",
+        "name": "scene_axes.png"
+      }
+    ]
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "summary": "离线专家尚未满足完整动作/保持或证据检查；查看分阶段结果",
+  "observed_behavior": "离线专家尚未满足完整动作/保持或证据检查；查看分阶段结果",
+  "primary_category": "runtime_environment",
+  "stage": "simulation_test",
+  "mode": "simulation",
+  "run_id": "ffb4837f85184642",
+  "task_id": "ffb4837f85184642:expert_validation",
+  "diagnosis": {
+    "state": "unknown"
+  },
+  "evidence": [
+    {
+      "path": "knowledge/evidence/incidents/f5/f5674cce7aea32fbc7170bd4840e135dfc44e3c2e87e069f9888f82809ca6f68.json",
+      "source_reference": "knowledge/evidence/incidents/cf3624f31dcc419a904b91639d720e9a/failure_result.json",
+      "sha256": "f5674cce7aea32fbc7170bd4840e135dfc44e3c2e87e069f9888f82809ca6f68",
+      "bytes": 5344
+    },
+    {
+      "path": "knowledge/evidence/incidents/e3/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.log",
+      "source_reference": "knowledge/evidence/incidents/cf3624f31dcc419a904b91639d720e9a/1_worker.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "knowledge/evidence/incidents/8f/8f4e3cef04d375cac78da6b89c387bf280090722ca8c07ef8085df71f00271a5.json",
+      "source_reference": "knowledge/evidence/incidents/cf3624f31dcc419a904b91639d720e9a/2_expert_validation.json",
+      "sha256": "8f4e3cef04d375cac78da6b89c387bf280090722ca8c07ef8085df71f00271a5",
+      "bytes": 4322
+    },
+    {
+      "path": "knowledge/evidence/incidents/f5/f5d684f32f5fd05c758f73a1cd14fdf0cda8d68ea720251f15855c6b528cb0be.json",
+      "source_reference": "knowledge/evidence/incidents/cf3624f31dcc419a904b91639d720e9a/3_expert_result.json",
+      "sha256": "f5d684f32f5fd05c758f73a1cd14fdf0cda8d68ea720251f15855c6b528cb0be",
+      "bytes": 18049
+    }
+  ],
+  "declared_failure_category": "runtime_environment",
+  "declared_failure_stage": "simulation_test",
+  "validation_scope": "module_reported_failure_only_no_hardware_inference",
+  "schema_version": 1,
+  "record_type": "incident",
+  "incident_id": "INC-3a5dff58b47747d0",
+  "revision": 1,
+  "timestamp_utc": "2026-11-11T08:12:47.893499+00:00",
+  "hardware_verified": false
+}

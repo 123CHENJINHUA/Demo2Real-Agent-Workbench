@@ -1,0 +1,23 @@
+{
+  "source_run": "4291c82d53364932",
+  "left_recovery_start_s": 23.25,
+  "left_recovery_end_s": 40.733333333333334,
+  "initial_right_gap_m": 0.018509138375520706,
+  "initial_right_height_m": 0.08614477634429929,
+  "first_right_loss_indicator": {
+    "time_s": 72.5,
+    "phase": "cooperative_insert",
+    "gap_m": 0.005911575630307198,
+    "grasp_drift_m": 0.02378510347069106,
+    "height_above_table_m": 0.13388934850692746
+  },
+  "physical_left_recovery": [
+    {
+      "arm": 0,
+      "time_s": 40.733333333333334,
+      "passed": true
+    }
+  ],
+  "terminal_error": "Dropped object has no supported tabletop grasp; needs human",
+  "interpretation": "Loss indicator only; cause not established; blocking skill monitoring and unsupported grasp condition need further work"
+}

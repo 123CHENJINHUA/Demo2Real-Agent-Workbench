@@ -1,0 +1,219 @@
+{
+  "error": "本轮动作或证据检查未通过：Dropped object has no supported tabletop grasp; needs human",
+  "result": {
+    "status": "failed",
+    "checks": [
+      {
+        "id": "complete_trace_shapes",
+        "passed": true,
+        "details": {
+          "time": [
+            4492
+          ],
+          "phase": [
+            4492
+          ],
+          "objects": [
+            4492,
+            2,
+            4,
+            4
+          ],
+          "joints": [
+            4492,
+            2,
+            7
+          ],
+          "jaws": [
+            4492,
+            2,
+            2
+          ],
+          "commanded_joints": [
+            4492,
+            2,
+            7
+          ],
+          "contact_forces_N": [
+            4492,
+            4,
+            2,
+            3
+          ],
+          "latch_deflections_m": [
+            4492,
+            2
+          ]
+        }
+      },
+      {
+        "id": "finite_trace",
+        "passed": true,
+        "details": null
+      },
+      {
+        "id": "monotonic_simulation_clock",
+        "passed": true,
+        "details": {
+          "start_s": 0.016666666666666666,
+          "end_s": 74.86666666666666
+        }
+      },
+      {
+        "id": "rigid_object_transforms",
+        "passed": true,
+        "details": null
+      },
+      {
+        "id": "measured_joint_limits",
+        "passed": true,
+        "details": "URDF limits with 0.002rad numerical tolerance"
+      },
+      {
+        "id": "commanded_joint_limits",
+        "passed": true,
+        "details": null
+      },
+      {
+        "id": "no_lowering_phase",
+        "passed": true,
+        "details": {
+          "phases": [
+            "initialization",
+            "dex_grasp",
+            "dex_coordination_closed_loop",
+            "recovery_wait",
+            "recovery_regrasp_0",
+            "cooperative_insert",
+            "recovery_regrasp_1"
+          ]
+        }
+      },
+      {
+        "id": "ground_truth_teacher_scope",
+        "passed": true,
+        "details": "Not a vision/student or hardware evaluation"
+      },
+      {
+        "id": "no_hardware_commands",
+        "passed": true,
+        "details": null
+      },
+      {
+        "id": "loaded_exact_scene",
+        "passed": true,
+        "details": null
+      },
+      {
+        "id": "binding_task_spec_hash",
+        "passed": true,
+        "details": null
+      },
+      {
+        "id": "binding_spec_revision",
+        "passed": true,
+        "details": null
+      },
+      {
+        "id": "only_transient_renderer_changes",
+        "passed": true,
+        "details": {
+          "source_signature": "883a6e512951d0d6fd9d18c1a1d2af081a2f7a1e703f18d785b145b0e188935f",
+          "prepared_signature": "883a6e512951d0d6fd9d18c1a1d2af081a2f7a1e703f18d785b145b0e188935f"
+        }
+      },
+      {
+        "id": "execution_usd_no_object_attachment",
+        "passed": true,
+        "details": {
+          "forbidden_joints": [],
+          "actual_usd_audit": "runs/4291c82d53364932/expert_validation/execution_usd_audit.json"
+        }
+      }
+    ],
+    "stage_results": {
+      "grasp": {
+        "passed": true,
+        "details": [
+          {
+            "arm": 0,
+            "lift_m": 0.07619184255599976,
+            "jaw_gap_m": 0.01960265263915062,
+            "contact_forces_N": [
+              5.794910907745361,
+              5.676494121551514
+            ],
+            "passed": true
+          },
+          {
+            "arm": 1,
+            "lift_m": 0.0750962495803833,
+            "jaw_gap_m": 0.018508974462747574,
+            "contact_forces_N": [
+              5.483609199523926,
+              5.467301845550537
+            ],
+            "passed": true
+          }
+        ]
+      },
+      "insertion": {
+        "passed": null,
+        "details": "stage not reached or trace unavailable"
+      },
+      "release": {
+        "passed": null,
+        "details": "stage not reached or trace unavailable"
+      },
+      "retention": {
+        "passed": null,
+        "details": "stage not reached or trace unavailable"
+      }
+    },
+    "action_passed": false,
+    "retention_passed": null,
+    "full_task_passed": false,
+    "scope": "fixed_scene_ground_truth_scripted_expert_only",
+    "hardware_verified": false,
+    "hardware_commands_sent": 0,
+    "generalization_evaluated": false,
+    "policy_trained": false,
+    "task_spec_hash": "f1acdaa349da50dd574ae242ed501a290826a3aaa727a6d7ce099636d2c2a93e",
+    "spec_revision": 2,
+    "evidence_sha256": {
+      "runs/4291c82d53364932/expert_execution/execution_1794408836077833139/expert_result.json": "e9b9768466a022426bfcc679f5200260ea4b40cd37632b8f1143967e6c551827",
+      "runs/4291c82d53364932/expert_execution/execution_1794408836077833139/trajectory.npz": "d55de303736e0331432ae916dacce0cf1f338f005a3aeda381b1e2a9292fd117"
+    },
+    "report_path": "runs/4291c82d53364932/expert_validation/expert_validation.json",
+    "expert_report_path": "runs/4291c82d53364932/expert_execution/execution_1794408836077833139/expert_result.json",
+    "trajectory_path": "runs/4291c82d53364932/expert_execution/execution_1794408836077833139/trajectory.npz",
+    "error": "本轮动作或证据检查未通过：Dropped object has no supported tabletop grasp; needs human",
+    "failure_category": "physics_contact",
+    "failure_stage": "simulation_test",
+    "evidence_paths": [
+      "runs/4291c82d53364932/expert_validation/expert_validation.json",
+      "runs/4291c82d53364932/expert_execution/execution_1794408836077833139/expert_result.json"
+    ],
+    "evaluation_scope": "action_only",
+    "experiment_passed": false,
+    "retention_record_only": true,
+    "artifacts": [
+      {
+        "path": "runs/4291c82d53364932/expert_validation/execution_usd_audit.json",
+        "name": "execution_usd_audit.json"
+      },
+      {
+        "path": "runs/4291c82d53364932/expert_validation/prepared_usd_audit.json",
+        "name": "prepared_usd_audit.json"
+      },
+      {
+        "path": "runs/4291c82d53364932/expert_validation/expert_validation.json",
+        "name": "expert_validation.json"
+      },
+      {
+        "path": "runs/4291c82d53364932/expert_validation/usd_worker.log",
+        "name": "usd_worker.log"
+      }
+    ]
+  }
+}

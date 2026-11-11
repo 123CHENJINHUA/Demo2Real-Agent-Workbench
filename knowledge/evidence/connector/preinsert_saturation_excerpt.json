@@ -1,0 +1,100 @@
+{
+  "source_sha256": "77d7b97b446b7fe3c10df1e7aac5e15c780d5619fce2f35fafb83d261bcc7cb5",
+  "records_total": 1550,
+  "selection_indices": [
+    0,
+    340,
+    1549
+  ],
+  "selected_records": [
+    {
+      "depth_m": -0.021589925699854233,
+      "lateral_error_m": 0.024452247202811545,
+      "angle_rad": 0.22039878871189966,
+      "roll_rad": 0.12940659732388962,
+      "roll_error_rad": -1.441389729471007,
+      "target_roll_rad": 1.5707963267948966,
+      "latch_engagement_m": -0.04428262053475652,
+      "nominal_hooks_caught": false,
+      "alignment_weight": 0.0,
+      "depth_command_m": -0.021561675246896832,
+      "progress": 0.0,
+      "pair_force_N": 0.0,
+      "recoveries": 0,
+      "recovering": false,
+      "inserting": false,
+      "correction_saturated": [
+        false,
+        false
+      ],
+      "keyed_alignment_ready": false,
+      "key_reference_rotation_rad": 0.0,
+      "original_demo_translation_deviation_m": [
+        0.0006697638977299069,
+        6.803647722905479e-05
+      ],
+      "simulation_time_s": 20.2
+    },
+    {
+      "depth_m": -0.004839568478223401,
+      "lateral_error_m": 0.002084421945149433,
+      "angle_rad": 0.001514984920919192,
+      "roll_rad": 1.5746159040746832,
+      "roll_error_rad": 0.0038195772797866567,
+      "target_roll_rad": 1.5707963267948966,
+      "latch_engagement_m": -0.027239582364055576,
+      "nominal_hooks_caught": false,
+      "alignment_weight": 1.0,
+      "depth_command_m": -0.011579234009430232,
+      "progress": 0.9770114942528736,
+      "pair_force_N": 0.0,
+      "recoveries": 0,
+      "recovering": false,
+      "inserting": true,
+      "correction_saturated": [
+        true,
+        false
+      ],
+      "keyed_alignment_ready": false,
+      "key_reference_rotation_rad": 0.721882354705242,
+      "original_demo_translation_deviation_m": [
+        0.08255690750059033,
+        0.06955397168341239
+      ],
+      "simulation_time_s": 31.533333333333335
+    },
+    {
+      "depth_m": -0.005175436624938724,
+      "lateral_error_m": 0.001783342793290377,
+      "angle_rad": 0.004648554561836304,
+      "roll_rad": 1.5663133137047558,
+      "roll_error_rad": -0.004483013090140986,
+      "target_roll_rad": 1.5707963267948966,
+      "latch_engagement_m": -0.027575567359513366,
+      "nominal_hooks_caught": false,
+      "alignment_weight": 1.0,
+      "depth_command_m": -0.011579234009430232,
+      "progress": 1.0,
+      "pair_force_N": 0.0,
+      "recoveries": 0,
+      "recovering": false,
+      "inserting": true,
+      "correction_saturated": [
+        true,
+        false
+      ],
+      "keyed_alignment_ready": false,
+      "key_reference_rotation_rad": 0.721882354705242,
+      "original_demo_translation_deviation_m": [
+        0.0837842521968875,
+        0.06945523544361346
+      ],
+      "simulation_time_s": 71.83333333333333
+    }
+  ],
+  "saturation_count_by_arm": [
+    1368,
+    0
+  ],
+  "meaning": "诊断摘录及聚合，非原始轨迹的完整复制；不构成对修正方法的控制变量对照试验。"
+}

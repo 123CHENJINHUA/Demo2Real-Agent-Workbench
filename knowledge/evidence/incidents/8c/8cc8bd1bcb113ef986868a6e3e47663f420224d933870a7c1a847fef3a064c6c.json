@@ -1,0 +1,333 @@
+{
+  "schema_version": "recovery-dataset/v1",
+  "feature_names": [
+    "left.visible",
+    "left.pose_age_s",
+    "left.confidence",
+    "left.grasp_drift_m",
+    "left.jaw_gap_m",
+    "left.object_height_m",
+    "left.object_speed_m_s",
+    "left.object_x_m",
+    "left.object_y_m",
+    "left.stable_s",
+    "right.visible",
+    "right.pose_age_s",
+    "right.confidence",
+    "right.grasp_drift_m",
+    "right.jaw_gap_m",
+    "right.object_height_m",
+    "right.object_speed_m_s",
+    "right.object_x_m",
+    "right.object_y_m",
+    "right.stable_s",
+    "progress",
+    "wait_s",
+    "left_joint_margin_rad",
+    "right_joint_margin_rad"
+  ],
+  "labels": [
+    "continue",
+    "wait",
+    "regrasp_left",
+    "regrasp_right",
+    "needs_human"
+  ],
+  "observation_contract": "recovery-state-24/v1",
+  "action_contract": "recovery-skill-5/v1",
+  "observation_source": "simulated_pose_estimate",
+  "task_signature": "7bc362433bd4f66bd3a2a41ed418e1e19122aacd1561ace5cf2aabba8184e73b",
+  "force_observations": false,
+  "event_labels_in_features": false,
+  "synthetic_test_fixture": false,
+  "source": "actual_physx_teacher_rollouts",
+  "collector_signature": "0e545ff637c805ec23e442a8bd22f16b30a7cbc82b4c1d6381776cdd9633be63",
+  "episodes": [
+    {
+      "run_id": "99b794c85ad64403",
+      "batch": "placement_1794402603405676901",
+      "case_id": "train_none_0",
+      "split": "train",
+      "supervision_path": "runs/99b794c85ad64403/expert_execution/execution_1794402637004346886/supervision.npz",
+      "supervision_sha256": "650e00fda671106a6b72fae744f9e48f200770796d0b82ef0cb6e313133bdc00",
+      "rows": 705,
+      "excluded_unverified_regrasp_rows": 0,
+      "action_passed": true,
+      "local_recoveries": [],
+      "motion_error": null
+    },
+    {
+      "run_id": "2f76b2041cf44d42",
+      "batch": "placement_1794402603405676901",
+      "case_id": "train_drop_0",
+      "split": "train",
+      "supervision_path": "runs/2f76b2041cf44d42/expert_execution/execution_1794402705550593659/supervision.npz",
+      "supervision_sha256": "b5e5b4141de5ce23e85653f00021aa57a0d05d2153982ba030969362f637640d",
+      "rows": 769,
+      "excluded_unverified_regrasp_rows": 0,
+      "action_passed": true,
+      "local_recoveries": [
+        0
+      ],
+      "motion_error": null
+    },
+    {
+      "run_id": "5db0c5aaf9114b1f",
+      "batch": "placement_1794402994935086887",
+      "case_id": "train_occlude_0",
+      "split": "train",
+      "supervision_path": "runs/5db0c5aaf9114b1f/expert_execution/execution_1794403028643969971/supervision.npz",
+      "supervision_sha256": "9a1d5984e89b059a6fbca8819a291d0d04e84cf94ca63de17f2d02380954e78c",
+      "rows": 753,
+      "excluded_unverified_regrasp_rows": 0,
+      "action_passed": true,
+      "local_recoveries": [],
+      "motion_error": null
+    },
+    {
+      "run_id": "329e2a5391584f37",
+      "batch": "placement_1794402994935086887",
+      "case_id": "train_drop_1",
+      "split": "train",
+      "supervision_path": "runs/329e2a5391584f37/expert_execution/execution_1794403100336031391/supervision.npz",
+      "supervision_sha256": "d27a6c98dbfa45d1df491d0951367579b6118a5d8035a65e821701b02976bc47",
+      "rows": 755,
+      "excluded_unverified_regrasp_rows": 0,
+      "action_passed": true,
+      "local_recoveries": [
+        1
+      ],
+      "motion_error": null
+    },
+    {
+      "run_id": "8d4fb2c188fb44fa",
+      "batch": "placement_1794402994935086887",
+      "case_id": "train_relocate_0",
+      "split": "train",
+      "supervision_path": "runs/8d4fb2c188fb44fa/expert_execution/execution_1794403217876311064/supervision.npz",
+      "supervision_sha256": "4fbd094aa20738d87530ee65a97f99510f9d195632901ff41e26f92228152f0b",
+      "rows": 788,
+      "excluded_unverified_regrasp_rows": 0,
+      "action_passed": true,
+      "local_recoveries": [
+        0
+      ],
+      "motion_error": null
+    },
+    {
+      "run_id": "852a4715a7fd46e2",
+      "batch": "placement_1794402994935086887",
+      "case_id": "train_remove_1",
+      "split": "train",
+      "supervision_path": "runs/852a4715a7fd46e2/expert_execution/execution_1794403309315577563/supervision.npz",
+      "supervision_sha256": "41f06162ef58a1d85074e71a2040ed992eb5e9e52223cf192d6b29ce4368470b",
+      "rows": 288,
+      "excluded_unverified_regrasp_rows": 0,
+      "action_passed": false,
+      "local_recoveries": [],
+      "motion_error": "Needs human: object unavailable or outside supported workspace"
+    },
+    {
+      "run_id": "54ee2f27168a4074",
+      "batch": "placement_1794402994935086887",
+      "case_id": "validation_none_0",
+      "split": "validation",
+      "supervision_path": "runs/54ee2f27168a4074/expert_execution/execution_1794403382406504071/supervision.npz",
+      "supervision_sha256": "cbc06530d5125c711cb00f64f8c191e0cb75d24132e7693de7746d9595dae0d3",
+      "rows": 692,
+      "excluded_unverified_regrasp_rows": 0,
+      "action_passed": true,
+      "local_recoveries": [],
+      "motion_error": null
+    },
+    {
+      "run_id": "a8ec325da7f54070",
+      "batch": "placement_1794402994935086887",
+      "case_id": "validation_occlude_0",
+      "split": "validation",
+      "supervision_path": "runs/a8ec325da7f54070/expert_execution/execution_1794403451117362825/supervision.npz",
+      "supervision_sha256": "568326d04ca2310c77c2f0632c9a0fa5ac1a30ad794226700c1bb16fdf93f1cd",
+      "rows": 756,
+      "excluded_unverified_regrasp_rows": 0,
+      "action_passed": true,
+      "local_recoveries": [],
+      "motion_error": null
+    },
+    {
+      "run_id": "c0324c5fb0524122",
+      "batch": "placement_1794402994935086887",
+      "case_id": "validation_drop_0",
+      "split": "validation",
+      "supervision_path": "runs/c0324c5fb0524122/expert_execution/execution_1794403548587184033/supervision.npz",
+      "supervision_sha256": "65b494e3c9ee29461b20889c3f652d0f63a3e7990dfd633aee0766c39233ecc6",
+      "rows": 786,
+      "excluded_unverified_regrasp_rows": 0,
+      "action_passed": true,
+      "local_recoveries": [
+        0
+      ],
+      "motion_error": null
+    },
+    {
+      "run_id": "4a20cd616b8b4c4a",
+      "batch": "placement_1794402994935086887",
+      "case_id": "validation_drop_1",
+      "split": "validation",
+      "supervision_path": "runs/4a20cd616b8b4c4a/expert_execution/execution_1794403642211992533/supervision.npz",
+      "supervision_sha256": "f11f02c16283a2d7ddf86b97715de083c957961b0fd9c9c11e1aacee620d9bfd",
+      "rows": 764,
+      "excluded_unverified_regrasp_rows": 0,
+      "action_passed": true,
+      "local_recoveries": [
+        1
+      ],
+      "motion_error": null
+    },
+    {
+      "run_id": "516c45c7e2054e00",
+      "batch": "placement_1794402994935086887",
+      "case_id": "validation_relocate_0",
+      "split": "validation",
+      "supervision_path": "runs/516c45c7e2054e00/expert_execution/execution_1794403760694771397/supervision.npz",
+      "supervision_sha256": "78bd492d0b8fd741fce53f94bb7e008bb0aab2cc692f677a512e4e003f135aff",
+      "rows": 798,
+      "excluded_unverified_regrasp_rows": 0,
+      "action_passed": true,
+      "local_recoveries": [
+        0
+      ],
+      "motion_error": null
+    },
+    {
+      "run_id": "6b989bf72fba4082",
+      "batch": "placement_1794402994935086887",
+      "case_id": "validation_remove_1",
+      "split": "validation",
+      "supervision_path": "runs/6b989bf72fba4082/expert_execution/execution_1794403853163170675/supervision.npz",
+      "supervision_sha256": "424f3bf84c861f75d104a45459219cf6c4d3f4d3633435e7b74d4197e31ce036",
+      "rows": 303,
+      "excluded_unverified_regrasp_rows": 0,
+      "action_passed": false,
+      "local_recoveries": [],
+      "motion_error": "Needs human: object unavailable or outside supported workspace"
+    },
+    {
+      "run_id": "f5976323b01a40a5",
+      "batch": "placement_1794402994935086887",
+      "case_id": "test_none_0",
+      "split": "test",
+      "supervision_path": "runs/f5976323b01a40a5/expert_execution/execution_1794403927621324957/supervision.npz",
+      "supervision_sha256": "480bbfdc73dd5a29237454971de632165b4430fb9ac6d41abc3d626344285684",
+      "rows": 692,
+      "excluded_unverified_regrasp_rows": 0,
+      "action_passed": true,
+      "local_recoveries": [],
+      "motion_error": null
+    },
+    {
+      "run_id": "5f806e825a504d36",
+      "batch": "placement_1794402994935086887",
+      "case_id": "test_occlude_0",
+      "split": "test",
+      "supervision_path": "runs/5f806e825a504d36/expert_execution/execution_1794403997249178649/supervision.npz",
+      "supervision_sha256": "cdf2539203f1e16500315d65e993f1e31faf9b5fc4ecaa176e129706ea6a43a3",
+      "rows": 787,
+      "excluded_unverified_regrasp_rows": 0,
+      "action_passed": true,
+      "local_recoveries": [],
+      "motion_error": null
+    },
+    {
+      "run_id": "bcdd1411e5614cf7",
+      "batch": "placement_1794402994935086887",
+      "case_id": "test_drop_0",
+      "split": "test",
+      "supervision_path": "runs/bcdd1411e5614cf7/expert_execution/execution_1794404095743633776/supervision.npz",
+      "supervision_sha256": "5184baf81e2e158476d0fa967deecdcacfd5020e1f52b258ebbfdd030009a155",
+      "rows": 114,
+      "excluded_unverified_regrasp_rows": 1,
+      "action_passed": false,
+      "local_recoveries": [],
+      "motion_error": "Unreachable target for arm 0: [-0.4317967733820812, 0.25181353795360345, 0.18726593486525445], residual=0.01547"
+    },
+    {
+      "run_id": "80614304826249ef",
+      "batch": "placement_1794402994935086887",
+      "case_id": "test_drop_1",
+      "split": "test",
+      "supervision_path": "runs/80614304826249ef/expert_execution/execution_1794404143889626814/supervision.npz",
+      "supervision_sha256": "b752ddbd0a1bf26577f1aa542330d427e5fb415dab2ea26e08febac3bf60438e",
+      "rows": 779,
+      "excluded_unverified_regrasp_rows": 0,
+      "action_passed": true,
+      "local_recoveries": [
+        1
+      ],
+      "motion_error": null
+    },
+    {
+      "run_id": "b6378a2642e6401c",
+      "batch": "placement_1794402994935086887",
+      "case_id": "test_relocate_0",
+      "split": "test",
+      "supervision_path": "runs/b6378a2642e6401c/expert_execution/execution_1794404264374888381/supervision.npz",
+      "supervision_sha256": "0de3ca0e617e06da9881f7cb6de5153901a07e9302889cb6f04762187bd2e69a",
+      "rows": 819,
+      "excluded_unverified_regrasp_rows": 0,
+      "action_passed": true,
+      "local_recoveries": [
+        0
+      ],
+      "motion_error": null
+    },
+    {
+      "run_id": "684d0c8ca2c44def",
+      "batch": "placement_1794402994935086887",
+      "case_id": "test_remove_1",
+      "split": "test",
+      "supervision_path": "runs/684d0c8ca2c44def/expert_execution/execution_1794404359907396482/supervision.npz",
+      "supervision_sha256": "ac32df8493ffeced2f130a56f921e2cebed5f07afca7e546e482c69beac9166f",
+      "rows": 318,
+      "excluded_unverified_regrasp_rows": 0,
+      "action_passed": false,
+      "local_recoveries": [],
+      "motion_error": "Needs human: object unavailable or outside supported workspace"
+    }
+  ],
+  "protected_position_holdout_excluded": [
+    "35773cdbd0e84ddb",
+    "70a73f55781f4e7f",
+    "72aa51a91cb54b8f",
+    "761101410ffb4b65",
+    "94e13f33ec0a435e",
+    "9b8bf67caf42460d",
+    "aa009d827a8a4d1b",
+    "e875f9d2aed04286",
+    "ebfae62a28184f55",
+    "f3a97416daf94f06"
+  ],
+  "label_scope": "supervisor decisions; regrasp labels included only when local regrasp was physically verified; task failures remain recorded",
+  "class_counts": {
+    "train": [
+      3659,
+      395,
+      2,
+      1,
+      1
+    ],
+    "validation": [
+      3696,
+      399,
+      2,
+      1,
+      1
+    ],
+    "test": [
+      3096,
+      410,
+      1,
+      1,
+      1
+    ]
+  }
+}

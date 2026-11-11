@@ -1,0 +1,47 @@
+{
+  "summary": "本轮动作或证据检查未通过：Trial abandoned: No reliably held supporting arm",
+  "observed_behavior": "本轮动作或证据检查未通过：Trial abandoned: No reliably held supporting arm",
+  "primary_category": "physics_contact",
+  "stage": "simulation_test",
+  "mode": "simulation",
+  "run_id": "acba571ba9ac45e7",
+  "task_id": "acba571ba9ac45e7:expert_validation",
+  "diagnosis": {
+    "state": "unknown"
+  },
+  "evidence": [
+    {
+      "path": "knowledge/evidence/incidents/6b/6b1f80307c1b63d18ef6bed3b89364748c3881eb7e6ee2b30a3d602fe0738c36.json",
+      "source_reference": "knowledge/evidence/incidents/0847e3360cb640d088d68d00083a042c/failure_result.json",
+      "sha256": "6b1f80307c1b63d18ef6bed3b89364748c3881eb7e6ee2b30a3d602fe0738c36",
+      "bytes": 6205
+    },
+    {
+      "path": "knowledge/evidence/incidents/e3/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.log",
+      "source_reference": "knowledge/evidence/incidents/0847e3360cb640d088d68d00083a042c/1_worker.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "knowledge/evidence/incidents/30/30f0d0cbfb1088b1597d137f233ac3fc1ccd0aaa9be80f352ade07fca15f8e63.json",
+      "source_reference": "knowledge/evidence/incidents/0847e3360cb640d088d68d00083a042c/2_expert_validation.json",
+      "sha256": "30f0d0cbfb1088b1597d137f233ac3fc1ccd0aaa9be80f352ade07fca15f8e63",
+      "bytes": 5118
+    },
+    {
+      "path": "knowledge/evidence/incidents/39/39e57fbc17473415e54ca9cdd7b9a5d0eb324637828e6fee85ef22fdc33a973b.json",
+      "source_reference": "knowledge/evidence/incidents/0847e3360cb640d088d68d00083a042c/3_expert_result.json",
+      "sha256": "39e57fbc17473415e54ca9cdd7b9a5d0eb324637828e6fee85ef22fdc33a973b",
+      "bytes": 30577
+    }
+  ],
+  "declared_failure_category": "physics_contact",
+  "declared_failure_stage": "simulation_test",
+  "validation_scope": "module_reported_failure_only_no_hardware_inference",
+  "schema_version": 1,
+  "record_type": "incident",
+  "incident_id": "INC-8912964e70114457",
+  "revision": 1,
+  "timestamp_utc": "2026-11-11T16:34:50.813980+00:00",
+  "hardware_verified": false
+}

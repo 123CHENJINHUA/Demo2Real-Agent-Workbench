@@ -1,0 +1,65 @@
+{
+  "summary": "旋转包围盒空角导致落桌检查误报",
+  "observed_behavior": "场景局部验证失败；查看逐项checks",
+  "primary_category": "evaluation_metrics",
+  "stage": "scene_build",
+  "mode": "offline",
+  "run_id": "aea753a4f01b4585",
+  "task_id": "aea753a4f01b4585:scene_validation",
+  "diagnosis": {
+    "state": "confirmed",
+    "root_cause": "把局部AABB变换后的空角当作实际几何最低点；直接使用有面引用顶点与解析圆柱支撑后不越原容差。"
+  },
+  "declared_failure_category": "physics_contact",
+  "declared_failure_stage": "scene_build",
+  "validation_scope": "仅对应误报或候选检查逻辑已修复；不证明保持、任意位置、RGBD、学习策略或真机可靠性。",
+  "incident_id": "INC-c85f16b3b507467e",
+  "title": "旋转包围盒空角导致落桌检查误报",
+  "resolved": true,
+  "resolution_state": "verified_in_scope",
+  "revision_reason": "追加真实复核/定向复测；原失败与hash证据保留。",
+  "fix": "使用精确支撑计算；新增实际碰撞支撑检查；原3mm容差和物理参数不变。",
+  "evidence": [
+    {
+      "path": "knowledge/evidence/incidents/49/496a9e5728e0d480c674e5456c7f12ee6dc5f0ba62d3122910874af2b6621c31.json",
+      "source_reference": "knowledge/evidence/incidents/49/496a9e5728e0d480c674e5456c7f12ee6dc5f0ba62d3122910874af2b6621c31.json",
+      "sha256": "496a9e5728e0d480c674e5456c7f12ee6dc5f0ba62d3122910874af2b6621c31",
+      "bytes": 38626
+    },
+    {
+      "path": "knowledge/evidence/incidents/e3/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.log",
+      "source_reference": "knowledge/evidence/incidents/e3/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "knowledge/evidence/incidents/88/888c3bfb92cf5e9bf6f92061cda5cea600ddb35cdeed8b689308434bef1acd40.json",
+      "source_reference": "knowledge/evidence/incidents/88/888c3bfb92cf5e9bf6f92061cda5cea600ddb35cdeed8b689308434bef1acd40.json",
+      "sha256": "888c3bfb92cf5e9bf6f92061cda5cea600ddb35cdeed8b689308434bef1acd40",
+      "bytes": 35520
+    },
+    {
+      "path": "knowledge/evidence/incidents/fb/fb60c8cf7af4d7fb5b1d446da3d849d8bb41b0eb1dcaa702ce79d8f940a6299a.json",
+      "source_reference": "runs/placement_1794386435542648456/exact_support_diagnostic.json",
+      "sha256": "fb60c8cf7af4d7fb5b1d446da3d849d8bb41b0eb1dcaa702ce79d8f940a6299a",
+      "bytes": 1330
+    },
+    {
+      "path": "knowledge/evidence/incidents/71/710cb63eeae5c6fc1617faac0f825e4fba2b80ce823d1e9bfecd48ec7081634b.json",
+      "source_reference": "runs/aea753a4f01b4585/scene_validation/validation_report.json",
+      "sha256": "710cb63eeae5c6fc1617faac0f825e4fba2b80ce823d1e9bfecd48ec7081634b",
+      "bytes": 38112
+    },
+    {
+      "path": "knowledge/evidence/incidents/9c/9cb90bf36ecdc3c2646aa86d78dd0cc690a0071359cf6fdb09ed28f1865de535.json",
+      "source_reference": "runs/placement_1794386435542648456/final_report.json",
+      "sha256": "9cb90bf36ecdc3c2646aa86d78dd0cc690a0071359cf6fdb09ed28f1865de535",
+      "bytes": 7466
+    }
+  ],
+  "schema_version": 1,
+  "record_type": "incident",
+  "revision": 2,
+  "timestamp_utc": "2026-11-11T09:05:03.736580+00:00",
+  "hardware_verified": false
+}

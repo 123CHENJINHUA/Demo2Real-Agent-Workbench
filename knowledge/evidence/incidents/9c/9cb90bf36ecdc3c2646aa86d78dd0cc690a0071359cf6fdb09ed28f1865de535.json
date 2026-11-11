@@ -1,0 +1,251 @@
+{
+  "timestamp_utc": "2026-11-11T09:05:03.706502+00:00",
+  "suite_id": "connector_small_v1",
+  "suite_sha256": "71e8e5173008ac7ddb4334ea6154e86bfcd1261902f84ce63e73cd859cea3cc1",
+  "initial_batch": "placement_1794386435542648456",
+  "retest_batch": "placement_1794387533714830125",
+  "initial_action_passes": 3,
+  "initial_case_count": 5,
+  "focused_retest_action_passes": 2,
+  "focused_retest_count": 2,
+  "implementation_changed_between_batches": true,
+  "all_five_cases_have_successful_latest_evidence": true,
+  "single_version_five_case_rerun_performed": false,
+  "evaluation_scope": "action_only",
+  "retention_record_only": true,
+  "cases": [
+    {
+      "case": {
+        "id": "control",
+        "title": "原位对照",
+        "xy_offsets_m": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ]
+        ],
+        "yaw_offsets_deg": [
+          0,
+          0
+        ]
+      },
+      "first_run_id": "66a70a6995034ab6",
+      "first_action_passed": true,
+      "retest_run_id": null,
+      "retest_action_passed": null,
+      "latest_action_passed": true,
+      "latest_retention_passed": false,
+      "latest_full_task_passed": false,
+      "insertion_depth_m": 0.022821610231972815,
+      "all_evidence_checks_passed": true,
+      "validation_report": "runs/66a70a6995034ab6/expert_validation/expert_validation.json",
+      "trajectory_path": "runs/66a70a6995034ab6/expert_execution/execution_1794386468660562821/trajectory.npz",
+      "coordinator_sha256": "594e464c1ea1dc9ff582c014c8e53385299f18c34703445a880f52715b75c7f6",
+      "key_candidate_summary": [
+        {
+          "roll_rad": 1.5707963267948966,
+          "feasible": true,
+          "errors": []
+        },
+        {
+          "roll_rad": -1.5707963267948966,
+          "feasible": true,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "case": {
+        "id": "male_only",
+        "title": "仅移动公头",
+        "xy_offsets_m": [
+          [
+            0.01,
+            -0.01
+          ],
+          [
+            0,
+            0
+          ]
+        ],
+        "yaw_offsets_deg": [
+          5,
+          0
+        ]
+      },
+      "first_run_id": "aea753a4f01b4585",
+      "first_action_passed": false,
+      "retest_run_id": "ed40d6aad9f6447b",
+      "retest_action_passed": true,
+      "latest_action_passed": true,
+      "latest_retention_passed": false,
+      "latest_full_task_passed": false,
+      "insertion_depth_m": 0.022838536058413766,
+      "all_evidence_checks_passed": true,
+      "validation_report": "runs/ed40d6aad9f6447b/expert_validation/expert_validation.json",
+      "trajectory_path": "runs/ed40d6aad9f6447b/expert_execution/execution_1794387567156197302/trajectory.npz",
+      "coordinator_sha256": "90415a43438adc556fb0a73b7c77c9f99d1b9fbe3004a94212d6bc1d11e2b483",
+      "key_candidate_summary": [
+        {
+          "roll_rad": 1.5707963267948966,
+          "feasible": true,
+          "errors": []
+        },
+        {
+          "roll_rad": -1.5707963267948966,
+          "feasible": false,
+          "errors": [
+            "Demo-retarget IK arm=1: position=0.0010m, rotation=0.1531rad"
+          ]
+        }
+      ]
+    },
+    {
+      "case": {
+        "id": "female_only",
+        "title": "仅移动母头",
+        "xy_offsets_m": [
+          [
+            0,
+            0
+          ],
+          [
+            -0.01,
+            0.01
+          ]
+        ],
+        "yaw_offsets_deg": [
+          0,
+          -5
+        ]
+      },
+      "first_run_id": "ee7e73597a9d4820",
+      "first_action_passed": true,
+      "retest_run_id": null,
+      "retest_action_passed": null,
+      "latest_action_passed": true,
+      "latest_retention_passed": false,
+      "latest_full_task_passed": false,
+      "insertion_depth_m": 0.022813638938394408,
+      "all_evidence_checks_passed": true,
+      "validation_report": "runs/ee7e73597a9d4820/expert_validation/expert_validation.json",
+      "trajectory_path": "runs/ee7e73597a9d4820/expert_execution/execution_1794386569774083255/trajectory.npz",
+      "coordinator_sha256": "594e464c1ea1dc9ff582c014c8e53385299f18c34703445a880f52715b75c7f6",
+      "key_candidate_summary": [
+        {
+          "roll_rad": 1.5707963267948966,
+          "feasible": true,
+          "errors": []
+        },
+        {
+          "roll_rad": -1.5707963267948966,
+          "feasible": true,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "case": {
+        "id": "opposed_a",
+        "title": "双物体反向变化A",
+        "xy_offsets_m": [
+          [
+            0.01,
+            0.01
+          ],
+          [
+            -0.01,
+            -0.01
+          ]
+        ],
+        "yaw_offsets_deg": [
+          -5,
+          5
+        ]
+      },
+      "first_run_id": "7c11dbad05ed4e69",
+      "first_action_passed": true,
+      "retest_run_id": null,
+      "retest_action_passed": null,
+      "latest_action_passed": true,
+      "latest_retention_passed": false,
+      "latest_full_task_passed": false,
+      "insertion_depth_m": 0.02284350983267775,
+      "all_evidence_checks_passed": true,
+      "validation_report": "runs/7c11dbad05ed4e69/expert_validation/expert_validation.json",
+      "trajectory_path": "runs/7c11dbad05ed4e69/expert_execution/execution_1794387039650305984/trajectory.npz",
+      "coordinator_sha256": "594e464c1ea1dc9ff582c014c8e53385299f18c34703445a880f52715b75c7f6",
+      "key_candidate_summary": [
+        {
+          "roll_rad": 1.5707963267948966,
+          "feasible": true,
+          "errors": []
+        },
+        {
+          "roll_rad": -1.5707963267948966,
+          "feasible": true,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "case": {
+        "id": "opposed_b",
+        "title": "双物体反向变化B",
+        "xy_offsets_m": [
+          [
+            -0.01,
+            -0.01
+          ],
+          [
+            0.01,
+            0.01
+          ]
+        ],
+        "yaw_offsets_deg": [
+          5,
+          -5
+        ]
+      },
+      "first_run_id": "7b554d98fd924970",
+      "first_action_passed": false,
+      "retest_run_id": "545c6226189642f2",
+      "retest_action_passed": true,
+      "latest_action_passed": true,
+      "latest_retention_passed": true,
+      "latest_full_task_passed": true,
+      "insertion_depth_m": 0.022825214228280717,
+      "all_evidence_checks_passed": true,
+      "validation_report": "runs/545c6226189642f2/expert_validation/expert_validation.json",
+      "trajectory_path": "runs/545c6226189642f2/expert_execution/execution_1794387635659324819/trajectory.npz",
+      "coordinator_sha256": "90415a43438adc556fb0a73b7c77c9f99d1b9fbe3004a94212d6bc1d11e2b483",
+      "key_candidate_summary": [
+        {
+          "roll_rad": 1.5707963267948966,
+          "feasible": true,
+          "errors": []
+        },
+        {
+          "roll_rad": -1.5707963267948966,
+          "feasible": false,
+          "errors": [
+            "Demo-retarget IK arm=1: position=0.0019m, rotation=0.4897rad"
+          ]
+        }
+      ]
+    }
+  ],
+  "backend_tests": {
+    "passed": 134,
+    "skipped": 1,
+    "output": "runs/placement_1794387533714830125/test_output.txt"
+  },
+  "frontend_component_groups_passed": 23,
+  "browser_report": "runs/placement_1794386435542648456/frontend/report.json",
+  "scope": "deterministic initial XY/yaw tests, ground-truth scripted expert; no statistical coverage/RGBD/student/real robot claim",
+  "hardware_commands_sent": 0
+}

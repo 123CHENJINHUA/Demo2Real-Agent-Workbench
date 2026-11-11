@@ -1,0 +1,35 @@
+{
+  "summary": "Partial validation failed",
+  "observed_behavior": "Partial validation failed",
+  "primary_category": "workflow_integrity",
+  "stage": "runtime",
+  "mode": "offline",
+  "run_id": "d30e1bc9684c42f9",
+  "task_id": "functional_geometry",
+  "diagnosis": {
+    "state": "unknown"
+  },
+  "evidence": [
+    {
+      "path": "knowledge/evidence/incidents/26/26b1d8aa1fd900f5bbe4a588e2ba79928b2a12d06504128ee2db7859e4542251.json",
+      "source_reference": "knowledge/evidence/incidents/200a2a6fff354885af8355abdf0e788e/failure_result.json",
+      "sha256": "26b1d8aa1fd900f5bbe4a588e2ba79928b2a12d06504128ee2db7859e4542251",
+      "bytes": 458
+    },
+    {
+      "path": "knowledge/evidence/incidents/e3/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.log",
+      "source_reference": "knowledge/evidence/incidents/200a2a6fff354885af8355abdf0e788e/1_worker.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  ],
+  "declared_failure_category": null,
+  "declared_failure_stage": null,
+  "validation_scope": "module_reported_failure_only_no_hardware_inference",
+  "schema_version": 1,
+  "record_type": "incident",
+  "incident_id": "INC-35352ecb0083439b",
+  "revision": 1,
+  "timestamp_utc": "2026-11-11T15:17:41.323168+00:00",
+  "hardware_verified": false
+}

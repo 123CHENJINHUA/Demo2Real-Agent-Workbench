@@ -1,0 +1,54 @@
+{
+  "incident_id": "INC-PHASE-ABORT-HOME",
+  "summary": "双侧夹持丢失后按用户要求松爪归位，任务仍失败",
+  "primary_category": "planning_control",
+  "stage": "simulation_test",
+  "mode": "simulation",
+  "run_id": "acba571ba9ac45e7",
+  "observed_behavior": "双侧夹爪受扰打开后，阶段监督放弃当前任务；双爪实际开度约65mm，双臂受限运动返回初始姿态，独立轨迹核验通过，无人工请求。",
+  "diagnosis": {
+    "state": "supported_by_diagnostics",
+    "explanation": "夹持丢失时缺少可靠支撑，终止任务而非调用桌面重抓；正常物理驱动完成开爪和归位。"
+  },
+  "resolved": true,
+  "status": "verified_in_scope",
+  "feature_tags": [
+    "bimanual",
+    "friction_grasp",
+    "abort",
+    "return_home"
+  ],
+  "reusable_checklist": [
+    "任务完成与失败退出分别评估，归位成功不改任务失败",
+    "先测量实际开爪再规划归位，确认归位后保持开爪",
+    "初始姿态来自本回合绑定场景；其他资产/障碍物/实机须重新预检"
+  ],
+  "verification": {
+    "scope": "one dual-loss PhysX development case; not arbitrary environment/hardware"
+  },
+  "evidence": [
+    {
+      "path": "knowledge/evidence/incidents/9d/9dfb01a9e220986b52542063f2c0b591653286116c78de8b36369080d7f2e0e0.json",
+      "source_reference": "runs/acba571ba9ac45e7/phase_validation/phase_validation.json",
+      "sha256": "9dfb01a9e220986b52542063f2c0b591653286116c78de8b36369080d7f2e0e0",
+      "bytes": 7052
+    },
+    {
+      "path": "knowledge/evidence/incidents/39/39e57fbc17473415e54ca9cdd7b9a5d0eb324637828e6fee85ef22fdc33a973b.json",
+      "source_reference": "runs/acba571ba9ac45e7/expert_execution/execution_1794414824367329642/expert_result.json",
+      "sha256": "39e57fbc17473415e54ca9cdd7b9a5d0eb324637828e6fee85ef22fdc33a973b",
+      "bytes": 30577
+    },
+    {
+      "path": "knowledge/evidence/incidents/82/82674f5becc038029b2e47fcdff49b86d5d344239fe3d851b6d9a731b4dbcd43.md",
+      "source_reference": "docs/PHASE_RECOVERY_V3_RESULTS.md",
+      "sha256": "82674f5becc038029b2e47fcdff49b86d5d344239fe3d851b6d9a731b4dbcd43",
+      "bytes": 4254
+    }
+  ],
+  "schema_version": 1,
+  "record_type": "incident",
+  "revision": 1,
+  "timestamp_utc": "2026-11-11T16:36:17.285019+00:00",
+  "hardware_verified": false
+}

@@ -1,0 +1,198 @@
+{
+  "status": "failed",
+  "checks": [
+    {
+      "id": "complete_trace_shapes",
+      "passed": true,
+      "details": {
+        "time": [
+          2406
+        ],
+        "phase": [
+          2406
+        ],
+        "objects": [
+          2406,
+          2,
+          4,
+          4
+        ],
+        "joints": [
+          2406,
+          2,
+          7
+        ],
+        "jaws": [
+          2406,
+          2,
+          2
+        ],
+        "commanded_joints": [
+          2406,
+          2,
+          7
+        ],
+        "contact_forces_N": [
+          2406,
+          4,
+          2,
+          3
+        ],
+        "latch_deflections_m": [
+          2406,
+          2
+        ]
+      }
+    },
+    {
+      "id": "finite_trace",
+      "passed": true,
+      "details": null
+    },
+    {
+      "id": "monotonic_simulation_clock",
+      "passed": true,
+      "details": {
+        "start_s": 0.016666666666666666,
+        "end_s": 40.1
+      }
+    },
+    {
+      "id": "rigid_object_transforms",
+      "passed": true,
+      "details": null
+    },
+    {
+      "id": "measured_joint_limits",
+      "passed": true,
+      "details": "URDF limits with 0.002rad numerical tolerance"
+    },
+    {
+      "id": "commanded_joint_limits",
+      "passed": true,
+      "details": null
+    },
+    {
+      "id": "no_lowering_phase",
+      "passed": true,
+      "details": {
+        "phases": [
+          "initialization",
+          "dex_grasp",
+          "dex_coordination_closed_loop",
+          "cooperative_insert",
+          "phase_recovery_wait",
+          "abort_open_grippers",
+          "abort_return_home"
+        ]
+      }
+    },
+    {
+      "id": "ground_truth_teacher_scope",
+      "passed": true,
+      "details": "Not a vision/student or hardware evaluation"
+    },
+    {
+      "id": "no_hardware_commands",
+      "passed": true,
+      "details": null
+    },
+    {
+      "id": "loaded_exact_scene",
+      "passed": true,
+      "details": null
+    },
+    {
+      "id": "binding_task_spec_hash",
+      "passed": true,
+      "details": null
+    },
+    {
+      "id": "binding_spec_revision",
+      "passed": true,
+      "details": null
+    },
+    {
+      "id": "only_transient_renderer_changes",
+      "passed": true,
+      "details": {
+        "source_signature": "6bfd9e3f3717ddc71019d853adc30a51c8b21db49b2a557f9d086e26fb6c89d6",
+        "prepared_signature": "6bfd9e3f3717ddc71019d853adc30a51c8b21db49b2a557f9d086e26fb6c89d6"
+      }
+    },
+    {
+      "id": "execution_usd_no_object_attachment",
+      "passed": true,
+      "details": {
+        "forbidden_joints": [],
+        "actual_usd_audit": "runs/afa02722dec34f3e/expert_validation/execution_usd_audit.json"
+      }
+    }
+  ],
+  "stage_results": {
+    "grasp": {
+      "passed": true,
+      "details": [
+        {
+          "arm": 0,
+          "lift_m": 0.07627928256988525,
+          "jaw_gap_m": 0.019619770348072052,
+          "contact_forces_N": [
+            5.799660682678223,
+            5.675019264221191
+          ],
+          "passed": true
+        },
+        {
+          "arm": 1,
+          "lift_m": 0.07496970891952515,
+          "jaw_gap_m": 0.018507473170757294,
+          "contact_forces_N": [
+            5.482499599456787,
+            5.471059322357178
+          ],
+          "passed": true
+        }
+      ]
+    },
+    "insertion": {
+      "passed": null,
+      "details": "stage not reached or trace unavailable"
+    },
+    "release": {
+      "passed": null,
+      "details": "stage not reached or trace unavailable"
+    },
+    "retention": {
+      "passed": null,
+      "details": "stage not reached or trace unavailable"
+    }
+  },
+  "action_passed": false,
+  "retention_passed": null,
+  "full_task_passed": false,
+  "scope": "fixed_scene_ground_truth_scripted_expert_only",
+  "hardware_verified": false,
+  "hardware_commands_sent": 0,
+  "generalization_evaluated": false,
+  "policy_trained": false,
+  "task_spec_hash": "4e9a93f3188bf1dba24950b933ddbb903c6d4bce4fe676f3413343aa46c30b94",
+  "spec_revision": 2,
+  "evidence_sha256": {
+    "runs/afa02722dec34f3e/expert_execution/execution_1794413864428066150/expert_result.json": "860098c66103c9e50725fabf38e9b01c03e94928a46f6867d34c754006d9e715",
+    "runs/afa02722dec34f3e/expert_execution/execution_1794413864428066150/trajectory.npz": "19f99221ea49e9706d9102a340695205df918de99a965fe5977d977a6a8dc8d8"
+  },
+  "report_path": "runs/afa02722dec34f3e/expert_validation/expert_validation.json",
+  "expert_report_path": "runs/afa02722dec34f3e/expert_execution/execution_1794413864428066150/expert_result.json",
+  "trajectory_path": "runs/afa02722dec34f3e/expert_execution/execution_1794413864428066150/trajectory.npz",
+  "error": "本轮动作或证据检查未通过：Trial abandoned: No reliably held supporting arm",
+  "failure_category": "physics_contact",
+  "failure_stage": "simulation_test",
+  "evidence_paths": [
+    "runs/afa02722dec34f3e/expert_validation/expert_validation.json",
+    "runs/afa02722dec34f3e/expert_execution/execution_1794413864428066150/expert_result.json"
+  ],
+  "evaluation_scope": "action_only",
+  "experiment_passed": false,
+  "retention_record_only": true
+}

@@ -1,0 +1,376 @@
+{
+  "error": "RGBD worker: ModuleNotFoundError: No module named 'sim_bridge'; see /home/cjh/Downloads/Demo2Real-Agent-Workbench/runs/3035e6ca201844ef/simulation/isaac_1794326652389997890/trial_000/vision/worker.log",
+  "result": {
+    "status": "failed",
+    "mode": "rgbd",
+    "returncode": 1,
+    "report": "runs/3035e6ca201844ef/simulation/isaac_1794326652389997890/summary.json",
+    "result": {
+      "passed": false,
+      "successes": 0,
+      "trials": 1,
+      "results": [
+        {
+          "passed": false,
+          "index": 0,
+          "fixed_grasp_joints": false,
+          "randomized_spread_m": 0.0,
+          "execution_goal": "release",
+          "assembly_attempted": false,
+          "placement_mode": "randomized initialization",
+          "requested_placement_variation": {
+            "xy_offsets_m": [
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ]
+            ],
+            "yaw_offsets_deg": [
+              0.0,
+              0.0
+            ]
+          },
+          "initial_object_poses": [
+            [
+              [
+                0.48123930777431645,
+                0.12456159666739774,
+                -0.867694149622184,
+                -0.43513214588165283
+              ],
+              [
+                -0.8763484358851535,
+                0.09156535596242749,
+                -0.47289449617131185,
+                -0.026726681739091873
+              ],
+              [
+                0.02054623017834789,
+                0.9879778308358657,
+                0.1532242089302988,
+                0.7889782786369324
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            [
+              [
+                -0.36182060887947814,
+                0.9322466753038786,
+                0.0014083234530337608,
+                -0.4290415942668915
+              ],
+              [
+                -0.9322396499495623,
+                -0.36182334967961055,
+                0.003619211038849611,
+                0.1260072886943817
+              ],
+              [
+                0.0038835617673996774,
+                -3.389821132057441e-06,
+                0.9999924589398201,
+                0.7894124984741211
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ]
+          ],
+          "error": "RGBD worker: ModuleNotFoundError: No module named 'sim_bridge'; see /home/cjh/Downloads/Demo2Real-Agent-Workbench/runs/3035e6ca201844ef/simulation/isaac_1794326652389997890/trial_000/vision/worker.log"
+        }
+      ],
+      "physics": {
+        "object_pose_source": "RGBD vision",
+        "arm_bases_m": [
+          [
+            0.0,
+            -0.375,
+            0.802
+          ],
+          [
+            0.0,
+            0.375,
+            0.802
+          ]
+        ],
+        "physics_hz": 240,
+        "mass_kg": [
+          0.02,
+          0.025
+        ],
+        "static_friction": 0.6,
+        "dynamic_friction": 0.4,
+        "finger_max_force_N": 10.0,
+        "finger_stiffness_N_m": 600.0,
+        "finger_damping_Ns_m": 10.0,
+        "contact_offset_m": 0.0003,
+        "male_pin_radius_m": 0.0036,
+        "female_bore_radius_m": 0.00555,
+        "socket_depth_m": 0.058,
+        "nominal_insertion_depth_m": 0.0228,
+        "elastic_latch_simulated": true,
+        "cable_dynamics_simulated": false,
+        "grasp_center_local_x_m": [
+          0.016,
+          -0.019
+        ],
+        "rotation_control": "Full keyed relative pose; +/-90 degree key datum, not free axial roll",
+        "collision_model": "Reconstructed through bore, open key channels, retaining lip and two passive spring clips",
+        "fixed_grasp_joints": false,
+        "object_teleports_during_execution": false,
+        "controller": "dexmimic",
+        "connector_model": "keyed",
+        "angular_damping_per_s": 5.0,
+        "linear_damping_per_s": 0.1,
+        "robot_contact_paths": [
+          "/World/nero/base_link",
+          "/World/nero/link1",
+          "/World/nero/link2",
+          "/World/nero/link3",
+          "/World/nero/link4",
+          "/World/nero/link5",
+          "/World/nero/link6",
+          "/World/nero/link7",
+          "/World/nero/gripper_flange",
+          "/World/nero/gripper_base",
+          "/World/nero/gripper_link1",
+          "/World/nero/gripper_link2",
+          "/World/nero2/base_link",
+          "/World/nero2/link1",
+          "/World/nero2/link2",
+          "/World/nero2/link3",
+          "/World/nero2/link4",
+          "/World/nero2/link5",
+          "/World/nero2/link6",
+          "/World/nero2/link7",
+          "/World/nero2/gripper_flange",
+          "/World/nero2/gripper_base",
+          "/World/nero2/gripper_link1",
+          "/World/nero2/gripper_link2"
+        ],
+        "latch_model": "Two limited radial prismatic springs; unmeasured material parameters",
+        "keyed_physics": {
+          "version": 1,
+          "units": "m",
+          "description": "Engineering collision reconstruction from Meshy cross sections; spring/material parameters are simulation assumptions, not measured hardware properties",
+          "target_roll_deg": 90.0,
+          "roll_candidates_deg": [
+            90.0,
+            -90.0
+          ],
+          "nominal_tip_to_mouth_m": 0.057,
+          "lock_target_depth_m": 0.0228,
+          "lock_min_depth_m": 0.0222,
+          "lock_max_depth_m": 0.0236,
+          "ready_lateral_m": 0.0003,
+          "ready_axis_rad": 0.015,
+          "ready_roll_rad": 0.03490658504,
+          "evaluation_roll_rad": 0.0872664626,
+          "contact_offset_m": 5e-05,
+          "static_friction": 0.6,
+          "dynamic_friction": 0.4,
+          "pin_radius_m": 0.0036,
+          "pin_y_offset_m": 0.0007,
+          "collar_radius_m": 0.00525,
+          "barrel_front_x_m": -0.005,
+          "bore_radius_m": 0.00555,
+          "female_rear_x_m": -0.029,
+          "window_start_x_m": 0.016,
+          "retaining_lip_x_m": 0.0225,
+          "mouth_x_m": 0.029,
+          "front_outer_y_m": 0.0063,
+          "front_outer_z_m": 0.0095,
+          "slot_half_width_m": 0.00355,
+          "slot_inner_radius_m": 0.00595,
+          "slot_outer_radius_m": 0.00895,
+          "window_inner_radius_m": 0.0053,
+          "window_outer_z_m": 0.0058,
+          "collision_grid_m": 0.00025,
+          "latch_head_front_x_m": -0.01645,
+          "latch_head_back_x_m": -0.0121,
+          "latch_root_x_m": -0.005,
+          "latch_inner_radius_m": 0.00555,
+          "latch_outer_radius_m": 0.00825,
+          "latch_half_width_m": 0.0014,
+          "latch_travel_m": 0.00065,
+          "latch_mass_kg": 0.0003,
+          "latch_stiffness_N_m": 400.0,
+          "latch_damping_Ns_m": 0.2,
+          "latch_drive_max_force_N": 1.0,
+          "latch_seated_deflection_m": 0.0002
+        },
+        "connector_pair_joint": false,
+        "connector_contact_offset_m": 5e-05,
+        "gripper_material_friction": {
+          "static": 1.2,
+          "dynamic": 1.0
+        }
+      }
+    },
+    "pose_noise_m": 0.0,
+    "pose_delay_s": 0.0,
+    "hardware_verified": false,
+    "perception": "rgbd",
+    "error": "RGBD worker: ModuleNotFoundError: No module named 'sim_bridge'; see /home/cjh/Downloads/Demo2Real-Agent-Workbench/runs/3035e6ca201844ef/simulation/isaac_1794326652389997890/trial_000/vision/worker.log",
+    "failure_category": "physics_contact",
+    "failure_stage": "simulation_test",
+    "evidence_paths": [
+      "runs/3035e6ca201844ef/simulation/isaac_worker.log",
+      "runs/3035e6ca201844ef/simulation/isaac_1794326652389997890/summary.json"
+    ],
+    "artifacts": [
+      {
+        "path": "runs/3035e6ca201844ef/simulation/simulation_report.json",
+        "name": "simulation_report.json"
+      },
+      {
+        "path": "runs/3035e6ca201844ef/simulation/isaac_worker.log",
+        "name": "isaac_worker.log"
+      },
+      {
+        "path": "runs/3035e6ca201844ef/simulation/isaac_1794326652389997890/physical_scene.usdc",
+        "name": "physical_scene.usdc"
+      },
+      {
+        "path": "runs/3035e6ca201844ef/simulation/isaac_1794326652389997890/summary.json",
+        "name": "summary.json"
+      },
+      {
+        "path": "runs/3035e6ca201844ef/simulation/isaac_1794326652389997890/physics.json",
+        "name": "physics.json"
+      },
+      {
+        "path": "runs/3035e6ca201844ef/simulation/isaac_1794326652389997890/camera_projection_audit.json",
+        "name": "camera_projection_audit.json"
+      },
+      {
+        "path": "runs/3035e6ca201844ef/simulation/isaac_1794326652389997890/isaac.log",
+        "name": "isaac.log"
+      },
+      {
+        "path": "runs/3035e6ca201844ef/simulation/isaac_1794326652389997890/physics_audit.json",
+        "name": "physics_audit.json"
+      },
+      {
+        "path": "runs/3035e6ca201844ef/simulation/isaac_1794326652389997890/trial_000/latch_deflection.npz",
+        "name": "latch_deflection.npz"
+      },
+      {
+        "path": "runs/3035e6ca201844ef/simulation/isaac_1794326652389997890/trial_000/trajectory.npz",
+        "name": "trajectory.npz"
+      },
+      {
+        "path": "runs/3035e6ca201844ef/simulation/isaac_1794326652389997890/trial_000/rgbd_evaluation_truth.json",
+        "name": "rgbd_evaluation_truth.json"
+      },
+      {
+        "path": "runs/3035e6ca201844ef/simulation/isaac_1794326652389997890/trial_000/rgbd_initial/camera_0.npz",
+        "name": "camera_0.npz"
+      },
+      {
+        "path": "runs/3035e6ca201844ef/simulation/isaac_1794326652389997890/trial_000/rgbd_initial/camera_0_rgb.png",
+        "name": "camera_0_rgb.png"
+      },
+      {
+        "path": "runs/3035e6ca201844ef/simulation/isaac_1794326652389997890/trial_000/rgbd_initial/camera_1_depth_preview.png",
+        "name": "camera_1_depth_preview.png"
+      },
+      {
+        "path": "runs/3035e6ca201844ef/simulation/isaac_1794326652389997890/trial_000/rgbd_initial/camera_1_rgb.png",
+        "name": "camera_1_rgb.png"
+      },
+      {
+        "path": "runs/3035e6ca201844ef/simulation/isaac_1794326652389997890/trial_000/rgbd_initial/camera_1.npz",
+        "name": "camera_1.npz"
+      },
+      {
+        "path": "runs/3035e6ca201844ef/simulation/isaac_1794326652389997890/trial_000/rgbd_initial/camera_0_depth_preview.png",
+        "name": "camera_0_depth_preview.png"
+      },
+      {
+        "path": "runs/3035e6ca201844ef/simulation/isaac_1794326652389997890/trial_000/vision/inference.jsonl",
+        "name": "inference.jsonl"
+      },
+      {
+        "path": "runs/3035e6ca201844ef/simulation/isaac_1794326652389997890/trial_000/vision/perception.json",
+        "name": "perception.json"
+      },
+      {
+        "path": "runs/3035e6ca201844ef/simulation/isaac_1794326652389997890/trial_000/vision/visualization/latest.png",
+        "name": "latest.png"
+      },
+      {
+        "path": "runs/3035e6ca201844ef/simulation/isaac_1794326652389997890/trial_000/vision/visualization/segmentation_0.971/camera_1_sam3.png",
+        "name": "camera_1_sam3.png"
+      },
+      {
+        "path": "runs/3035e6ca201844ef/simulation/isaac_1794326652389997890/trial_000/vision/visualization/segmentation_0.971/camera_1_masks.npz",
+        "name": "camera_1_masks.npz"
+      },
+      {
+        "path": "runs/3035e6ca201844ef/simulation/isaac_1794326652389997890/trial_000/vision/visualization/segmentation_0.971/camera_0_rgb.png",
+        "name": "camera_0_rgb.png"
+      },
+      {
+        "path": "runs/3035e6ca201844ef/simulation/isaac_1794326652389997890/trial_000/vision/visualization/segmentation_0.971/camera_0_sam3.png",
+        "name": "camera_0_sam3.png"
+      },
+      {
+        "path": "runs/3035e6ca201844ef/simulation/isaac_1794326652389997890/trial_000/vision/visualization/segmentation_0.971/camera_1_rgb.png",
+        "name": "camera_1_rgb.png"
+      },
+      {
+        "path": "runs/3035e6ca201844ef/simulation/isaac_1794326652389997890/trial_000/vision/visualization/segmentation_0.971/camera_0_masks.npz",
+        "name": "camera_0_masks.npz"
+      },
+      {
+        "path": "runs/3035e6ca201844ef/simulation/isaac_1794326652389997890/trial_000/vision/visualization/segmentation_0.971/source.json",
+        "name": "source.json"
+      },
+      {
+        "path": "runs/3035e6ca201844ef/simulation/isaac_1794326652389997890/trial_000/vision/visualization/frame_0.971/panels.png",
+        "name": "panels.png"
+      },
+      {
+        "path": "runs/3035e6ca201844ef/simulation/isaac_1794326652389997890/trial_000/vision/ipc/masks_0.npz",
+        "name": "masks_0.npz"
+      },
+      {
+        "path": "runs/3035e6ca201844ef/simulation/isaac_1794326652389997890/trial_000/vision/ipc/masks_1.npz",
+        "name": "masks_1.npz"
+      },
+      {
+        "path": "runs/3035e6ca201844ef/simulation/isaac_1794326652389997890/trial_000/vision/ipc/camera_0.npz",
+        "name": "camera_0.npz"
+      },
+      {
+        "path": "runs/3035e6ca201844ef/simulation/isaac_1794326652389997890/trial_000/vision/ipc/mask_0_0.npy",
+        "name": "mask_0_0.npy"
+      },
+      {
+        "path": "runs/3035e6ca201844ef/simulation/isaac_1794326652389997890/trial_000/vision/ipc/camera_1.npz",
+        "name": "camera_1.npz"
+      },
+      {
+        "path": "runs/3035e6ca201844ef/simulation/isaac_1794326652389997890/rgbd/timing_audit.jsonl",
+        "name": "timing_audit.jsonl"
+      },
+      {
+        "path": "runs/3035e6ca201844ef/simulation/isaac_1794326652389997890/rgbd/acquisition.json",
+        "name": "acquisition.json"
+      }
+    ]
+  }
+}

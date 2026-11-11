@@ -1,0 +1,70 @@
+{
+  "summary": "ValueError: Unsupported expert plan version/scope/perception",
+  "observed_behavior": "ValueError: Unsupported expert plan version/scope/perception",
+  "primary_category": "workflow_integrity",
+  "stage": "simulation_test",
+  "mode": "simulation",
+  "run_id": "7216db904c4e4bdb",
+  "task_id": "7216db904c4e4bdb:expert_execution",
+  "diagnosis": {
+    "state": "confirmed",
+    "explanation": "新增恢复运行器仍沿用GT-only入口检查，拒绝已显式绑定的simulated_pose_estimate；错误发生于执行前。修正为独立状态契约，不将其冒充相机。"
+  },
+  "evidence": [
+    {
+      "path": "knowledge/evidence/incidents/b1/b13df4f8c060ad622e22064404f1abf8e56d3f4d6b4268154fa07a639f6791f9.json",
+      "source_reference": "knowledge/evidence/incidents/b1/b13df4f8c060ad622e22064404f1abf8e56d3f4d6b4268154fa07a639f6791f9.json",
+      "sha256": "b13df4f8c060ad622e22064404f1abf8e56d3f4d6b4268154fa07a639f6791f9",
+      "bytes": 1678
+    },
+    {
+      "path": "knowledge/evidence/incidents/e3/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.log",
+      "source_reference": "knowledge/evidence/incidents/e3/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "knowledge/evidence/incidents/1e/1ec276424e237515a3bfc44cd96215e4913c96aa9403f9a5302977675c42dec2.json",
+      "source_reference": "knowledge/evidence/incidents/1e/1ec276424e237515a3bfc44cd96215e4913c96aa9403f9a5302977675c42dec2.json",
+      "sha256": "1ec276424e237515a3bfc44cd96215e4913c96aa9403f9a5302977675c42dec2",
+      "bytes": 700
+    },
+    {
+      "path": "knowledge/evidence/incidents/7f/7fc69d4264ee78cb430d601603dee64663c07d2b9a8f7f08cddb243832d1184f.log",
+      "source_reference": "knowledge/evidence/incidents/7f/7fc69d4264ee78cb430d601603dee64663c07d2b9a8f7f08cddb243832d1184f.log",
+      "sha256": "7fc69d4264ee78cb430d601603dee64663c07d2b9a8f7f08cddb243832d1184f",
+      "bytes": 38241
+    },
+    {
+      "path": "knowledge/evidence/incidents/19/19a40c6401169f5eff734839ff788f12ce671af28dc7310552915a5016f45483.json",
+      "source_reference": "runs/99b794c85ad64403/expert_execution/execution_1794402637004346886/expert_result.json",
+      "sha256": "19a40c6401169f5eff734839ff788f12ce671af28dc7310552915a5016f45483",
+      "bytes": 35161
+    }
+  ],
+  "declared_failure_category": "runtime_environment",
+  "declared_failure_stage": "simulation_test",
+  "validation_scope": "module_reported_failure_only_no_hardware_inference",
+  "record_type": "incident",
+  "incident_id": "INC-44e123ddf44e427f",
+  "hardware_verified": false,
+  "resolved": true,
+  "status": "verified_in_scope",
+  "revision_reason": "修正恢复运行器的观测来源检查；保留初次拒绝与实际物理复测证据",
+  "mitigation": [
+    "recovery_runtime只接受显式状态代理来源；GT运行器保持原契约",
+    "新增计划/运行/数据/策略独立来源标记"
+  ],
+  "verification": {
+    "scope": "入口拒绝修复及两个实际PhysX试采回合，不含RGBD/泛化学生/真机",
+    "action_passed": true,
+    "local_regrasp_verified": false
+  },
+  "reusable_checklist": [
+    "新增观测模式同时核验计划创建、载入与执行入口，不只修改配置项",
+    "状态代理与相机估计采用独立契约和来源，模型成功率不可继承"
+  ],
+  "schema_version": 1,
+  "revision": 2,
+  "timestamp_utc": "2026-11-11T13:24:44.526576+00:00"
+}

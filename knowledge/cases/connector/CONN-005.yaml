@@ -1,0 +1,72 @@
+schema_version: 1
+record_type: curated_historical_case
+case_id: CONN-005
+revision: 1
+recorded_on: '2026-11-10'
+title: 单手预插修正持续饱和，目标无法收敛
+status: mitigation_recorded
+primary_category: planning_control
+secondary_categories:
+- workflow_integrity
+stages:
+- simulation_test
+feature_tags:
+- bimanual
+- keyed_insertion
+- reference_saturation
+evidence_scopes:
+- simulation
+hardware_verified: false
+facts:
+- robot_diagnostic_01 插入未收敛；1550条反馈最后仍显示一侧 correction_saturated=true。
+- 最终估计深度约-5.18mm，尚未进入要求的锁止行程。
+diagnosis:
+  state: supported_by_diagnostics
+  explanation: 开发复盘将问题定位为预插间距修正集中于一只手并消耗参考残差界；诊断摘录支持持续饱和。
+  alternatives:
+  - 本快照不是单独改变分担规则的严格对照试验，仍需检查 IK、抓持和参考定义。
+source_mitigation:
+  actions:
+  - 围绕规定参考中点由两臂分担必要的安全间距/对准修正。
+  - 对键滚转在早段显式适配参考，不在孔口突加大角度。
+  - 记录饱和、参考偏离和不可达，不盲目放大限幅。
+  implemented_in_new_project: false
+  attempts:
+  - change: 诊断单侧持续参考修正饱和
+    outcome: preinsertion_not_converged
+  - change: 开发记录采用两臂分担参考修正
+    outcome: historical_mitigation_recorded
+    limits: 本案例摘录不提供单变量因果对照
+  status: recorded_in_source_history
+verification:
+  scope: 历史诊断与后续修正记录
+  passed_subchecks:
+  - 保留饱和计数与末段状态
+  failed_or_unverified:
+  - 未在新框架复现
+  - 该摘录不能证明新任务分担后必然可行
+applicability:
+  when:
+  - 双臂任务存在相对间距修正和参考残差界
+  - 源示教末段与新安全预插要求冲突
+  not_when:
+  - 单臂/固定接收端时不能直接套两臂均分
+  - 两臂可达/碰撞约束不对称时需优化分配
+  transferable_principles:
+  - 先诊断饱和来源，明确参考变形与误差反馈分工。
+  parameters_not_to_copy:
+  - 旧限幅数值
+  - 固定均分比例
+  - 旧任务世界中点
+preventive_checks:
+- 对新参考做 IK/碰撞和每臂修正预算。
+- 目标保持世界锚定，避免追随测量漂移。
+regression_tests:
+- 故意不可行/饱和的目标应报告原因，不无限推进。
+evidence:
+- knowledge/evidence/connector/preinsert_saturation_failure.json
+- knowledge/evidence/connector/preinsert_saturation_excerpt.json
+source_provenance: knowledge/evidence/connector/provenance.json
+notes:
+- 历史报告整理的知识种子，尚未在新框架复现或自动应用。
+- 来源路径仅为溯源，运行/检索使用本项目内快照。

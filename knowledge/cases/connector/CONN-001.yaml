@@ -1,0 +1,69 @@
+schema_version: 1
+record_type: curated_historical_case
+case_id: CONN-001
+revision: 1
+recorded_on: '2026-11-10'
+title: 原示教深度有损且近裁剪，不能当精密度量输入
+status: mitigation_recorded
+primary_category: data_quality
+secondary_categories:
+- perception_estimation
+- frames_calibration
+stages:
+- data_ingestion
+- task_analysis
+feature_tags:
+- wrist_rgbd
+- tight_clearance
+evidence_scopes:
+- source_data_analysis
+hardware_verified: false
+facts:
+- conversion.json 明确 depth_used=false，拒用原录制深度的原因是 8-bit 有损编码与近裁剪。
+- 替代标注使用人工 RGB 端缘、已知尺寸、水平假设和夹指接触约束；它不是视觉真值。
+- 基座外参未实测，源标注轴向 roll 不完全可观测。
+diagnosis:
+  state: supported_by_diagnostics
+  explanation: 现有编码和可观测性不足以支撑精密反投影；不能用替代假设宣称恢复了原始深度精度。
+  alternatives: []
+source_mitigation:
+  actions:
+  - 明确拒用不合格深度。
+  - 保留原 RGB 拟合、重投影残差和几何约束修正；新采集保存原始度量深度与元数据。
+  implemented_in_new_project: false
+  attempts:
+  - change: 拒用原有损深度并构造替代源标注
+    outcome: mitigation_recorded
+    limits: 原深度无法恢复成无损测量，替代标注仍有残差和假设
+  status: recorded_in_source_history
+verification:
+  scope: 历史源数据处理决策
+  passed_subchecks:
+  - 明确标记未使用深度及未观测自由度
+  failed_or_unverified:
+  - 没有证明替代标注达到装配公差
+  - 没有完成两臂实测外参
+applicability:
+  when:
+  - 从 RGBD/深度视频重建精密配合任务
+  - 视频编码、scale、无效值或近裁剪不明确
+  not_when:
+  - 已有经过验证的无损度量深度时不应一概拒用
+  transferable_principles:
+  - 先审查深度定义/编码，再决定是否可反投影。
+  - 缺失自由度保留 unknown，不补成精确真值。
+  parameters_not_to_copy:
+  - 旧人工像素点
+  - 旧接触注册偏置
+  - 旧相机/基座参数
+preventive_checks:
+- 核验 dtype、scale、光轴 Z/射线距离、量程与同步。
+- 把标定和重建误差与任务间隙比较。
+regression_tests:
+- 对不合格深度必须报告不可用于度量，不静默继续。
+evidence:
+- knowledge/evidence/connector/source_conversion.json
+source_provenance: knowledge/evidence/connector/provenance.json
+notes:
+- 历史报告整理的知识种子，尚未在新框架复现或自动应用。
+- 来源路径仅为溯源，运行/检索使用本项目内快照。

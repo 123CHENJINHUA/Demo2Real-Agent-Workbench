@@ -1,0 +1,307 @@
+{
+  "passed": false,
+  "index": 0,
+  "fixed_grasp_joints": false,
+  "randomized_spread_m": 0.025,
+  "execution_goal": "place",
+  "assembly_attempted": true,
+  "placement_mode": "randomized initialization",
+  "requested_placement_variation": {
+    "xy_offsets_m": [
+      [
+        -0.0064394399625923825,
+        -0.018372442927163935
+      ],
+      [
+        -0.010287263125971925,
+        0.008158428403189338
+      ]
+    ],
+    "yaw_offsets_deg": [
+      1.990975648445998,
+      -4.926718747667104
+    ]
+  },
+  "initial_object_poses": [
+    [
+      [
+        0.514843862659955,
+        0.12093705518212816,
+        -0.848710802196633,
+        -0.4413393437862396
+      ],
+      [
+        -0.8570377446376225,
+        0.0963338492416439,
+        -0.5061680489291532,
+        -0.04552282392978668
+      ],
+      [
+        0.020545105203789993,
+        0.987974705229928,
+        0.1532445120648765,
+        0.7889782190322876
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    [
+      [
+        -0.4405515432077758,
+        0.8977256873002258,
+        0.0017111804651163852,
+        -0.439326673746109
+      ],
+      [
+        -0.8977189166737966,
+        -0.440554866459693,
+        0.003486586397488812,
+        0.13416452705860138
+      ],
+      [
+        0.003883867051315047,
+        -1.3805543670883033e-07,
+        0.9999924577599115,
+        0.7894125580787659
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ]
+  ],
+  "initial_plan_pose_source": "Noisy delayed pose estimate",
+  "generator": {
+    "isaaclab_version": "2.3.2",
+    "generator_file": "/home/cjh/Downloads/IsaacLab/source/isaaclab_mimic/isaaclab_mimic/datagen/data_generator.py",
+    "generator_sha256": "586538ef89b774e6521c10c52980a72018884d9e9973f70a5ee46fc9c2c62c99",
+    "backend": "Official IsaacLab Mimic bimanual DataGenerator; project-specific Nero PhysX adapter",
+    "subtask_boundaries": {
+      "left": [
+        [
+          [
+            0,
+            240
+          ],
+          [
+            240,
+            355
+          ],
+          [
+            355,
+            555
+          ]
+        ]
+      ],
+      "right": [
+        [
+          [
+            0,
+            240
+          ],
+          [
+            240,
+            355
+          ],
+          [
+            355,
+            555
+          ]
+        ]
+      ]
+    },
+    "coordination_scheme": "Official TRANSLATE: same translation for both arms; source cooperative wrist orientations retained"
+  },
+  "gripper_control": "Source closure timing; force closure command zero below 27mm (left),35mm (right); source widths are feedback, not motor targets",
+  "time_scale": 2.0,
+  "transit_adaptation": {
+    "method": "World-anchored far transit, smooth blend to official object-relative grasp targets",
+    "source_transition_frames": {
+      "left": [
+        120,
+        165
+      ],
+      "right": [
+        0,
+        75
+      ]
+    }
+  },
+  "camera_housing": "90x25x25 mm approximation, optical pose calibrated; actual housing/bracket geometry unavailable",
+  "grasps": [
+    {
+      "arm": 0,
+      "lift_m": 0.07683545351028442,
+      "jaw_gap_m": 0.019480569288134575,
+      "contact_forces_N": [
+        5.759649276733398,
+        5.646143436431885
+      ],
+      "passed": true
+    },
+    {
+      "arm": 1,
+      "lift_m": 0.07501739263534546,
+      "jaw_gap_m": 0.01851053722202778,
+      "contact_forces_N": [
+        5.484714984893799,
+        5.496460437774658
+      ],
+      "passed": true
+    }
+  ],
+  "cooperative_feedback": {
+    "method": "Continuous measured-object feedback during demonstrated coordination and insertion",
+    "feedback_hz": 30,
+    "reference_frame": "Frozen female demonstration path with prescribed male-relative goal",
+    "normal_fixed_backoff": false,
+    "recoveries": 0,
+    "insertion": {
+      "depth_m": 0.022957432820622396,
+      "lateral_error_m": 0.000247918143543438,
+      "angle_rad": 0.006336245566178634,
+      "roll_rad": 1.576565529048948,
+      "roll_error_rad": 0.005769202254051642,
+      "target_roll_rad": 1.5707963267948966,
+      "latch_engagement_m": 0.0005571899259873975,
+      "nominal_hooks_caught": true
+    },
+    "passed": true,
+    "correction_limits": {
+      "translation_m": 0.06,
+      "rotation_rad": 0.6,
+      "tool_speed_m_s": 0.08,
+      "tool_angular_speed_rad_s": 0.6
+    },
+    "terminal_alignment_error": {
+      "depth_m": -0.007080256476286052,
+      "lateral_error_m": 0.00046285994267258017,
+      "angle_rad": 0.003202972114907445,
+      "roll_rad": 1.5679135421787331,
+      "roll_error_rad": -0.0028827846161636472,
+      "target_roll_rad": 1.5707963267948966,
+      "latch_engagement_m": -0.029480318543366725,
+      "nominal_hooks_caught": false,
+      "alignment_weight": 1.0,
+      "depth_command_m": -0.0069000000000000224,
+      "progress": 1.0,
+      "pair_force_N": 0.0,
+      "recoveries": 0,
+      "recovering": false,
+      "inserting": true,
+      "correction_saturated": [
+        false,
+        false
+      ],
+      "keyed_alignment_ready": true,
+      "key_reference_rotation_rad": 0.17701256141293586,
+      "original_demo_translation_deviation_m": [
+        0.022227713293112388,
+        0.029298731781940937
+      ],
+      "simulation_time_s": 31.833333333333332
+    },
+    "cooperative_restarts": 0,
+    "insertion_started_during_coordination": true,
+    "demonstration_correction": {
+      "max_translation_m": 0.05697452157632854,
+      "max_rotation_rad": 0.3233227992591089
+    },
+    "mechanical_task": "90-degree keyed latch engagement",
+    "key_target_roll_rad": 1.5707963267948966,
+    "reference_roll_correction_rad": 0.35402512282587173,
+    "reference_deformation": "Necessary key rotation split between arms; residual .06m/.6rad limits around deformed reference"
+  },
+  "after_cooperative_motion": {
+    "depth_m": 0.02291663514029188,
+    "lateral_error_m": 0.0007080739806680463,
+    "angle_rad": 0.0017823456175597493,
+    "roll_rad": 1.5712642383905264,
+    "roll_error_rad": 0.00046791159562964424,
+    "target_roll_rad": 1.5707963267948966,
+    "latch_engagement_m": 0.0005166159209237658,
+    "nominal_hooks_caught": true
+  },
+  "keyed_contact": {
+    "depth_m": 0.02291663514029188,
+    "lateral_error_m": 0.0007080739806680463,
+    "angle_rad": 0.0017823456175597493,
+    "roll_rad": 1.5712642383905264,
+    "roll_error_rad": 0.00046791159562964424,
+    "target_roll_rad": 1.5707963267948966,
+    "latch_engagement_m": 0.0005166159209237658,
+    "nominal_hooks_caught": true,
+    "deflection_m": [
+      4.6260802648301347e-07,
+      -1.7293081442260744e-07
+    ],
+    "maximum_deflection_m": [
+      0.000671814776200862,
+      0.0006628760544019844
+    ],
+    "both_latches_seated": true,
+    "both_latches_flexed": true,
+    "aligned_for_insertion": true,
+    "engaged": true,
+    "approximation": "Two radial prismatic springs and reconstructed convex contact geometry",
+    "connector_pair_joint": false
+  },
+  "visual_retention_test": {
+    "before": {
+      "depth_m": 0.022916268663585947,
+      "lateral_error_m": 0.0006889439740657227,
+      "angle_rad": 0.0009645261886552471,
+      "roll_rad": 1.5704903774030876,
+      "roll_error_rad": -0.00030594939180872416,
+      "target_roll_rad": 1.5707963267948966,
+      "latch_engagement_m": 0.0005162630352062297,
+      "nominal_hooks_caught": true
+    },
+    "after": {
+      "depth_m": 0.022670969286264754,
+      "lateral_error_m": 0.0007237096365087163,
+      "angle_rad": 0.038523132511824876,
+      "roll_rad": 1.5237754423587904,
+      "roll_error_rad": -0.047020884436106414,
+      "target_roll_rad": 1.5707963267948966,
+      "latch_engagement_m": 0.00026199200454331967,
+      "nominal_hooks_caught": false
+    },
+    "passed": false,
+    "method": "Male jaw opened and retreated 40mm; female alone carries pair under gravity; no fixture or object attachment"
+  },
+  "recovery_policy": {
+    "policy": "scripted data-collection expert",
+    "policy_checkpoint": null,
+    "force_observations": false,
+    "pose_source": "Noisy delayed simulator pose surrogate; not RGB perception",
+    "pose_noise_m": 0.0,
+    "pose_delay_s": 0.0,
+    "held_pose_prediction": "Timestamp-matched FK compensation; disabled for empty/open/lost grasps",
+    "events": [],
+    "recoveries": [],
+    "requires_human": false,
+    "observation_guard_overrides": 0,
+    "counts": {
+      "continue": 659,
+      "wait": 0,
+      "regrasp_left": 0,
+      "regrasp_right": 0,
+      "needs_human": 0
+    },
+    "learning_scope": "High-level recovery skill decisions; low-level demonstration and visual servo skills remain deterministic"
+  },
+  "requires_human": false,
+  "tracking": {
+    "position_rmse_m": 0.0008179342538917336,
+    "position_max_m": 0.004644861762188519,
+    "rotation_rmse_rad": 0.008406319776590416
+  },
+  "error": "Visual latch retention failed after releasing male gripper: {'depth_m': 0.022670969286264754, 'lateral_error_m': 0.0007237096365087163, 'angle_rad': 0.038523132511824876, 'roll_rad': 1.5237754423587904, 'roll_error_rad': -0.047020884436106414, 'target_roll_rad': 1.5707963267948966, 'latch_engagement_m': 0.00026199200454331967, 'nominal_hooks_caught': False}"
+}

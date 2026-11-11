@@ -1,0 +1,41 @@
+{
+  "summary": "场景局部验证失败；查看逐项checks",
+  "observed_behavior": "场景局部验证失败；查看逐项checks",
+  "primary_category": "physics_contact",
+  "stage": "scene_build",
+  "mode": "offline",
+  "run_id": "e648721d1192409c",
+  "task_id": "e648721d1192409c:scene_validation",
+  "diagnosis": {
+    "state": "unknown"
+  },
+  "evidence": [
+    {
+      "path": "knowledge/evidence/incidents/72/72b51a725fd008b623b5f153fe15243b9979e6e50b8d509ea80f16863a9e8ff3.json",
+      "source_reference": "knowledge/evidence/incidents/220f6d65c69942bd9ea10ce9ada83f0f/failure_result.json",
+      "sha256": "72b51a725fd008b623b5f153fe15243b9979e6e50b8d509ea80f16863a9e8ff3",
+      "bytes": 17654
+    },
+    {
+      "path": "knowledge/evidence/incidents/e3/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.log",
+      "source_reference": "knowledge/evidence/incidents/220f6d65c69942bd9ea10ce9ada83f0f/1_worker.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "knowledge/evidence/incidents/ff/ff15979bbe0828e2e2d12c783eae1908a6a714a1fa58c91371f1ad79a71e19e4.json",
+      "source_reference": "knowledge/evidence/incidents/220f6d65c69942bd9ea10ce9ada83f0f/2_validation_report.json",
+      "sha256": "ff15979bbe0828e2e2d12c783eae1908a6a714a1fa58c91371f1ad79a71e19e4",
+      "bytes": 15914
+    }
+  ],
+  "declared_failure_category": "physics_contact",
+  "declared_failure_stage": "scene_build",
+  "validation_scope": "module_reported_failure_only_no_hardware_inference",
+  "schema_version": 1,
+  "record_type": "incident",
+  "incident_id": "INC-ce9bfa77637d4223",
+  "revision": 1,
+  "timestamp_utc": "2026-11-11T02:24:08.106722+00:00",
+  "hardware_verified": false
+}

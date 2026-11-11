@@ -1,0 +1,47 @@
+{
+  "summary": "ValueError: Unsupported expert plan version/scope/perception",
+  "observed_behavior": "ValueError: Unsupported expert plan version/scope/perception",
+  "primary_category": "runtime_environment",
+  "stage": "simulation_test",
+  "mode": "simulation",
+  "run_id": "744371af964f463e",
+  "task_id": "744371af964f463e:expert_execution",
+  "diagnosis": {
+    "state": "unknown"
+  },
+  "evidence": [
+    {
+      "path": "knowledge/evidence/incidents/d6/d64229f5997d44cd359049bba9abc6e94f49654b60bae7b6267320060937272f.json",
+      "source_reference": "knowledge/evidence/incidents/998ec29cb72342c282b546694f0aad7a/failure_result.json",
+      "sha256": "d64229f5997d44cd359049bba9abc6e94f49654b60bae7b6267320060937272f",
+      "bytes": 1678
+    },
+    {
+      "path": "knowledge/evidence/incidents/e3/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.log",
+      "source_reference": "knowledge/evidence/incidents/998ec29cb72342c282b546694f0aad7a/1_worker.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "knowledge/evidence/incidents/16/162cdada263f82ba78971198871dcbf755c2aa11fc9ad4fea34ff6bcb3089c91.json",
+      "source_reference": "knowledge/evidence/incidents/998ec29cb72342c282b546694f0aad7a/2_expert_result.json",
+      "sha256": "162cdada263f82ba78971198871dcbf755c2aa11fc9ad4fea34ff6bcb3089c91",
+      "bytes": 700
+    },
+    {
+      "path": "knowledge/evidence/incidents/ee/ee065e165520a347856e00c728d33f258210ed1cdccef7fed44cc38bc2bc0d65.log",
+      "source_reference": "knowledge/evidence/incidents/998ec29cb72342c282b546694f0aad7a/3_isaac_expert.log",
+      "sha256": "ee065e165520a347856e00c728d33f258210ed1cdccef7fed44cc38bc2bc0d65",
+      "bytes": 38848
+    }
+  ],
+  "declared_failure_category": "runtime_environment",
+  "declared_failure_stage": "simulation_test",
+  "validation_scope": "module_reported_failure_only_no_hardware_inference",
+  "schema_version": 1,
+  "record_type": "incident",
+  "incident_id": "INC-1d26b2c5efe44d75",
+  "revision": 1,
+  "timestamp_utc": "2026-11-11T13:07:01.576406+00:00",
+  "hardware_verified": false
+}

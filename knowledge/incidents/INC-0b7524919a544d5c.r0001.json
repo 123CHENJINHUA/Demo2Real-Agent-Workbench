@@ -1,0 +1,47 @@
+{
+  "summary": "本轮动作或证据检查未通过：Trial abandoned: In-place correction exceeds bounded envelope",
+  "observed_behavior": "本轮动作或证据检查未通过：Trial abandoned: In-place correction exceeds bounded envelope",
+  "primary_category": "physics_contact",
+  "stage": "simulation_test",
+  "mode": "simulation",
+  "run_id": "993e4c6c4e6e4a48",
+  "task_id": "993e4c6c4e6e4a48:expert_validation",
+  "diagnosis": {
+    "state": "unknown"
+  },
+  "evidence": [
+    {
+      "path": "knowledge/evidence/incidents/60/60977a43ce4062d75254b74e4d93bee24c5cb8ea2b39db4dafe56a67a0f4311b.json",
+      "source_reference": "knowledge/evidence/incidents/8157b91742054ea2a43cb82d3741b67a/failure_result.json",
+      "sha256": "60977a43ce4062d75254b74e4d93bee24c5cb8ea2b39db4dafe56a67a0f4311b",
+      "bytes": 6305
+    },
+    {
+      "path": "knowledge/evidence/incidents/e3/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.log",
+      "source_reference": "knowledge/evidence/incidents/8157b91742054ea2a43cb82d3741b67a/1_worker.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "knowledge/evidence/incidents/d6/d658e9a3dee08e93b5bf06cc36c7f53a54cfc04e560cd8ed1432852e86e9f9e9.json",
+      "source_reference": "knowledge/evidence/incidents/8157b91742054ea2a43cb82d3741b67a/2_expert_validation.json",
+      "sha256": "d658e9a3dee08e93b5bf06cc36c7f53a54cfc04e560cd8ed1432852e86e9f9e9",
+      "bytes": 5201
+    },
+    {
+      "path": "knowledge/evidence/incidents/00/001b7cde5ddaf695b1e6d32e17b27384058aa076d5e458f7f99fc185a7bf2db9.json",
+      "source_reference": "knowledge/evidence/incidents/8157b91742054ea2a43cb82d3741b67a/3_expert_result.json",
+      "sha256": "001b7cde5ddaf695b1e6d32e17b27384058aa076d5e458f7f99fc185a7bf2db9",
+      "bytes": 31864
+    }
+  ],
+  "declared_failure_category": "physics_contact",
+  "declared_failure_stage": "simulation_test",
+  "validation_scope": "module_reported_failure_only_no_hardware_inference",
+  "schema_version": 1,
+  "record_type": "incident",
+  "incident_id": "INC-0b7524919a544d5c",
+  "revision": 1,
+  "timestamp_utc": "2026-11-11T16:16:21.179800+00:00",
+  "hardware_verified": false
+}

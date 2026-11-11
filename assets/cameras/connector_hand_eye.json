@@ -1,0 +1,30 @@
+{
+  "serial": "262522071128",
+  "width": 640,
+  "height": 480,
+  "fps": 30,
+  "intrinsics": {
+    "K": [[603.61181640625, 0, 326.3060302734375], [0, 602.384521484375, 254.5773162841797], [0, 0, 1]],
+    "distortion_model": "none",
+    "distortion_coefficients": [0, 0, 0, 0, 0]
+  },
+  "hand_eye": {
+    "mode": "eye-in-hand",
+    "matrix": [
+      [0.02907060802713829, -0.37223400727266265, 0.9276835363305032, 0.06745641034089363],
+      [0.06604886259908874, 0.9267628298647561, 0.3697948146343263, -0.07101065404221134],
+      [-0.9973928250685882, 0.05052228231982739, 0.05152719176218007, -0.020454574742457918],
+      [0, 0, 0, 1]
+    ],
+    "passed": true,
+    "transform_name": "T_sdk_flange_color",
+    "convention": "Maps camera COLOR optical (+X right,+Y down,+Z forward) coordinates into SDK MDH flange coordinates; translation in metres"
+  },
+  "reuse": {
+    "left_wrist_recorded_serial": "302623061771",
+    "right_wrist_recorded_serial": "262723060852",
+    "shared_intrinsics_and_extrinsics_authorized_by_user": true,
+    "independent_validation_on_recorded_cameras": false
+  },
+  "source": "User-provided calibration; convention checked against hand_eye_calibration/solve.py and robot_pose.py"
+}

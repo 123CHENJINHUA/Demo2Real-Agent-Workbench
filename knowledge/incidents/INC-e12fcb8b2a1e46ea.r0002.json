@@ -1,0 +1,59 @@
+{
+  "summary": "严格完成保持分支遗漏simulation_time_s导致动作记录失败",
+  "observed_behavior": "首轮v3正常回归611641b8e4f64060在hold_complete记录时缺少simulation_time_s并失败；失败松爪归位实际执行成功。新回归1d2fa651c497460b补齐日志字段后独立插接动作通过。",
+  "primary_category": "workflow_integrity",
+  "stage": "simulation_test",
+  "mode": "simulation",
+  "run_id": "611641b8e4f64060",
+  "task_id": "611641b8e4f64060:expert_validation",
+  "diagnosis": {
+    "state": "confirmed",
+    "explanation": "完成保持分支构造状态记录未添加simulation_time_s，外层保存反馈时读取该键引发KeyError；已补齐当前物理时间。"
+  },
+  "evidence": [
+    {
+      "path": "knowledge/evidence/incidents/30/305a5b617b34570cf4746ab7792dfb81a227de06d3a402f894319170fae90e42.json",
+      "source_reference": "runs/611641b8e4f64060/expert_execution/result.json",
+      "sha256": "305a5b617b34570cf4746ab7792dfb81a227de06d3a402f894319170fae90e42",
+      "bytes": 36848
+    },
+    {
+      "path": "knowledge/evidence/incidents/3d/3d8c0e0b091d5eb78f319bfb1896cfb2817053639e438c4aba9c1c5325995341.json",
+      "source_reference": "runs/1d2fa651c497460b/expert_execution/result.json",
+      "sha256": "3d8c0e0b091d5eb78f319bfb1896cfb2817053639e438c4aba9c1c5325995341",
+      "bytes": 42261
+    },
+    {
+      "path": "knowledge/evidence/incidents/42/42c6567c25b3b0926817927cb8b0e3947e915ab62cdf9f84c115bff6b25a4bd9.json",
+      "source_reference": "runs/1d2fa651c497460b/phase_validation/phase_validation.json",
+      "sha256": "42c6567c25b3b0926817927cb8b0e3947e915ab62cdf9f84c115bff6b25a4bd9",
+      "bytes": 6395
+    }
+  ],
+  "declared_failure_category": "physics_contact",
+  "declared_failure_stage": "simulation_test",
+  "validation_scope": "module_reported_failure_only_no_hardware_inference",
+  "schema_version": 1,
+  "record_type": "incident",
+  "incident_id": "INC-e12fcb8b2a1e46ea",
+  "revision": 2,
+  "timestamp_utc": "2026-11-11T16:34:52.483592+00:00",
+  "hardware_verified": false,
+  "resolved": true,
+  "status": "verified_in_scope",
+  "revision_reason": "纠正自动按physics_contact归类；追加字段修正与同条件新物理回归证据，原失败不覆盖",
+  "verification": {
+    "scope": "one predeclared nominal PhysX development regression, no hardware or generalization claim"
+  },
+  "feature_tags": [
+    "bimanual",
+    "keyed_insertion",
+    "logging",
+    "phase_recovery"
+  ],
+  "reusable_checklist": [
+    "每个控制分支应保持轨迹记录schema一致，包括完成保持和退出分支",
+    "日志失败与物理任务失败分别归类；保留失败并执行明确退出",
+    "正常回归与扰动恢复分别验收"
+  ]
+}

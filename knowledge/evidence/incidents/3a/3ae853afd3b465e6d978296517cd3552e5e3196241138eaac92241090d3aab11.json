@@ -1,0 +1,23 @@
+{
+  "status": "failed",
+  "dependencies": [
+    {
+      "stage": "assets/connector_visuals/connector_1.usdc",
+      "asset": "../../../assets/objects/connector/model/1/Meshy_AI_Solar_Cable_Connector_1105093342_texture.png",
+      "resolved": "/home/cjh/Downloads/assets/objects/connector/model/1/Meshy_AI_Solar_Cable_Connector_1105093342_texture.png"
+    },
+    {
+      "stage": "assets/connector_visuals/connector_2.usdc",
+      "asset": "../../../assets/objects/connector/model/2/Meshy_AI_Black_Cable_Connector_1105095505_texture.png",
+      "resolved": "/home/cjh/Downloads/assets/objects/connector/model/2/Meshy_AI_Black_Cable_Connector_1105095505_texture.png"
+    }
+  ],
+  "outside": [
+    "/home/cjh/Downloads/assets/objects/connector/model/1/Meshy_AI_Solar_Cable_Connector_1105093342_texture.png",
+    "/home/cjh/Downloads/assets/objects/connector/model/2/Meshy_AI_Black_Cable_Connector_1105095505_texture.png"
+  ],
+  "missing": [
+    "/home/cjh/Downloads/assets/objects/connector/model/1/Meshy_AI_Solar_Cable_Connector_1105093342_texture.png",
+    "/home/cjh/Downloads/assets/objects/connector/model/2/Meshy_AI_Black_Cable_Connector_1105095505_texture.png"
+  ]
+}

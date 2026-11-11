@@ -1,0 +1,41 @@
+{
+  "summary": "保持失败按用户要求仅记录；动作实验通过，不等于完整任务通过",
+  "observed_behavior": "保持失败按用户要求仅记录；动作实验通过，不等于完整任务通过",
+  "primary_category": "physics_contact",
+  "stage": "simulation_test",
+  "mode": "simulation",
+  "run_id": "2f76b2041cf44d42",
+  "task_id": "expert_validation",
+  "diagnosis": {
+    "state": "unknown"
+  },
+  "evidence": [
+    {
+      "path": "knowledge/evidence/incidents/0c/0cc620c9f5a1ef2edbb341647a0d7a93a5176e5bf4b315a41d0a576e9a28110d.json",
+      "source_reference": "knowledge/evidence/incidents/f92b88ad87c44f88967e0a69a38d1538/failure_result.json",
+      "sha256": "0cc620c9f5a1ef2edbb341647a0d7a93a5176e5bf4b315a41d0a576e9a28110d",
+      "bytes": 411
+    },
+    {
+      "path": "knowledge/evidence/incidents/e3/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.log",
+      "source_reference": "knowledge/evidence/incidents/f92b88ad87c44f88967e0a69a38d1538/1_worker.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "knowledge/evidence/incidents/ac/acdd64f02828e4569abaf002e0287c8490b2d796ba3d9811d08b3b7f1555108f.json",
+      "source_reference": "knowledge/evidence/incidents/f92b88ad87c44f88967e0a69a38d1538/2_expert_validation.json",
+      "sha256": "acdd64f02828e4569abaf002e0287c8490b2d796ba3d9811d08b3b7f1555108f",
+      "bytes": 6555
+    }
+  ],
+  "declared_failure_category": "physics_contact",
+  "declared_failure_stage": "simulation_test",
+  "validation_scope": "module_reported_failure_only_no_hardware_inference",
+  "schema_version": 1,
+  "record_type": "incident",
+  "incident_id": "INC-072c9c2adb0141ee",
+  "revision": 1,
+  "timestamp_utc": "2026-11-11T13:13:18.856726+00:00",
+  "hardware_verified": false
+}

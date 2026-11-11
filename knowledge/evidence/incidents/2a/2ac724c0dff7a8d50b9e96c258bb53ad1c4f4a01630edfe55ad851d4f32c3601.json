@@ -1,0 +1,93 @@
+{
+  "status": "succeeded",
+  "scope": "held-out episode supervisor decision classification only",
+  "test_metrics": {
+    "accuracy": 0.9897406668566543,
+    "macro_f1": 0.5140911803317818,
+    "balanced_accuracy": 0.9824390243902439,
+    "confusion_matrix": [
+      [
+        3096,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        374,
+        17,
+        3,
+        16
+      ],
+      [
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        1,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
+    ],
+    "per_class": {
+      "continue": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "samples": 3096
+      },
+      "wait": {
+        "precision": 1.0,
+        "recall": 0.9121951219512195,
+        "f1": 0.9540816326530613,
+        "samples": 410
+      },
+      "regrasp_left": {
+        "precision": 0.05555555555555555,
+        "recall": 1.0,
+        "f1": 0.10526315789473684,
+        "samples": 1
+      },
+      "regrasp_right": {
+        "precision": 0.25,
+        "recall": 1.0,
+        "f1": 0.4,
+        "samples": 1
+      },
+      "needs_human": {
+        "precision": 0.058823529411764705,
+        "recall": 1.0,
+        "f1": 0.1111111111111111,
+        "samples": 1
+      }
+    }
+  },
+  "test_episodes": [
+    "5f806e825a504d36",
+    "684d0c8ca2c44def",
+    "80614304826249ef",
+    "b6378a2642e6401c",
+    "bcdd1411e5614cf7",
+    "f5976323b01a40a5"
+  ],
+  "checkpoint": "runs/97418110f98f4579/recovery_learning/policy.npz",
+  "checkpoint_sha256": "03794e5fa6cb80b7e84485f75386c67c8e80054fd60d749c8678aaa59dc4a08c",
+  "task_signature": "7bc362433bd4f66bd3a2a41ed418e1e19122aacd1561ace5cf2aabba8184e73b",
+  "observation_source": "simulated_pose_estimate",
+  "closed_loop_evaluated": false,
+  "hardware_verified": false,
+  "report_path": "runs/97418110f98f4579/recovery_evaluation/evaluation.json"
+}

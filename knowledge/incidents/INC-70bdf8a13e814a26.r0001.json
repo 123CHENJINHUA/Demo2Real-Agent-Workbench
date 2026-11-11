@@ -1,0 +1,47 @@
+{
+  "summary": "RGBD worker: ModuleNotFoundError: No module named 'sim_bridge'; see /home/cjh/Downloads/Demo2Real-Agent-Workbench/runs/3035e6ca201844ef/simulation/isaac_1794326652389997890/trial_000/vision/worker.log",
+  "observed_behavior": "RGBD worker: ModuleNotFoundError: No module named 'sim_bridge'; see /home/cjh/Downloads/Demo2Real-Agent-Workbench/runs/3035e6ca201844ef/simulation/isaac_1794326652389997890/trial_000/vision/worker.log",
+  "primary_category": "physics_contact",
+  "stage": "simulation_test",
+  "mode": "simulation",
+  "run_id": "3035e6ca201844ef",
+  "task_id": "3035e6ca201844ef:simulation",
+  "diagnosis": {
+    "state": "unknown"
+  },
+  "evidence": [
+    {
+      "path": "knowledge/evidence/incidents/e1/e137ad1017c97ab27727b6ac24d12133ea6a799df7b88a5e4112ab626aeb679e.json",
+      "source_reference": "knowledge/evidence/incidents/dad83452ef304e9884f1590b489d4b40/failure_result.json",
+      "sha256": "e137ad1017c97ab27727b6ac24d12133ea6a799df7b88a5e4112ab626aeb679e",
+      "bytes": 13634
+    },
+    {
+      "path": "knowledge/evidence/incidents/e3/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.log",
+      "source_reference": "knowledge/evidence/incidents/dad83452ef304e9884f1590b489d4b40/1_worker.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "knowledge/evidence/incidents/44/44e94a8713253610aad56c9095d58238aea1cab2620447216841a10f4f027f45.log",
+      "source_reference": "knowledge/evidence/incidents/dad83452ef304e9884f1590b489d4b40/2_isaac_worker.log",
+      "sha256": "44e94a8713253610aad56c9095d58238aea1cab2620447216841a10f4f027f45",
+      "bytes": 51363
+    },
+    {
+      "path": "knowledge/evidence/incidents/21/21d9e71197999334f58629af6c4282aed6840d437b87954d3029aa6488c7f668.json",
+      "source_reference": "knowledge/evidence/incidents/dad83452ef304e9884f1590b489d4b40/3_summary.json",
+      "sha256": "21d9e71197999334f58629af6c4282aed6840d437b87954d3029aa6488c7f668",
+      "bytes": 5942
+    }
+  ],
+  "declared_failure_category": "physics_contact",
+  "declared_failure_stage": "simulation_test",
+  "validation_scope": "module_reported_failure_only_no_hardware_inference",
+  "schema_version": 1,
+  "record_type": "incident",
+  "incident_id": "INC-70bdf8a13e814a26",
+  "revision": 1,
+  "timestamp_utc": "2026-11-10T16:04:50.519401+00:00",
+  "hardware_verified": false
+}

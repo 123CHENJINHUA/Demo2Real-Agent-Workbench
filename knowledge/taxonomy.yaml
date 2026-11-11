@@ -1,0 +1,119 @@
+schema_version: 1
+status: design_seed
+stages:
+- data_ingestion
+- task_analysis
+- asset_modeling
+- scene_build
+- perception_validation
+- simulation_test
+- training
+- deployment
+- hardware_test
+- runtime
+categories:
+  data_quality: 编码、尺度、同步、缺失数据
+  task_semantics: 目标、阶段和完成语义
+  geometry_function: 功能轴、键位、孔槽、配合与资产
+  frames_calibration: 坐标、标定、时间匹配
+  physics_contact: 接触、摩擦、弹性、保持与数值稳定性
+  perception_estimation: 检测、身份、姿态、遮挡与精度
+  planning_control: 参考、可达性、限幅、跟踪和恢复
+  policy_learning: 数据覆盖、标签、策略和分布偏移
+  runtime_environment: 环境、依赖、GPU和缓存
+  hardware_io: SDK、固件、通信和真实反馈
+  evaluation_metrics: 判据、误报与验证范围
+  workflow_integrity: 版本、依赖、工件和生命周期
+diagnosis_states:
+- unknown
+- hypothesis
+- supported_by_diagnostics
+- confirmed
+resolution_states:
+- open
+- mitigation_recorded
+- partially_verified
+- verified_in_scope
+- superseded
+evidence_scopes:
+- source_data_analysis
+- simulation
+- mechanism_bench
+- hardware
+feature_tags:
+- keyed_insertion
+- snap_fit
+- through_bore
+- concave_contact
+- hidden_lock
+- tight_clearance
+- axial_symmetry
+- roll_ambiguity
+- bimanual
+- parallel_jaw
+- wrist_rgbd
+- friction_grasp
+- post_release_impact
+- reference_saturation
+notes:
+- 主类别、阶段、特征、诊断确定性和已验证范围分别记录，不互相替代。
+- 未知原因允许待分类，不因强制分类伪造根因。
+- 相似度只用于排序，不证明参数或修正可直接迁移。
+feature_aliases:
+  keyed_insertion:
+  - 对键
+  - 键槽
+  - 卡槽
+  - 带键插销
+  - 防转插接
+  - keyed connector
+  snap_fit:
+  - 卡扣
+  - 卡齿
+  - 锁止肩
+  - 弹性锁止
+  - snap latch
+  through_bore:
+  - 通孔
+  - 贯通孔
+  - 套筒
+  concave_contact:
+  - 凹形碰撞
+  - 孔槽
+  - 凸包封孔
+  hidden_lock:
+  - 隐藏锁止
+  - 看不到卡扣
+  - 锁紧确认
+  tight_clearance:
+  - 紧配合
+  - 小间隙
+  - 装配公差
+  axial_symmetry:
+  - 轴对称
+  - 自由滚转
+  roll_ambiguity:
+  - 滚转歧义
+  - 滚到侧面
+  - resting face
+  bimanual:
+  - 双臂
+  - 双手协作
+  parallel_jaw:
+  - 平行夹爪
+  - 夹指
+  wrist_rgbd:
+  - 腕相机
+  - 手眼
+  - RGBD
+  friction_grasp:
+  - 摩擦抓取
+  - 滑移
+  post_release_impact:
+  - 松手落桌
+  - 释放冲击
+  - 掉落后保持
+  reference_saturation:
+  - 参考饱和
+  - 目标限幅
+  - 预插不收敛
