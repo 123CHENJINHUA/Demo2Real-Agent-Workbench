@@ -23,21 +23,17 @@ def cdp(method,params=None):
 def read(path):
  with urllib.request.urlopen(BASE+'/api'+path,timeout=30) as response:return json.load(response)
 def has(text):return 'document.body.innerText.includes('+json.dumps(text)+')'
-def open_run(run_id):
- wait("[...document.querySelectorAll('.task-row')].some(b=>b.textContent.includes("+json.dumps(run_id)+"))")
- js("[...document.querySelectorAll('.task-row')].find(b=>b.textContent.includes("+json.dumps(run_id)+")).click()")
- wait('document.querySelector(".run-id")?.innerText.includes('+json.dumps(run_id)+')')
 detail=read('/runs/'+RUN);run=detail.get('run',detail);tasks=detail['tasks'];artifacts=detail['artifacts']
 assert run['input']['expert_run'] is True
 assert [t['stage'] for t in tasks]==['experience','scene_validation','expert_plan','expert_execution','expert_validation']
 execution=next(t for t in tasks if t['stage']=='expert_execution');validation=next(t for t in tasks if t['stage']=='expert_validation');result={**(execution.get('result') or {}),**(validation.get('result') or {})}
 scene=run['input']['scene_run_id']
 cdp('Page.enable');cdp('Runtime.enable');cdp('Network.enable');cdp('Emulation.setDeviceMetricsOverride',{'width':1440,'height':1050,'deviceScaleFactor':1,'mobile':False});cdp('Page.navigate',{'url':BASE});wait(has('本地服务已连接'))
-open_run(scene);wait("document.querySelector('.expert-launch')!==null")
-assert js(has('Ground truth 专家')) and js(has('无RGBD感知、无学习策略、无真实硬件执行'))
+open_run_card(scene);wait("document.querySelector('.expert-launch')!==null")
+assert js(has('Ground truth 专家')) and js(has('脚本专家使用仿真真值与录制轨迹'))
 wait("[...document.querySelectorAll('.expert-launch button')].some(b=>b.innerText.includes('运行离线示教专家')&&!b.disabled)")
 screenshot('expert-'+RUN+'-launch-readonly')
-open_run(RUN);wait("document.querySelectorAll('.expert-criterion').length===6")
+open_run_card(RUN);wait("document.querySelectorAll('.expert-criterion').length===6")
 assert js('document.querySelectorAll(".stage-card").length')==len(tasks)
 wait('document.querySelector(".expert-source-links").innerText.includes('+json.dumps(run['input']['spec_hash'])+')')
 assert js("document.querySelector('.expert-launch')===null")
@@ -62,8 +58,8 @@ cdp('Emulation.setDeviceMetricsOverride',{'width':390,'height':844,'deviceScaleF
 assert js('document.documentElement.scrollWidth<=window.innerWidth')
 cdp('Emulation.setDeviceMetricsOverride',{'width':1440,'height':1050,'deviceScaleFactor':1,'mobile':False})
 js("[...document.querySelectorAll('.expert-source-links button')].find(b=>b.innerText.includes('查看来源场景')).click()")
-wait('document.querySelector(".run-id")?.innerText.includes('+json.dumps(scene)+')')
-robot=read('/robots/status');assert not robot['connected'] and robot['hardware_commands_sent']==0
+wait('document.querySelector(".run-detail")?.dataset.runId==='+json.dumps(scene))
+assert read('/health')['hardware_commands_enabled'] is False
 js('document.title');assert requests and all(r['method']=='GET' for r in requests),requests
 assert not errors,errors
 report={'status':'passed','run_id':RUN,'scene_run_id':scene,'workflow_status':run['status'],'execution_status':execution['status'],'independent_validation_status':validation['status'],'action_passed':result.get('action_passed'),'retention_passed':result.get('retention_passed'),'full_task_passed':result.get('full_task_passed'),'ground_truth_only_label_visible':True,'explicit_launch_available_but_never_clicked':True,'actual_stage_count':len(tasks),'actual_stages_visible':True,'verified_report_paths':verified_reports,'available_reports_get_verified':True,'actual_scene_binding_and_navigation_verified':True,'retention_stage_passed':expected_retention,'retention_failure_not_hidden':expected_retention is False,'mobile_no_horizontal_overflow':True,'browser_api_methods':sorted(set(r['method'] for r in requests)),'browser_errors':errors,'browser_experts_launched':0,'gpu_jobs_started':0,'hardware_commands_sent':0,'evidence_scope':'GET-only expert UI verification; actual expert outcomes retained without RGBD/learning/hardware claims'}

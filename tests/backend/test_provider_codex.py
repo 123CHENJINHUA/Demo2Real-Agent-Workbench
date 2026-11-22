@@ -1,5 +1,5 @@
 """Fake CLI tests validate transport and isolation, never model/task accuracy."""
-import json, os, sys, time
+import json, os, shutil, sys, time
 from pathlib import Path
 import pytest
 from fastapi.testclient import TestClient
@@ -16,8 +16,13 @@ with (home.parent/'fake_invocations.jsonl').open('a') as log:
 if '--version' in args:
  print('codex-cli 0.166.0-test-fixture');sys.exit(0)
 if 'login' in args and 'status' in args:
- logged=os.environ.get('WORKBENCH_FAKE_CODEX_AUTH','1')=='1'
+ logged=(home/'auth.json').is_file() if os.environ.get('WORKBENCH_FAKE_DEVICE_MODE') else os.environ.get('WORKBENCH_FAKE_CODEX_AUTH','1')=='1'
  print('Logged in using ChatGPT' if logged else 'Not logged in');sys.exit(0 if logged else 1)
+if 'login' in args and '--device-auth' in args:
+ print('Visit https://auth.openai.com/codex/device and enter AAAA-BBBB',flush=True)
+ while not (Path.cwd()/'fixture_authorized').exists():time.sleep(.02)
+ (home/'auth.json').write_text('fictional new account credential')
+ sys.exit(1 if os.environ.get('WORKBENCH_FAKE_DEVICE_MODE')=='fail' else 0)
 mode=os.environ.get('WORKBENCH_FAKE_CODEX_MODE','success')
 print(json.dumps({'type':'thread.started','thread_id':'fixture-only','model':'fixture-reported-model'}),flush=True)
 if mode=='hang':
@@ -35,6 +40,18 @@ if mode in ('tool','code_execution'):
  print(json.dumps({'type':'item.started','item':{'type':'code_execution' if mode=='code_execution' else 'command_execution','command':'fixture never executed'}}),flush=True);time.sleep(2);sys.exit(2)
 prompt=sys.stdin.read();schema=json.loads(Path(args[args.index('--output-schema')+1]).read_text())
 value={'ok':True}
+if 'assignments' in schema.get('properties',{}):
+ slots=schema['properties']['assignments']
+ count=slots['minItems'] if slots['minItems']==slots['maxItems'] else 3
+ roles=['agent_intent','agent_validation','agent_geometry','agent_observation']
+ value={'assignments':[{'role':role,'focus':'Fixture task focus','reason':'Fixture scope'} for role in roles[:count]]}
+ if 'understanding' in schema['properties']:
+  value['understanding']={'task_summary':'Fixture intent','phases':[{'name':'Fixture transfer','evidence_refs':[]}]}
+if 'findings' in schema.get('properties',{}):
+ if mode=='specialist_failure' and '"role": "agent_validation"' in prompt:
+  print(json.dumps({'type':'error','message':'fixture specialist failed'}),flush=True);sys.exit(2)
+ refs=schema['properties']['findings']['items']['properties']['evidence_refs']['items']['enum']
+ value={'summary':'Fixture specialist report','findings':[{'observation':'fixture evidence','evidence_refs':[refs[0]]}],'unknowns':[],'checks':['Independent validation required']}
 if 'task_summary' in schema.get('properties',{}):
  refs=[line.split('Evidence reference: ',1)[1].strip() for line in prompt.splitlines() if 'Evidence reference: ' in line]
  value={'task_summary':'fixture proposal, no actual model analysis','objects':[],'phases':[{'name':'fixture phase','evidence_refs':[refs[0]] if refs else [],'start_time_s':None,'end_time_s':None}],'success_conditions':['independent validation required'],'unknowns':['fixture only'],'required_assets':[],'confidence':0.1}
@@ -62,6 +79,43 @@ def calls(root):
     path=root/'.runtime/fake_invocations.jsonl'
     return [json.loads(line) for line in path.read_text().splitlines()]
 
+
+@pytest.mark.parametrize('action',['authorize','fail','cancel'])
+def test_switch_account_only_commits_a_successful_official_login(cli_project,monkeypatch,action):
+    from modules.model_accounts.codex_login import CodexLoginManager
+
+    monkeypatch.setenv('WORKBENCH_FAKE_DEVICE_MODE',action)
+    manager=CodexLoginManager(cli_project)
+    active=cli_project/'.runtime/codex-home/auth.json'
+    active.parent.mkdir(parents=True)
+    active.write_text('fictional original account credential')
+    assert manager.start()['status']=='authenticated'
+    try:
+        state=manager.start(switch_account=True)
+        for _ in range(150):
+            if state.get('user_code'):
+                break
+            time.sleep(.02)
+            state=manager.status()
+        assert state['status']=='pending' and state['verification_url']=='https://auth.openai.com/codex/device'
+        assert state['user_code']=='AAAA-BBBB' and state['login_command'] is None
+        assert active.read_text()=='fictional original account credential'
+        if action=='cancel':
+            ended=manager.cancel()
+        else:
+            (cli_project/'fixture_authorized').touch()
+            manager.process.wait(timeout=4)
+            ended=manager.status()
+        expected={'authorize':'authenticated','fail':'failed','cancel':'cancelled'}[action]
+        assert ended['status']==expected and ended['authenticated']
+        assert active.read_text()==f'fictional {"new" if action=="authorize" else "original"} account credential'
+        if action=='authorize':
+            assert active.stat().st_mode&0o777==0o600
+        assert manager.status()==ended
+        assert list((cli_project/'.runtime/codex-auth').glob('switch-*'))==[]
+    finally:
+        manager.close()
+
 def test_codex_facade_does_not_require_api_key_and_isolates_runtime(cli_project,monkeypatch):
     monkeypatch.setenv('OPENAI_API_KEY','must-not-be-inherited')
     provider=Provider(cli_project)
@@ -83,6 +137,7 @@ def test_codex_facade_does_not_require_api_key_and_isolates_runtime(cli_project,
     assert execution['codex_home']==str(cli_project/'.runtime/codex-home')
     assert execution['sqlite_home']==str(cli_project/'.runtime/codex-sqlite')
     assert '--ignore-user-config' in args and '--ephemeral' in args and '--ignore-rules' not in args
+    assert not any(arg.startswith('model_reasoning_effort=') for arg in args)
     assert args[args.index('--sandbox')+1]=='read-only' and args[args.index('-a')+1]=='never'
     assert '--dangerously-bypass-approvals-and-sandbox' not in args
     assert args[-2:]==['--','-']
@@ -146,11 +201,97 @@ def test_codex_provider_api_switch_and_status_require_no_key(cli_project):
     with TestClient(create_app(cli_project,start_scheduler=False)) as client:
         headers={'X-Session-Token':client.get('/api/session').json()['token']}
         assert client.get('/api/settings/provider').json()['kind']=='openai_compatible'
-        configured=client.put('/api/settings/provider',json={'kind':'codex_cli','model':''},headers=headers)
+        configured=client.put('/api/settings/provider',json={'kind':'codex_cli','model':'gpt-6.2-sol','reasoning_effort':'high'},headers=headers)
         assert configured.status_code==200 and configured.json()['configured']
+        assert configured.json()['reasoning_effort']=='high'
         status=client.get('/api/settings/provider/codex/status').json()
         assert status['authenticated'] and status['available']
-        assert client.post('/api/settings/provider/test',json={},headers=headers).json()['status']=='succeeded'
+        invalid=client.put('/api/settings/provider',json={'reasoning_effort':['high']},headers=headers)
+        assert invalid.status_code==400
+        result=client.post('/api/settings/provider/test',json={},headers=headers).json()
+        assert result['status']=='succeeded'
+        assert result['requested_model']=='gpt-6.2-sol' and result['requested_reasoning_effort']=='high'
+        assert result['model']=='fixture-reported-model'
+        args=next(call['args'] for call in calls(cli_project) if 'exec' in call['args'])
+        assert args[args.index('--model')+1]=='gpt-6.2-sol'
+        assert 'model_reasoning_effort="high"' in args
+        assert client.put('/api/settings/provider',json={'reasoning_effort':''},headers=headers).json()['reasoning_effort']==''
         assert client.post('/api/settings/provider/codex/login/start',json={}).status_code==403
         assert client.get('/api/settings/provider/codex/login').json()['authenticated']
         assert 'api_key' not in client.get('/api/settings/provider').json()
+
+
+@pytest.mark.parametrize('count',[None,4])
+def test_supervisor_dispatches_registered_roles_and_retries_only_failed_specialist(cli_project,monkeypatch,count):
+    from backend.store import Store
+    from orchestration.scheduler import Scheduler
+    from orchestration.workflow import delegated_stages
+
+    project=Path(__file__).resolve().parents[2]
+    for directory in ('application','backend','contracts','modules','orchestration','workers'):
+        shutil.copytree(project/directory,cli_project/directory,ignore=shutil.ignore_patterns('__pycache__'))
+    Provider(cli_project).save({'kind':'codex_cli','timeout':5})
+    store=Store(cli_project/'.runtime/workbench.sqlite3')
+    run=store.create_run('Harness transport fixture',{'specialist_count':count} if count is not None else {},[
+        {'id':'data_audit','role':'Fixture frames'},
+        {'id':'agent_dispatch','role':'Fixture dispatch','kind':'llm','deps':['data_audit']},
+        {'id':'task_analysis','role':'Fixture synthesis','kind':'llm','deps':['agent_dispatch']},
+    ])
+    rid=run['id']
+    directory=cli_project/run['output_directory']
+    frame=directory/'data_audit/front/frame_000.jpg'
+    frame.parent.mkdir(parents=True)
+    frame.write_bytes(b'explicit fixture image, no semantic accuracy claim')
+    store.transition(rid+':data_audit','succeeded',result={'status':'succeeded'})
+    monkeypatch.setenv('WORKBENCH_FAKE_CODEX_MODE','specialist_failure')
+
+    def wait_for_run():
+        deadline=time.monotonic()+18
+        while time.monotonic()<deadline:
+            result=store.get_run(rid)
+            if result['status'] in ('failed','succeeded','blocked'):return result
+            time.sleep(.1)
+        pytest.fail('Fixture workflow did not finish')
+
+    scheduler=Scheduler(cli_project,store)
+    scheduler.start()
+    try:
+        tasks={task['stage']:task for task in wait_for_run()['tasks']}
+        assert tasks['agent_validation']['status']=='failed'
+        assert tasks['task_analysis']['status']=='blocked'
+        assert not (directory/'task_analysis/model_response.json').exists()
+        roles=['agent_intent','agent_validation','agent_geometry']
+        if count==4:roles.append('agent_observation')
+        assert tasks['task_analysis']['deps']==['agent_dispatch',*roles]
+        understanding=tasks['agent_dispatch']['result']['understanding']
+        assert understanding['task_summary']=='Fixture intent'
+        assert [phase['name'] for phase in understanding['phases']]==['Fixture transfer']
+        assert {'agent_intent','agent_validation','agent_geometry','agent_observation'}&tasks.keys()==set(roles)
+        with pytest.raises(ValueError,match='本次要求 2 个'):
+            delegated_stages(tasks['agent_dispatch']['result'],2)
+        invalid=json.loads(json.dumps(tasks['agent_dispatch']['result']))
+        invalid['plan']['assignments'][0]['role']='arbitrary_command'
+        with pytest.raises(ValueError,match='未注册'):
+            delegated_stages(invalid)
+
+        monkeypatch.setenv('WORKBENCH_FAKE_CODEX_MODE','success')
+        scheduler.retry(rid)
+        completed=wait_for_run()
+        assert completed['status']=='succeeded',completed
+        tasks={task['stage']:task for task in completed['tasks']}
+        assert all(tasks[stage]['attempt']==(2 if stage=='agent_validation' else 1) for stage in ['agent_dispatch',*roles,'task_analysis'])
+        artifact_paths={item['path'] for item in completed['artifacts']}
+        proposal=json.loads((directory/'task_analysis/task_proposal.json').read_text())
+        reports=proposal['analysis_team']['members']
+        assert len(reports)==len(roles) and all(member['report_path'] in artifact_paths for member in reports)
+        assert all(member['model']=='fixture-reported-model' for member in reports)
+        assert proposal['analysis_team']['plan_path'] in artifact_paths
+        assert len(store.query("SELECT id FROM events WHERE run_id=? AND type='agents.dispatched'",(rid,)))==1
+        assert tasks['agent_dispatch']['progress']=={'phase':'validating_model_output'}
+        assert tasks['agent_validation']['progress']=={'phase':'validating_model_output'}
+        assert tasks['task_analysis']['progress']=={'phase':'validating_model_output'}
+        prompts=[path.read_text() for path in (directory/'task_analysis/codex_cli').glob('*/prompt.txt')]
+        assert len(prompts)==1 and 'Specialist reports:' in prompts[0] and 'Fixture specialist report' in prompts[0]
+        assert 'Fixture intent' in prompts[0] and 'Fixture transfer' in prompts[0]
+    finally:
+        scheduler.stop()

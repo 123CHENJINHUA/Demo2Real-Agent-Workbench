@@ -1,0 +1,39 @@
+{
+  "finding_code": "single_convex_hull_would_fill_voids",
+  "primary_category": "physics_contact",
+  "stage": "asset_modeling",
+  "severity": "blocking",
+  "asset_id": "object_1",
+  "record_origin": "worker",
+  "summary": "Closed nested contours reveal cavity candidates. A single convex hull fills such free space; use separately reviewed compound/decomposition geometry preserving functional clearance.",
+  "observed_behavior": "Closed nested contours reveal cavity candidates. A single convex hull fills such free space; use separately reviewed compound/decomposition geometry preserving functional clearance.",
+  "mode": "offline",
+  "run_id": "33baee2b3afe47b9",
+  "task_id": "33baee2b3afe47b9:functional_geometry",
+  "diagnosis": {
+    "state": "unknown"
+  },
+  "evidence": [
+    {
+      "path": "knowledge/evidence/incidents/fb/fbdc042a255bbd80b3371d8f651ded7baa41e4953ba673c434ce4dd450edd731.json",
+      "source_reference": ".runtime/tmp/incident-kav4j22j/failure_result.json",
+      "sha256": "fbdc042a255bbd80b3371d8f651ded7baa41e4953ba673c434ce4dd450edd731",
+      "bytes": 651
+    },
+    {
+      "path": "knowledge/evidence/incidents/e3/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.log",
+      "source_reference": "runs/33baee2b3afe47b9/functional_geometry/worker.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  ],
+  "declared_failure_category": "physics_contact",
+  "declared_failure_stage": "asset_modeling",
+  "validation_scope": "module_reported_failure_only_no_hardware_inference",
+  "schema_version": 1,
+  "record_type": "incident",
+  "incident_id": "INC-84db5ed231244900",
+  "revision": 1,
+  "timestamp_utc": "2026-11-22T18:39:00.164114+00:00",
+  "hardware_verified": false
+}

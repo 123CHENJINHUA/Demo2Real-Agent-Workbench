@@ -19,10 +19,11 @@ def environment(root):
     # HOME remains the actual OS home. No global auth/config is copied or modified.
     return env
 
-def auth_status(root):
+def auth_status(root, *, process_env=None):
     root=Path(root).resolve();result={"available":False,"authenticated":False,"configured":False,"status":"unavailable","auth_home":str(root/".runtime/codex-home"),"model":"","version":"","detail":"尚未找到登记的Codex CLI"}
     try:
-        path=executable(root);env=environment(root);result.update(available=True,executable=str(path))
+        path=executable(root);env=process_env if process_env is not None else environment(root)
+        result.update(available=True,executable=str(path),auth_home=env['CODEX_HOME'])
         v=subprocess.run([str(path),"--version"],env=env,cwd=root,capture_output=True,text=True,timeout=10)
         result["version"]=next((line for line in v.stdout.splitlines() if "codex" in line.casefold()),"")
         p=subprocess.run([str(path),"--no-daemon","-c",'cli_auth_credentials_store="file"',"login","status"],env=env,cwd=root,capture_output=True,text=True,timeout=10)

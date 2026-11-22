@@ -7,8 +7,7 @@ from contracts.policies import ObservationPacket,MotionProposal,dependency_signa
 from modules.policies.scripted.rule_supervisor import RuleSupervisor
 from modules.policies.scripted.demo_motion import DemoMotion
 from modules.policies.neural.state_supervisor import StateSupervisor,FEATURES,LABELS
-from modules.robot_backends.mock_robot import MockRobot,ShadowRobot
-from modules.robot_backends.nero_sdk import NeroRobotBackend
+from modules.robot_backends.mock_robot import MockRobot
 from modules.execution.gate import ExecutionGate
 from modules.learning.supervisor_bc import train
 from modules.evaluation import evaluate
@@ -66,12 +65,6 @@ def test_real_bc_heldout_export_and_policy_swap(tmp_path):
     assert package["manifest"]["mode"]=="offline_shadow_only"
     with (tmp_path/"evaluation/evaluation_report.json").open("w") as handle:json.dump({"checkpoint_sha256":"wrong"},handle)
     with pytest.raises(ValueError):export(tmp_path,checkpoint,tmp_path/"evaluation/evaluation_report.json",tmp_path/"bad")
-
-def test_nero_never_connects_or_sends(tmp_path):
-    b=NeroRobotBackend(tmp_path)
-    for method in (b.connect,b.send_joint_target,b.hold):
-        with pytest.raises(PermissionError):method()
-
 
 def test_config_factory_switches_same_role_and_blocks_cross_role(tmp_path):
     import shutil

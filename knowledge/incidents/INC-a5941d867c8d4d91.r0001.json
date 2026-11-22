@@ -1,0 +1,39 @@
+{
+  "finding_code": null,
+  "primary_category": "workflow_integrity",
+  "stage": "runtime",
+  "severity": null,
+  "asset_id": null,
+  "record_origin": "worker",
+  "summary": "Exception: Cannot add the object LipB to the scene since its name is not unique",
+  "observed_behavior": "Exception: Cannot add the object LipB to the scene since its name is not unique",
+  "mode": "offline",
+  "run_id": "48d6f415ce22410d",
+  "task_id": "48d6f415ce22410d:scene_build",
+  "diagnosis": {
+    "state": "unknown"
+  },
+  "evidence": [
+    {
+      "path": "knowledge/evidence/incidents/70/70525e20d1ab27fe29402f6d30fffa9ebbc226e8015a97d356fd179e8dd64f48.json",
+      "source_reference": ".runtime/tmp/incident-ta33jc1o/failure_result.json",
+      "sha256": "70525e20d1ab27fe29402f6d30fffa9ebbc226e8015a97d356fd179e8dd64f48",
+      "bytes": 3571
+    },
+    {
+      "path": "knowledge/evidence/incidents/e3/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.log",
+      "source_reference": "runs/fba8ce6288334f8d/derived/48d6f415ce22410d/scene_build/worker.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  ],
+  "declared_failure_category": null,
+  "declared_failure_stage": null,
+  "validation_scope": "module_reported_failure_only_no_hardware_inference",
+  "schema_version": 1,
+  "record_type": "incident",
+  "incident_id": "INC-a5941d867c8d4d91",
+  "revision": 1,
+  "timestamp_utc": "2026-11-19T17:43:56.015480+00:00",
+  "hardware_verified": false
+}

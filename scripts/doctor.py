@@ -17,6 +17,6 @@ def run():
         if (ROOT/folder).exists():
             report["business_symlinks"].extend(str(p.relative_to(ROOT)) for p in (ROOT/folder).rglob("*") if p.is_symlink())
     report["status"]="passed" if not any(report[k] for k in ("business_symlinks","syntax_errors","old_business_paths")) and report["environment"]["ok"] else "failed"
-    report["missing_capabilities"]={"multimodal_model":"configure provider in frontend; not inherited from chat session","generic_scene_synthesis":"pending task/asset/frame/evaluation plugins beyond Connector","hardware_execution":"uncommissioned; real connect and sends rejected"}
+    report["missing_capabilities"]={"multimodal_model":"configure provider in frontend; not inherited from chat session","generic_scene_synthesis":"pending task/asset/frame/evaluation plugins beyond Connector"}
     out=ROOT/"runs/acceptance/isolation";out.mkdir(parents=True,exist_ok=True);(out/"doctor.json").write_text(json.dumps(report,ensure_ascii=False,indent=2));print(json.dumps(report,ensure_ascii=False,indent=2));return report
 if __name__=="__main__":sys.exit(0 if run()["status"]=="passed" else 1)

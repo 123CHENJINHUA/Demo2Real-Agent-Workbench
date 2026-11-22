@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "kind": "vision_tracking_summary",
+  "processed_frames": 86,
+  "accepted_frames": 82,
+  "rejected_frames": 4,
+  "discarded_on_manual_reset": 0,
+  "registration_calls": 5,
+  "snapshots": 2,
+  "box_selections": 4,
+  "error": null,
+  "plot_error": null,
+  "opens_camera": true,
+  "opens_can": false,
+  "usable_for_robot": false,
+  "diagnostic_only": true,
+  "absolute_pose_accuracy_tested": false,
+  "note": "Jitter and RGB-D agreement do not establish absolute pose accuracy."
+}

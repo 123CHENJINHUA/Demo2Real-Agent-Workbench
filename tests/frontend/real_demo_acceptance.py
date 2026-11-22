@@ -4,8 +4,7 @@ exec((Path(__file__).parent/'browser_smoke.py').read_text().split("cdp('Page.ena
 def read(path):
  with urllib.request.urlopen(BASE+'/api'+path) as r:return json.load(r)
 cdp('Page.enable');cdp('Runtime.enable');cdp('Emulation.setDeviceMetricsOverride',{'width':1440,'height':1050,'deviceScaleFactor':1,'mobile':False});cdp('Page.navigate',{'url':BASE});wait("document.body.innerText.includes('本地服务已连接')")
-wait("document.querySelectorAll('.task-row').length>0")
-js("[...document.querySelectorAll('.task-row')].find(b=>b.textContent.includes('已录制Connector转换数据')).click()")
+open_run_card('5ae490795fcd4cef')
 wait("[...document.querySelectorAll('button')].some(b=>b.textContent.trim()==='重试')")
 before=read('/runs/5ae490795fcd4cef')
 if next(t for t in before['tasks'] if t['stage']=='demo_import')['status']!='succeeded':
@@ -19,9 +18,11 @@ while time.time()<end:
  time.sleep(.5)
 assert next(t for t in run['tasks'] if t['stage']=='demo_import')['status']=='succeeded',run
 screenshot('08-retried-run')
+click('返回工作台')
 click('导入示教');wait("document.querySelector('[role=dialog]')!==null")
 fill('input[placeholder="/home/…/datasets/my_demo"]',str(ROOT/'data/reference/connector/source_demo'))
 fill('input[placeholder="例如：双臂连接器装配"]','浏览器验收 · Connector 原始LeRobot示教')
+js("document.querySelector('.import-options summary').click()")
 fill('#task-goal','分析双臂连接器抓取、协作对键和插入，最终原地松手')
 js("(()=>{const el=document.querySelector('#asset-paths');Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype,'value').set.call(el,"+json.dumps(str(ROOT/'assets/objects/connector'))+");el.dispatchEvent(new Event('input',{bubbles:true}));})()")
 click('复制并创建任务');wait("document.querySelector('[role=dialog]')===null")

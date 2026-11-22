@@ -2,6 +2,11 @@
 from dataclasses import dataclass
 from typing import Literal
 
+
+class IncidentConflict(ValueError):
+    """The record changed after the reader loaded it."""
+
+
 @dataclass(frozen=True)
 class Incident:
     incident_id: str

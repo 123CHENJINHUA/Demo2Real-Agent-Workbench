@@ -47,10 +47,11 @@ def create_variant(ctx):
     case=next((c for c in suite['cases'] if c['id']==inp['case_id']),None)
     if case is None:raise ValueError('Unknown declared case')
     source=base['source'];deps={'demo_import':{'manifest_path':source['manifest_path']},'geometry':{'report_path':source['geometry_report_path']},'task_analysis':{'report_path':source['proposal_path']},'experience':{'checklist_path':source['experience_checklist_path']}}
-    first=generate(root,ctx['run_id'],dependencies=deps,profile_id=base['profile_id']);spec=first['spec']
+    run_dir=Path(ctx['output_dir']).parent
+    first=generate(root,ctx['run_id'],dependencies=deps,profile_id=base['profile_id'],run_dir=run_dir);spec=first['spec']
     spec['objects']=varied_objects(base,case)
     spec['simulation_variant']={'suite_id':suite['id'],'suite_sha256':digest,'case':case,'baseline_spec_path':suite['baseline_spec_path'],'baseline_spec_hash':base['content_hash'],'pose_source':'declared_simulation_initial_conditions_not_camera_estimates'}
     spec['assumptions'].append('Declared small initial XY/yaw perturbation; no trajectory retraining or task parameter retuning.')
-    result=save(root,ctx['run_id'],spec,expected_revision=first['spec']['revision']);spec=result['spec']
+    result=save(root,ctx['run_id'],spec,expected_revision=first['spec']['revision'],run_dir=run_dir);spec=result['spec']
     ctx['emit']('placement.variant_created',{'case_id':case['id'],'spec_hash':spec['content_hash'],'spec_revision':spec['revision']})
     return {'status':'succeeded','spec_path':result['spec_path'],'spec_hash':spec['content_hash'],'revision':spec['revision'],'spec_revision':spec['revision'],'case_id':case['id'],'suite_sha256':digest}

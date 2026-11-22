@@ -1,0 +1,39 @@
+{
+  "finding_code": "mesh_topology_open_or_nonmanifold",
+  "primary_category": "geometry_function",
+  "stage": "asset_modeling",
+  "severity": "review",
+  "asset_id": "object_0",
+  "record_origin": "worker",
+  "summary": "Mesh edge topology has gaps/nonmanifold edges; sections and volume/contact claims require separate repair/validation.",
+  "observed_behavior": "Mesh edge topology has gaps/nonmanifold edges; sections and volume/contact claims require separate repair/validation.",
+  "mode": "offline",
+  "run_id": "5ea55dcd6fa04c5f",
+  "task_id": "5ea55dcd6fa04c5f:functional_geometry",
+  "diagnosis": {
+    "state": "unknown"
+  },
+  "evidence": [
+    {
+      "path": "knowledge/evidence/incidents/16/165c8976e86915c3cf9a32be58ec1e715bc74472a73065908bf33cdb0b63a8ed.json",
+      "source_reference": ".runtime/tmp/incident-___xa2mi/failure_result.json",
+      "sha256": "165c8976e86915c3cf9a32be58ec1e715bc74472a73065908bf33cdb0b63a8ed",
+      "bytes": 521
+    },
+    {
+      "path": "knowledge/evidence/incidents/e3/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.log",
+      "source_reference": "runs/5ea55dcd6fa04c5f/functional_geometry/worker.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  ],
+  "declared_failure_category": "geometry_function",
+  "declared_failure_stage": "asset_modeling",
+  "validation_scope": "module_reported_failure_only_no_hardware_inference",
+  "schema_version": 1,
+  "record_type": "incident",
+  "incident_id": "INC-9311c79ba0d645f5",
+  "revision": 1,
+  "timestamp_utc": "2026-11-21T19:23:10.089548+00:00",
+  "hardware_verified": false
+}

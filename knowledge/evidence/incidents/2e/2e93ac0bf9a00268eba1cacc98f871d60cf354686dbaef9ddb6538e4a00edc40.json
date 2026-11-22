@@ -1,0 +1,13 @@
+{
+  "error": "object_3: no mesh or explicit primitive geometry supplied",
+  "result": {
+    "code": "mesh_missing",
+    "primary_category": "geometry_function",
+    "stage": "asset_modeling",
+    "severity": "blocking",
+    "status": "open",
+    "message": "object_3: no mesh or explicit primitive geometry supplied",
+    "hardware_verified": false,
+    "asset_id": "object_3"
+  }
+}

@@ -1,0 +1,173 @@
+{
+  "error": "RuntimeError: Accessed invalid expired 'Shader' prim </visuals/base_link/base_link/node_STL_BINARY_/Looks/DefaultMaterial/DefaultMaterial> ",
+  "result": {
+    "status": "failed",
+    "error": "RuntimeError: Accessed invalid expired 'Shader' prim </visuals/base_link/base_link/node_STL_BINARY_/Looks/DefaultMaterial/DefaultMaterial> ",
+    "failure_stage": "simulation_test",
+    "failure_category": "runtime_environment",
+    "report_path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795158394634461933/expert_learning_report.json",
+    "replay_preflight_path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/replay_check_1795158394345567617/replay_preflight.json",
+    "artifacts": [
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/replay_check_1795158394345567617/recorded_trajectory.npz",
+        "name": "recorded_trajectory.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/replay_check_1795158394345567617/replay_preflight.json",
+        "name": "replay_preflight.json"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/replay_check_1795158394345567617/bounded_replay_trajectory.npz",
+        "name": "bounded_replay_trajectory.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/replay_check_1795158394345567617/replay_check.log",
+        "name": "replay_check.log"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795157493075723577/placement_expert.npz",
+        "name": "placement_expert.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795157493075723577/experiment.json",
+        "name": "experiment.json"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795157493075723577/kit.log",
+        "name": "kit.log"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795157493075723577/candidate_3_train_3.npz",
+        "name": "candidate_3_train_3.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795157493075723577/candidate_0_train_0.npz",
+        "name": "candidate_0_train_0.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795157493075723577/candidate_1_train_3.npz",
+        "name": "candidate_1_train_3.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795157493075723577/learned_holdout_0.npz",
+        "name": "learned_holdout_0.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795157493075723577/candidate_2_train_1.npz",
+        "name": "candidate_2_train_1.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795157493075723577/candidate_1_train_1.npz",
+        "name": "candidate_1_train_1.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795157493075723577/candidate_3_train_1.npz",
+        "name": "candidate_3_train_1.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795157493075723577/isaac_learning.log",
+        "name": "isaac_learning.log"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795157493075723577/expert_learning_report.json",
+        "name": "expert_learning_report.json"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795157493075723577/candidate_0_train_3.npz",
+        "name": "candidate_0_train_3.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795157493075723577/baseline_holdout_0.npz",
+        "name": "baseline_holdout_0.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795157493075723577/learned_holdout_1.npz",
+        "name": "learned_holdout_1.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795157493075723577/candidate_1_train_2.npz",
+        "name": "candidate_1_train_2.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795157493075723577/candidate_0_train_2.npz",
+        "name": "candidate_0_train_2.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795157493075723577/baseline_holdout_2.npz",
+        "name": "baseline_holdout_2.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795157493075723577/candidate_2_train_0.npz",
+        "name": "candidate_2_train_0.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795157493075723577/episodes.json",
+        "name": "episodes.json"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795157493075723577/baseline_holdout_1.npz",
+        "name": "baseline_holdout_1.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795157493075723577/candidate_2_train_2.npz",
+        "name": "candidate_2_train_2.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795157493075723577/candidate_2_train_3.npz",
+        "name": "candidate_2_train_3.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795157493075723577/candidate_3_train_2.npz",
+        "name": "candidate_3_train_2.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795157493075723577/candidate_0_train_1.npz",
+        "name": "candidate_0_train_1.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795157493075723577/candidate_3_train_0.npz",
+        "name": "candidate_3_train_0.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795157493075723577/candidate_1_train_0.npz",
+        "name": "candidate_1_train_0.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795157493075723577/learned_holdout_2.npz",
+        "name": "learned_holdout_2.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/replay_check_1795157492723818052/recorded_trajectory.npz",
+        "name": "recorded_trajectory.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/replay_check_1795157492723818052/replay_preflight.json",
+        "name": "replay_preflight.json"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/replay_check_1795157492723818052/bounded_replay_trajectory.npz",
+        "name": "bounded_replay_trajectory.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/replay_check_1795157492723818052/replay_check.log",
+        "name": "replay_check.log"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795158394634461933/experiment.json",
+        "name": "experiment.json"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795158394634461933/kit.log",
+        "name": "kit.log"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795158394634461933/isaac_learning.log",
+        "name": "isaac_learning.log"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795158394634461933/expert_learning_report.json",
+        "name": "expert_learning_report.json"
+      }
+    ]
+  }
+}

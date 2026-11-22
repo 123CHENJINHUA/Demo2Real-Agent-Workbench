@@ -42,12 +42,32 @@ def build(root,spec_path,out,app):
         if collision:collide(x.GetPrim())
         return x
     table=spec['scene']['table'];cube('/World/Table',table['size_m'],table['position_m'],[.44,.48,.51])
+    if spec.get('scene_approximation') and spec['scene'].get('preview_workbench_rail'):
+        cx,cy,cz=table['position_m'];sx,sy,sz=table['size_m'];top=cz+sz/2
+        cube('/World/WorkbenchFrontRail',[sx,.018,.009],[cx,cy-sy*.32,top+.0045],[.52,.54,.57],False)
+        cube('/World/WorkbenchRearFrame',[sx,.026,.035],[cx,cy+sy*.50,top-.0175],[.52,.54,.57],False)
+        marks=UsdGeom.Points.Define(stage,'/World/PerforationPreview')
+        nx=min(56,max(2,int(sx/.025)));ny=min(28,max(2,int(sy/.025)))
+        marks.CreatePointsAttr([Gf.Vec3f(cx+sx*(i/(nx-1)-.5)*.93,cy+sy*(j/(ny-1)-.5)*.62,top+.001)
+                                for i in range(nx) for j in range(ny)])
+        marks.CreateWidthsAttr([.004]);marks.SetWidthsInterpolation(UsdGeom.Tokens.constant)
+        marks.CreateDisplayColorAttr([Gf.Vec3f(.13,.15,.17)])
     floor=spec['scene'].get('floor',{'size_m':[3,3,.05],'position_m':[0,0,-.025]});cube('/World/Floor',floor['size_m'],floor['position_m'],[.24,.27,.29])
     for i,item in enumerate(spec['scene'].get('obstacles',[])):
         if item.get('geometry_type','box')!='box':raise ValueError('Unknown obstacle type')
         cube('/World/Obstacle'+str(i),item['size_m'],item['pose']['position_m'],[.35,.24,.16])
     emit('world_and_support',1)
     robots=[];camera_records=[]
+    registration=spec.get('robot',{}).get('preview_registration')
+    def calibrated_camera(identifier,mount_path,calibration_path,T_parent_color):
+        data=json.loads(local(calibration_path).read_text());K=np.asarray(data['intrinsics']['K'],dtype=float);w,h=int(data['width']),int(data['height'])
+        if not (16<=w<=2048 and 16<=h<=2048):raise ValueError('Camera resolution exceeds preview budget')
+        optical_to_usd=np.diag([1.,-1.,-1.,1.]);mount=UsdGeom.Xform.Define(stage,mount_path);apply(mount.GetPrim(),T_parent_color@optical_to_usd)
+        camera=UsdGeom.Camera.Define(stage,str(mount.GetPath())+'/Color');focal=20.
+        camera.CreateFocalLengthAttr(focal);camera.CreateHorizontalApertureAttr(w*focal/K[0,0]);camera.CreateVerticalApertureAttr(h*focal/K[1,1]);camera.CreateHorizontalApertureOffsetAttr((w/2-K[0,2])*focal/K[0,0]);camera.CreateVerticalApertureOffsetAttr((K[1,2]-h/2)*focal/K[1,1]);camera.CreateClippingRangeAttr(Gf.Vec2f(.005,10.))
+        projection=np.asarray(camera.GetCamera().frustum.ComputeProjectionMatrix());points=np.array([[0,0,1],[.1,.05,1],[-.05,-.1,.8]],float);clip=np.c_[points*np.array([1,-1,-1]),np.ones(3)]@projection;ndc=clip[:,:2]/clip[:,3:4];pixels=(ndc*np.array([1,-1])+1)*np.array([w/2,h/2]);target=points@K.T;err=float(np.max(np.abs(pixels-target[:,:2]/target[:,2:3])))
+        if err>.001:raise RuntimeError('Optical/USD projection convention mismatch')
+        return {'id':identifier,'path':str(camera.GetPath()),'width':w,'height':h,'K':K.tolist(),'calibration_path':calibration_path,'maximum_projection_error_px':err,'independently_calibrated_on_recording':data.get('reuse',{}).get('independent_validation_on_recorded_cameras',False)}
     if spec.get('robot',{}).get('arms'):
         enable_extension('isaacsim.asset.importer.urdf');app.update()
         _,config=omni.kit.commands.execute('URDFCreateImportConfig');config.merge_fixed_joints=False;config.fix_base=True;config.import_inertia_tensor=True;config.distance_scale=1.;config.self_collision=False;config.default_drive_strength=6000.;config.default_position_drive_damping=300.
@@ -57,43 +77,68 @@ def build(root,spec_path,out,app):
             if not status:raise RuntimeError('URDF import failed')
             base_path=path.rsplit('/',1)[0];apply(stage.GetPrimAtPath(base_path),matrix(arm['base_pose']))
             robot=world.scene.add(SingleArticulation(prim_path=path,name='robot_'+str(a)));robots.append((arm,robot,base_path))
+            if registration:
+                for prim in Usd.PrimRange(stage.GetPrimAtPath(base_path)):
+                    if prim.HasAPI(UsdPhysics.CollisionAPI):
+                        UsdPhysics.CollisionAPI(prim).CreateCollisionEnabledAttr(False).Set(False)
+                x,y,z=arm['base_pose']['position_m'];stand_top=z-.005
+                if stand_top>0:
+                    cube('/World/EstimatedMount'+str(a),[.18,.18,stand_top],[x,y,stand_top/2],[.42,.45,.48],False)
             if spec['scene'].get('base_plates'):
                 pos=np.asarray(arm['base_pose']['position_m'])-[0,0,.011];cube('/World/BasePlate'+str(a),[.16,.16,.022],pos.tolist(),[.85,.64,.035])
             cam=arm.get('camera')
             if cam:
-                data=json.loads(local(cam['calibration_path']).read_text());K=np.asarray(data['intrinsics']['K'],dtype=float);w,h=int(data['width']),int(data['height'])
-                
-                if not (16<=w<=2048 and 16<=h<=2048):raise ValueError('Camera resolution exceeds preview budget')
-                Tparent=np.asarray(cam['T_parent_sdk_flange'])@np.asarray(data['hand_eye']['matrix']);optical_to_usd=np.diag([1.,-1.,-1.,1.])
+                data=json.loads(local(cam['calibration_path']).read_text())
+                Tparent=np.asarray(cam['T_parent_sdk_flange'])@np.asarray(data['hand_eye']['matrix'])
                 parent=base_path+'/'+cam.get('parent_link','gripper_base')
                 if not stage.GetPrimAtPath(parent):raise ValueError('Camera parent link not found')
-                mount=UsdGeom.Xform.Define(stage,parent+'/TaskCamera');apply(mount.GetPrim(),Tparent@optical_to_usd)
-                camera=UsdGeom.Camera.Define(stage,str(mount.GetPath())+'/Color');focal=20.;camera.CreateFocalLengthAttr(focal);camera.CreateHorizontalApertureAttr(w*focal/K[0,0]);camera.CreateVerticalApertureAttr(h*focal/K[1,1]);camera.CreateHorizontalApertureOffsetAttr((w/2-K[0,2])*focal/K[0,0]);camera.CreateVerticalApertureOffsetAttr((K[1,2]-h/2)*focal/K[1,1]);camera.CreateClippingRangeAttr(Gf.Vec2f(.005,10.))
-                if cam.get('housing_size_m'):cube(str(mount.GetPath())+'/ApproximateHousing',cam['housing_size_m'],[0,0,.015],[.14,.16,.19])
-                projection=np.asarray(camera.GetCamera().frustum.ComputeProjectionMatrix());points=np.array([[0,0,1],[.1,.05,1],[-.05,-.1,.8]],float);clip=np.c_[points*np.array([1,-1,-1]),np.ones(3)]@projection;ndc=clip[:,:2]/clip[:,3:4];pixels=(ndc*np.array([1,-1])+1)*np.array([w/2,h/2]);target=points@K.T;target=target[:,:2]/target[:,2:3];err=float(np.max(np.abs(pixels-target)))
-                if err>.001:raise RuntimeError('Optical/USD projection convention mismatch')
-                camera_records.append({'id':arm['id'],'path':str(camera.GetPath()),'width':w,'height':h,'K':K.tolist(),'calibration_path':cam['calibration_path'],'maximum_projection_error_px':err,'independently_calibrated_on_recording':data.get('reuse',{}).get('independent_validation_on_recorded_cameras',False),'housing_measured':cam.get('housing_measured',False)})
+                mount_path=parent+'/TaskCamera'
+                if cam.get('housing_size_m'):
+                    UsdGeom.Xform.Define(stage,mount_path)
+                    cube(mount_path+'/ApproximateHousing',cam['housing_size_m'],[0,0,.015],[.14,.16,.19])
+                camera_records.append(calibrated_camera(arm['id'],mount_path,cam['calibration_path'],Tparent)|{'housing_measured':cam.get('housing_measured',False)})
+    if registration:
+        center=registration['center_camera']
+        camera_records.append(calibrated_camera('center','/World/RegisteredCenterMount',center['calibration_path'],np.asarray(center['T_world_camera_optical']))|{'approximate_reference_view':True})
     stage.SetDefaultPrim(stage.GetPrimAtPath('/World'));app.update();emit('robots_and_calibrated_cameras',2)
     objects=[];requested=[];keyed=[]
     for i,obj in enumerate(spec['objects']):
         name=obj['id']
         if not name.replace('_','').isalnum():raise ValueError('Object ID must be USD-safe')
         path='/World/Objects/'+name;prim=UsdGeom.Xform.Define(stage,path).GetPrim();apply(prim,matrix(obj['pose']))
+        collision=obj.get('collision',{});kind=collision.get('type','unknown')
         if obj['geometry_type']=='mesh':
             if obj.get('visual_asset_path'):add_reference_to_stage(str(local(obj['visual_asset_path'])),path+'/VisualAsset')
             else:
                 points,faces=read_mesh(local(obj['asset_path']))
-                mesh=UsdGeom.Mesh.Define(stage,path+'/VisualAsset');mesh.CreatePointsAttr(Vt.Vec3fArray.FromNumpy(points.astype(np.float32)));mesh.CreateFaceVertexCountsAttr([3]*len(faces));mesh.CreateFaceVertexIndicesAttr(faces.ravel().tolist());mesh.CreateSubdivisionSchemeAttr('none');mesh.CreateDisplayColorAttr([Gf.Vec3f(.10,.12,.14)])
+                if spec.get('scene_approximation') and obj.get('preview_mesh_center_asset'):
+                    points=points-np.asarray(obj['preview_mesh_center_asset'],float)
+                color=obj.get('preview_color_rgb',[.10,.12,.14])
+                mesh=UsdGeom.Mesh.Define(stage,path+'/VisualAsset');mesh.CreatePointsAttr(Vt.Vec3fArray.FromNumpy(points.astype(np.float32)));mesh.CreateFaceVertexCountsAttr([3]*len(faces));mesh.CreateFaceVertexIndicesAttr(faces.ravel().tolist());mesh.CreateSubdivisionSchemeAttr('none');mesh.CreateDisplayColorAttr([Gf.Vec3f(*color)])
             visual=stage.GetPrimAtPath(path+'/VisualAsset');UsdGeom.Xformable(visual).AddScaleOp().Set(Gf.Vec3f(*obj['scale']))
-        elif obj['geometry_type']=='box':cube(path+'/VisualAsset',(np.array(obj['size_m'])*obj['scale']).tolist(),[0,0,0],[.8,.25,.07],False)
+        elif obj['geometry_type']=='box':
+            color=obj.get('preview_color_rgb',[.8,.25,.07]) if spec.get('scene_approximation') else [.8,.25,.07]
+            size=(np.array(obj['size_m'])*obj['scale']).tolist()
+            shape=obj.get('preview_shape') if spec.get('scene_approximation') else None
+            if shape and shape!='box':
+                from modules.scene_building.preview_details import box_components
+                UsdGeom.Xform.Define(stage,path+'/VisualAsset')
+                for part_name,dimensions,offset,part_color in box_components(shape,size,color):
+                    cube(path+'/VisualAsset/'+part_name,dimensions,offset,part_color,collision=kind!='preview_compound')
+            else:cube(path+'/VisualAsset',size,[0,0,0],color,False)
         elif obj['geometry_type']=='cylinder':
             shape=UsdGeom.Cylinder.Define(stage,path+'/VisualAsset');shape.CreateRadiusAttr(obj['radius_m']);shape.CreateHeightAttr(obj['height_m']);shape.CreateDisplayColorAttr([Gf.Vec3f(.4,.35,.2)]);shape.AddScaleOp().Set(Gf.Vec3f(*obj['scale']))
-        collision=obj.get('collision',{});kind=collision.get('type','unknown')
         if kind=='connector_keyed_engineering':
             if obj['scale']!=[1,1,1]:raise ValueError('Engineering connector collision cannot silently scale functional dimensions')
             if collision.get('profile_path')!='assets/objects/connector/keyed_physics.json':raise ValueError('Unregistered engineering collision profile')
             keyed.append((collision['role'],path))
-        elif kind=='box' and obj['geometry_type']=='box':collide(stage.GetPrimAtPath(path+'/VisualAsset'))
+        elif kind=='box' and obj['geometry_type']=='box':
+            visual=stage.GetPrimAtPath(path+'/VisualAsset')
+            if visual.IsA(UsdGeom.Cube):collide(visual)
+        elif kind=='preview_compound' and obj['geometry_type'] in ('mesh','box') and spec.get('scene_approximation'):
+            for index,part in enumerate(collision['boxes']):
+                body=cube(path+'/RepairCollision'+str(index),part['size_m'],part['center_m'],[.3,.3,.3])
+                body.MakeInvisible()
         elif kind in ('convex_hull','mesh') and obj['geometry_type']=='mesh':
             # Convex approximations require an explicit task choice; never infer for holes.
             for child in Usd.PrimRange(stage.GetPrimAtPath(path+'/VisualAsset')):
@@ -139,12 +184,32 @@ def build(root,spec_path,out,app):
     settled={obj['id']:pose_of(body) for obj,body,path in objects}
     dynamics={obj['id']:{'linear_velocity_m_s':np.asarray(body.get_linear_velocity()).tolist(),'angular_velocity_rad_s':np.asarray(body.get_angular_velocity()).tolist()} for obj,body,path in objects}
     # Overview is a dedicated simulation camera, never a recorded/demo image.
-    cfg=spec['scene'].get('preview_camera',{'eye_m':[-1.4,-1.4,1.7],'target_m':[-.25,0,.9]});eye=np.array(cfg['eye_m']);target=np.array(cfg['target_m']);forward=target-eye;forward/=np.linalg.norm(forward);up=np.array([0.,0.,1.]);right=np.cross(forward,up)
-    if np.linalg.norm(right)<1e-5:right=np.array([1.,0,0])
-    right/=np.linalg.norm(right);t=np.eye(4);t[:3,:3]=np.column_stack((right,np.cross(right,forward),-forward));t[:3,3]=eye
-    camera=UsdGeom.Camera.Define(stage,'/World/PreviewCamera');apply(camera.GetPrim(),t);camera.CreateFocalLengthAttr(24.);camera.CreateHorizontalApertureAttr(36.);camera.CreateVerticalApertureAttr(22.5);camera.CreateClippingRangeAttr(Gf.Vec2f(.01,20.))
-    main={'id':'overview','path':str(camera.GetPath()),'width':1280,'height':800,'K':[[1280*24/36,0,640],[0,800*24/22.5,400],[0,0,1]],'maximum_projection_error_px':0.,'calibration_path':None}
-    views=[main,*camera_records]
+    def make_preview_camera(path,cfg,identifier,width,height):
+        eye=np.array(cfg['eye_m']);target=np.array(cfg['target_m']);forward=target-eye
+        forward/=np.linalg.norm(forward)
+        right=np.cross(forward,cfg.get('up',[0.,0.,1.]))
+        if np.linalg.norm(right)<1e-5:right=np.array([1.,0.,0.])
+        right/=np.linalg.norm(right);matrix=np.eye(4)
+        matrix[:3,:3]=np.column_stack((right,np.cross(right,forward),-forward));matrix[:3,3]=eye
+        camera=UsdGeom.Camera.Define(stage,path);apply(camera.GetPrim(),matrix)
+        vertical=36.*height/width
+        focal=36.*cfg.get('focal_fraction',2/3)
+        camera.CreateFocalLengthAttr(focal);camera.CreateHorizontalApertureAttr(36.)
+        camera.CreateVerticalApertureAttr(vertical);camera.CreateClippingRangeAttr(Gf.Vec2f(.01,20.))
+        return {'id':identifier,'path':str(camera.GetPath()),'width':width,'height':height,
+                'K':[[width*focal/36,0,width/2],[0,height*focal/vertical,height/2],[0,0,1]],
+                'maximum_projection_error_px':0.,'calibration_path':None}
+    cfg=spec['scene'].get('preview_camera',{'eye_m':[-1.4,-1.4,1.7],'target_m':[-.25,0,.9]})
+    main=make_preview_camera('/World/PreviewCamera',cfg,'overview',1280,800)
+    comparison_views=[]
+    if spec.get('scene_approximation'):
+        for config in spec['scene'].get('preview_reference_views',[]):
+            identifier=config['id']
+            path='/World/ReferenceView_'+identifier
+            item=make_preview_camera(path,config,identifier,config.get('width',640),config.get('height',480))
+            comparison_views.append(item|{'approximate_reference_view':True}|{key:config[key] for key in
+                                    ('recorded_camera','frame_ref','corner_fit_error') if key in config})
+    views=[main,*comparison_views,*camera_records]
     import omni.replicator.core as rep
     products=[]
     for view in views:
@@ -216,8 +281,14 @@ def build(root,spec_path,out,app):
             joint=UsdPhysics.Joint(prim);a=set(str(x) for x in joint.GetBody0Rel().GetTargets());b=set(str(x) for x in joint.GetBody1Rel().GetTargets())
             if a&object_paths and b&object_paths:pair_joints.append(str(prim.GetPath()))
     manifest={'schema_version':'scene-manifest/v1','implementation':{'builder_version':'scene_building/v1','loaded_builder_sha256':_SOURCE_SHA256,'initial_joint_pose_hold_only':True},'task_spec_hash':spec['content_hash'],'spec_revision':spec['revision'],'profile_id':spec.get('profile_id'),'spec_snapshot_path':str(Path(spec_path).relative_to(root)),'scene_path':str((out/'scene.usda').relative_to(root)),'preview_path':str((out/'scene.png').relative_to(root)),'scope':'scene_and_local_settling_only','contact_execution_authorized':False,'hardware_verified':False,'objects':spec['objects'],'initial_poses':initial,'settled_poses':settled,'capture_time_s':capture_time_s,'dynamics':dynamics,'world_visual_bounds':boxes,'robots':robot_records,'cameras':captures,'usd_layers':audit,'material_adaptations':material_adaptations,'connector_pair_joints':pair_joints,'gravity_m_s2':[0,0,-9.81],'physics_hz':hz,'settling_duration_s':duration,'settling_samples':records,'assumptions':spec.get('assumptions',[]),'evaluation':spec['evaluation'],'synthetic_test_fixture':bool(spec.get('source',{}).get('synthetic_test_fixture',False)),'full_task_executed':False,'hardware_commands_sent':0,'robot_motion_controller_loaded':False}
+    if spec.get('scene_approximation'):
+        manifest['scene_approximation']=spec['scene_approximation']
+    if registration:
+        manifest['robot_registration']=registration
     (out/'scene_manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2))
     result={'status':'succeeded','scene_path':manifest['scene_path'],'preview_path':manifest['preview_path'],'manifest_path':str((out/'scene_manifest.json').relative_to(root)),'task_spec_hash':spec['content_hash'],'spec_revision':spec['revision'],'scope':manifest['scope'],'hardware_verified':False,'contact_execution_authorized':False,'full_task_executed':False,'message':'真实USD/PhysX场景与相机预览已构建；仅局部落桌检查，未执行抓取/插入策略。'}
+    if registration:
+        result['robot_registration']={key:registration[key] for key in ('status','bundle_id','message','input_spec_hash') if key in registration}
     (out/'build_report.json').write_text(json.dumps(result,ensure_ascii=False,indent=2));emit('scene_artifacts_complete',8)
     for product,_,_ in products:product.destroy()
     return result
@@ -235,8 +306,10 @@ def read_mesh(path):
                 ids=[int(v.split('/')[0]) for v in p[1:]];ids=[i-1 if i>0 else len(vertices)+i for i in ids]
                 faces.extend((ids[0],ids[k],ids[k+1]) for k in range(1,len(ids)-1))
     elif Path(path).suffix.lower()=='.stl':
-        data=Path(path).read_bytes();count=struct.unpack_from('<I',data,80)[0]
-        if len(data)!=84+count*50:raise ValueError('Only binary STL supported by scene authoring')
+        data=Path(path).read_bytes();count=struct.unpack_from('<I',data,80)[0] if len(data)>=84 else 0
+        if len(data)!=84+count*50:
+            from modules.geometry.functional import load_mesh
+            return load_mesh(Path(path))
         for i in range(count):
             values=struct.unpack_from('<12fH',data,84+i*50);start=len(vertices);vertices.extend([values[j:j+3] for j in (3,6,9)]);faces.append((start,start+1,start+2))
     else:raise ValueError('Unsupported scene mesh')

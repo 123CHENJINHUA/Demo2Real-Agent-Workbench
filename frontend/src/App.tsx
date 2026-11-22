@@ -2,8 +2,8 @@ import PhaseRecoveryPanel from './PhaseRecoveryPanel';
 import RecoveryLearningPanel from './RecoveryLearningPanel';
 import {useEffect,useState,useCallback,useRef} from 'react';
 import type {ReactNode,FormEvent} from 'react';
-import {Activity,ArrowRight,ArrowUpRight,Box,Check,CheckCircle2,ChevronDown,ChevronRight,Clock3,Code2,Copy,Database,FileArchive,FileText,Folder,FolderOpen,GitBranch,Layers3,LoaderCircle,Network,Play,Plus,RefreshCw,Search,Settings2,ShieldCheck,Square,Terminal,TriangleAlert,Unplug,Waypoints,X} from 'lucide-react';
-import {api,post,put,collection} from './api';
+import {Activity,ArrowLeft,ArrowRight,ArrowUpRight,Box,Check,CheckCircle2,ChevronDown,ChevronRight,Copy,Database,FileArchive,FileText,Folder,FolderOpen,GitBranch,Image,Layers3,LoaderCircle,MessageCircle,Play,Plus,RefreshCw,Search,Settings2,Square,Terminal,TriangleAlert,Waypoints,X} from 'lucide-react';
+import {api,ApiError,post,put,collection} from './api';
 import {buildDiagnosticPayload,defaultDiagnosticOptions} from './diagnostics';
 import type {DiagnosticOptions} from './diagnostics';
 import {selectLatestSimulationPanel,getSimulationValidationNotices} from './simulationPreviews';
@@ -11,10 +11,20 @@ import ModelProviderSettings from './ModelProviderSettings';
 import TaskScenePanel from './TaskScenePanel';
 import ScenePreviewPanel from './ScenePreviewPanel';
 import ExpertRunPanel from './ExpertRunPanel';
+import Knowledge from './Knowledge';
+import AgentTeamPanel from './AgentTeamPanel';
+import AgentCollaborationPanel from './AgentCollaborationPanel';
+import RunProgress from './RunProgress';
+import AgentConversation from './AgentConversation';
+import TaskUnderstanding from './TaskUnderstanding';
+import ActionReplayPanel from './ActionReplayPanel';
+import type {AgentQuestion} from './AgentConversation';
+import {isTaskProblem,taskActivities,taskMessage} from './runActivity';
+import RunGallery, {isActiveRun} from './RunGallery';
+import type {RunPreview,RunSummary} from './RunGallery';
 
-type Page='overview'|'knowledge'|'deploy'|'settings';
-const categoryLabels:Record<string,string>={data_quality:'数据质量',task_semantics:'任务语义',geometry_function:'功能几何',frames_calibration:'坐标与标定',physics_contact:'物理与接触',perception_estimation:'感知估计',planning_control:'规划与控制',policy_learning:'策略与学习',runtime_environment:'运行环境',hardware_io:'硬件与通信',evaluation_metrics:'评价判据',workflow_integrity:'工作流完整性'};
-const statusText:Record<string,string>={pending:'等待执行',queued:'已排队',running:'执行中',completed:'已完成',succeeded:'已完成',failed:'失败',cancelled:'已取消',canceled:'已取消',blocked:'等待条件',needs_configuration:'待配置',interrupted:'已中断',not_started:'尚未开始',ready:'就绪',unconfigured:'待配置',disconnected:'未连接',offline:'离线',idle:'空闲',partially_verified:'局部验证',open:'未解决',mitigation_recorded:'已有缓解记录',verified_in_scope:'范围内验证'};
+type Page='overview'|'knowledge'|'policies'|'settings';
+const statusText:Record<string,string>={pending:'等待执行',queued:'已排队',running:'执行中',completed:'已完成',succeeded:'已完成',failed:'失败',cancelled:'已取消',canceled:'已取消',blocked:'等待条件',waiting_input:'等待回复',needs_configuration:'待配置',interrupted:'已中断',not_started:'尚未开始',ready:'就绪',unconfigured:'待配置',disconnected:'未连接',offline:'离线',idle:'空闲',partially_verified:'局部验证',open:'未解决',mitigation_recorded:'已有缓解记录',verified_in_scope:'范围内验证'};
 const label=(s?:string)=>statusText[s||'']||s||'未知';
 const date=(v:any)=>v?new Date(typeof v==='number'&&v<1e12?v*1000:v).toLocaleString('zh-CN',{hour12:false}):'—';
 const short=(s:any,n=62)=>String(s||'').length>n?String(s).slice(0,n)+'…':String(s||'');
@@ -24,77 +34,525 @@ function ErrorBox({error}:{error?:string|null}){return error?<div className="err
 function JsonView({data}:{data:any}){return <pre className="json-view">{JSON.stringify(data,null,2)}</pre>}
 const environmentFields:Record<string,string>={isaac_sim_root:'Isaac Sim 根目录',isaac_lab_root:'IsaacLab 根目录',app_python:'应用 Python',data_python:'数据审查 Python',vision_python:'视觉 Python',policy_python:'策略 Python',training_python:'训练 Python',node_executable:'Node 可执行文件',cuda_home:'CUDA 根目录（可选）',ffmpeg_executable:'FFmpeg（可选）',codex_executable:'Codex CLI 可执行文件'};
 
+const navigation = [
+ {id:'overview', icon:Layers3, label:'任务工作台'},
+ {id:'knowledge', icon:Database, label:'经验与失败记录'},
+ {id:'policies', icon:Waypoints, label:'离线策略'},
+ {id:'settings', icon:Settings2, label:'环境与模型配置'},
+] as const;
+const retryable = ['failed','blocked','interrupted','cancelled','needs_configuration'];
+
 export default function App(){
- const eventCursor=useRef(0);const selectedRef=useRef<string|null>(null);const [page,setPage]=useState<Page>('overview');const [runs,setRuns]=useState<any[]>([]);const [overview,setOverview]=useState<any>({});const [health,setHealth]=useState<any>(null);const [error,setError]=useState<string|null>(null);const [lastUpdate,setLastUpdate]=useState('');const [selected,setSelected]=useState<string|null>(null);const [detail,setDetail]=useState<any>(null);const [events,setEvents]=useState<any[]>([]);const [importOpen,setImportOpen]=useState(false);const [busy,setBusy]=useState(false);const [toast,setToast]=useState('');
- selectedRef.current=selected;
- const refresh=useCallback(async()=>{try{const [h,o,r]=await Promise.all([api('/health'),api('/overview'),api('/runs')]);setHealth(h);setOverview(o);setRuns(collection(r));setError(null);setLastUpdate(new Date().toLocaleTimeString('zh-CN',{hour12:false}));}catch(e){setError((e as Error).message);setHealth(null)}},[]);
- const loadDetail=useCallback(async()=>{if(!selected)return;try{const [d,e]=await Promise.all([api('/runs/'+selected),api('/runs/'+selected+'/events?after='+eventCursor.current)]);if(selectedRef.current!==selected)return;setDetail(d);const rows=collection(e);eventCursor.current=e.cursor??eventCursor.current;setEvents(previous=>{const merged=new Map(previous.map(v=>[v.id,v]));rows.forEach(v=>merged.set(v.id,v));return [...merged.values()].slice(-500)})}catch(e){setError((e as Error).message)}},[selected]);
+ const detailPolling = useRef({cursor:0,issued:0,applied:0});
+ const selectedRef = useRef<string|null>(null);
+ const deletedRuns = useRef(new Set<string>());
+ const [page,setPage] = useState<Page>(()=>new URLSearchParams(window.location.search).get('page')==='settings'?'settings':'overview');
+ const [runs,setRuns] = useState<RunSummary[]>([]);
+ const [previews,setPreviews] = useState<Record<string,RunPreview>>({});
+ const [health,setHealth] = useState<any>(null);
+ const [loading,setLoading] = useState(true);
+ const [error,setError] = useState<string|null>(null);
+ const [selected,setSelected] = useState<string|null>(()=>{
+  if(page==='settings')return null;
+  const id=new URLSearchParams(window.location.search).get('run');
+  return id && /^[a-f0-9]{16}$/.test(id) ? id : null;
+ });
+ const [detail,setDetail] = useState<any>(null);
+ const [detailConnected,setDetailConnected] = useState(false);
+ const [events,setEvents] = useState<any[]>([]);
+ const [importOpen,setImportOpen] = useState(false);
+ const [editingModels,setEditingModels] = useState<ModelRun|null>(null);
+ const [busy,setBusy] = useState(false);
+ const [toast,setToast] = useState('');
+ selectedRef.current = selected;
+
+ const refresh = useCallback(async()=>{
+  try {
+   const [h, gallery] = await Promise.all([api('/health'),api<{runs:RunSummary[];previews?:Record<string,RunPreview>}>('/runs?previews=true')]);
+   setHealth(h);
+   setRuns(gallery.runs.filter(run=>!deletedRuns.current.has(run.id)));
+   setPreviews(Object.fromEntries(Object.entries(gallery.previews ?? {}).filter(([id])=>!deletedRuns.current.has(id))));
+   setError(null);
+  } catch(e) {
+   setError((e as Error).message);
+   setHealth(null);
+  } finally {
+   setLoading(false);
+  }
+ },[]);
+ const loadDetail = useCallback(async()=>{
+  if(!selected) return;
+  const polling=detailPolling.current;
+  const ticket=++polling.issued;
+  const current=()=>selectedRef.current===selected&&detailPolling.current===polling&&ticket>=polling.applied;
+  try {
+   const [d,e] = await Promise.all([api('/runs/'+selected),api('/runs/'+selected+'/events?tail=true&after='+polling.cursor)]);
+   if(!current()) return;
+   polling.applied=ticket;
+   setDetail(d);
+   setDetailConnected(true);
+   const rows=collection(e);
+   polling.cursor=Math.max(polling.cursor,e.cursor??0);
+   if(rows.length) setEvents(previous=>{
+    const merged = new Map(previous.map(v=>[v.id,v]));
+    rows.forEach(v=>merged.set(v.id,v));
+    return [...merged.values()].sort((left,right)=>left.id-right.id).slice(-500);
+   });
+  } catch(e) {
+   if(current()) {
+    polling.applied=ticket;
+    setDetailConnected(false);
+    if(e instanceof ApiError && e.status===404) {
+     setSelected(null);
+     setToast('这个运行已移出列表或不存在');
+    } else setError((e as Error).message);
+   }
+  }
+ },[selected]);
  useEffect(()=>{void refresh();const id=setInterval(refresh,4000);return()=>clearInterval(id)},[refresh]);
- useEffect(()=>{setDetail(null);setEvents([]);eventCursor.current=0;void loadDetail();const id=setInterval(loadDetail,2500);return()=>clearInterval(id)},[loadDetail]);
+ useEffect(()=>{
+  const url=new URL(window.location.href);
+  if(page==='settings')url.searchParams.set('page','settings');
+  else url.searchParams.delete('page');
+  if(url.href!==window.location.href)window.history.replaceState(window.history.state,'',url);
+ },[page]);
+ useEffect(()=>{
+  const url=new URL(window.location.href);
+  if(selected)url.searchParams.set('run',selected);
+  else url.searchParams.delete('run');
+  if(url.href!==window.location.href)window.history.replaceState(window.history.state,'',url);
+  setDetail(null);
+  setDetailConnected(false);
+  setEvents([]);
+  detailPolling.current={cursor:0,issued:0,applied:0};
+  if(!selected) return;
+  void loadDetail();
+  const id=setInterval(loadDetail,2500);
+  return()=>clearInterval(id);
+ },[selected,loadDetail]);
  useEffect(()=>{if(!toast)return;const id=setTimeout(()=>setToast(''),4500);return()=>clearTimeout(id)},[toast]);
- async function diagnostic(kind:string,options:DiagnosticOptions){setBusy(true);try{const run=await post('/diagnostics',buildDiagnosticPayload(kind,options));setSelected(run.id);await refresh();setToast('已提交真实离线仿真诊断；结果不会视为泛化策略验证')}catch(e){setError((e as Error).message)}finally{setBusy(false)}}
- async function act(path:string){setBusy(true);try{await post(path);await refresh();await loadDetail();setToast('操作已提交')}catch(e){setError((e as Error).message)}finally{setBusy(false)}}
- const active=runs.filter(r=>r.status==='running').length;const completed=runs.filter(r=>['completed','succeeded'].includes(r.status)).length;const blocked=runs.filter(r=>['blocked','needs_configuration','failed','interrupted'].includes(r.status)).length;
- const agents=collection((selected&&detail?.agents)?detail.agents:overview.agents||[]);const liveAgents=agents.filter(a=>a.status==='running');
- const title={overview:'工作台',knowledge:'经验与失败记录',deploy:'策略与真机',settings:'环境与模型配置'}[page];
- return <div className="app"><aside className="sidebar"><a className="brand" href="#" onClick={e=>{e.preventDefault();setPage('overview')}}><span className="brand-icon"><GitBranch size={23}/></span><span>Demo2Real<small>AGENT WORKBENCH</small></span></a><div className="workspace-tag"><span className="dot"/>本地独立工作空间<ChevronDown size={14}/></div><div className="nav-label">工作空间</div><nav>{([{id:'overview',icon:Layers3,title:'任务工作台'},{id:'knowledge',icon:Database,title:'经验与失败记录'},{id:'deploy',icon:Waypoints,title:'策略与真机'},{id:'settings',icon:Settings2,title:'环境与模型配置'}] as const).map(item=><button key={item.id} className={page===item.id?'nav-item active':'nav-item'} onClick={()=>setPage(item.id)}><item.icon size={18}/>{item.title}{item.id==='overview'&&active>0&&<span className="nav-count">{active}</span>}</button>)}</nav><div className="sidebar-bottom"><div className="isolation"><ShieldCheck size={19}/><div>项目内运行<small>业务文件与证据保存在本目录</small></div></div><div className="local-status"><i className={health?'connected':''}/><span>{health?'本地服务已连接':'本地服务未连接'}</span><code>v0.1</code></div></div></aside>
- <div className="workspace"><header className="topbar"><div className="breadcrumb">工作空间 <ChevronRight size={14}/><strong>{title}</strong></div><div className="topbar-right"><span className="environment-pill"><span className="dot"/> LOCAL</span><button className="icon-button" aria-label="刷新状态" onClick={()=>{void refresh();void loadDetail()}}><RefreshCw size={16}/></button><span className="avatar">D2R</span></div></header><main><ErrorBox error={error}/>
- {page==='overview'&&<><div className="page-heading"><div><div className="eyebrow">DEMONSTRATION TO DEPLOYMENT</div><h1>从一次示教，开始新的能力。</h1><p>分析任务、构建仿真、积累经验，让每一步都有可追溯的证据。</p></div><button className="button primary" onClick={()=>setImportOpen(true)}><Plus size={18}/>导入示教</button></div>
- <div className="stats-grid"><Stat title="全部任务" number={runs.length} icon={<Layers3 size={19}/>} note="已持久化的工作流"/><Stat title="正在执行" number={active} icon={<Activity size={19}/>} note={`${liveAgents.length} 个 Agent / Worker 活跃`}/><Stat title="完成工作流" number={completed} icon={<CheckCircle2 size={19}/>} note="以实际产物与检查为准"/><Stat title="需要关注" number={blocked} icon={<TriangleAlert size={19}/>} note="查看缺失配置与失败反馈" amber/></div>
- <div className="pipeline-banner"><div className="pipeline-copy"><span className="tiny-label">可追溯工作流</span><strong>你的示教，是整个流程的起点</strong></div><div className="pipeline">{['导入与审查','分析与建模','仿真与验证','策略与部署'].map((v,i)=><span key={v}><b>{String(i+1).padStart(2,'0')}</b>{v}{i<3&&<ChevronRight size={15}/>}</span>)}</div></div>
- <div className="content-grid"><section className="panel task-panel"><div className="panel-heading"><div><h2>任务与运行<span className="count">{runs.length}</span></h2><p>查看每次运行的阶段、产物和反馈</p></div><button className="text-button" onClick={()=>setImportOpen(true)}><Plus size={15}/>新任务</button></div>{runs.length===0?<Empty title="还没有导入示教">选择一个示教文件夹。系统将复制数据并建立独立、可追踪的任务。</Empty>:<div className="task-list">{runs.map(run=><button className={'task-row '+(selected===(run.id||run.run_id)?'selected':'')} key={run.id||run.run_id} onClick={()=>setSelected(run.id||run.run_id)}><span className="task-icon"><Box size={21}/></span><span className="task-main"><strong>{run.name||run.title||run.input?.name||'示教任务'}</strong><small>{short(run.id||run.run_id,20)} · {date(run.created_at)}</small></span><Status value={run.status}/><ChevronRight size={16}/></button>)}</div>}</section>
- <section className="panel agents-panel"><div className="panel-heading"><div><h2>Agent 状态<span className="count">{agents.length}</span></h2><p>工具 Worker 与模型 Agent 分别标记</p></div><span className="live-label"><i/>LIVE</span></div>{agents.length===0?<Empty title="等待任务分配" icon={<Network size={28}/>}>任务启动后，这里显示实际执行角色、状态和反馈。</Empty>:<div className="agent-list">{agents.slice(0,12).map((a,i)=><div className="agent-line" key={a.id||i}><span className={'agent-symbol '+(a.status==='running'?'working':'')}><Code2 size={17}/></span><div><strong>{a.name||a.role||a.stage||a.id}</strong><small>{a.kind==='llm'?'模型 Agent':'工具 Worker'}{a.message?' · '+short(a.message,40):''}</small></div><Status value={a.status}/></div>)}</div>}</section></div>
- {selected&&<RunDetail detail={detail} events={events} busy={busy} cancel={()=>act('/runs/'+selected+'/cancel')} retry={()=>act('/runs/'+selected+'/retry')} close={()=>setSelected(null)} onOpenRun={id=>{setSelected(id);void refresh()}}/>}
- <DiagnosticPanel busy={busy} run={diagnostic}/><div className="footnote"><ShieldCheck size={14}/><span>仿真通过、策略训练与真机验证分别记录。任务分析不会自动使能机械臂。</span><span className="update">{lastUpdate?'更新于 '+lastUpdate:'等待服务响应'}</span></div></>}
- {page==='knowledge'&&<Knowledge/>}{page==='settings'&&<Settings notify={setToast}/>} {page==='deploy'&&<Deployment/>}
- </main><footer><span>Demo2Real · 本地工作台</span><span>DEMO → SIMULATION → REAL WORLD</span></footer></div>{importOpen&&<ImportModal close={()=>setImportOpen(false)} done={async id=>{setImportOpen(false);setSelected(id);await refresh();setToast('任务已创建，正在进行数据审查')}}/>}{toast&&<div className="toast" role="status"><CheckCircle2 size={17}/>{toast}</div>}</div>
-}
-function Stat({title,number,icon,note,amber=false}:{title:string,number:number,icon:ReactNode,note:string,amber?:boolean}){return <div className={'stat-card '+(amber?'amber':'')}><span className="stat-icon">{icon}</span><div className="stat-title">{title}</div><strong className="stat-number">{number}<small>{title==='正在执行'?'RUNNING':title==='需要关注'?'ATTENTION':'TOTAL'}</small></strong><div className="stat-note">{note}</div></div>}
-function RunDetail({detail,events,busy,cancel,retry,close,onOpenRun}:{detail:any,events:any[],busy:boolean,cancel:()=>void,retry:()=>void,close:()=>void,onOpenRun:(id:string)=>void}){
- const run=detail?.run||detail;const jobs=collection(detail?.tasks||detail?.jobs||detail?.stages||detail?.agents||[]);const artifacts=collection(detail?.artifacts||[]);
- const [tab,setTab]=useState<'runtime'|'task-scene'>('runtime');const [specOpened,setSpecOpened]=useState(false);
- useEffect(()=>{setTab('runtime');setSpecOpened(false)},[run?.id]);
- return <section className="panel run-detail"><div className="panel-heading"><div><span className="tiny-label">RUN DETAILS</span><h2>{run?.name||run?.title||'运行详情'} {run&&<Status value={run.status}/>}</h2></div><div className="actions">{run?.input?.source_run_id&&<button type="button" className="button secondary small" onClick={()=>onOpenRun(run.input.source_run_id)}><GitBranch size={13}/>源任务</button>}{run&&['running','queued','pending'].includes(run.status)&&<button disabled={busy} className="button secondary small" onClick={cancel}><Square size={13}/>取消</button>}{run&&['failed','blocked','interrupted','cancelled','needs_configuration'].includes(run.status)&&<button disabled={busy} className="button secondary small" onClick={retry}><RefreshCw size={14}/>重试</button>}<button className="icon-button" onClick={close} aria-label="关闭运行详情"><X size={18}/></button></div></div>{!detail?<div className="loading"><LoaderCircle className="spin"/>正在读取运行记录</div>:<><div className="run-id">{run?.id||run?.run_id} <span>创建于 {date(run?.created_at)}</span></div><div className="run-detail-tabs" role="tablist" aria-label="运行详情页面"><button type="button" role="tab" aria-selected={tab==='runtime'} className={tab==='runtime'?'active':''} onClick={()=>setTab('runtime')}><Activity size={15}/>运行与证据</button><button type="button" role="tab" aria-selected={tab==='task-scene'} className={tab==='task-scene'?'active':''} onClick={()=>{setSpecOpened(true);setTab('task-scene')}}><Box size={15}/>任务定义 / 场景</button></div><div className="run-pane" hidden={tab!=='runtime'}>{run?.error&&<ErrorBox error={typeof run.error==='string'?run.error:JSON.stringify(run.error)}/>}<ExpertRunPanel key={run?.id||run?.run_id} run={run} tasks={jobs} artifacts={artifacts} busy={busy} onOpenRun={onOpenRun}/><PhaseRecoveryPanel run={run} tasks={jobs} artifacts={artifacts}/><RecoveryLearningPanel run={run} tasks={jobs} artifacts={artifacts}/><SimulationValidationNotice jobs={jobs}/><RunPreviews jobs={jobs} artifacts={artifacts}/><SimulationVisionPreview runId={run?.id||run?.run_id} artifacts={artifacts}/><ScenePreviewPanel runId={run?.id||run?.run_id} artifacts={artifacts} tasks={jobs} specHash={run?.input?.spec_hash} specRevision={run?.input?.spec_revision}/>{jobs.length>0&&<div className="stage-grid">{jobs.map((j,i)=><div className={'stage-card '+(j.status==='running'?'current':'')} key={j.id||i}><div><span className="stage-number">{String(i+1).padStart(2,'0')}</span><Status value={j.status}/></div><h3>{j.name||j.role||j.stage||j.id}</h3><p>{(j.error||j.result?.reason)==='needs_multimodal_analysis'?'需要配置并运行真实多模态分析':j.message||j.error||j.result?.message||j.result?.reason||(j.status==='succeeded'?(j.result?.quality_state==='requires_review'?'审查完成，仍有数据质量检查项':'阶段执行完成，产物已归档'):'等待阶段反馈')}</p>{j.progress?.completed!==undefined&&<small className="progress-label">{j.progress.completed} / {j.progress.total??'?'} {j.progress.unit||'项'}</small>}<small>{j.kind==='llm'?'模型 Agent':'工具 Worker'}</small></div>)}</div>}<div className="details-columns"><div><h3 className="subheading"><Terminal size={16}/>运行事件 <span>{events.length}</span></h3><div className="event-stream">{events.length===0?<p className="muted">尚无事件</p>:events.slice(-80).reverse().map((e,i)=><div className="event-line" key={e.id||i}><time>{date(e.created_at||e.timestamp)}</time><b>{e.type||e.event_type||'event'}</b><span>{e.message||e.payload?.message||e.payload?.reason||short(JSON.stringify(e.payload||e.data||{}),220)}</span></div>)}</div></div><ArtifactPanel artifacts={artifacts}/></div></div><div className="run-pane task-scene-pane" hidden={tab!=='task-scene'}>{specOpened&&<TaskScenePanel key={run?.id||run?.run_id} run={run} tasks={jobs} artifacts={artifacts} onOpenRun={onOpenRun}/>}</div></>}</section>
+
+ function navigate(target:Page){
+  setSelected(null);
+  setPage(target);
+  window.scrollTo(0,0);
+ }
+ function openRun(id:string){
+  setSelected(id);
+  setPage('overview');
+  window.scrollTo(0,0);
+ }
+ async function diagnostic(kind:string,options:DiagnosticOptions){
+  setBusy(true);
+  try {
+   const run=await post('/diagnostics',buildDiagnosticPayload(kind,options));
+   openRun(run.id);
+   await refresh();
+   setToast('已提交离线仿真诊断');
+  } catch(e) {
+   setError((e as Error).message);
+  } finally {
+   setBusy(false);
+  }
+ }
+ async function act(path:string){
+  setBusy(true);
+  try {
+   await post(path);
+   await refresh();
+   await loadDetail();
+   setToast('操作已提交');
+  } catch(e) {
+   setError((e as Error).message);
+  } finally {
+   setBusy(false);
+  }
+ }
+ async function deleteRun(id:string){
+  await api('/runs/'+encodeURIComponent(id),{method:'DELETE'});
+  deletedRuns.current.add(id);
+  setRuns(items=>items.filter(run=>run.id!==id));
+  setPreviews(items=>{
+   const remaining={...items};
+   delete remaining[id];
+   return remaining;
+  });
+  setToast('运行已从列表删除');
+ }
+ const active = runs.filter(isActiveRun).length;
+ return <div className="app workbench-app">
+  <aside className="sidebar">
+   <a className="brand" href="#" aria-label="Demo2Real 首页" onClick={e=>{e.preventDefault();navigate('overview')}}>
+    <img src="/mark.svg" alt="" width="38" height="38"/><span>Demo2Real</span>
+   </a>
+   <nav aria-label="工作台导航">{navigation.map(item=>
+    <button key={item.id} className={page===item.id?'nav-item active':'nav-item'} title={item.label}
+     aria-label={item.label} aria-current={page===item.id?'page':undefined} onClick={()=>navigate(item.id)}>
+     <item.icon size={19}/><span>{item.label}</span>{item.id==='overview'&&active>0&&<span className="nav-count">{active}</span>}
+    </button>)}</nav>
+  </aside>
+  <div className="workspace">
+   <header className="topbar">
+    <span className="workbench-connection"><i className={health?'connected':''} aria-hidden="true"/>
+     {loading?'正在连接本地服务':health?'本地服务已连接':'本地服务未连接'}
+    </span>
+    <button className="icon-button" title="刷新状态" aria-label="刷新状态" onClick={()=>{void refresh();void loadDetail()}}><RefreshCw size={17}/></button>
+   </header>
+   <main>
+    <ErrorBox error={error}/>
+    {page==='overview'&&<>
+     <div hidden={!!selected}><RunGallery runs={runs} previews={previews} loading={loading} onOpen={openRun} onImport={()=>setImportOpen(true)} onDelete={deleteRun}
+      renderStatus={status=><Status value={status}/>} diagnostics={<DiagnosticPanel busy={busy} run={diagnostic}/>}/></div>
+     {selected&&<RunDetail key={selected} detail={(detail?.run??detail)?.id===selected?detail:null} connected={detailConnected}
+      sourceName={runs.find(run=>run.id===detail?.input?.source_run_id)?.name} events={events} busy={busy}
+      cancel={()=>act('/runs/'+selected+'/cancel')} retry={()=>act('/runs/'+selected+'/retry')} close={()=>setSelected(null)}
+      onOpenRun={openRun} onEditModels={()=>setEditingModels(detail?.run??detail)}
+      onReply={async()=>{await Promise.all([loadDetail(),refresh()])}}/>}
+    </>}
+    {page==='knowledge'&&<Knowledge runs={runs} onOpenRun={openRun}/>}
+    {page==='settings'&&<Settings notify={setToast}/>}
+    {page==='policies'&&<OfflinePolicies/>}
+   </main>
+  </div>
+  {importOpen&&<ImportModal close={()=>setImportOpen(false)} done={async id=>{
+   setImportOpen(false);
+   openRun(id);
+   await refresh();
+   setToast('任务已创建');
+  }}/>}
+  {editingModels&&<ImportModal editing={editingModels} close={()=>setEditingModels(null)} done={async()=>{
+   setEditingModels(null);
+   await loadDetail();
+   setToast(editingModels.status==='waiting_input'?'模型选择已保存，可在 Agent 对话中继续':'模型选择已保存，可以重试');
+  }}/>}
+  {toast&&<div className="toast" role="status"><CheckCircle2 size={17}/>{toast}</div>}
+ </div>;
 }
 
-function ImportModal({close,done}:{close:()=>void,done:(id:string)=>void}){
- const [path,setPath]=useState('');const [name,setName]=useState('');const [goal,setGoal]=useState('');const [assetPaths,setAssetPaths]=useState('');const [episode,setEpisode]=useState(0);const [browser,setBrowser]=useState<any>(null);const [error,setError]=useState('');const [busy,setBusy]=useState(false);const [browseBusy,setBrowseBusy]=useState(false);
- async function browse(p:string){setBrowseBusy(true);setError('');try{const d=await api('/fs?path='+encodeURIComponent(p));setBrowser(d);if(d.path)setPath(d.path)}catch(e){setError((e as Error).message)}finally{setBrowseBusy(false)}}
- async function submit(e:FormEvent){e.preventDefault();setBusy(true);setError('');try{const d=await post('/runs',{name:name.trim()||path.replace(/\/$/,'').split('/').pop()||'示教任务',demo_path:path.trim(),source_path:path.trim(),workflow:'demo_to_real',goal,episode_index:episode,asset_paths:assetPaths.split('\n').map(v=>v.trim()).filter(Boolean)});done(d.id||d.run_id||d.run?.id)}catch(e){setError((e as Error).message);setBusy(false)}}
- return <div className="modal-backdrop" onMouseDown={e=>{if(e.target===e.currentTarget&&!busy)close()}}><div className="modal" role="dialog" aria-modal="true" aria-labelledby="import-title"><div className="modal-header"><span className="modal-symbol"><FolderOpen size={23}/></span><button className="icon-button" onClick={close} aria-label="关闭导入"><X size={20}/></button></div><h2 id="import-title">导入一条示教</h2><p className="modal-description">选择运行本服务的电脑上的数据文件夹。原始文件只读，导入副本与产物保存在本项目内。</p><form onSubmit={submit}><label>示教文件夹路径<span className="required">*</span></label><div className="input-action"><input autoFocus value={path} onChange={e=>setPath(e.target.value)} placeholder="/home/…/datasets/my_demo" required/><button type="button" className="button secondary" onClick={()=>browse(path)} disabled={browseBusy}>{browseBusy?<LoaderCircle size={16} className="spin"/>:<Folder size={16}/>}浏览</button></div>{browser&&<div className="folder-browser"><div className="folder-top"><code>{browser.path||path}</code>{(browser.parent||browser.parent_path)&&<button type="button" onClick={()=>browse(browser.parent||browser.parent_path)}>上一级</button>}</div>{collection(browser.entries||browser.directories||browser.children||[]).map((f:any,i)=><button type="button" key={f.path||i} onClick={()=>{const p=f.path||((browser.path||path)+'/'+f.name);if(f.is_dir!==false&&f.type!=='file')void browse(p)}} disabled={f.is_dir===false||f.type==='file'}><Folder size={16}/>{f.name||f.path}<ChevronRight size={14}/></button>)}<button className="select-folder" type="button" onClick={()=>setBrowser(null)}><Check size={15}/>使用当前文件夹</button></div>}<label>任务名称</label><input value={name} onChange={e=>setName(e.target.value)} placeholder="例如：双臂连接器装配"/><div className="import-extra"><div><label htmlFor="episode-index">示教 Episode 索引</label><input id="episode-index" type="number" min="0" step="1" value={episode} onChange={e=>setEpisode(Math.max(0,Number(e.target.value)||0))}/></div><div><label htmlFor="task-goal">目标说明（可选）</label><input id="task-goal" value={goal} onChange={e=>setGoal(e.target.value)} placeholder="供分析Agent参考的任务目标"/></div></div><label htmlFor="asset-paths">本项目内物体模型路径（可选，每行一个）</label><textarea id="asset-paths" className="asset-input" value={assetPaths} onChange={e=>setAssetPaths(e.target.value)} placeholder="assets/objects/my_object/model.obj"/><div className="info-note"><ShieldCheck size={17}/><span>系统先审查数据、检索历史问题，再调度可用模块。缺失模型或环境时会暂停并说明原因。</span></div><ErrorBox error={error}/><div className="modal-actions"><button type="button" className="button secondary" onClick={close} disabled={busy}>取消</button><button className="button primary" type="submit" disabled={busy||!path.trim()}>{busy?<LoaderCircle className="spin" size={17}/>:<ArrowRight size={17}/>}复制并创建任务</button></div></form></div></div>
+const runTabs = [
+ {id:'summary', icon:Image, label:'概览'},
+ {id:'task-scene', icon:Box, label:'任务定义 / 场景'},
+ {id:'action-replay', icon:Activity, label:'专家训练'},
+ {id:'runtime', icon:Activity, label:'运行记录'},
+ {id:'files', icon:FolderOpen, label:'产物文件'},
+] as const;
+
+function RunDetail({detail,sourceName,events,connected,busy,cancel,retry,close,onOpenRun,onEditModels,onReply}:{
+ detail:any; sourceName?:string; events:any[]; connected:boolean; busy:boolean; cancel:()=>void; retry:()=>void; close:()=>void; onOpenRun:(id:string)=>void; onEditModels:()=>void;
+ onReply:()=>Promise<void>;
+}){
+ const run = detail?.run || detail;
+ const jobs = collection(detail?.tasks || detail?.jobs || detail?.stages || detail?.agents || []);
+ const artifacts = collection(detail?.artifacts || []);
+ const stages = jobs.some(job=>job.stage==='agent_dispatch')?jobs.filter(job=>job.kind!=='llm'||job.stage==='scene_layout'):jobs;
+ const [tab,setTab] = useState<typeof runTabs[number]['id']>('summary');
+ const [specOpened,setSpecOpened] = useState(false);
+ const [conversation,setConversation] = useState(false);
+ const questions:AgentQuestion[] = run?.questions ?? [];
+ const pendingQuestions = questions.filter(question=>question.pending);
+ const runId = run?.id || run?.run_id;
+ const simulation = jobs.find(job=>job.stage==='simulation');
+ const hasReplay = !!simulation&&(!!simulation.result?.episode_report_path||events.some(event=>
+  event.type==='expert.rollouts'&&event.task_id===simulation.id&&event.created_at>=(simulation.started_at??Infinity)));
+ const currentTab = tab==='action-replay'&&!hasReplay ? 'summary' : tab;
+ const title = run?.input?.preview && run.name?.startsWith('场景预览 / ')
+  ? ['场景预览', sourceName].filter(Boolean).join(' · ') : run?.name || '运行详情';
+ const activities = taskActivities(jobs,events);
+ const now = Date.now()/1000;
+ const showLiveAgents = !!run && isActiveRun(run);
+ const collaborationEvents=[...new Map([
+  ...collection(run?.collaboration_events),...events.filter(event=>event.type?.startsWith('agent.handoff_')),
+ ].map(event=>[event.id,event])).values()].sort((a,b)=>a.id-b.id);
+ const collaborationProps={tasks:jobs,events:collaborationEvents,artifacts,activities,connected,now};
+ const agentProps = {tasks:jobs, artifacts, activities, connected, now,
+  specialistCount:run?.input?.specialist_count, renderStatus:(status:string)=><Status value={status}/>};
+ function openTaskScene(){
+  setSpecOpened(true);
+  setTab('task-scene');
+ }
+ const hasVisuals = artifacts.some(artifact=>/\/(scene|panels|contact_sheet)\.(png|jpe?g)$/i.test(artifact.path || ''));
+ const editable = [...retryable,'waiting_input'];
+ const editModels = editable.includes(run?.status) && jobs.some(job=>job.stage==='geometry'&&editable.includes(job.status));
+
+ return <section className="panel run-detail" aria-label="运行详情" data-run-id={runId}>
+  <button className="run-back" onClick={close} aria-label="关闭运行详情"><ArrowLeft size={17}/>返回工作台</button>
+  <div className="run-heading">
+   <div>
+    <h1>{title}</h1>
+    {run&&<div className="run-heading-meta"><Status value={run.status}/><time>{date(run.created_at)}</time></div>}
+   </div>
+   {run&&<div className="actions">
+    {run.input?.source_run_id&&<button type="button" className="button secondary small" onClick={()=>onOpenRun(run.input.source_run_id)}><GitBranch size={14}/>源任务</button>}
+    <button type="button" className={'button small '+(pendingQuestions.length?'primary':'secondary')} onClick={()=>setConversation(true)}>
+     <MessageCircle size={15}/>Agent 对话{pendingQuestions.length>0&&<span className="agent-question-count">{pendingQuestions.length}</span>}
+    </button>
+    {(isActiveRun(run)||run.status==='waiting_input')&&<button disabled={busy} className="button secondary small" onClick={cancel}><Square size={13}/>取消</button>}
+    {editModels&&<button type="button" disabled={busy} className="button secondary small" onClick={onEditModels}><Box size={14}/>修改物体模型</button>}
+    {retryable.includes(run.status)&&<button disabled={busy} className="button secondary small" onClick={retry}><RefreshCw size={14}/>重试</button>}
+   </div>}
+  </div>
+  {!detail?<div className="loading"><LoaderCircle className="spin"/>正在读取运行记录</div>:<>
+   <div className="run-detail-tabs" role="tablist" aria-label="运行详情页面">
+    {runTabs.filter(item=>item.id!=='action-replay'||hasReplay).map(item=><button key={item.id} type="button" role="tab" id={'run-tab-'+item.id}
+     aria-controls={'run-pane-'+item.id} aria-selected={currentTab===item.id} className={currentTab===item.id?'active':''}
+     onClick={()=>item.id==='task-scene'?openTaskScene():setTab(item.id)}><item.icon size={16}/>{item.label}</button>)}
+   </div>
+   <div className="run-pane run-summary" id="run-pane-summary" role="tabpanel" aria-labelledby="run-tab-summary" hidden={currentTab!=='summary'}>
+    <TaskUnderstanding tasks={jobs} events={events} artifacts={artifacts} onReplay={hasReplay?()=>setTab('action-replay'):undefined}/>
+    {run.error&&<ErrorBox error={typeof run.error==='string'?run.error:JSON.stringify(run.error)}/>}
+    <RunProgress tasks={jobs} artifacts={artifacts} activities={activities} connected={connected} now={now}
+     agentsVisible={showLiveAgents} onTaskScene={openTaskScene} onConversation={()=>setConversation(true)} renderStatus={agentProps.renderStatus}/>
+    <AgentCollaborationPanel {...collaborationProps} onShowAll={()=>setTab('runtime')}/>
+    <SimulationValidationNotice jobs={jobs}/>
+    <ScenePreviewPanel runId={runId} outputDirectory={run.output_directory} artifacts={artifacts} tasks={jobs} specHash={run.input?.spec_hash} specRevision={run.input?.spec_revision} activeScene={run.active_scene}/>
+    <RunPreviews jobs={jobs} artifacts={artifacts}/>
+    <SimulationVisionPreview runId={runId} outputDirectory={run.output_directory} artifacts={artifacts}/>
+    {!hasVisuals&&!run.input?.expert_run&&!run.input?.phase_recovery&&!run.input?.recovery_learning&&!run.input?.recovery_student&&<div className="run-no-preview"><Image size={26}/>暂无图像预览</div>}
+    <ExpertRunPanel run={run} tasks={jobs} artifacts={artifacts} busy={busy} onOpenRun={onOpenRun}/>
+    <PhaseRecoveryPanel run={run} tasks={jobs} artifacts={artifacts}/>
+    <RecoveryLearningPanel run={run} tasks={jobs} artifacts={artifacts}/>
+   </div>
+   <div className="run-pane task-scene-pane" id="run-pane-task-scene" role="tabpanel" aria-labelledby="run-tab-task-scene" hidden={tab!=='task-scene'}>
+    {specOpened&&<TaskScenePanel run={run} tasks={jobs} artifacts={artifacts} onOpenRun={onOpenRun}/>}
+   </div>
+   {hasReplay&&<div className="run-pane" id="run-pane-action-replay" role="tabpanel" aria-labelledby="run-tab-action-replay" hidden={currentTab!=='action-replay'}>
+    {currentTab==='action-replay'&&<ActionReplayPanel runId={runId} active={simulation.status==='running'}
+      sceneRecheck={simulation.result?.scene_recheck_result} artifacts={artifacts}/>}
+   </div>}
+   <div className="run-pane run-records" id="run-pane-runtime" role="tabpanel" aria-labelledby="run-tab-runtime" hidden={tab!=='runtime'}>
+    <AgentCollaborationPanel {...collaborationProps}/>
+    {jobs.some(job=>job.kind==='llm')&&<details className="agent-assignment-details">
+     <summary>查看分析分工详情</summary><AgentTeamPanel {...agentProps}/>
+    </details>}
+    {stages.length>0&&<section className="run-stages">
+     <h3 className="subheading"><Layers3 size={16}/>执行阶段 <span>{stages.length}</span></h3>
+     <ul>{stages.map((job,i)=><li className="stage-card" key={job.id||i}>
+      <div><strong>{job.name||job.role||job.stage||job.id}</strong><Status value={job.status}/></div>
+      <p>{isTaskProblem(job)?taskMessage(job,jobs):job.message||job.error||job.result?.message||job.result?.reason}</p>
+      {job.progress?.completed!==undefined&&<small>{job.progress.completed} / {job.progress.total??'?'} {job.progress.unit||'项'}</small>}
+     </li>)}</ul>
+    </section>}
+    <section className="run-events">
+     <h3 className="subheading"><Terminal size={16}/>运行事件 <span>{events.length}</span></h3>
+     <div className="event-stream">{events.length===0?<p className="muted">尚无事件</p>:events.slice(-80).reverse().map((e,i)=>
+      <div className="event-line" key={e.id||i}><time>{date(e.created_at||e.timestamp)}</time><b>{e.type||e.event_type||'event'}</b><span>{e.message||e.payload?.message||e.payload?.reason||short(JSON.stringify(e.payload||e.data||{}),220)}</span></div>
+     )}</div>
+    </section>
+   </div>
+   <div className="run-pane run-files" id="run-pane-files" role="tabpanel" aria-labelledby="run-tab-files" hidden={tab!=='files'}>
+    <div className="run-id">运行 ID <code>{runId}</code>{run.output_directory&&<div className="run-output-directory">产物目录 <code>{run.output_directory}/</code></div>}</div>
+    <ArtifactPanel artifacts={artifacts}/>
+   </div>
+   {conversation&&<AgentConversation runId={runId} questions={questions} artifacts={artifacts} onClose={()=>setConversation(false)} onReply={onReply}/>}
+  </>}
+ </section>;
 }
-function Knowledge(){
- const [query,setQuery]=useState('');const [cases,setCases]=useState<any[]>([]);const [error,setError]=useState('');const [busy,setBusy]=useState(true);const [selected,setSelected]=useState<any>(null);const [category,setCategory]=useState('all');
- const search=useCallback(async(q='')=>{setBusy(true);try{const d=await api('/experience?query='+encodeURIComponent(q));setCases(collection(d));setError('')}catch(e){setError((e as Error).message)}finally{setBusy(false)}},[]);
- useEffect(()=>{void search()},[search]);
- const cats=[...new Set(cases.map(c=>c.primary_category||c.category||c.stage||c.record?.stage||'未分类'))];const filtered=category==='all'?cases:cases.filter(c=>(c.primary_category||c.category||c.stage||c.record?.stage||'未分类')===category);
- return <><div className="page-heading"><div><div className="eyebrow">LEARN FROM EVERY ATTEMPT</div><h1>让失败成为下一次的经验。</h1><p>按现象、机构与阶段检索历史问题，保留验证范围和未解决的问题。</p></div><span className="soft-badge"><Database size={15}/>{cases.length} 条检索结果</span></div><div className="knowledge-search panel"><form onSubmit={e=>{e.preventDefault();void search(query)}}><Search size={20}/><input aria-label="搜索历史经验" value={query} onChange={e=>setQuery(e.target.value)} placeholder="搜索现象或机构特征，例如：卡槽、深度、夹持滚动…"/><button className="button primary" disabled={busy}>检索经验</button></form><div className="search-hint">试试 <button onClick={()=>{setQuery('卡槽');void search('卡槽')}}>卡槽</button><button onClick={()=>{setQuery('位姿');void search('位姿')}}>位姿</button><button onClick={()=>{setQuery('松手');void search('松手')}}>松手</button><span>经验仅提供检查依据，不能直接复用尺寸或真机执行权限。</span></div></div><ErrorBox error={error}/><div className="filter-row"><button className={category==='all'?'selected':''} onClick={()=>setCategory('all')}>全部分类</button>{cats.map(c=><button key={c} className={category===c?'selected':''} onClick={()=>setCategory(c)}>{categoryLabels[c]||c}</button>)}</div>{busy?<div className="loading"><LoaderCircle className="spin"/>正在检索历史记录</div>:filtered.length===0?<section className="panel"><Empty title="没有匹配的记录" icon={<Search size={28}/>}>换一个现象、任务阶段或机构关键词试试。</Empty></section>:<div className="knowledge-grid">{filtered.map((c,i)=>{const record=c.record||c;return <button className="knowledge-card panel" key={c.id||i} onClick={()=>setSelected(record)}><div className="case-top"><code>{c.id||c.case_id||record.id||'CASE'}</code><span className="tag">{categoryLabels[c.primary_category||c.category]||c.category||record.stage||'历史案例'}</span></div><h2>{c.title||record.title||c.summary||'问题记录'}</h2><p>{short(c.summary||record.facts?.[0]||record.symptom||record.problem?.symptom||record.problem?.description||record.failure?.symptom||record.description||'查看事实、根因状态、修正和证据',130)}</p><div className="case-footer"><span><i className="amber-dot"/>{label(record.status||record.diagnosis_status||'查看验证范围')}</span><span>查看详情<ArrowUpRight size={14}/></span></div></button>})}</div>}<IncidentLog/>{selected&&<div className="modal-backdrop"><div className="modal wide"><div className="modal-header"><span className="tiny-label">EXPERIENCE RECORD</span><button className="icon-button" onClick={()=>setSelected(null)} aria-label="关闭经验详情"><X/></button></div><h2>{selected.title||selected.id||'经验详情'}</h2><div className="info-note"><ShieldCheck size={17}/><span>以下为存档原始结构。仿真证据与真机验证须分别核验。</span></div><JsonView data={selected}/></div></div>}</>
+
+type ImportBrowserMode = 'demo' | 'models';
+type ModelRun = {id:string; status?:string; input:{source_path?:string; model_sources?:string[]}};
+type ImportBrowser = {
+ mode: ImportBrowserMode;
+ path: string;
+ parent: string|null;
+ entries: {name:string; path:string; is_dir:boolean}[];
+};
+
+function ImportModal({close,done,editing}:{close:()=>void,done:(id:string)=>void,editing?:ModelRun}){
+ const [path,setPath]=useState(editing?.input.source_path||'');
+ const [name,setName]=useState('');
+ const [goal,setGoal]=useState('');
+ const [models,setModels]=useState<string[]>(editing?.input.model_sources||[]);
+ const [modelDirectory,setModelDirectory]=useState('');
+ const [episode,setEpisode]=useState(0);
+ const [specialistCount,setSpecialistCount]=useState<number>();
+ const [browser,setBrowser]=useState<ImportBrowser|null>(null);
+ const [error,setError]=useState('');
+ const [busy,setBusy]=useState(false);
+ const [browsing,setBrowsing]=useState<ImportBrowserMode|null>(null);
+
+ async function browse(directory:string,mode:ImportBrowserMode){
+  setBrowsing(mode);
+  setError('');
+  try{
+   const query=new URLSearchParams({path:directory.trim(),models:String(mode==='models')});
+   const result=await api<Omit<ImportBrowser,'mode'>>('/fs?'+query.toString());
+   setBrowser({...result,mode});
+   if(mode==='demo')setPath(result.path);
+   else setModelDirectory(result.path);
+  }catch(e){setError((e as Error).message)}
+  finally{setBrowsing(null)}
+ }
+
+ function toggleModel(value:string){
+  setModels(current=>current.includes(value)?current.filter(item=>item!==value):[...current,value]);
+ }
+
+ async function submit(e:FormEvent){
+  e.preventDefault();
+  setBusy(true);
+  setError('');
+  try{
+   if(editing){
+    await put('/runs/'+editing.id+'/object-models',{model_sources:models});
+    done(editing.id);
+    return;
+   }
+   const source=path.trim();
+   const d=await post('/runs',{
+    name:name.trim()||source.replace(/\/$/,'').split('/').pop()||'示教任务',
+    source_path:source,goal,episode_index:episode,specialist_count:specialistCount,model_sources:models
+   });
+   done(d.id||d.run_id||d.run?.id);
+  }catch(e){setError((e as Error).message);setBusy(false)}
+ }
+
+ function picker(mode:ImportBrowserMode){
+  if(browser?.mode!==mode)return null;
+  const choosingModels=mode==='models';
+  const entries=browser.entries.filter(item=>item.is_dir||choosingModels&&/\.(obj|stl)$/i.test(item.name));
+  return <div className="folder-browser" role="group" aria-label={choosingModels?'选择物体模型文件':'选择示教文件夹'}>
+   <div className="folder-top">
+    <code title={browser.path}>{browser.path}</code>
+    {browser.path!=='/'&&<button type="button" disabled={!!browsing||busy} onClick={()=>void browse('/',mode)}>根目录</button>}
+    {browser.parent&&<button type="button" disabled={!!browsing||busy} onClick={()=>void browse(browser.parent!,mode)}>上一级</button>}
+   </div>
+   {entries.map(item=>{
+    const selected=models.includes(item.path);
+    return <button type="button" key={item.path} title={item.path}
+     aria-pressed={item.is_dir?undefined:selected} disabled={!!browsing||busy}
+     onClick={()=>item.is_dir?void browse(item.path,mode):toggleModel(item.path)}>
+     {item.is_dir?<Folder size={16}/>:<Box size={16}/>}
+     <span>{item.name}</span>
+     {item.is_dir?<ChevronRight size={14}/>:selected&&<Check size={16}/>}
+    </button>;
+   })}
+   {choosingModels&&!entries.some(item=>!item.is_dir)&&<p className="import-field-help">此目录没有 STL 或 OBJ 文件。</p>}
+   <button className="select-folder" type="button" disabled={!!browsing||busy} onClick={()=>setBrowser(null)}>
+    <Check size={15}/>{choosingModels?'完成选择':'使用当前文件夹'}
+   </button>
+  </div>;
+ }
+
+ return <div className="modal-backdrop" onMouseDown={e=>{if(e.target===e.currentTarget&&!busy)close()}}>
+  <div className="modal" role="dialog" aria-modal="true" aria-labelledby="import-title">
+   <div className="modal-header">
+    <span className="modal-symbol"><FolderOpen size={23}/></span>
+    <button className="icon-button" type="button" onClick={close} disabled={busy} aria-label={editing?'关闭模型选择':'关闭导入'}><X size={20}/></button>
+   </div>
+   <h2 id="import-title">{editing?'修改物体模型':'导入一条示教'}</h2>
+   <p className="modal-description">{editing?'保存后，下次重试将使用这里选择的模型。':'选择本机文件夹，系统会复制示教数据到工作台。'}</p>
+   <form onSubmit={submit}>
+    {!editing&&<>
+    <label htmlFor="demo-path">示教文件夹路径<span className="required">*</span></label>
+    <div className="input-action">
+     <input id="demo-path" autoFocus value={path} onChange={e=>setPath(e.target.value)} placeholder="/home/…/datasets/my_demo" required/>
+     <button type="button" className="button secondary" onClick={()=>void browse(path,'demo')} disabled={!!browsing||busy}>
+      {browsing==='demo'?<LoaderCircle size={16} className="spin"/>:<Folder size={16}/>}浏览
+     </button>
+    </div>
+    {picker('demo')}
+    <label htmlFor="demo-name">任务名称</label>
+    <input id="demo-name" value={name} onChange={e=>setName(e.target.value)} placeholder="例如：双臂连接器装配"/>
+    </>}
+    <div className="import-models">
+     <label htmlFor="select-object-models">物体模型（可选）</label>
+     <div className="import-model-actions">
+      <button id="select-object-models" type="button" className="button secondary" aria-expanded={browser?.mode==='models'}
+       onClick={()=>void browse(modelDirectory,'models')} disabled={!!browsing||busy}>
+       {browsing==='models'?<LoaderCircle size={16} className="spin"/>:<Box size={16}/>}选择 STL / OBJ
+      </button>
+      {models.length>0&&<span aria-live="polite">已选 {models.length} 个</span>}
+     </div>
+     {picker('models')}
+     {models.length>0&&<ul className="import-model-list" aria-label="已选模型">{models.map(model=>{
+      const filename=model.split('/').pop();
+      return <li key={model}><span title={model}>{filename}</span>
+       <button type="button" className="icon-button" aria-label={'移除 '+filename} onClick={()=>toggleModel(model)} disabled={busy}><X size={15}/></button>
+      </li>;
+     })}</ul>}
+    </div>
+    {!editing&&<details className="import-options">
+     <summary><Settings2 size={15}/>示教索引与 Agent<ChevronRight size={14}/></summary>
+     <div className="import-extra">
+      <div><label htmlFor="episode-index">示教 Episode 索引</label><input id="episode-index" type="number" min="0" step="1" value={episode} onChange={e=>setEpisode(Math.max(0,Number(e.target.value)||0))}/></div>
+      <div><label htmlFor="task-goal">目标说明（可选）</label><input id="task-goal" value={goal} onChange={e=>setGoal(e.target.value)} placeholder="供分析Agent参考的任务目标"/></div>
+     </div>
+     <label htmlFor="specialist-count">专责 Agent 数量</label>
+     <select id="specialist-count" value={specialistCount??''} onChange={event=>setSpecialistCount(event.target.value?Number(event.target.value):undefined)} aria-describedby="specialist-count-help">
+      <option value="">自动 · 2–4 个</option><option value="2">2 个</option><option value="3">3 个</option><option value="4">4 个</option>
+     </select>
+     <p id="specialist-count-help" className="import-field-help">总控 Agent 单独计数，按所选数量派工。</p>
+    </details>}
+    <ErrorBox error={error}/>
+    <div className="modal-actions">
+     <button type="button" className="button secondary" onClick={close} disabled={busy}>取消</button>
+     <button className="button primary" type="submit" disabled={busy||!editing&&!path.trim()}>
+      {busy?<LoaderCircle className="spin" size={17}/>:<ArrowRight size={17}/>} {editing?'保存模型选择':'复制并创建任务'}
+     </button>
+    </div>
+   </form>
+  </div>
+ </div>;
 }
 function Settings({notify}:{notify:(v:string)=>void}){
  const [env,setEnv]=useState<Record<string,string>>({});const [envConfig,setEnvConfig]=useState<any>({schema_version:1});const [validation,setValidation]=useState<any>(null);const [error,setError]=useState('');const [busy,setBusy]=useState(false);
  useEffect(()=>{api('/settings/environments').then(value=>{setEnv(value.environments||value.config?.environments||{});setEnvConfig(value.config||{schema_version:1});setValidation(value.validation||value.checks||null)}).catch(e=>setError(e.message))},[]);
  async function saveEnv(){setBusy(true);setError('');try{const value=await put('/settings/environments',{...envConfig,environments:env});setValidation(value.validation||value.checks||value);notify('环境路径已保存并校验')}catch(e){setError((e as Error).message)}finally{setBusy(false)}}
- return <><div className="page-heading"><div><div className="eyebrow">CONFIGURE YOUR WORKSPACE</div><h1>连接环境，按需启用能力。</h1><p>环境只读复用；SDK、资产、数据和运行证据保存在本项目内。</p></div></div><ErrorBox error={error}/><div className="settings-layout"><section className="panel settings-panel"><div className="panel-heading"><div><h2><Terminal size={18}/>外部运行环境</h2><p>统一写入 config/environments.yaml</p></div><span className="tag">只读复用</span></div><div className="settings-fields">{Object.entries(environmentFields).map(([key,title])=><div className="field" key={key}><label htmlFor={key}>{title}</label><input id={key} value={env[key]||''} onChange={e=>setEnv({...env,[key]:e.target.value})} placeholder="填写绝对路径" spellCheck={false}/></div>)}</div><div className="panel-bottom"><span className="muted">不会向共享环境自动安装或修改依赖。</span><button className="button primary" disabled={busy} onClick={saveEnv}>{busy?<LoaderCircle className="spin" size={16}/>:<Check size={16}/>}保存并自检</button></div>{validation&&<details className="validation"><summary>查看路径自检结果</summary><JsonView data={validation}/></details>}</section><div className="settings-side"><ModelProviderSettings notify={notify}/></div></div></>
+ return <>
+  <div className="page-heading"><h1>环境与模型配置</h1></div>
+  <ErrorBox error={error}/>
+  <div className="settings-compact">
+   <details className="panel settings-panel">
+    <summary><Terminal size={17}/>外部运行环境<ChevronRight size={16}/></summary>
+    <div className="settings-fields">{Object.entries(environmentFields).map(([key,title])=><div className="field" key={key}>
+     <label htmlFor={key}>{title}</label>
+     <input id={key} value={env[key]||''} onChange={e=>setEnv({...env,[key]:e.target.value})} placeholder="填写绝对路径" spellCheck={false}/>
+    </div>)}</div>
+    <div className="panel-bottom"><span className="muted">config/environments.yaml</span>
+     <button className="button primary" disabled={busy} onClick={saveEnv}>{busy?<LoaderCircle className="spin" size={16}/>:<Check size={16}/>}保存并自检</button>
+    </div>
+    {validation&&<details className="validation"><summary>查看路径自检结果</summary><JsonView data={validation}/></details>}
+   </details>
+   <ModelProviderSettings notify={notify}/>
+  </div>
+ </>
 }
 
-function Deployment(){
- const [status,setStatus]=useState<any>(null);const [policies,setPolicies]=useState<any[]>([]);const [error,setError]=useState('');
- useEffect(()=>{api('/robots/status').then(setStatus).catch(e=>setError(e.message));api('/policies').then(p=>setPolicies(collection(p))).catch(()=>{})},[]);
- return <><div className="page-heading"><div><div className="eyebrow">ONE CONTRACT · MULTIPLE BACKENDS</div><h1>同一策略契约，连接仿真与真机。</h1><p>高层决策与低层运动分开替换；设备命令统一经过执行层。</p></div><span className="soft-badge"><ShieldCheck size={16}/>默认无运动权限</span></div><ErrorBox error={error}/><ActivePolicyForm policies={policies}/><div className="deploy-grid"><section className="panel"><div className="panel-heading"><div><h2>策略插件</h2><p>仅显示后端注册的实际实现</p></div><GitBranch size={20}/></div>{policies.length===0?<Empty title="尚未取得策略清单" icon={<GitBranch size={28}/>}>接口未配置或尚无兼容策略。训练结果和部署包将在通过检查后归档。</Empty>:<div className="policy-list">{policies.map((p,i)=><div key={p.id||i}><span className="task-icon"><GitBranch size={19}/></span><div><strong>{p.name||p.id||p.plugin_id}</strong><p>{p.role||p.level} · {p.kind||p.implementation||'策略插件'}</p>{(p.description||p.detail)&&<small>{p.description||p.detail}</small>}</div><span className="tag">{p.available===false?'待配置':p.version||p.status||'可用'}</span></div>)}</div>}</section><section className="panel"><div className="panel-heading"><div><h2>机器人执行服务</h2><p>打开页面不会连接、使能或恢复机械臂</p></div><Unplug size={20}/></div><div className="robot-state"><div className="robot-orbit"><Waypoints size={38}/><span className="orbit-dot"/></div><h3>{status?.mode==='mock'?'无硬件模式':status?.mode==='shadow'?'影子模式':status?.connected?'只读状态':'真实机器人未启用'}</h3><p>实机发送权限需要独立的现场核验和试验批次授权。</p><div className="robot-facts"><span>执行模式 <b>{status?.mode||'未连接'}</b></span><span>运动权限 <b className="text-amber">{status?.motion_enabled?'后端报告已开放':'未开放'}</b></span></div></div></section></div><div className="safety-flow"><div><span>01</span><strong>无硬件测试</strong><p>核验消息、限幅、过期与取消</p></div><ChevronRight/><div><span>02</span><strong>只读 / 影子模式</strong><p>读取实际反馈，检查动作提议</p></div><ChevronRight/><div><span>03</span><strong>现场受控测试</strong><p>人工授权、小范围分阶段执行</p></div></div><DeploymentBundles/>{status&&<details className="panel raw-status"><summary>查看执行服务实际状态</summary><JsonView data={status}/></details>}</>
-}
-
-function IncidentLog(){
- const [items,setItems]=useState<any[]>([]);const [open,setOpen]=useState(false);const [summary,setSummary]=useState('');const [category,setCategory]=useState('workflow_integrity');const [stage,setStage]=useState('simulation_test');const [mode,setMode]=useState('simulation');const [busy,setBusy]=useState(false);const [error,setError]=useState('');
- const load=useCallback(async()=>{try{const d=await api('/incidents');setItems(d.incidents||[])}catch(e){setError((e as Error).message)}},[]);useEffect(()=>{void load()},[load]);
- async function save(e:FormEvent){e.preventDefault();setBusy(true);setError('');try{await post('/incidents',{summary,category,primary_category:category,stage,mode,diagnosis:{state:'unknown'},evidence_scope:'unverified_user_report'});setSummary('');setOpen(false);await load()}catch(e){setError((e as Error).message)}finally{setBusy(false)}}
- return <section className="panel incident-panel"><div className="panel-heading"><div><h2>本项目问题记录<span className="count">{items.length}</span></h2><p>自动故障与人工观察都保留，不覆盖旧证据</p></div><button className="text-button" onClick={()=>setOpen(!open)}><Plus size={14}/>{open?'收起记录':'记录问题'}</button></div><ErrorBox error={error}/>{open&&<form className="incident-form" onSubmit={save}><div className="incident-fields"><div className="field"><label>主要类别</label><select value={category} onChange={e=>setCategory(e.target.value)}>{Object.entries(categoryLabels).map(([k,v])=><option key={k} value={k}>{v}</option>)}</select></div><div className="field"><label>发生阶段</label><select value={stage} onChange={e=>setStage(e.target.value)}>{Object.entries({data_ingestion:'数据导入',task_analysis:'任务分析',asset_modeling:'资产建模',scene_build:'场景构建',perception_validation:'感知核验',simulation_test:'仿真测试',training:'训练',deployment:'部署',hardware_test:'真机测试',runtime:'运行时'}).map(([k,v])=><option key={k} value={k}>{v}</option>)}</select></div><div className="field"><label>现场类型</label><select value={mode} onChange={e=>setMode(e.target.value)}><option value="simulation">仿真</option><option value="offline">离线</option><option value="shadow">影子模式</option><option value="hardware">真机观察</option></select></div></div><label>观察到的现象</label><textarea required value={summary} onChange={e=>setSummary(e.target.value)} placeholder="描述触发条件、实际现象和预期结果。原因未知时保持未知。"/><div className="incident-save"><span>这条人工记录不构成已验证根因或真机通过。</span><button className="button primary" disabled={busy||!summary.trim()}>{busy?<LoaderCircle size={15} className="spin"/>:<Check size={15}/>}保存观察记录</button></div></form>}{items.length===0?<div className="mini-empty incident-empty">还没有本项目运行问题。新增问题会按类别、阶段和诊断状态归档。</div>:<div className="incident-list">{items.slice(0,20).map((v,i)=><div key={v.id||i}><span className="tag">{categoryLabels[v.category]||v.category}</span><span>{v.summary}</span><time>{date(v.created_at)}</time><Status value={v.status||'open'}/></div>)}</div>}</section>
+function OfflinePolicies(){
+ const [policies,setPolicies]=useState<any[]|null>(null);
+ const [error,setError]=useState('');
+ useEffect(()=>{
+  api('/policies').then(result=>setPolicies(collection(result))).catch(e=>setError(e.message));
+ },[]);
+ return <>
+  <div className="page-heading">
+   <h1>离线策略</h1>
+  </div>
+  <ErrorBox error={error}/>
+  <ActivePolicyForm policies={policies??[]}/>
+  <div className="policy-grid">
+   <section className="panel">
+    <div className="panel-heading"><h2>策略插件</h2><GitBranch size={20}/></div>
+    {policies===null
+     ? (error?null:<div className="loading"><LoaderCircle className="spin"/>正在读取策略清单</div>)
+     : policies.length===0
+      ? <Empty title="暂无策略插件" icon={<GitBranch size={28}/>}/>
+      : <div className="policy-list">{policies.map(p=><div key={p.id}>
+         <span className="task-icon"><GitBranch size={19}/></span>
+         <div><strong>{p.name||p.id}</strong><p>{p.role==='supervisor'?'高层决策':'低层运动'} · {p.kind==='neural'?'神经网络':p.kind==='extension'?'扩展接口':'脚本'}</p>{(p.description||p.detail)&&<small>{p.description||p.detail}</small>}</div>
+         <span className="tag">{p.available===false?'待配置':p.version||'可用'}</span>
+        </div>)}</div>}
+   </section>
+   <PolicyPackages/>
+  </div>
+ </>
 }
 
 function RunPreviews({jobs,artifacts}:{jobs:any[],artifacts:any[]}){
- const audit=jobs.find(j=>j.stage==='data_audit')?.result;const views=(audit?.videos||[]).filter((v:any)=>v.contact_sheet).slice(0,3);
+ const audit=jobs.find(j=>j.stage==='data_audit')?.result;const views=(audit?.videos||[]).filter((v:any)=>v.contact_sheet);
  if(!views.length)return null;
- const cameraName=(path:string)=>{const name=path.split('/').find(p=>p.includes('observation.images.'))?.replace('observation.images.','');return name==='front'?'前视相机':name==='left_wrist'?'左腕相机':name==='right_wrist'?'右腕相机':name||'视频采样'};
- return <div className="run-previews"><div className="preview-heading"><h3>示教视频采样</h3><span>原始示教帧 · 点击查看完整联系图 · 非仿真相机</span></div><div className="preview-grid">{views.map((v:any,i:number)=>{const artifact=artifacts.find(a=>a.path===v.contact_sheet);if(!artifact)return null;return <a key={v.path||i} href={'/api/artifacts/'+artifact.id} target="_blank" rel="noreferrer"><img src={'/api/artifacts/'+artifact.id} alt={cameraName(v.path)+'真实示教采样'} loading="lazy"/><div><strong>{cameraName(v.path)}</strong><small>Episode {v.episode_index??audit.episode_index??'—'} · {v.sampled_interval_seconds?.map((x:number)=>x.toFixed(1)).join('–')||'未知区间'} s</small><ArrowUpRight size={13}/></div></a>})}</div></div>
+ const cameraName=(path:string)=>{const name=path.split('/').find(p=>p.includes('observation.images.'))?.replace('observation.images.','');return name==='front'?'前视相机':name==='left_wrist'?'左腕相机':name==='right_wrist'?'右腕相机':name==='side'?'侧视相机':name||'视频采样'};
+ return <div className="run-previews"><div className="preview-heading"><h3>示教视频采样</h3><span>点击查看原图</span></div><div className="preview-grid">{views.map((v:any,i:number)=>{const artifact=artifacts.find(a=>a.path===v.contact_sheet);if(!artifact)return null;return <a key={v.path||i} href={'/api/artifacts/'+artifact.id} target="_blank" rel="noreferrer"><img src={'/api/artifacts/'+artifact.id} alt={cameraName(v.path)+'真实示教采样'} loading="lazy"/><div><strong>{cameraName(v.path)}</strong><small>Episode {v.episode_index??audit.episode_index??'—'} · {v.sampled_interval_seconds?.map((x:number)=>x.toFixed(1)).join('–')||'未知区间'} s</small><ArrowUpRight size={13}/></div></a>})}</div></div>
 }
 function ArtifactPanel({artifacts}:{artifacts:any[]}){
  const [filter,setFilter]=useState('summary');const [query,setQuery]=useState('');
@@ -105,14 +563,41 @@ function ArtifactPanel({artifacts}:{artifacts:any[]}){
 
 function ActivePolicyForm({policies}:{policies:any[]}){
  const [active,setActive]=useState<any>(null);const [role,setRole]=useState('supervisor');const [plugin,setPlugin]=useState('rule_supervisor_v1');const [checkpoint,setCheckpoint]=useState('');const [signature,setSignature]=useState('');const [error,setError]=useState('');const [busy,setBusy]=useState(false);const [message,setMessage]=useState('');
- useEffect(()=>{api('/policies/active').then(setActive).catch(e=>setError(e.message))},[]);
+ useEffect(()=>{api('/policies/active').then(value=>{setActive(value);setPlugin(value.active.supervisor)}).catch(e=>setError(e.message))},[]);
  function changeRole(v:string){setRole(v);setPlugin(active?.active?.[v]||(v==='supervisor'?'rule_supervisor_v1':'demo_motion_v1'));setError('');setMessage('')}
- async function apply(){setBusy(true);setError('');setMessage('');try{const payload:any={role,plugin_id:plugin};if(plugin==='state_mlp_v1'){payload.checkpoint=checkpoint;payload.dependency_signature=signature}const r=await put('/policies/active',payload);setActive(r);setMessage('离线策略配置已应用；未触发任何设备命令')}catch(e){setError((e as Error).message)}finally{setBusy(false)}}
- return <section className="panel active-policy"><div className="panel-heading"><div><h2>可替换策略配置</h2><p>高层输出技能决策，低层输出运动提议；按角色单独更换</p></div><span className="tag">仅离线配置</span></div><div className="active-policy-body"><div className="active-policy-state"><span>当前高层 <code>{active?.active?.supervisor||'读取中'}</code></span><span>当前运动 <code>{active?.active?.motion||'读取中'}</code></span></div><div className="policy-switch-fields"><div className="field"><label htmlFor="policy-role">策略层级</label><select id="policy-role" value={role} onChange={e=>changeRole(e.target.value)}><option value="supervisor">高层技能与恢复决策</option><option value="motion">低层连续运动</option></select></div><div className="field"><label htmlFor="policy-plugin">实现插件</label><select id="policy-plugin" value={plugin} onChange={e=>{setPlugin(e.target.value);setMessage('')}}>{policies.filter(p=>p.role===role&&p.kind!=='extension').map(p=><option key={p.id} value={p.id}>{p.id} · {p.kind==='neural'?'神经网络':'脚本'}</option>)}</select></div><button className="button primary" disabled={busy||!active} onClick={apply}>{busy?<LoaderCircle className="spin" size={15}/>:<Check size={15}/>}应用离线策略</button></div>{plugin==='state_mlp_v1'&&<div className="neural-policy-fields"><div className="field"><label htmlFor="policy-checkpoint">本项目内已训练权重</label><input id="policy-checkpoint" value={checkpoint} onChange={e=>setCheckpoint(e.target.value)} placeholder="runs/…/state_supervisor.npz"/></div><div className="field"><label htmlFor="policy-signature">冻结依赖签名（SHA-256）</label><input id="policy-signature" value={signature} onChange={e=>setSignature(e.target.value)} placeholder="训练metadata中的64字符版本签名"/></div><p>还需已训练权重与冻结签名。只训练高层技能分类不能代表低层动作或接触任务已通过。</p></div>}<ErrorBox error={error}/>{message&&<div className="policy-confirmation" role="status"><CheckCircle2 size={15}/>{message}</div>}</div></section>
+ async function apply(){setBusy(true);setError('');setMessage('');try{const payload:any={role,plugin_id:plugin};if(plugin==='state_mlp_v1'){payload.checkpoint=checkpoint;payload.dependency_signature=signature}const r=await put('/policies/active',payload);setActive(r);setMessage('离线策略配置已保存')}catch(e){setError((e as Error).message)}finally{setBusy(false)}}
+ return <section className="panel active-policy"><div className="panel-heading"><div><h2>可替换策略配置</h2><p>高层输出技能决策，低层输出运动提议；按角色单独更换</p></div><span className="tag">仅离线配置</span></div><div className="active-policy-body"><div className="active-policy-state"><span>当前高层 <code>{active?.active?.supervisor||'读取中'}</code></span><span>当前运动 <code>{active?.active?.motion||'读取中'}</code></span></div><div className="policy-switch-fields"><div className="field"><label htmlFor="policy-role">策略层级</label><select id="policy-role" disabled={!active} value={role} onChange={e=>changeRole(e.target.value)}><option value="supervisor">高层技能与恢复决策</option><option value="motion">低层连续运动</option></select></div><div className="field"><label htmlFor="policy-plugin">实现插件</label><select id="policy-plugin" value={plugin} onChange={e=>{setPlugin(e.target.value);setMessage('')}}>{policies.filter(p=>p.role===role&&p.kind!=='extension').map(p=><option key={p.id} value={p.id}>{p.id} · {p.kind==='neural'?'神经网络':'脚本'}</option>)}</select></div><button className="button primary" disabled={busy||!active||!policies.some(p=>p.id===plugin&&p.role===role)} onClick={apply}>{busy?<LoaderCircle className="spin" size={15}/>:<Check size={15}/>}应用离线策略</button></div>{plugin==='state_mlp_v1'&&<div className="neural-policy-fields"><div className="field"><label htmlFor="policy-checkpoint">本项目内已训练权重</label><input id="policy-checkpoint" value={checkpoint} onChange={e=>setCheckpoint(e.target.value)} placeholder="runs/…/state_supervisor.npz"/></div><div className="field"><label htmlFor="policy-signature">冻结依赖签名（SHA-256）</label><input id="policy-signature" value={signature} onChange={e=>setSignature(e.target.value)} placeholder="训练metadata中的64字符版本签名"/></div><p>还需已训练权重与冻结签名。只训练高层技能分类不能代表低层动作或接触任务已通过。</p></div>}<ErrorBox error={error}/>{message&&<div className="policy-confirmation" role="status"><CheckCircle2 size={15}/>{message}</div>}</div></section>
 }
-function DeploymentBundles(){
- const [items,setItems]=useState<any[]>([]);const [error,setError]=useState('');const [selected,setSelected]=useState<any>(null);useEffect(()=>{api('/deployments').then(r=>setItems(r.items||[])).catch(e=>setError(e.message))},[]);
- return <section className="panel bundle-panel"><div className="panel-heading"><div><h2>实际部署包<span className="count">{items.length}</span></h2><p>依赖签名、观测/动作契约与验证证据一并归档</p></div><FileArchive size={19}/></div><ErrorBox error={error}/>{items.length===0?<div className="mini-empty incident-empty">尚无可展示的部署包。生成并通过兼容检查后将在这里列出，真机验证单独记录。</div>:<div className="bundle-list">{items.map((p,i)=><button key={p.path||i} onClick={()=>setSelected(p)}><FileArchive size={19}/><span><strong>{p.manifest?.name||p.manifest?.policy_id||p.path}</strong><small>{p.path}</small></span><span className="tag">{p.manifest?.hardware_verified?'有真机证据':'查看验证范围'}</span><ArrowUpRight size={14}/></button>)}</div>}{selected&&<div className="modal-backdrop"><div className="modal wide"><div className="modal-header"><span className="tiny-label">DEPLOYMENT MANIFEST</span><button className="icon-button" onClick={()=>setSelected(null)} aria-label="关闭部署包详情"><X/></button></div><JsonView data={selected}/></div></div>}</section>
+function PolicyPackages(){
+ const [items,setItems]=useState<any[]|null>(null);
+ const [error,setError]=useState('');
+ const [selected,setSelected]=useState<any>(null);
+ useEffect(()=>{
+  api('/deployments').then(result=>setItems(collection(result))).catch(e=>setError(e.message));
+ },[]);
+ return <section className="panel bundle-panel">
+  <div className="panel-heading">
+   <div><h2>离线策略包{items!==null&&<span className="count">{items.length}</span>}</h2><p>查看权重标识、依赖签名和评价范围</p></div>
+   <FileArchive size={19}/>
+  </div>
+  <ErrorBox error={error}/>
+  {items===null
+   ? (error?null:<div className="loading"><LoaderCircle className="spin"/>正在读取离线策略包</div>)
+   : items.length===0
+    ? <div className="mini-empty incident-empty">暂无已归档的离线策略包。</div>
+    : <div className="bundle-list">{items.map(item=><button type="button" key={item.path} onClick={()=>setSelected(item)}>
+       <FileArchive size={19}/>
+       <span><strong>{item.manifest?.name||item.path.split('/').pop()}</strong><small>{item.manifest?.plugin_id||item.path}</small></span>
+       <span className="tag">{item.manifest?.synthetic_test_fixture?'合成夹具':item.manifest?.mode==='simulation_only'?'仿真专用':'查看详情'}</span>
+       <ArrowUpRight size={14}/>
+      </button>)}</div>}
+  {selected&&<div className="modal-backdrop">
+   <div className="modal wide" role="dialog" aria-modal="true" aria-labelledby="policy-package-title">
+    <div className="modal-header"><h2 id="policy-package-title">策略包清单</h2><button className="icon-button" onClick={()=>setSelected(null)} aria-label="关闭策略包详情"><X/></button></div>
+    <JsonView data={selected}/>
+   </div>
+  </div>}
+ </section>
 }
 
 function DiagnosticPanel({busy,run}:{busy:boolean,run:(kind:string,options:DiagnosticOptions)=>void}){
@@ -121,10 +606,10 @@ function DiagnosticPanel({busy,run}:{busy:boolean,run:(kind:string,options:Diagn
  return <section className="panel diagnostic-panel configurable-diagnostics"><div className="diagnostic-top"><div><span className="tiny-label">MIGRATED REGRESSION · CONNECTOR</span><h2>已迁移任务的离线仿真诊断</h2><p>独立运行原任务的真实 Isaac 回归；不代表新场景自动构建或策略已训练。</p></div><div className="diagnostic-actions"><button className="button secondary small" disabled={busy} onClick={()=>run('connector_bench',options)}><Play size={13}/>机构台架</button><button className="button secondary small" disabled={busy} onClick={()=>run('connector_physics',options)}><Play size={13}/>位姿代理回归</button><button className="button secondary small" disabled={busy} onClick={()=>run('connector_rgbd',options)}><Play size={13}/>RGBD 回归</button></div></div><details className="diagnostic-parameters"><summary><Settings2 size={14}/>位置变化与干扰参数<span>Seed {options.seed} · {options.spread_m.toFixed(3)} m · ±{options.yaw_spread_deg}° · {options.disturbance}</span></summary><div className="diagnostic-fields"><div className="field"><label htmlFor="diagnostic-seed">随机种子</label><input id="diagnostic-seed" type="number" min="0" max="2147483647" step="1" value={options.seed} onChange={e=>numeric('seed',e.target.value)}/></div><div className="field"><label htmlFor="diagnostic-spread">位置变化范围（m）</label><input id="diagnostic-spread" type="number" min="0" max="0.05" step="0.001" value={options.spread_m} onChange={e=>numeric('spread_m',e.target.value)}/></div><div className="field"><label htmlFor="diagnostic-yaw">角度变化范围（± °）</label><input id="diagnostic-yaw" type="number" min="0" max="30" step="1" value={options.yaw_spread_deg} onChange={e=>numeric('yaw_spread_deg',e.target.value)}/></div><div className="field"><label htmlFor="diagnostic-noise">位姿测量噪声（m）</label><input id="diagnostic-noise" type="number" min="0" max="0.005" step="0.0001" value={options.pose_noise_m} onChange={e=>numeric('pose_noise_m',e.target.value)}/></div><div className="field"><label htmlFor="diagnostic-delay">位姿延迟（s）</label><input id="diagnostic-delay" type="number" min="0" max="0.5" step="0.01" value={options.pose_delay_s} onChange={e=>numeric('pose_delay_s',e.target.value)}/></div><div className="field"><label htmlFor="diagnostic-disturbance">物体 / 观测干扰</label><select id="diagnostic-disturbance" value={options.disturbance} onChange={e=>setOptions({...options,disturbance:e.target.value})}><option value="none">无干扰 · none</option><option value="push">推动 · push</option><option value="drop">脱落 · drop</option><option value="relocate">移到别处 · relocate</option><option value="occlude">遮挡 · occlude</option><option value="remove">拿走 · remove</option></select></div></div><div className="diagnostic-scope"><p>机构台架忽略位置、噪声和干扰参数；位姿代理回归使用状态估计代理，RGBD 回归才使用实际渲染图像。参数会随运行保存。</p><p>零噪声基线不表示已具备扰动鲁棒性。有噪声或扩大范围的测试已出现失败，参见经验与失败记录。</p></div></details></section>
 }
 
-function SimulationVisionPreview({runId,artifacts}:{runId:string|undefined,artifacts:any[]}){
- const selected=selectLatestSimulationPanel(artifacts,runId);if(!selected)return null;
+function SimulationVisionPreview({runId,outputDirectory,artifacts}:{runId:string|undefined,outputDirectory?:string,artifacts:any[]}){
+ const selected=selectLatestSimulationPanel(artifacts,runId,outputDirectory);if(!selected)return null;
  const url='/api/artifacts/'+selected.artifact.id;
- return <section className="simulation-vision-panel"><div className="simulation-preview-heading"><span className="tiny-label">SIMULATION RGBD · PERCEPTION ESTIMATES</span><h3>仿真 RGBD 感知结果</h3><p>SAM 快照保留自身时间，FoundationPose 为跟踪估计；此面板来自仿真渲染，与原始示教采样分别记录。</p></div><a href={url} target="_blank" rel="noreferrer" title="打开原始仿真分割与FoundationPose结果图"><img src={url} alt="仿真RGBD相机、SAM分割快照与FoundationPose跟踪估计的真实保存结果" loading="lazy"/><div><span>仿真采样 t = {selected.frameTime.toFixed(3)} s</span><span>点击查看原图<ArrowUpRight size={14}/></span></div></a><p className="simulation-preview-source">保存的感知面板，不是实时视频。{selected.artifact.path}</p></section>
+ return <section className="simulation-vision-panel"><div className="simulation-preview-heading"><h3>仿真 RGBD 感知结果</h3></div><a href={url} target="_blank" rel="noreferrer" title="打开原始仿真分割与FoundationPose结果图"><img src={url} alt="仿真RGBD相机、SAM分割快照与FoundationPose跟踪估计的真实保存结果" loading="lazy"/><div><span>仿真采样 t = {selected.frameTime.toFixed(3)} s</span><span>点击查看原图<ArrowUpRight size={14}/></span></div></a><details className="simulation-preview-source"><summary>图像来源</summary><p>保存的 RGBD 采样面板。SAM 快照保留自己的时间戳，FoundationPose 显示跟踪估计。</p><code>{selected.artifact.path}</code></details></section>
 }
 
 function SimulationValidationNotice({jobs}:{jobs:any[]}){

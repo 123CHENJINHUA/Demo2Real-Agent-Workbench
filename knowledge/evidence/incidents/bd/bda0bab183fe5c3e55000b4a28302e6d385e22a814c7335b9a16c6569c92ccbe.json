@@ -1,0 +1,33 @@
+{
+  "error": "Codex报告失败事件：Reconnecting... 3/5 (stream disconnected before completion: tls handshake eof)",
+  "result": {
+    "status": "failed",
+    "error": "Codex报告失败事件：Reconnecting... 3/5 (stream disconnected before completion: tls handshake eof)",
+    "artifacts": [
+      {
+        "path": "runs/f8ea0d883671437e/agent_validation/model_response.json",
+        "name": "model_response.json"
+      },
+      {
+        "path": "runs/f8ea0d883671437e/agent_validation/codex_cli/1ee197a3bb0e46f0a9c095fa00b65cb2/output_schema.json",
+        "name": "output_schema.json"
+      },
+      {
+        "path": "runs/f8ea0d883671437e/agent_validation/codex_cli/1ee197a3bb0e46f0a9c095fa00b65cb2/final.json",
+        "name": "final.json"
+      },
+      {
+        "path": "runs/f8ea0d883671437e/agent_validation/codex_cli/1ee197a3bb0e46f0a9c095fa00b65cb2/stderr.log",
+        "name": "stderr.log"
+      },
+      {
+        "path": "runs/f8ea0d883671437e/agent_validation/codex_cli/1ee197a3bb0e46f0a9c095fa00b65cb2/events.jsonl",
+        "name": "events.jsonl"
+      },
+      {
+        "path": "runs/f8ea0d883671437e/agent_validation/codex_cli/1ee197a3bb0e46f0a9c095fa00b65cb2/prompt.txt",
+        "name": "prompt.txt"
+      }
+    ]
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "error": "Closed nested contours reveal cavity candidates. A single convex hull fills such free space; use separately reviewed compound/decomposition geometry preserving functional clearance.",
+  "result": {
+    "code": "single_convex_hull_would_fill_voids",
+    "primary_category": "physics_contact",
+    "stage": "asset_modeling",
+    "severity": "blocking",
+    "status": "open",
+    "message": "Closed nested contours reveal cavity candidates. A single convex hull fills such free space; use separately reviewed compound/decomposition geometry preserving functional clearance.",
+    "hardware_verified": false,
+    "asset_id": "object_1"
+  }
+}

@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/home/cjh/Downloads/Demo2Real-Agent-Workbench/application/registry.py", line 38, in _invoke
+    result=entry(ctx)
+  File "/home/cjh/Downloads/Demo2Real-Agent-Workbench/application/action_expert.py", line 281, in run
+    return _run_once(ctx)
+  File "/home/cjh/Downloads/Demo2Real-Agent-Workbench/application/action_expert.py", line 167, in _run_once
+    program=validate_program(raw,objects,arms,cases,require_waypoints=True)
+  File "/home/cjh/Downloads/Demo2Real-Agent-Workbench/contracts/action_program.py", line 110, in validate_program
+    raise ValueError("目标点的阶段时间、机械臂、位置、朝向或夹爪开度无效")
+ValueError: 目标点的阶段时间、机械臂、位置、朝向或夹爪开度无效

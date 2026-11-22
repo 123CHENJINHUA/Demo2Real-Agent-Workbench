@@ -1,0 +1,39 @@
+{
+  "finding_code": null,
+  "primary_category": "runtime_environment",
+  "stage": "simulation_test",
+  "severity": null,
+  "asset_id": null,
+  "record_origin": "worker",
+  "summary": "RuntimeError: Accessed invalid expired 'Shader' prim </visuals/base_link/base_link/node_STL_BINARY_/Looks/DefaultMaterial/DefaultMaterial> ",
+  "observed_behavior": "RuntimeError: Accessed invalid expired 'Shader' prim </visuals/base_link/base_link/node_STL_BINARY_/Looks/DefaultMaterial/DefaultMaterial> ",
+  "mode": "simulation",
+  "run_id": "99fd30fdc594464f",
+  "task_id": "99fd30fdc594464f:simulation",
+  "diagnosis": {
+    "state": "unknown"
+  },
+  "evidence": [
+    {
+      "path": "knowledge/evidence/incidents/c0/c03c95d7b5585fbf5faec9ba7b06adc706898c2ab4f9abaefd3143f9eecd0882.json",
+      "source_reference": ".runtime/tmp/incident-xw5p5kep/failure_result.json",
+      "sha256": "c03c95d7b5585fbf5faec9ba7b06adc706898c2ab4f9abaefd3143f9eecd0882",
+      "bytes": 8415
+    },
+    {
+      "path": "knowledge/evidence/incidents/e3/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.log",
+      "source_reference": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/worker.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  ],
+  "declared_failure_category": "runtime_environment",
+  "declared_failure_stage": "simulation_test",
+  "validation_scope": "module_reported_failure_only_no_hardware_inference",
+  "schema_version": 1,
+  "record_type": "incident",
+  "incident_id": "INC-ca3707dd34f14fb0",
+  "revision": 1,
+  "timestamp_utc": "2026-11-20T07:06:42.486317+00:00",
+  "hardware_verified": false
+}

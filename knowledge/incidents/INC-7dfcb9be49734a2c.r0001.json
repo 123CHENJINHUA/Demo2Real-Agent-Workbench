@@ -1,0 +1,39 @@
+{
+  "finding_code": "grasp_roll_ambiguity",
+  "primary_category": "planning_control",
+  "stage": "asset_modeling",
+  "severity": "review",
+  "asset_id": "object_1",
+  "record_origin": "worker",
+  "summary": "Nearly equal transverse surface PCA moments leave axial roll poorly constrained. Preserve demonstration/table approach and verify opposing jaw patches; do not rotate a down-grasp to a side-grasp from PCA alone.",
+  "observed_behavior": "Nearly equal transverse surface PCA moments leave axial roll poorly constrained. Preserve demonstration/table approach and verify opposing jaw patches; do not rotate a down-grasp to a side-grasp from PCA alone.",
+  "mode": "offline",
+  "run_id": "7e6884f089ca454f",
+  "task_id": "7e6884f089ca454f:functional_geometry",
+  "diagnosis": {
+    "state": "unknown"
+  },
+  "evidence": [
+    {
+      "path": "knowledge/evidence/incidents/cc/cc0568b859415ca0c4d7d0318ac50abb6765bf81af3591ccf139486f2227d297.json",
+      "source_reference": ".runtime/tmp/incident-4ysrdshf/failure_result.json",
+      "sha256": "cc0568b859415ca0c4d7d0318ac50abb6765bf81af3591ccf139486f2227d297",
+      "bytes": 693
+    },
+    {
+      "path": "knowledge/evidence/incidents/e3/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.log",
+      "source_reference": "runs/7e6884f089ca454f/functional_geometry/worker.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  ],
+  "declared_failure_category": "planning_control",
+  "declared_failure_stage": "asset_modeling",
+  "validation_scope": "module_reported_failure_only_no_hardware_inference",
+  "schema_version": 1,
+  "record_type": "incident",
+  "incident_id": "INC-7dfcb9be49734a2c",
+  "revision": 1,
+  "timestamp_utc": "2026-11-22T17:18:41.623902+00:00",
+  "hardware_verified": false
+}

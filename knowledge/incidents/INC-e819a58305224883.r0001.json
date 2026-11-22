@@ -1,0 +1,39 @@
+{
+  "finding_code": null,
+  "primary_category": "workflow_integrity",
+  "stage": "runtime",
+  "severity": null,
+  "asset_id": null,
+  "record_origin": "worker",
+  "summary": "Geometry assets must be copied inside project; symlinks rejected",
+  "observed_behavior": "Geometry assets must be copied inside project; symlinks rejected",
+  "mode": "offline",
+  "run_id": "c046cfad85e14b60",
+  "task_id": "c046cfad85e14b60:geometry",
+  "diagnosis": {
+    "state": "unknown"
+  },
+  "evidence": [
+    {
+      "path": "knowledge/evidence/incidents/d9/d94b8da0e7ea717305f3a6f31710779b506125bdbbb61ffbd8cfeb34ed0ca8df.json",
+      "source_reference": ".runtime/tmp/incident-z5h_jbtt/failure_result.json",
+      "sha256": "d94b8da0e7ea717305f3a6f31710779b506125bdbbb61ffbd8cfeb34ed0ca8df",
+      "bytes": 235
+    },
+    {
+      "path": "knowledge/evidence/incidents/40/40ff793d66a46707fc26729944c848caa7f25a464467dcebd0670930ccffddbb.log",
+      "source_reference": "runs/c046cfad85e14b60/geometry/worker.log",
+      "sha256": "40ff793d66a46707fc26729944c848caa7f25a464467dcebd0670930ccffddbb",
+      "bytes": 587
+    }
+  ],
+  "declared_failure_category": null,
+  "declared_failure_stage": null,
+  "validation_scope": "module_reported_failure_only_no_hardware_inference",
+  "schema_version": 1,
+  "record_type": "incident",
+  "incident_id": "INC-e819a58305224883",
+  "revision": 1,
+  "timestamp_utc": "2026-11-20T08:02:44.703100+00:00",
+  "hardware_verified": false
+}

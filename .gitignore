@@ -54,6 +54,8 @@ test-results/
 /weights/
 /deployments/
 /exports/
+/实景与仿真对比图/
+/docs/ISARC/workflow-images.zip
 /vendor/vision/weights/
 /vendor/vision/third_party/
 *.pt
@@ -90,6 +92,11 @@ test-results/
 /assets/**/*.usdc
 /assets/**/*.usd
 !/assets/**/*.usda
+
+# 体积较大的原始网格单独分发；仿真用的低面数 Connector 网格留在仓库
+/assets/objects/connector/model/1/Meshy_AI_Solar_Cable_Connector_1105093342_texture.obj
+/assets/objects/connector/model/2/Meshy_AI_Black_Cable_Connector_1105095505_texture.obj
+/assets/panels/SolarPanel_50k_27x18cm_m.obj
 
 # 编辑器与操作系统临时文件
 .idea/

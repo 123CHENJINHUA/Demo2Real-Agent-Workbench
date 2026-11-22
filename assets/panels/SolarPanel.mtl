@@ -1,0 +1,9 @@
+# Rhino
+newmtl tripo_material_8cc615e9_bfb0_4e9e_b31e_511c863ae1de
+Ka 0.0000 0.0000 0.0000
+Kd 1.0000 1.0000 1.0000
+Ks 1.0000 1.0000 1.0000
+Tf 0.0000 0.0000 0.0000
+d 1.0000
+Ns 0.0000
+map_Kd SolarPanel_basecolor.jpg

@@ -1,0 +1,70 @@
+{
+  "error": "Exception: Cannot add the object LipB to the scene since its name is not unique",
+  "result": {
+    "status": "failed",
+    "error": "Exception: Cannot add the object LipB to the scene since its name is not unique",
+    "task_spec_hash": "b2809459cbf724f89d472624cceea2f41bd16275713b09f74f5c909a95ab5d87",
+    "spec_revision": 1,
+    "spec_path": "runs/fba8ce6288334f8d/derived/48d6f415ce22410d/scene_build/refinement_1_1795110138960394677/preview_b2809459cbf724f89d472624cceea2f41bd16275713b09f74f5c909a95ab5d87.json",
+    "build_output": "runs/fba8ce6288334f8d/derived/48d6f415ce22410d/scene_build/build_1795110228577581564",
+    "hardware_verified": false,
+    "contact_execution_authorized": false,
+    "source_task_spec_hash": "ed9c035cdbafcd40dd7238acec000344266eb3a51d481a553bfea84f04542cf9",
+    "scene_approximation": true,
+    "report_path": "runs/fba8ce6288334f8d/derived/48d6f415ce22410d/scene_build/refinement_history.json",
+    "artifacts": [
+      {
+        "path": "runs/fba8ce6288334f8d/derived/48d6f415ce22410d/scene_build/refinement_history.json",
+        "name": "refinement_history.json"
+      },
+      {
+        "path": "runs/fba8ce6288334f8d/derived/48d6f415ce22410d/scene_build/build_1795110228577581564/kit.log",
+        "name": "kit.log"
+      },
+      {
+        "path": "runs/fba8ce6288334f8d/derived/48d6f415ce22410d/scene_build/build_1795110228577581564/isaac_build.log",
+        "name": "isaac_build.log"
+      },
+      {
+        "path": "runs/fba8ce6288334f8d/derived/48d6f415ce22410d/scene_build/build_1795110228577581564/task_spec.json",
+        "name": "task_spec.json"
+      },
+      {
+        "path": "runs/fba8ce6288334f8d/derived/48d6f415ce22410d/scene_build/build_1795110228577581564/build_report.json",
+        "name": "build_report.json"
+      },
+      {
+        "path": "runs/fba8ce6288334f8d/derived/48d6f415ce22410d/scene_build/refinement_1_1795110138960394677/scene_layout_report.json",
+        "name": "scene_layout_report.json"
+      },
+      {
+        "path": "runs/fba8ce6288334f8d/derived/48d6f415ce22410d/scene_build/refinement_1_1795110138960394677/preview_b2809459cbf724f89d472624cceea2f41bd16275713b09f74f5c909a95ab5d87.json",
+        "name": "preview_b2809459cbf724f89d472624cceea2f41bd16275713b09f74f5c909a95ab5d87.json"
+      },
+      {
+        "path": "runs/fba8ce6288334f8d/derived/48d6f415ce22410d/scene_build/refinement_1_1795110138960394677/model_response.json",
+        "name": "model_response.json"
+      },
+      {
+        "path": "runs/fba8ce6288334f8d/derived/48d6f415ce22410d/scene_build/refinement_1_1795110138960394677/codex_cli/6a23fa2da5364dc19dea47a78c9e3d78/output_schema.json",
+        "name": "output_schema.json"
+      },
+      {
+        "path": "runs/fba8ce6288334f8d/derived/48d6f415ce22410d/scene_build/refinement_1_1795110138960394677/codex_cli/6a23fa2da5364dc19dea47a78c9e3d78/final.json",
+        "name": "final.json"
+      },
+      {
+        "path": "runs/fba8ce6288334f8d/derived/48d6f415ce22410d/scene_build/refinement_1_1795110138960394677/codex_cli/6a23fa2da5364dc19dea47a78c9e3d78/stderr.log",
+        "name": "stderr.log"
+      },
+      {
+        "path": "runs/fba8ce6288334f8d/derived/48d6f415ce22410d/scene_build/refinement_1_1795110138960394677/codex_cli/6a23fa2da5364dc19dea47a78c9e3d78/events.jsonl",
+        "name": "events.jsonl"
+      },
+      {
+        "path": "runs/fba8ce6288334f8d/derived/48d6f415ce22410d/scene_build/refinement_1_1795110138960394677/codex_cli/6a23fa2da5364dc19dea47a78c9e3d78/prompt.txt",
+        "name": "prompt.txt"
+      }
+    ]
+  }
+}

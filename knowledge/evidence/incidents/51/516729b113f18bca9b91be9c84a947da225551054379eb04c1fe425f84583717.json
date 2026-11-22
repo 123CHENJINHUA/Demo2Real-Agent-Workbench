@@ -1,0 +1,431 @@
+{
+  "error": "worker failed",
+  "result": {
+    "hardware_verified": false,
+    "hardware_commands_sent": 0,
+    "contact_execution_authorized": false,
+    "action_program": {
+      "strategy": "保留连续示教关节轨迹作为基线。正视和侧视抽帧支持从白座抬起带线矩形板、向黄槽横移并下放的顺序。以 episode 2 的请求视频区间归一化，离座后的中段帧约在 0.42，板已下放至黄槽处的末次抽帧约在 0.92。阶段分界供离线优化使用，未直接观测到的事件时刻均为 null，采集时间及跨视角同步待核实。右腕中段夹指跨在板框边缘附近，末帧张开且板已出画。左腕末帧仍可见板边和夹指。右臂先夹、左臂后续协持是待检验候选，首次承载侧、是否交接及最终承载侧均未知。保留零工具偏移，因为缺少已标定的末端对准残差。有损深度仅供定性参考。板底和槽内线缆受遮挡，实际承托、插入深度、锁止及松爪后的保持均待验证。黄槽使用凸包碰撞描述，槽腔可能在碰撞体中被填平，PhysX 中须先核对有效槽腔再评价落座。布局变体将板、白座和黄槽作为一组，以保留板的初始承托及两槽在同一导轨上的相对位置。",
+      "phases": [
+        {
+          "name": "张爪接近板框",
+          "instruction": "沿示教方向以张爪接近各自对准的板框边缘。按当前略倾斜的板姿态检查双指扫掠体与板面、白座上沿及垂线的间隙，在夹指跨对板框且尚有间隙时结束。0.045 米为按场景板件约 0.023 米外形厚度提出的候选总开口，实际可用间隙由碰撞检查确认。",
+          "end_fraction": 0.27,
+          "anchor": "object_0",
+          "arms": [
+            "left",
+            "right"
+          ],
+          "adjustment_m": [
+            0,
+            0,
+            0
+          ],
+          "rotation_adjustment_deg": [
+            0,
+            0,
+            0
+          ],
+          "grippers": [
+            {
+              "arm": "left",
+              "opening_m": 0.045
+            },
+            {
+              "arm": "right",
+              "opening_m": 0.045
+            }
+          ],
+          "contact_free": true
+        },
+        {
+          "name": "对准板框后闭爪",
+          "instruction": "候选承载爪在双指对准板框且线缆位于夹指之外后，才沿记录的闭合曲线合拢。以右侧先夹为候选，左爪在对准前保持张开。参与承载的夹爪须核验双指接触和传力，闭合时序与分工留待连续记录复核。",
+          "end_fraction": 0.34,
+          "anchor": "object_0",
+          "arms": [
+            "left",
+            "right"
+          ],
+          "adjustment_m": [
+            0,
+            0,
+            0
+          ],
+          "rotation_adjustment_deg": [
+            0,
+            0,
+            0
+          ],
+          "grippers": [],
+          "contact_free": false
+        },
+        {
+          "name": "夹持抬板离开白座",
+          "instruction": "经核验的承载爪保持闭合，沿示教上提。以板底越过白座上沿并脱离支座约束为离座判据，检查垂线能随板移动且未被白座挂住。另一臂随记录运动，参与协持时须确认接触和传力。",
+          "end_fraction": 0.4,
+          "anchor": "object_1",
+          "arms": [
+            "left",
+            "right"
+          ],
+          "adjustment_m": [
+            0,
+            0,
+            0
+          ],
+          "rotation_adjustment_deg": [
+            0,
+            0,
+            0
+          ],
+          "grippers": [],
+          "contact_free": false
+        },
+        {
+          "name": "悬空横移并对齐黄槽",
+          "instruction": "沿示教向世界负 X 方向移送，使板底保持在两座上沿之上，接近黄槽时将板底对齐槽口。核对垂线扫掠范围。承载爪保持闭合，如记录显示承载转换，接手侧须建立有效支撑后原承载侧才可卸载。",
+          "end_fraction": 0.7,
+          "anchor": "object_2",
+          "arms": [
+            "left",
+            "right"
+          ],
+          "adjustment_m": [
+            0,
+            0,
+            0
+          ],
+          "rotation_adjustment_deg": [
+            0,
+            0,
+            0
+          ],
+          "grippers": [],
+          "contact_free": false
+        },
+        {
+          "name": "沿黄槽槽口下放板件",
+          "instruction": "板底与槽口对齐后沿示教下放，保持板件近似竖直。检查板底两端与槽口的相对位置、槽壁干涉和线缆夹入风险。在黄槽承托得到确认前，当前承载爪保持闭合。已确认卸载的右爪可随记录张开。",
+          "end_fraction": 0.92,
+          "anchor": "object_2",
+          "arms": [
+            "left",
+            "right"
+          ],
+          "adjustment_m": [
+            0,
+            0,
+            0
+          ],
+          "rotation_adjustment_deg": [
+            0,
+            0,
+            0
+          ],
+          "grippers": [],
+          "contact_free": false
+        },
+        {
+          "name": "确认承托后松爪撤离",
+          "instruction": "末段仅在黄槽独立承托得到确认时采用释放候选。已卸载的右爪保持张开。若左爪仍承载，左爪保持闭合至确认黄槽接载，然后松开并撤至无接触。若右臂仍在承载，同样须等黄槽接载后才可松开。双爪撤离后独立核验板是否竖直保持。承托或撤离无法确认时保留为未验证，完整双爪释放尚无直接影像证据。",
+          "end_fraction": 1,
+          "anchor": "object_2",
+          "arms": [
+            "left",
+            "right"
+          ],
+          "adjustment_m": [
+            0,
+            0,
+            0
+          ],
+          "rotation_adjustment_deg": [
+            0,
+            0,
+            0
+          ],
+          "grippers": [],
+          "contact_free": false
+        }
+      ],
+      "variation_groups": [
+        [
+          "object_0",
+          "object_1",
+          "object_2"
+        ]
+      ],
+      "experience": [
+        {
+          "case_id": "CONN-005",
+          "decision": "use",
+          "reason": "以当前场景位姿锚定支座和黄槽，按臂核对接近、移送和下放的可达性及碰撞间隙。"
+        },
+        {
+          "case_id": "CONN-006",
+          "decision": "use",
+          "reason": "分别核验下放、松爪和双爪撤离后的独立承托。槽壁遮挡使落座和锁止仍需独立证据。"
+        },
+        {
+          "case_id": "INC-e63b326307af4aa0",
+          "decision": "skip",
+          "reason": "本段没有可见的掉落与重抓，固定重抓姿态及其恢复流程与观察到的动作无关。"
+        },
+        {
+          "case_id": "INC-PHASE-ABORT-HOME",
+          "decision": "skip",
+          "reason": "抽帧没有提供夹持丢失或中止归位的证据，归位也不属于本段搬运终态。"
+        },
+        {
+          "case_id": "INC-e12fcb8b2a1e46ea",
+          "decision": "skip",
+          "reason": "本次交付是离线动作程序，记录器分支和日志字段不属于当前任务。"
+        },
+        {
+          "case_id": "INC-35d861969fb64513",
+          "decision": "use",
+          "reason": "采用独立核验双指接触和传力的原则，避免仅凭夹指靠近或爪宽稳定推定协持或交接。"
+        }
+      ]
+    },
+    "action_program_path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795355681812640613/action_program.json",
+    "experience_checklist_path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795355681812640613/experience_checklist.json",
+    "action_acceptance_path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795355681812640613/acceptance.json",
+    "replay_preflight_path": "runs/d89cc5bb00a24ba9/simulation/replay_check_1795355906485025456/replay_preflight.json",
+    "experiment_path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795355681812640613/experiment.json",
+    "scope": "offline_physx_task_action_program",
+    "unmeasured_criteria": [
+      "板完全离开白色支座。中段抽帧已显示板底与白座之间有间隙。",
+      "拟议终态为板竖直落座于黄色槽位。末次抽样显示板已下放至槽位，实际落座待核实。",
+      "双爪完全脱离后，板仍由黄槽独立承托并保持原位。释放及保持过程待核实。"
+    ],
+    "episode_report_path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795355681812640613/episodes.json",
+    "simulated_runs": 1,
+    "reused_runs": 0,
+    "stopped_runs": 1,
+    "scene_recheck": {
+      "kind": "unexpected_robot_contact",
+      "phase": 0,
+      "time_s": 0.058333333333333334,
+      "actors": [
+        "/World/nero2/gripper_link1",
+        "/World/Objects/object_0"
+      ],
+      "object_id": "object_0",
+      "impulse_ns": 0.004797238440789732,
+      "initial_window": true,
+      "scene_manifest_path": "runs/d89cc5bb00a24ba9/scene_build/build_1795353811755092803/scene_manifest.json",
+      "episode_report_path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795355681812640613/episodes.json",
+      "source_scene_hash": "11c1074f011c27a48571f61b10a3b807be791cee56a2899d19f372e3c1499d39"
+    },
+    "status": "failed",
+    "reason": "候选方案未通过示教布局筛选（张爪接近板框），未启动位置泛化验收。0.06 秒检测到非预期的机械臂接触，将回查场景与起始位姿。已回查场景，未取得支持变更的复验证据。",
+    "validation_status": "not_started",
+    "generalization_evaluated": false,
+    "checks": [],
+    "early_falls": [],
+    "test_passed": 0,
+    "test_total": 0,
+    "holdout_total": 0,
+    "selected_candidate": "方案 1",
+    "approach_verified": false,
+    "report_path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795355681812640613/expert_learning_report.json",
+    "scene_recheck_result": {
+      "status": "no_verified_scene_change",
+      "source_scene_manifest": "runs/d89cc5bb00a24ba9/scene_build/build_1795353811755092803/scene_manifest.json",
+      "source_episode_report_path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795355681812640613/episodes.json",
+      "repair_report_path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795355915903931080/scene_repair_1795355915910963191/repair_history.json"
+    },
+    "artifacts": [
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795355681812640613/learning.json",
+        "name": "learning.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795355681812640613/experiment.json",
+        "name": "experiment.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795355681812640613/rollout_scene.usdc",
+        "name": "rollout_scene.usdc"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795355681812640613/kit.log",
+        "name": "kit.log"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795355681812640613/000_demonstrated_layout.npz",
+        "name": "000_demonstrated_layout.npz"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795355681812640613/acceptance.json",
+        "name": "acceptance.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795355681812640613/isaac_learning.log",
+        "name": "isaac_learning.log"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795355681812640613/expert_learning_report.json",
+        "name": "expert_learning_report.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795355681812640613/experience_checklist.json",
+        "name": "experience_checklist.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795355681812640613/episodes.json",
+        "name": "episodes.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795355681812640613/action_program.json",
+        "name": "action_program.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795355681812640613/model_response.json",
+        "name": "model_response.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795355681812640613/verification/model_response.json",
+        "name": "model_response.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795355681812640613/verification/codex_cli/f5c5ccaa098b4e9681398e29654537db/output_schema.json",
+        "name": "output_schema.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795355681812640613/verification/codex_cli/f5c5ccaa098b4e9681398e29654537db/final.json",
+        "name": "final.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795355681812640613/verification/codex_cli/f5c5ccaa098b4e9681398e29654537db/stderr.log",
+        "name": "stderr.log"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795355681812640613/verification/codex_cli/f5c5ccaa098b4e9681398e29654537db/events.jsonl",
+        "name": "events.jsonl"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795355681812640613/verification/codex_cli/f5c5ccaa098b4e9681398e29654537db/prompt.txt",
+        "name": "prompt.txt"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795355681812640613/codex_cli/7c2874292641403186263f4827794ab5/output_schema.json",
+        "name": "output_schema.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795355681812640613/codex_cli/7c2874292641403186263f4827794ab5/final.json",
+        "name": "final.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795355681812640613/codex_cli/7c2874292641403186263f4827794ab5/stderr.log",
+        "name": "stderr.log"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795355681812640613/codex_cli/7c2874292641403186263f4827794ab5/events.jsonl",
+        "name": "events.jsonl"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795355681812640613/codex_cli/7c2874292641403186263f4827794ab5/prompt.txt",
+        "name": "prompt.txt"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/replay_check_1795355906485025456/recorded_trajectory.npz",
+        "name": "recorded_trajectory.npz"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/replay_check_1795355906485025456/replay_preflight.json",
+        "name": "replay_preflight.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/replay_check_1795355906485025456/bounded_replay_trajectory.npz",
+        "name": "bounded_replay_trajectory.npz"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/replay_check_1795355906485025456/replay_check.log",
+        "name": "replay_check.log"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795355915903931080/scene_repair_1795355915910963191/repair_history.json",
+        "name": "repair_history.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795355915903931080/scene_repair_1795355915910963191/attempt_1/model_response.json",
+        "name": "model_response.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795355915903931080/scene_repair_1795355915910963191/attempt_1/codex_cli/8db767e7d0164d3fbfcbf0854c8600c4/output_schema.json",
+        "name": "output_schema.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795355915903931080/scene_repair_1795355915910963191/attempt_1/codex_cli/8db767e7d0164d3fbfcbf0854c8600c4/final.json",
+        "name": "final.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795355915903931080/scene_repair_1795355915910963191/attempt_1/codex_cli/8db767e7d0164d3fbfcbf0854c8600c4/stderr.log",
+        "name": "stderr.log"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795355915903931080/scene_repair_1795355915910963191/attempt_1/codex_cli/8db767e7d0164d3fbfcbf0854c8600c4/events.jsonl",
+        "name": "events.jsonl"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795355915903931080/scene_repair_1795355915910963191/attempt_1/codex_cli/8db767e7d0164d3fbfcbf0854c8600c4/prompt.txt",
+        "name": "prompt.txt"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795353894277089437/experience_checklist.json",
+        "name": "experience_checklist.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795353894277089437/action_program.json",
+        "name": "action_program.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795353894277089437/model_response.json",
+        "name": "model_response.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795353894277089437/verification/codex_cli/f43886660c7149a6b1d27dc15181a8d6/output_schema.json",
+        "name": "output_schema.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795353894277089437/verification/codex_cli/f43886660c7149a6b1d27dc15181a8d6/final.json",
+        "name": "final.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795353894277089437/verification/codex_cli/f43886660c7149a6b1d27dc15181a8d6/stderr.log",
+        "name": "stderr.log"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795353894277089437/verification/codex_cli/f43886660c7149a6b1d27dc15181a8d6/events.jsonl",
+        "name": "events.jsonl"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795353894277089437/verification/codex_cli/f43886660c7149a6b1d27dc15181a8d6/prompt.txt",
+        "name": "prompt.txt"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795353894277089437/codex_cli/7c1f2da735fe401cbc036cc159e37c6e/output_schema.json",
+        "name": "output_schema.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795353894277089437/codex_cli/7c1f2da735fe401cbc036cc159e37c6e/final.json",
+        "name": "final.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795353894277089437/codex_cli/7c1f2da735fe401cbc036cc159e37c6e/stderr.log",
+        "name": "stderr.log"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795353894277089437/codex_cli/7c1f2da735fe401cbc036cc159e37c6e/events.jsonl",
+        "name": "events.jsonl"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795353894277089437/codex_cli/7c1f2da735fe401cbc036cc159e37c6e/prompt.txt",
+        "name": "prompt.txt"
+      }
+    ]
+  }
+}

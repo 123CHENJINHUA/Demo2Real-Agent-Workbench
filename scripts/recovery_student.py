@@ -10,6 +10,6 @@ def main():
  while True:
   r=get('/api/runs/'+rid);print(json.dumps({'run_id':rid,'status':r['status'],'stages':{t['stage']:t['status'] for t in r['tasks']}},ensure_ascii=False),flush=True)
   if r['status'] not in ('queued','running'):
-   output=ROOT/'runs'/rid/'learning_summary.json';output.write_text(json.dumps(r,ensure_ascii=False,indent=2));return
+   output=ROOT/r.get('output_directory','runs/'+rid)/'learning_summary.json';output.parent.mkdir(parents=True,exist_ok=True);output.write_text(json.dumps(r,ensure_ascii=False,indent=2));return
   time.sleep(5)
 if __name__=='__main__':main()

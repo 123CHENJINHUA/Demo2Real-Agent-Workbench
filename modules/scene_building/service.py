@@ -46,7 +46,7 @@ def _stop(process):
 
 def run(ctx):
     root=Path(ctx["root"]).resolve();out=Path(ctx["output_dir"]).resolve();out.relative_to(root)
-    deps=ctx.get("dependencies",{});value=ctx["input"].get("spec_path") or deps.get("task_spec",{}).get("spec_path")
+    deps=ctx.get("dependencies",{});value=deps.get("scene_layout",{}).get("spec_path") or ctx["input"].get("spec_path") or deps.get("task_spec",{}).get("spec_path")
     if not value:return {"status":"needs_configuration","reason":"需要完整任务定义的不可变spec_path；不会从文件名猜场景"}
     try:path,spec,missing=checked_spec(root,value)
     except (ValueError,OSError) as exc:return {"status":"blocked","reason":str(exc)}
@@ -81,6 +81,7 @@ def run(ctx):
         if not result_path.is_file():return {"status":"failed","error":"Isaac构建退出但未生成build_report；查看isaac_build.log","failure_category":"runtime_environment","failure_stage":"scene_build","evidence_paths":[str(log_path.relative_to(root))]}
         result=json.loads(result_path.read_text())
         if process.returncode:result.update(status="failed",error=result.get("error") or "Isaac场景构建失败",failure_category="runtime_environment",failure_stage="scene_build",evidence_paths=[str(result_path.relative_to(root)),str(log_path.relative_to(root))])
-        return result|{"task_spec_hash":spec["content_hash"],"spec_revision":spec["revision"],"spec_path":str(path.relative_to(root)),"build_output":str(build.relative_to(root)),"hardware_verified":False,"contact_execution_authorized":False}
+        binding = spec.get("scene_approximation",{})
+        return result|{"task_spec_hash":spec["content_hash"],"spec_revision":spec["revision"],"spec_path":str(path.relative_to(root)),"build_output":str(build.relative_to(root)),"hardware_verified":False,"contact_execution_authorized":False,"source_task_spec_hash":binding.get("source_task_spec_hash"),"scene_approximation":bool(binding)}
     finally:
         _stop(process);fcntl.flock(lock,fcntl.LOCK_UN);lock.close()

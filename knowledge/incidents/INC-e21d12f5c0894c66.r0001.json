@@ -1,0 +1,39 @@
+{
+  "finding_code": null,
+  "primary_category": "workflow_integrity",
+  "stage": "runtime",
+  "severity": null,
+  "asset_id": null,
+  "record_origin": "worker",
+  "summary": "最终修正版场景的局部物理检查未通过",
+  "observed_behavior": "最终修正版场景的局部物理检查未通过",
+  "mode": "offline",
+  "run_id": "f8ea0d883671437e",
+  "task_id": "f8ea0d883671437e:scene_validation",
+  "diagnosis": {
+    "state": "unknown"
+  },
+  "evidence": [
+    {
+      "path": "knowledge/evidence/incidents/0e/0e02a83ab478d96cb00c9298506e003c031c72f3a637e87074a2756cf54f27db.json",
+      "source_reference": ".runtime/tmp/incident-i7cqtmvg/failure_result.json",
+      "sha256": "0e02a83ab478d96cb00c9298506e003c031c72f3a637e87074a2756cf54f27db",
+      "bytes": 57200
+    },
+    {
+      "path": "knowledge/evidence/incidents/e3/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.log",
+      "source_reference": "runs/f8ea0d883671437e/scene_validation/worker.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  ],
+  "declared_failure_category": null,
+  "declared_failure_stage": null,
+  "validation_scope": "module_reported_failure_only_no_hardware_inference",
+  "schema_version": 1,
+  "record_type": "incident",
+  "incident_id": "INC-e21d12f5c0894c66",
+  "revision": 1,
+  "timestamp_utc": "2026-11-21T08:30:26.044671+00:00",
+  "hardware_verified": false
+}

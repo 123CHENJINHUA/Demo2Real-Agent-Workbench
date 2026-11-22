@@ -1,0 +1,390 @@
+{
+  "error": "worker failed",
+  "result": {
+    "status": "failed",
+    "reason": "学习与留出测试已完成，0/3 个未见位置通过接触和松手保持检查",
+    "scope": "offline_physx_proxy_panel_placement",
+    "generalization_scope": "held_out_xy_positions_of_source_group_and_goal",
+    "task_spec_hash": "f07d8bac822d9bd101c393f8995473f162415d0588515f399f5d63cd5575d094",
+    "completed_trials": 22,
+    "training_trials": 16,
+    "training_history": [
+      {
+        "candidate": 0,
+        "bias_m": [
+          [
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0
+          ]
+        ],
+        "train_mean_reward": 0.5295653095540882
+      },
+      {
+        "candidate": 1,
+        "bias_m": [
+          [
+            0.0,
+            -0.10161795219716968,
+            0.0
+          ],
+          [
+            -0.0,
+            -0.10161795219716968,
+            -0.0
+          ]
+        ],
+        "train_mean_reward": 0.5378884091276065
+      },
+      {
+        "candidate": 2,
+        "bias_m": [
+          [
+            0.008088925511869823,
+            -0.09290939431388973,
+            0.0045198395028732815
+          ],
+          [
+            0.014938426910821801,
+            -0.09965088604510548,
+            0.009710716913333311
+          ]
+        ],
+        "train_mean_reward": 0.5354432197260721
+      },
+      {
+        "candidate": 3,
+        "bias_m": [
+          [
+            0.013493111112331169,
+            -0.11276744997535483,
+            0.00826084053586221
+          ],
+          [
+            -0.0017799239731078312,
+            -0.08538447900694454,
+            -0.0017570582562855073
+          ]
+        ],
+        "train_mean_reward": 0.5340887903194924
+      }
+    ],
+    "demonstration_fit_rmse_rad": 0.00101390565910336,
+    "heldout_passed": 0,
+    "heldout_total": 3,
+    "fixed_reference_heldout_passed": 0,
+    "heldout_mean_xy_error_m": 0.736375372106948,
+    "fixed_reference_heldout_mean_xy_error_m": 0.7422084683817305,
+    "position_amplitude_m": 0.05,
+    "source_episode_index": 2,
+    "enabled_robot_colliders": 8,
+    "rollout_scene_path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795158730882300036/rollout_scene.usdc",
+    "checkpoint_path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795158730882300036/placement_expert.npz",
+    "checkpoint_sha256": "3163e8eea8b1e8c1ef7f8e1f05856386af004b3897d5dfc7cb1785c5b6af2621",
+    "episode_report_path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795158730882300036/episodes.json",
+    "hardware_verified": false,
+    "hardware_commands_sent": 0,
+    "contact_execution_authorized": false,
+    "report_path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795158730882300036/expert_learning_report.json",
+    "replay_preflight_path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/replay_check_1795158730594804956/replay_preflight.json",
+    "artifacts": [
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/replay_check_1795158394345567617/recorded_trajectory.npz",
+        "name": "recorded_trajectory.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/replay_check_1795158394345567617/replay_preflight.json",
+        "name": "replay_preflight.json"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/replay_check_1795158394345567617/bounded_replay_trajectory.npz",
+        "name": "bounded_replay_trajectory.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/replay_check_1795158394345567617/replay_check.log",
+        "name": "replay_check.log"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795157493075723577/placement_expert.npz",
+        "name": "placement_expert.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795157493075723577/experiment.json",
+        "name": "experiment.json"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795157493075723577/kit.log",
+        "name": "kit.log"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795157493075723577/candidate_3_train_3.npz",
+        "name": "candidate_3_train_3.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795157493075723577/candidate_0_train_0.npz",
+        "name": "candidate_0_train_0.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795157493075723577/candidate_1_train_3.npz",
+        "name": "candidate_1_train_3.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795157493075723577/learned_holdout_0.npz",
+        "name": "learned_holdout_0.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795157493075723577/candidate_2_train_1.npz",
+        "name": "candidate_2_train_1.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795157493075723577/candidate_1_train_1.npz",
+        "name": "candidate_1_train_1.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795157493075723577/candidate_3_train_1.npz",
+        "name": "candidate_3_train_1.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795157493075723577/isaac_learning.log",
+        "name": "isaac_learning.log"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795157493075723577/expert_learning_report.json",
+        "name": "expert_learning_report.json"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795157493075723577/candidate_0_train_3.npz",
+        "name": "candidate_0_train_3.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795157493075723577/baseline_holdout_0.npz",
+        "name": "baseline_holdout_0.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795157493075723577/learned_holdout_1.npz",
+        "name": "learned_holdout_1.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795157493075723577/candidate_1_train_2.npz",
+        "name": "candidate_1_train_2.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795157493075723577/candidate_0_train_2.npz",
+        "name": "candidate_0_train_2.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795157493075723577/baseline_holdout_2.npz",
+        "name": "baseline_holdout_2.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795157493075723577/candidate_2_train_0.npz",
+        "name": "candidate_2_train_0.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795157493075723577/episodes.json",
+        "name": "episodes.json"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795157493075723577/baseline_holdout_1.npz",
+        "name": "baseline_holdout_1.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795157493075723577/candidate_2_train_2.npz",
+        "name": "candidate_2_train_2.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795157493075723577/candidate_2_train_3.npz",
+        "name": "candidate_2_train_3.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795157493075723577/candidate_3_train_2.npz",
+        "name": "candidate_3_train_2.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795157493075723577/candidate_0_train_1.npz",
+        "name": "candidate_0_train_1.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795157493075723577/candidate_3_train_0.npz",
+        "name": "candidate_3_train_0.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795157493075723577/candidate_1_train_0.npz",
+        "name": "candidate_1_train_0.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795157493075723577/learned_holdout_2.npz",
+        "name": "learned_holdout_2.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795158730882300036/placement_expert.npz",
+        "name": "placement_expert.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795158730882300036/experiment.json",
+        "name": "experiment.json"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795158730882300036/rollout_scene.usdc",
+        "name": "rollout_scene.usdc"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795158730882300036/kit.log",
+        "name": "kit.log"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795158730882300036/candidate_3_train_3.npz",
+        "name": "candidate_3_train_3.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795158730882300036/candidate_0_train_0.npz",
+        "name": "candidate_0_train_0.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795158730882300036/candidate_1_train_3.npz",
+        "name": "candidate_1_train_3.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795158730882300036/learned_holdout_0.npz",
+        "name": "learned_holdout_0.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795158730882300036/candidate_2_train_1.npz",
+        "name": "candidate_2_train_1.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795158730882300036/candidate_1_train_1.npz",
+        "name": "candidate_1_train_1.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795158730882300036/candidate_3_train_1.npz",
+        "name": "candidate_3_train_1.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795158730882300036/isaac_learning.log",
+        "name": "isaac_learning.log"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795158730882300036/expert_learning_report.json",
+        "name": "expert_learning_report.json"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795158730882300036/candidate_0_train_3.npz",
+        "name": "candidate_0_train_3.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795158730882300036/baseline_holdout_0.npz",
+        "name": "baseline_holdout_0.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795158730882300036/learned_holdout_1.npz",
+        "name": "learned_holdout_1.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795158730882300036/candidate_1_train_2.npz",
+        "name": "candidate_1_train_2.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795158730882300036/candidate_0_train_2.npz",
+        "name": "candidate_0_train_2.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795158730882300036/baseline_holdout_2.npz",
+        "name": "baseline_holdout_2.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795158730882300036/candidate_2_train_0.npz",
+        "name": "candidate_2_train_0.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795158730882300036/episodes.json",
+        "name": "episodes.json"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795158730882300036/baseline_holdout_1.npz",
+        "name": "baseline_holdout_1.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795158730882300036/candidate_2_train_2.npz",
+        "name": "candidate_2_train_2.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795158730882300036/candidate_2_train_3.npz",
+        "name": "candidate_2_train_3.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795158730882300036/candidate_3_train_2.npz",
+        "name": "candidate_3_train_2.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795158730882300036/candidate_0_train_1.npz",
+        "name": "candidate_0_train_1.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795158730882300036/candidate_3_train_0.npz",
+        "name": "candidate_3_train_0.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795158730882300036/candidate_1_train_0.npz",
+        "name": "candidate_1_train_0.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795158730882300036/learned_holdout_2.npz",
+        "name": "learned_holdout_2.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/replay_check_1795157492723818052/recorded_trajectory.npz",
+        "name": "recorded_trajectory.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/replay_check_1795157492723818052/replay_preflight.json",
+        "name": "replay_preflight.json"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/replay_check_1795157492723818052/bounded_replay_trajectory.npz",
+        "name": "bounded_replay_trajectory.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/replay_check_1795157492723818052/replay_check.log",
+        "name": "replay_check.log"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/replay_check_1795158730594804956/recorded_trajectory.npz",
+        "name": "recorded_trajectory.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/replay_check_1795158730594804956/replay_preflight.json",
+        "name": "replay_preflight.json"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/replay_check_1795158730594804956/bounded_replay_trajectory.npz",
+        "name": "bounded_replay_trajectory.npz"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/replay_check_1795158730594804956/replay_check.log",
+        "name": "replay_check.log"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795158394634461933/experiment.json",
+        "name": "experiment.json"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795158394634461933/kit.log",
+        "name": "kit.log"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795158394634461933/isaac_learning.log",
+        "name": "isaac_learning.log"
+      },
+      {
+        "path": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/expert_learning_1795158394634461933/expert_learning_report.json",
+        "name": "expert_learning_report.json"
+      }
+    ]
+  }
+}

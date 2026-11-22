@@ -7,12 +7,14 @@ from pathlib import Path
 import shutil
 import stat
 import struct
+import subprocess
 import zipfile
 import uuid
 from datetime import datetime, timezone
 
 VERSION = "demo_import.v1"
 VIDEO_SUFFIXES = {".mp4", ".mkv", ".avi", ".mov", ".webm"}
+OBJECT_MODEL_SUFFIXES = {".stl", ".obj"}
 
 
 def _inside(root: Path, path: Path) -> Path:
@@ -58,9 +60,77 @@ def _open_input(path: Path) -> int:
             next_directory = os.open(part, directory_flags, dir_fd=current)
             os.close(current)
             current = next_directory
-        return os.open(path.name, flags, dir_fd=current)
+        return os.open(path.name, flags | os.O_NONBLOCK, dir_fd=current)
     finally:
         os.close(current)
+
+
+def model_source_paths(root, values):
+    """Resolve ordered regular mesh files selected through the local browser."""
+    if not isinstance(values, list) or len(values)>200:
+        raise ValueError("请选择最多 200 个 STL 或 OBJ 文件")
+    paths = {}
+    for value in values:
+        if not isinstance(value, str) or not value:
+            raise ValueError("模型选择包含无效路径")
+        path = Path(value).expanduser()
+        if not path.is_absolute() or ".." in path.parts or path.suffix.lower() not in OBJECT_MODEL_SUFFIXES:
+            raise ValueError("请选择本机的 STL 或 OBJ 文件")
+        _no_symlink_path(path)
+        if path.is_relative_to(root) and any(part.startswith('.') for part in path.relative_to(root).parts):
+            raise ValueError("项目内部环境目录不用于模型导入")
+        info = path.lstat()
+        if not stat.S_ISREG(info.st_mode) or not 0 < info.st_size <= 256*1024**2:
+            raise ValueError(f"模型文件为空、过大或不可用：{path.name}")
+        paths[path] = info
+    return paths
+
+
+def _copy_input(original, destination, expected, cancel):
+    fd = _open_input(original)
+    try:
+        before = os.fstat(fd)
+        if not stat.S_ISREG(before.st_mode) or (before.st_ino, before.st_size, before.st_mtime_ns)!=expected:
+            raise ValueError(f"Source changed during import: {original.name}")
+        digest = hashlib.sha256()
+        partial = destination.with_name("." + uuid.uuid4().hex + ".copying")
+        partial_fd = os.open(partial, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, 0o600)
+        try:
+            with os.fdopen(fd, "rb", closefd=False) as src, os.fdopen(partial_fd, "wb") as dst:
+                while chunk := src.read(1024 * 1024):
+                    cancel()
+                    digest.update(chunk)
+                    dst.write(chunk)
+                dst.flush()
+                os.fsync(dst.fileno())
+            after = os.fstat(fd)
+            if (after.st_size, after.st_mtime_ns) != (before.st_size, before.st_mtime_ns):
+                raise ValueError(f"Source changed during import: {original.name}")
+            os.replace(partial, destination)
+        finally:
+            partial.unlink(missing_ok=True)
+        return digest.hexdigest()
+    finally:
+        os.close(fd)
+
+
+def copy_object_models(root, output, values, cancel, emit):
+    originals = model_source_paths(root, values)
+    if not originals:
+        return []
+    signature = [(str(path),info.st_ino,info.st_size,info.st_mtime_ns) for path,info in originals.items()]
+    batch = hashlib.sha256(json.dumps(signature).encode()).hexdigest()[:16]
+    output = _inside(root,output)
+    models = []
+    for index, (original, info) in enumerate(originals.items(), 1):
+        cancel()
+        destination = output / "models" / batch / f"{index:03d}" / original.name
+        _no_symlink_path(destination.parent)
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        digest = _copy_input(original,destination,(info.st_ino,info.st_size,info.st_mtime_ns),cancel)
+        models.append({"path":destination.relative_to(root).as_posix(),"source_path":str(original),"bytes":info.st_size,"sha256":digest})
+        emit("progress", {"unit":"assets","completed":index,"total":len(originals),"current_file":original.name})
+    return models
 
 
 def inspect_dataset(dataset: Path, entries: list[dict]) -> dict:
@@ -81,7 +151,7 @@ def inspect_dataset(dataset: Path, entries: list[dict]) -> dict:
                         result["depth_encoding"] = value
                     if path.name == "info.json" and isinstance(value, dict):
                         result["format"] = "lerobot"
-                        for key in ("fps", "total_frames", "total_episodes", "robot_type", "features", "video_path", "data_path", "codebase_version"):
+                        for key in ("fps", "total_frames", "total_episodes", "robot_type", "calibration_bundle", "features", "video_path", "data_path", "codebase_version"):
                             if key in value:
                                 result[key] = value[key]
                 except (ValueError, OSError) as exc:
@@ -218,30 +288,8 @@ def run(ctx: dict) -> dict:
         _no_symlink_path(destination.parent)
         if not destination.parent.resolve().is_relative_to(staging):
             raise ValueError("Staging path escaped output")
-        fd = _open_input(original)
-        try:
-            before = os.fstat(fd)
-            if (before.st_ino, before.st_size, before.st_mtime_ns) != (item["source_inode"], item["bytes"], item["source_mtime_ns"]):
-                raise ValueError("Source changed during import")
-            digest = hashlib.sha256()
-            partial = destination.with_name(destination.name + ".copying")
-            if partial.is_symlink():
-                raise ValueError("Staging partial symlink rejected")
-            partial_fd = os.open(partial, os.O_WRONLY | os.O_CREAT | os.O_TRUNC | getattr(os, "O_NOFOLLOW", 0), 0o600)
-            with os.fdopen(fd, "rb", closefd=False) as src, os.fdopen(partial_fd, "wb") as dst:
-                while chunk := src.read(1024 * 1024):
-                    cancel()
-                    digest.update(chunk)
-                    dst.write(chunk)
-                dst.flush()
-                os.fsync(dst.fileno())
-            after = os.fstat(fd)
-            if (after.st_size, after.st_mtime_ns) != (before.st_size, before.st_mtime_ns):
-                raise ValueError("Source changed during import")
-            os.replace(partial, destination)
-        finally:
-            os.close(fd)
-        item = {k: v for k, v in item.items() if k != "source_inode"} | {"sha256": digest.hexdigest()}
+        digest = _copy_input(original,destination,(item["source_inode"],item["bytes"],item["source_mtime_ns"]),cancel)
+        item = {k: v for k, v in item.items() if k != "source_inode"} | {"sha256": digest}
         completed.append(item)
         copied += item["bytes"]
         _atomic_json(checkpoint_path, {"schema_version": 1, "source_path": str(source), "files_completed": completed, "bytes_completed": copied})
@@ -256,9 +304,16 @@ def run(ctx: dict) -> dict:
 
 
 
+def _decode_frame(ffmpeg,source,timestamp,frame):
+    subprocess.run([str(ffmpeg),'-nostdin','-hide_banner','-loglevel','error','-y','-ss',f'{timestamp:.6f}',
+                    '-i',str(source),'-frames:v','1','-vf','scale=640:-2',str(frame)],
+                   capture_output=True,timeout=45,check=True)
+    if not frame.is_file():
+        raise ValueError('Decoder did not produce requested sample')
+
+
 def audit(ctx: dict) -> dict:
     """Audit the completed copy and sample real video frames if ffmpeg is configured."""
-    import subprocess
     import yaml
     root = Path(ctx["root"]).resolve()
     output = _inside(root, Path(ctx["output_dir"]))
@@ -270,6 +325,9 @@ def audit(ctx: dict) -> dict:
         imported = dependencies.get("demo_import", {})
         if isinstance(imported, dict) and "result" in imported:
             imported = imported["result"]
+    if not imported and inputs.get("source_import_manifest_path"):
+        source_manifest = _inside(root, root / inputs["source_import_manifest_path"])
+        imported = json.loads(source_manifest.read_text())["result"]
     if not imported.get("manifest_path"):
         raise ValueError("Completed import_result.manifest_path is required")
     manifest_path = _inside(root, root / imported["manifest_path"])
@@ -303,9 +361,24 @@ def audit(ctx: dict) -> dict:
     executable = environments.get("ffmpeg_executable", "")
     video_reports = []
     frames = []
-    video_budget = max(0, min(int(inputs.get("max_sample_videos", 3)), 8))
+    video_budget = max(0, min(int(inputs.get("max_sample_videos", 4)), 8))
     frame_budget = max(1, min(int(inputs.get("frames_per_video", 6)), 12))
     selected_episode = int(inputs.get("episode_index", 0))
+    motion = None
+    initial_pose = None
+    if metadata.get("robot_type") == "nero_dual_follower":
+        from modules.motion_replay.inspect import read_episode, JOINTS
+        from modules.rig_binding import NERO_MODELS
+        try:
+            _, times, positions, openings, hashes = read_episode(root, imported["manifest_path"], selected_episode)
+            initial_pose = {"episode_index":selected_episode, "frame_index":0, "timestamp_s":float(times[0]),
+                "joints":{side:dict(zip(JOINTS, values.tolist())) for side, values in zip(NERO_MODELS, positions[0])},
+                "gripper_opening_m":dict(zip(NERO_MODELS,openings[0].tolist())),"source_data_hashes":hashes}
+            from modules.motion_replay.timing import scene_motion
+            motion = scene_motion(root, NERO_MODELS, times, positions, openings) | {"episode_index":selected_episode}
+            emit("task.progress",{"message":"已分析示教开合与停顿，正在采样对应时刻的各视角画面"})
+        except (ImportError, OSError, ValueError, TypeError, KeyError) as exc:
+            findings.append({"category":"data_quality", "severity":"warning", "code":"scene_motion_unavailable", "message":str(exc)})
     episodes = metadata.get("episodes", [])
     episode = next((record for record in episodes if record.get("episode_index") == selected_episode), None)
     if episodes and episode is None:
@@ -332,7 +405,7 @@ def audit(ctx: dict) -> dict:
     for video_index, record in enumerate(selected_videos[:video_budget]):
         cancel()
         source = _inside(dataset, dataset / record["path"])
-        report = {"path": record["path"], "decoded": False, "samples": []}
+        report = {"path": record["path"], "stream": record.get("stream"), "decoded": False, "samples": []}
         if not executable:
             report["status"] = "needs_ffmpeg_configuration"
             video_reports.append(report)
@@ -346,8 +419,8 @@ def audit(ctx: dict) -> dict:
         try:
             probe = subprocess.run([str(ffprobe), "-v", "error", "-select_streams", "v:0", "-show_entries", "stream=width,height,avg_frame_rate,nb_frames,duration:format=duration", "-of", "json", str(source)], capture_output=True, text=True, timeout=30, check=True)
             details = json.loads(probe.stdout)
-            stream = details.get("streams", [{}])[0]
-            duration = float(stream.get("duration") or details.get("format", {}).get("duration") or 0)
+            video_stream = details.get("streams", [{}])[0]
+            duration = float(video_stream.get("duration") or details.get("format", {}).get("duration") or 0)
             if not 0 < duration < 86400:
                 raise ValueError("Video duration missing or outside sampling budget")
             start, end = 0., duration
@@ -359,16 +432,14 @@ def audit(ctx: dict) -> dict:
                 if not 0 <= start < end <= duration + .1:
                     raise ValueError("Episode video interval outside video duration")
                 end = min(end, duration)
-            report.update(status="decoded_samples", decoded=True, stream=stream, duration_seconds=duration, sampled_interval_seconds=[start, end], episode_index=selected_episode if episode else None)
+            report.update(status="decoded_samples", decoded=True, duration_seconds=duration, sampled_interval_seconds=[start, end], episode_index=selected_episode if episode else None)
             directory = output / f"video_{video_index:02d}"
             directory.mkdir(exist_ok=True)
             for index in range(frame_budget):
                 cancel()
-                timestamp = start + (end - start) * (index + .5) / frame_budget
+                timestamp = start if index == 0 else start + (end - start) * (index + .5) / frame_budget
                 frame = directory / f"frame_{index:03d}.jpg"
-                subprocess.run([str(ffmpeg), "-nostdin", "-hide_banner", "-loglevel", "error", "-y", "-ss", f"{timestamp:.6f}", "-i", str(source), "-frames:v", "1", "-vf", "scale=640:-2", str(frame)], capture_output=True, timeout=45, check=True)
-                if not frame.is_file():
-                    raise ValueError("Decoder did not produce requested sample")
+                _decode_frame(ffmpeg,source,timestamp,frame)
                 item = {"path": frame.relative_to(root).as_posix(), "source_video": record["path"], "requested_timestamp_seconds": timestamp, "timestamp_precision": "ffmpeg accurate seek; not sensor capture calibration", "sha256": _hash(frame)}
                 report["samples"].append(item)
                 frames.append(item)
@@ -378,10 +449,34 @@ def audit(ctx: dict) -> dict:
             if sheet.is_file():
                 report["contact_sheet"] = sheet.relative_to(root).as_posix()
                 emit("artifact", {"path": report["contact_sheet"], "kind": "demo_contact_sheet"})
+            if motion and episode and end-start>=motion['duration_s']-.5:
+                from modules.motion_replay.timing import scene_keyframes
+                report['motion_samples']=[]
+                for index,event in enumerate(scene_keyframes(motion['events'],4)):
+                    cancel()
+                    timestamp=start+event['time_s']
+                    if not start<=timestamp<end:
+                        continue
+                    frame=directory/f'motion_{index:02d}.jpg'
+                    try:
+                        _decode_frame(ffmpeg,source,timestamp,frame)
+                    except (OSError, ValueError, subprocess.SubprocessError):
+                        continue
+                    event_frames=[row['id'] for row in motion['events'] if abs(row['time_s']-event['time_s'])<=.16]
+                    item={'path':frame.relative_to(root).as_posix(),'source_video':record['path'],
+                          'requested_timestamp_seconds':timestamp,'timestamp_precision':'ffmpeg accurate seek; not sensor capture calibration',
+                          'event_ids':event_frames,'sha256':_hash(frame)}
+                    report['motion_samples'].append(item)
+                    frames.append(item)
+                    emit('artifact',{'path':item['path'],'kind':'demo_motion_frame'})
         except (ValueError, OSError, subprocess.SubprocessError, IndexError) as exc:
             report.update(status="decode_failed", error=str(exc)[:1000])
         video_reports.append(report)
     report = {"schema_version": 1, "module_version": VERSION, "status": "completed", "quality_state": "requires_review", "integrity_files_checked": checked, "metadata": metadata, "findings": findings, "videos": video_reports, "sample_frames": frames, "semantic_analysis_performed": False, "metric_depth_verified": False, "episode_index": selected_episode if episode else None, "sample_selection_scope": "episode_metadata_interval" if episode else "first_segment_per_rgb_stream_unverified", "cross_view_capture_sync_verified": False}
+    if initial_pose:
+        report['initial_robot_pose']=initial_pose
+    if motion:
+        report['scene_motion']=motion
     path = output / "data_audit.json"
     _atomic_json(path, report)
     return report | {"report_path": path.relative_to(root).as_posix()}

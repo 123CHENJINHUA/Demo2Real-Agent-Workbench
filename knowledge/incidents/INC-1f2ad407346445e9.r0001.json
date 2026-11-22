@@ -1,0 +1,39 @@
+{
+  "finding_code": null,
+  "primary_category": "workflow_integrity",
+  "stage": "runtime",
+  "severity": null,
+  "asset_id": null,
+  "record_origin": "worker",
+  "summary": "Codex报告失败事件：You’ve hit your usage limit. Upgrade to Pro (https://chatgpt.com/explore/pro), visit https://chatgpt.com/settings/usage to purchase more credits or try again at 10:01 PM.",
+  "observed_behavior": "Codex报告失败事件：You’ve hit your usage limit. Upgrade to Pro (https://chatgpt.com/explore/pro), visit https://chatgpt.com/settings/usage to purchase more credits or try again at 10:01 PM.",
+  "mode": "offline",
+  "run_id": "d89cc5bb00a24ba9",
+  "task_id": "d89cc5bb00a24ba9:agent_dispatch",
+  "diagnosis": {
+    "state": "unknown"
+  },
+  "evidence": [
+    {
+      "path": "knowledge/evidence/incidents/a5/a5a37ff8325dbee90eadede7f7aaedb8f4f9cf1f6d1acb579036e0a9b694a14d.json",
+      "source_reference": ".runtime/tmp/incident-6z7a7h70/failure_result.json",
+      "sha256": "a5a37ff8325dbee90eadede7f7aaedb8f4f9cf1f6d1acb579036e0a9b694a14d",
+      "bytes": 4583
+    },
+    {
+      "path": "knowledge/evidence/incidents/e3/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.log",
+      "source_reference": "runs/d89cc5bb00a24ba9/agent_dispatch/worker.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  ],
+  "declared_failure_category": null,
+  "declared_failure_stage": null,
+  "validation_scope": "module_reported_failure_only_no_hardware_inference",
+  "schema_version": 1,
+  "record_type": "incident",
+  "incident_id": "INC-1f2ad407346445e9",
+  "revision": 1,
+  "timestamp_utc": "2026-11-22T12:54:10.242080+00:00",
+  "hardware_verified": false
+}

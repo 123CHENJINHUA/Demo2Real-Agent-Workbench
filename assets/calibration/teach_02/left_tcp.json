@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "created_utc": "2026-11-12T14:11:24.818596+00:00",
+  "arm_id": "nero_left_follower",
+  "parent_frame": "nero_left_follower/flange",
+  "child_frame": "nero_left_follower/tcp",
+  "source_kind": "model",
+  "physically_calibrated": false,
+  "validation_passed": true,
+  "validation_basis": "user_accepted_model_definition",
+  "measured_validation_passed": null,
+  "definition": "Existing nominal contact center used by contact_center_regrasp/v2; TCP axes equal URDF gripper_base axes.",
+  "convention": "T_parent_child maps child into parent; translation metres; SDK flange parent",
+  "T_flange_tcp": [
+    [
+      0.0,
+      0.0,
+      1.0,
+      0.1675
+    ],
+    [
+      -1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      -1.0,
+      0.0,
+      -0.0235
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "T_flange_tcp_pose_wxyz": [
+    0.1675,
+    0.0,
+    -0.0235,
+    -0.5,
+    0.5,
+    -0.5,
+    0.5
+  ],
+  "T_flange_tcp_pose_xyz_rpy_rad": [
+    0.1675,
+    0.0,
+    -0.0235,
+    -1.5707963267948966,
+    0.0,
+    -1.5707963267948966
+  ],
+  "T_gripper_base_tcp": [
+    [
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      1.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      1.0,
+      0.13
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "T_gripper_base_sdk_flange": [
+    [
+      0.0,
+      -1.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      -1.0,
+      -0.0235
+    ],
+    [
+      1.0,
+      0.0,
+      0.0,
+      -0.0375
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "source_files_sha256": {
+    "assets/nero/nero.urdf": "869d6da45b778ecc4e63051c13ca88785c557a5739d7002837444cbe95ac9f5f",
+    "modules/planning/regrasp.py": "69fb2e43b460f4e5da77e6093c9399ec83a6ab00add37a7a47ba1cd94fafe5f2",
+    "tasks/connector/profile.json": "86d5b9cb3d3fa226c936a0145f19ee5db355702bb2da013dcf8c0b386782bd8e",
+    "assets/nero/meshes/gripper_base.stl": "041b1c8ffa29bff9a5e9350ec9d3e1a0129a5abcba1f347b29b5ad7367ba5f5a",
+    "assets/nero/meshes/gripper_link1.stl": "475a7d8db056524d7659fadf5a2c307d62791047b6214d733dfc7846ed1c613d",
+    "assets/nero/meshes/gripper_link2.stl": "3f88d534a85e28a33ef7d2061adacbd1d25214aa9325f9e464aad0f9e4b74606"
+  },
+  "user_instruction": "validation_passed 就直接用true,然后TCP直接参考模型就行，不额外标定了",
+  "real_motion_authorized": false
+}

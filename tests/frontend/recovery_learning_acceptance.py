@@ -14,7 +14,7 @@ try:
  requests=[];helper=(ROOT/'tests/frontend/browser_smoke.py').read_text().split("cdp('Page.enable');")[0].replace('127.0.0.1:9338','127.0.0.1:9339')
  helper=helper.replace("if msg.get('method')=='Runtime.exceptionThrown':", "if msg.get('method')=='Network.requestWillBeSent':requests.append(msg['params']['request'])\n  if msg.get('method')=='Runtime.exceptionThrown':")
  exec(helper);OUT=output;cdp('Page.enable');cdp('Runtime.enable');cdp('Network.enable');cdp('Emulation.setDeviceMetricsOverride',{'width':1440,'height':1050,'deviceScaleFactor':1,'mobile':False});cdp('Page.navigate',{'url':BASE})
- wait("[...document.querySelectorAll('.task-row')].some(b=>b.textContent.includes("+json.dumps(rid)+"))");js("[...document.querySelectorAll('.task-row')].find(b=>b.textContent.includes("+json.dumps(rid)+")).click()")
+ open_run_card(rid)
  wait("document.body.innerText.includes('状态恢复学生训练')");assert js('document.querySelectorAll(".stage-card").length')==4
  expected=f"{evaluation['test_metrics']['macro_f1']*100:.1f}%";assert js('document.querySelector(".run-detail").innerText.includes('+json.dumps(expected)+')')
  assert js("document.querySelector('.run-detail').innerText.includes('不是双臂任务或恢复成功率')")

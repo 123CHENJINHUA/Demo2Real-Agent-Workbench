@@ -1,0 +1,39 @@
+{
+  "finding_code": "functional_frame_unverified",
+  "primary_category": "geometry_function",
+  "stage": "asset_modeling",
+  "severity": "review",
+  "asset_id": "object_2",
+  "record_origin": "worker",
+  "summary": "PCA axes, contours and grasp regions are geometric candidates; assembly axis, keyed roll, grasp accessibility and hidden lock remain unverified.",
+  "observed_behavior": "PCA axes, contours and grasp regions are geometric candidates; assembly axis, keyed roll, grasp accessibility and hidden lock remain unverified.",
+  "mode": "offline",
+  "run_id": "ae54bca41ac14380",
+  "task_id": "ae54bca41ac14380:functional_geometry",
+  "diagnosis": {
+    "state": "unknown"
+  },
+  "evidence": [
+    {
+      "path": "knowledge/evidence/incidents/86/86c2bc967495a4aa4adfc47edf09d21fc63fe3c2f6c6922c06c7f641b6f5c3bc.json",
+      "source_reference": ".runtime/tmp/incident-pputr904/failure_result.json",
+      "sha256": "86c2bc967495a4aa4adfc47edf09d21fc63fe3c2f6c6922c06c7f641b6f5c3bc",
+      "bytes": 569
+    },
+    {
+      "path": "knowledge/evidence/incidents/e3/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.log",
+      "source_reference": "runs/ae54bca41ac14380/functional_geometry/worker.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  ],
+  "declared_failure_category": "geometry_function",
+  "declared_failure_stage": "asset_modeling",
+  "validation_scope": "module_reported_failure_only_no_hardware_inference",
+  "schema_version": 1,
+  "record_type": "incident",
+  "incident_id": "INC-9da5856d688345b7",
+  "revision": 1,
+  "timestamp_utc": "2026-11-21T18:39:28.112401+00:00",
+  "hardware_verified": false
+}

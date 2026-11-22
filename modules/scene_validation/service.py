@@ -53,18 +53,31 @@ def validate_manifest(root,manifest,usd_audit):
         check('within_table:'+name,within,{'bounds':bounds})
         speed=math.sqrt(sum(v*v for v in d['linear_velocity_m_s']));omega=math.sqrt(sum(v*v for v in d['angular_velocity_rad_s']))
         check('settled:'+name,speed<.03 and omega<.5,{'linear_speed_m_s':speed,'angular_speed_rad_s':omega,'scope':'local settling only, no grasp validation'})
+    registration=spec['robot'].get('preview_registration') or {}
+    if registration:
+        check('estimated_registration_manifest',manifest.get('robot_registration')==registration,'Same estimate as the rendered task snapshot')
+        robots={record['id']:record for record in manifest.get('robots',[])}
+        bases=usd_audit.get('articulation_base_positions',{})
+        for arm in spec['robot']['arms']:
+            actual=bases.get(robots.get(arm['id'],{}).get('root_path'))
+            expected=arm['base_pose']['position_m']
+            check('usd_estimated_robot_base:'+arm['id'],actual is not None and math.dist(actual,expected)<=.001,{'actual_m':actual,'estimated_m':expected})
     for cam in manifest.get('cameras',[]):
         check('usd_camera_exists:'+cam['id'],cam.get('path') in usd_audit.get('cameras',[]),'Camera must exist in independent USD inspection')
         if cam.get('calibration_path'):
             actual=usd_audit.get('camera_properties',{}).get(cam.get('path'),{})
             arm=next((a for a in spec.get('robot',{}).get('arms',[]) if a.get('id')==cam['id']),None)
-            if arm and actual:
+            binding=arm.get('camera') if arm else registration.get('center_camera') if cam['id']=='center' else None
+            if binding and actual:
                 import numpy as np
-                binding=arm.get('camera',{});cal=json.loads(local(binding['calibration_path']).read_text());K=np.asarray(cal['intrinsics']['K']);w,h=cal['width'],cal['height'];samples=np.array([[0,0,1],[.1,.05,1],[-.05,-.1,.8]],float);projected=samples@K.T;expected_pixels=projected[:,:2]/projected[:,2:3]
+                cal=json.loads(local(binding['calibration_path']).read_text());K=np.asarray(cal['intrinsics']['K']);w,h=cal['width'],cal['height'];samples=np.array([[0,0,1],[.1,.05,1],[-.05,-.1,.8]],float);projected=samples@K.T;expected_pixels=projected[:,:2]/projected[:,2:3]
                 ndc=np.asarray(actual['projection_ndc_samples']);pixels=(ndc*np.array([1,-1])+1)*np.array([w/2,h/2]);projection_error=float(np.max(np.abs(pixels-expected_pixels)))
-                expected_mount=np.asarray(binding['T_parent_sdk_flange'])@np.asarray(cal['hand_eye']['matrix']);mount_error=float(np.max(np.abs(np.asarray(actual['T_parent_camera_optical'])-expected_mount)))
+                expected_mount=(np.asarray(binding['T_parent_sdk_flange'])@np.asarray(cal['hand_eye']['matrix']) if arm
+                                else np.asarray(binding['T_world_camera_optical']))
+                parent=binding.get('parent_link','gripper_base') if arm else 'World'
+                mount_error=float(np.max(np.abs(np.asarray(actual['T_parent_camera_optical'])-expected_mount)))
                 check('usd_calibrated_projection:'+cam['id'],projection_error<=.001,{'pixel_error':projection_error,'source':'reopened USD lens versus bound calibration'})
-                check('usd_camera_mount:'+cam['id'],mount_error<=1e-6 and actual['parent_link_path'].endswith('/'+binding.get('parent_link','gripper_base')),{'matrix_error':mount_error,'parent':actual['parent_link_path'],'source':'reopened USD camera versus bound flange transform'})
+                check('usd_camera_mount:'+cam['id'],mount_error<=1e-6 and actual['parent_link_path'].endswith('/'+parent),{'matrix_error':mount_error,'parent':actual['parent_link_path'],'source':'reopened USD camera versus task snapshot'})
             else:check('usd_calibrated_camera:'+cam['id'],False,'Missing actual calibrated USD camera or robot binding')
         p=local(cam['rgb_path']);dimensions=None;contrast=0.;image_error=None
         try:
@@ -79,6 +92,7 @@ def validate_manifest(root,manifest,usd_audit):
         check('rendered_image:'+cam['id'],dimensions==(cam['width'],cam['height']) and contrast>1 and image_error is None,{'path':cam['rgb_path'],'dimensions':dimensions,'decoded_contrast':contrast,'error':image_error})
         check('projection:'+cam['id'],cam.get('maximum_projection_error_px',float('inf'))<=.001,{'maximum_projection_error_px':cam.get('maximum_projection_error_px'),'scope':'internal optical/USD geometry consistency, not hardware calibration'})
     warning=['Scene checks are local structure/render/settling checks. Full task action and retention have not been executed.','Robot/world calibration, unknown obstacles and engineering contact parameters remain independently unverified.']
+    if spec.get('scene_approximation'):warning.append('Scene uses approximated visual proxies. Local simulated checks do not verify real object dimensions or contact geometry.')
     if any('CONN-006' in str(v) for v in spec.get('assumptions',[])):warning.append('Known connector post-release retention failure remains unresolved (CONN-006).')
     return {'status':'succeeded' if all(v['passed'] for v in checks) else 'failed','checks':checks,'warnings':warning,'scope':'scene_structure_camera_and_local_settling_only','task_spec_hash':spec['content_hash'],'spec_revision':spec['revision'],'full_task_evaluated':False,'action_evaluation':'not_executed','retention_evaluation':'not_executed','hardware_verified':False,'contact_execution_authorized':False}
 

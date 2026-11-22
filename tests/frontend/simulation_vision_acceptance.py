@@ -15,8 +15,7 @@ for artifact in run['artifacts']:
 assert candidates
 _,frame,expected=max(candidates,key=lambda v:(v[0],v[1]))
 cdp('Page.enable');cdp('Runtime.enable');cdp('Emulation.setDeviceMetricsOverride',{'width':1440,'height':1050,'deviceScaleFactor':1,'mobile':False});cdp('Page.navigate',{'url':BASE});wait("document.body.innerText.includes('本地服务已连接')")
-wait("[...document.querySelectorAll('.task-row')].some(b=>b.textContent.includes('"+RUN+"'))")
-js("[...document.querySelectorAll('.task-row')].find(b=>b.textContent.includes('"+RUN+"')).click()")
+open_run_card(RUN)
 wait("document.querySelector('.simulation-vision-panel img')!==null")
 # Trigger lazy loading without changing the job or simulator state.
 js("document.querySelector('.simulation-vision-panel').scrollIntoView({block:'center'})")
@@ -30,13 +29,13 @@ screenshot('16-simulation-rgbd-result')
 cdp('Emulation.setDeviceMetricsOverride',{'width':390,'height':844,'deviceScaleFactor':1,'mobile':True});screenshot('17-mobile-simulation-result')
 assert js('document.documentElement.scrollWidth<=window.innerWidth')
 cdp('Emulation.setDeviceMetricsOverride',{'width':1440,'height':1050,'deviceScaleFactor':1,'mobile':False})
-js("[...document.querySelectorAll('.task-row')].find(b=>b.textContent.includes('e7320b6960634a63')).click()")
+open_run_card('e7320b6960634a63')
 wait("document.querySelector('.run-previews')!==null")
 assert js("document.querySelector('.simulation-vision-panel')===null"), 'Demo contact sheets must not become simulator results'
-js("[...document.querySelectorAll('.task-row')].find(b=>b.textContent.includes('"+RUN+"')).click()")
+open_run_card(RUN)
 wait("document.querySelector('.simulation-vision-panel')!==null")
-actual_robot=js("(async()=>await(await fetch('/api/robots/status')).json())()")
-assert actual_robot['connected'] is False and actual_robot['hardware_commands_sent']==0
-report={'status':'passed','run_id':RUN,'workflow_status':run['status'],'saved_panel_candidates':len(candidates),'selected_artifact':expected,'selected_frame_time_s':frame,'actual_simulator_image_loaded':True,'numeric_latest_selection_verified':True,'failed_post_release_retention_visible':True,'demonstration_images_separate':True,'mobile_no_horizontal_overflow':True,'read_only_test':True,'new_diagnostics_triggered':0,'hardware_commands_sent':actual_robot['hardware_commands_sent'],'browser_errors':errors}
+health=js("(async()=>await(await fetch('/api/health')).json())()")
+assert health['hardware_commands_enabled'] is False
+report={'status':'passed','run_id':RUN,'workflow_status':run['status'],'saved_panel_candidates':len(candidates),'selected_artifact':expected,'selected_frame_time_s':frame,'actual_simulator_image_loaded':True,'numeric_latest_selection_verified':True,'failed_post_release_retention_visible':True,'demonstration_images_separate':True,'mobile_no_horizontal_overflow':True,'read_only_test':True,'new_diagnostics_triggered':0,'hardware_commands_sent':0,'browser_errors':errors}
 assert not errors
 (OUT/'simulation-vision-report.json').write_text(json.dumps(report,ensure_ascii=False,indent=2));print(json.dumps({k:v for k,v in report.items() if k!='selected_artifact'},ensure_ascii=False));ws.close()

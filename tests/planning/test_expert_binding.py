@@ -83,8 +83,8 @@ class FrozenPlanTests(unittest.TestCase):
     def test_retention_flag_cannot_be_relaxed(self):
         plan=copy.deepcopy(self.reference);plan['evaluation_rules']['retention_required']=False;plan['content_hash']=binding._seal(plan)
         with self.assertRaisesRegex(ValueError,'evaluation rule flags'):binding.load_plan(ROOT,self.save('retention-flag.json',plan))
-    def test_scripted_source_cannot_be_relabelled_learned(self):
-        plan=copy.deepcopy(self.reference);plan['learned_policy']=True;plan['content_hash']=binding._seal(plan)
+    def test_policy_kind_cannot_be_relabelled(self):
+        plan=copy.deepcopy(self.reference);plan['learned_policy']=not plan['learned_policy'];plan['content_hash']=binding._seal(plan)
         with self.assertRaisesRegex(ValueError,'identity/reporting'):binding.load_plan(ROOT,self.save('learned.json',plan))
     def test_plan_bytes_tampering(self):
         plan=copy.deepcopy(self.reference);plan['binding_scope']='hardware'

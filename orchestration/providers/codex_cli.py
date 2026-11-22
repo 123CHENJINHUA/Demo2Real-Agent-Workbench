@@ -96,6 +96,8 @@ class CodexCliProvider:
         final=out/'final.json';events_path=out/'events.jsonl';stderr_path=out/'stderr.log'
         command=[str(executable),'-a','never','--no-daemon']
         for name in DISABLED_FEATURES:command+=['--disable',name]
+        effort=self.config.get('reasoning_effort')
+        if effort:command+=['-c','model_reasoning_effort='+json.dumps(effort)]
         command+=['--enable','skip_host_skill_discovery','-c','web_search="disabled"','-c','project_doc_max_bytes=0','-c','mcp_servers={}','-c','cli_auth_credentials_store="file"','exec','--json','--ephemeral','--ignore-user-config','--skip-git-repo-check','--sandbox','read-only','--color','never','--output-schema',str(schema_path),'-o',str(final),'-C',str(out)]
         model=self.config.get('model')
         if model:command+=['--model',model]
@@ -134,7 +136,7 @@ class CodexCliProvider:
         try:
             with (out/'prompt.txt').open('rb') as prompt_file,events_path.open('wb') as event_log,stderr_path.open('wb') as stderr:
                 process=subprocess.Popen(command,cwd=out,env=env,stdin=prompt_file,stdout=subprocess.PIPE,stderr=stderr,start_new_session=True,bufsize=0)
-                emit('model.codex_started',{'pid':process.pid,'requested_model':model or None,'model':'CLI default' if not model else 'awaiting CLI report','image_count':len(image_paths),'events_path':str(events_path.relative_to(self.root)),'tools_enabled':False})
+                emit('model.codex_started',{'pid':process.pid,'requested_model':model or None,'requested_reasoning_effort':effort or None,'model':'CLI default' if not model else 'awaiting CLI report','image_count':len(image_paths),'events_path':str(events_path.relative_to(self.root)),'tools_enabled':False})
                 selector=selectors.DefaultSelector();selector.register(process.stdout,selectors.EVENT_READ)
                 try:
                     eof=False
@@ -155,7 +157,7 @@ class CodexCliProvider:
                 finally:selector.close();process.stdout.close()
                 code=process.wait(timeout=5)
             check_cancel()
-            if code!=0:return {'status':'failed','error':f'Codex CLI退出码{code}；查看已归档的真实事件和stderr。','exit_code':code,'artifacts':artifacts}
+            if code!=0:return {'status':'failed','error':'Codex报告失败事件：'+turn_failure if turn_failure else f'Codex CLI退出码{code}；查看已归档的真实事件和stderr。','exit_code':code,'artifacts':artifacts}
             if final.is_file():artifacts.append({'path':str(final.relative_to(self.root))})
             if turn_failure:return {'status':'failed','error':'Codex报告失败事件：'+turn_failure,'artifacts':artifacts}
             if not turn_completed:return {'status':'failed','error':'Codex未报告turn.completed；即使存在final.json也不能认定推理成功。','artifacts':artifacts}
@@ -164,7 +166,7 @@ class CodexCliProvider:
             try:
                 value=json.loads(raw);validate_json(value,output_schema)
             except (ValueError,TypeError) as exc:return {'status':'failed','error':'Codex最终响应不符合JSON契约：'+str(exc),'artifacts':artifacts}
-            return {'status':'succeeded','content':json.dumps(value,ensure_ascii=False),'model':actual_model or 'CLI default','requested_model':model or None,'model_source':'cli_reported' if actual_model else 'not_reported','provider_kind':'codex_cli','usage':usage,'artifacts':artifacts,'evidence_scope':'model_inference_not_independent_validation'}
+            return {'status':'succeeded','content':json.dumps(value,ensure_ascii=False),'model':actual_model or 'CLI default','requested_model':model or None,'requested_reasoning_effort':effort or None,'model_source':'cli_reported' if actual_model else 'not_reported','provider_kind':'codex_cli','usage':usage,'artifacts':artifacts,'evidence_scope':'model_inference_not_independent_validation'}
         except InterruptedError:
             if process:self.stop(process)
             emit('model.codex_cancelled',{'events_path':str(events_path.relative_to(self.root))});raise

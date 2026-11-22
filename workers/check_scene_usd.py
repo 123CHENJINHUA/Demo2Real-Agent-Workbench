@@ -26,6 +26,11 @@ cache=UsdGeom.XformCache()
 for prim in stage.Traverse():
     if str(prim.GetPath()).startswith('/World/Objects/') and prim.HasAPI(UsdPhysics.RigidBodyAPI):
         position=cache.GetLocalToWorldTransform(prim).ExtractTranslation();poses[str(prim.GetPath())]=list(position)
+articulation_bases={}
+for prim in stage.Traverse():
+    if prim.HasAPI(UsdPhysics.ArticulationRootAPI):
+        parent=prim.GetParent()
+        articulation_bases[str(parent.GetPath())]=list(cache.GetLocalToWorldTransform(parent).ExtractTranslation())
 camera_properties={}
 for prim in stage.Traverse():
     if not prim.IsA(UsdGeom.Camera):continue
@@ -82,4 +87,5 @@ for prim in stage.Traverse():
 scene_signature=hashlib.sha256(json.dumps(signature,sort_keys=True).encode()).hexdigest()
 layer=stage.GetRootLayer();root_specs=[{'name':p.name,'active':p.active,'property_count':len(p.properties),'child_count':len(p.nameChildren)} for p in layer.rootPrims]
 report={'support_geometry_version':'used_vertices_and_analytic_support/v1','exact_object_bounds':exact_object_bounds,'scene_signature_without_runtime_graphs':scene_signature,'root_layer_sublayers':list(layer.subLayerPaths),'root_layer_specs':root_specs,'artifact_sha256':artifact_sha256,'joints':joints,'cameras':list(camera_properties),'camera_properties':camera_properties,'object_world_positions':poses,'status':'passed' if not missing and not outside else 'failed','outside':outside,'missing':missing,'layers':dependencies,'rigid_bodies':[str(p.GetPath()) for p in stage.Traverse() if p.HasAPI(UsdPhysics.RigidBodyAPI)],'physics_scenes':[str(p.GetPath()) for p in stage.Traverse() if p.IsA(UsdPhysics.Scene)]}
+report['articulation_base_positions']=articulation_bases
 out.write_text(json.dumps(report,indent=2));print(json.dumps({'status':report['status'],'body_count':len(report['rigid_bodies'])}));sys.exit(0 if report['status']=='passed' else 1)

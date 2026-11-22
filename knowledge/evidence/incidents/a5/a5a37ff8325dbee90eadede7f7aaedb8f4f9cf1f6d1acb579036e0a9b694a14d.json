@@ -1,0 +1,103 @@
+{
+  "error": "Codex报告失败事件：You’ve hit your usage limit. Upgrade to Pro (https://chatgpt.com/explore/pro), visit https://chatgpt.com/settings/usage to purchase more credits or try again at 10:01 PM.",
+  "result": {
+    "status": "failed",
+    "error": "Codex报告失败事件：You’ve hit your usage limit. Upgrade to Pro (https://chatgpt.com/explore/pro), visit https://chatgpt.com/settings/usage to purchase more credits or try again at 10:01 PM.",
+    "diagnosis_report_path": "runs/d89cc5bb00a24ba9/agent_dispatch/diagnosis_1795352038103805958/diagnosis.json",
+    "diagnosis_agent": "总控 Agent",
+    "artifacts": [
+      {
+        "path": "runs/d89cc5bb00a24ba9/agent_dispatch/model_response.json",
+        "name": "model_response.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/agent_dispatch/diagnosis_1795352038103805958/diagnosis.json",
+        "name": "diagnosis.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/agent_dispatch/diagnosis_1795352038103805958/codex_cli/03f91da73ab9456cbf63c73e0407a061/output_schema.json",
+        "name": "output_schema.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/agent_dispatch/diagnosis_1795352038103805958/codex_cli/03f91da73ab9456cbf63c73e0407a061/final.json",
+        "name": "final.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/agent_dispatch/diagnosis_1795352038103805958/codex_cli/03f91da73ab9456cbf63c73e0407a061/stderr.log",
+        "name": "stderr.log"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/agent_dispatch/diagnosis_1795352038103805958/codex_cli/03f91da73ab9456cbf63c73e0407a061/events.jsonl",
+        "name": "events.jsonl"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/agent_dispatch/diagnosis_1795352038103805958/codex_cli/03f91da73ab9456cbf63c73e0407a061/prompt.txt",
+        "name": "prompt.txt"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/agent_dispatch/codex_cli/2fbd43f1a4404b3f90475751690f3090/output_schema.json",
+        "name": "output_schema.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/agent_dispatch/codex_cli/2fbd43f1a4404b3f90475751690f3090/final.json",
+        "name": "final.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/agent_dispatch/codex_cli/2fbd43f1a4404b3f90475751690f3090/stderr.log",
+        "name": "stderr.log"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/agent_dispatch/codex_cli/2fbd43f1a4404b3f90475751690f3090/events.jsonl",
+        "name": "events.jsonl"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/agent_dispatch/codex_cli/2fbd43f1a4404b3f90475751690f3090/prompt.txt",
+        "name": "prompt.txt"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/agent_dispatch/codex_cli/28636c7c010541d6a1364934ce771fc8/output_schema.json",
+        "name": "output_schema.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/agent_dispatch/codex_cli/28636c7c010541d6a1364934ce771fc8/final.json",
+        "name": "final.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/agent_dispatch/codex_cli/28636c7c010541d6a1364934ce771fc8/stderr.log",
+        "name": "stderr.log"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/agent_dispatch/codex_cli/28636c7c010541d6a1364934ce771fc8/events.jsonl",
+        "name": "events.jsonl"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/agent_dispatch/codex_cli/28636c7c010541d6a1364934ce771fc8/prompt.txt",
+        "name": "prompt.txt"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/agent_dispatch/diagnosis_1795351428963092604/diagnosis.json",
+        "name": "diagnosis.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/agent_dispatch/diagnosis_1795351428963092604/codex_cli/d867546b716549e4ba5e77d5469f7ce4/output_schema.json",
+        "name": "output_schema.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/agent_dispatch/diagnosis_1795351428963092604/codex_cli/d867546b716549e4ba5e77d5469f7ce4/final.json",
+        "name": "final.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/agent_dispatch/diagnosis_1795351428963092604/codex_cli/d867546b716549e4ba5e77d5469f7ce4/stderr.log",
+        "name": "stderr.log"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/agent_dispatch/diagnosis_1795351428963092604/codex_cli/d867546b716549e4ba5e77d5469f7ce4/events.jsonl",
+        "name": "events.jsonl"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/agent_dispatch/diagnosis_1795351428963092604/codex_cli/d867546b716549e4ba5e77d5469f7ce4/prompt.txt",
+        "name": "prompt.txt"
+      }
+    ]
+  }
+}

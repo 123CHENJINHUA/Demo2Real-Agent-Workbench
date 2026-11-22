@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/home/cjh/Downloads/Demo2Real-Agent-Workbench/workers/run_stage.py", line 21, in main
+    try:result=execute_stage(args.stage,ctx)
+  File "/home/cjh/Downloads/Demo2Real-Agent-Workbench/application/registry.py", line 73, in execute_stage
+    result=entry(ctx | {'stage':stage})
+  File "/home/cjh/Downloads/Demo2Real-Agent-Workbench/modules/geometry/__init__.py", line 80, in run
+    raise ValueError("Geometry assets must be copied inside project; symlinks rejected")
+ValueError: Geometry assets must be copied inside project; symlinks rejected

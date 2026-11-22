@@ -1,5 +1,5 @@
 """OpenAI-compatible HTTP model adapter, backend-only credentials."""
-import json, os, urllib.request, urllib.error
+import json, os, re, urllib.request, urllib.error
 from pathlib import Path
 
 class CompatibleProvider:
@@ -60,11 +60,16 @@ class Provider:
         return public
     def save(self,data):
         if not isinstance(data,dict):raise ValueError('Provider配置必须是对象')
-        unknown=set(data)-{'kind','base_url','model','api_key','timeout'}
+        unknown=set(data)-{'kind','base_url','model','api_key','timeout','reasoning_effort'}
         if unknown:raise ValueError('未知Provider配置字段')
         current=self.load();kind=data.get('kind',current['kind'])
         if kind not in self.KINDS:raise ValueError('未注册的模型Provider')
         current.update(data);current['kind']=kind
+        if 'reasoning_effort' in data:
+            effort=data['reasoning_effort']
+            if kind!='codex_cli':raise ValueError('推理强度设置用于本机 Codex')
+            if not isinstance(effort,str) or effort and not re.fullmatch(r'[a-z][a-z0-9_-]{0,31}',effort):
+                raise ValueError('推理强度须填写模型支持的值，例如 high，或留空')
         for field in ('base_url','model','api_key'):
             if not isinstance(current.get(field,''),str):raise ValueError(field+'必须是字符串')
         if current.get('base_url') and not current['base_url'].startswith(('http://','https://')):raise ValueError('模型服务地址必须是http(s) URL')
@@ -76,7 +81,8 @@ class Provider:
         os.chmod(self.path,0o600)
         return self.public()
     def request(self,messages,**kwargs):
-        if self.load()['kind']=='codex_cli':
+        config=self.load()
+        if config['kind']=='codex_cli':
             from orchestration.providers.codex_cli import CodexCliProvider
-            return CodexCliProvider(self.root,self.load()).request(messages,**kwargs)
+            return CodexCliProvider(self.root,config).request(messages,**kwargs)
         return self.compatible.request(messages,**kwargs)

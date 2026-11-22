@@ -1,8 +1,8 @@
-"""Offline policy selection acceptance. Does not connect to robot hardware."""
+"""Browser acceptance for offline policy configuration and package inspection."""
 from pathlib import Path
 exec((Path(__file__).parent/'browser_smoke.py').read_text().split("cdp('Page.enable');")[0])
 cdp('Page.enable');cdp('Runtime.enable');cdp('Emulation.setDeviceMetricsOverride',{'width':1440,'height':1050,'deviceScaleFactor':1,'mobile':False});cdp('Page.navigate',{'url':BASE});wait("document.body.innerText.includes('本地服务已连接')")
-click('策略与真机');wait("document.querySelector('#policy-plugin')?.options.length>=2")
+click('离线策略');wait("document.querySelector('#policy-plugin')?.options.length>=2")
 wait("document.querySelector('.active-policy-state').innerText.includes('rule_supervisor_v1')")
 js("(()=>{const e=document.querySelector('#policy-plugin');e.value='state_mlp_v1';e.dispatchEvent(new Event('change',{bubbles:true}));})()")
 wait("document.querySelector('#policy-checkpoint')!==null")
@@ -11,12 +11,17 @@ assert js("document.querySelector('.active-policy-state').innerText.includes('ru
 screenshot('14-neural-validation-rejected')
 js("(()=>{const e=document.querySelector('#policy-plugin');e.value='rule_supervisor_v1';e.dispatchEvent(new Event('change',{bubbles:true}));})()")
 wait("document.querySelector('#policy-checkpoint')===null")
-click('应用离线策略');wait("document.body.innerText.includes('离线策略配置已应用')")
+click('应用离线策略');wait("document.body.innerText.includes('离线策略配置已保存')")
 screenshot('15-offline-policy-config')
-assert not js("[...document.querySelectorAll('button')].some(b=>b.textContent.includes('使能'))")
-actual_robot=js("(async()=>await(await fetch('/api/robots/status')).json())()")
-assert actual_robot['connected'] is False
-assert actual_robot['hardware_commands_sent']==0
-report={'status':'passed','empty_neural_checkpoint_rejected':True,'active_script_policy_preserved':True,'script_policy_offline_apply':True,'robot_hardware_connected':actual_robot['connected'],'hardware_commands_sent':actual_robot['hardware_commands_sent'],'browser_errors':errors}
+wait("document.querySelector('.bundle-list button')!==null")
+js("document.querySelector('.bundle-list button').click()")
+wait("document.querySelector('[aria-labelledby=policy-package-title] .json-view')!==null")
+assert js("JSON.parse(document.querySelector('[aria-labelledby=policy-package-title] .json-view').textContent).manifest.policy_sha256.length===64")
+js("document.querySelector('[aria-label=关闭策略包详情]').click()")
+assert not js("/真机|机器人执行服务|影子模式/.test(document.body.innerText)")
+assert not js("performance.getEntriesByType('resource').some(entry=>new URL(entry.name).pathname.startsWith('/api/robots/'))")
+cdp('Emulation.setDeviceMetricsOverride',{'width':390,'height':844,'deviceScaleFactor':1,'mobile':True})
+assert js('document.documentElement.scrollWidth<=window.innerWidth')
+report={'status':'passed','empty_neural_checkpoint_rejected':True,'active_script_policy_preserved':True,'script_policy_offline_apply':True,'package_manifest_visible':True,'no_robot_api_requests':True,'mobile_no_horizontal_overflow':True,'browser_errors':errors}
 assert not errors
 (OUT/'policy-report.json').write_text(json.dumps(report,ensure_ascii=False,indent=2));print(json.dumps(report,ensure_ascii=False));ws.close()

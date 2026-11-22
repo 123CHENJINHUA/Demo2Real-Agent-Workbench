@@ -2,15 +2,15 @@
 from pathlib import Path
 exec((Path(__file__).parent/'browser_smoke.py').read_text().split("cdp('Page.enable');")[0])
 cdp('Page.enable');cdp('Runtime.enable');cdp('Emulation.setDeviceMetricsOverride',{'width':1440,'height':1050,'deviceScaleFactor':1,'mobile':False});cdp('Page.navigate',{'url':BASE});wait("document.body.innerText.includes('本地服务已连接')")
-wait("[...document.querySelectorAll('.task-row')].some(b=>b.textContent.includes('Connector 原始LeRobot示教'))")
-js("[...document.querySelectorAll('.task-row')].find(b=>b.textContent.includes('Connector 原始LeRobot示教')).click()")
+open_run_card('e7320b6960634a63')
 wait("document.querySelectorAll('.preview-grid img').length===3")
 wait("[...document.querySelectorAll('.preview-grid img')].every(i=>i.complete&&i.naturalWidth>0)")
-assert js("document.querySelector('.artifact-list').getBoundingClientRect().height")<=301
+screenshot('10-workbench-evidence-preview')
+click('产物文件')
+assert 0 < js("document.querySelector('.artifact-list').getBoundingClientRect().height")<=301
 assert js("document.querySelectorAll('.artifact-list a').length")<81
 assert not js("[...document.querySelectorAll('.artifact-list a')].some(a=>/\\.(mp4|parquet)/.test(a.textContent))")
 assert js('document.documentElement.scrollHeight')<4000
-screenshot('10-workbench-evidence-preview')
 js("(()=>{const s=document.querySelector('[aria-label=工件分类]');s.value='all';s.dispatchEvent(new Event('change',{bubbles:true}));})()")
 wait("document.querySelectorAll('.artifact-list a').length===81")
 fill('[aria-label=搜索工件]','contact_sheet');wait("document.querySelectorAll('.artifact-list a').length===3")

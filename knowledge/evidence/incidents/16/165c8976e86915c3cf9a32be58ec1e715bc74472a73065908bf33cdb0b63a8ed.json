@@ -1,0 +1,13 @@
+{
+  "error": "Mesh edge topology has gaps/nonmanifold edges; sections and volume/contact claims require separate repair/validation.",
+  "result": {
+    "code": "mesh_topology_open_or_nonmanifold",
+    "primary_category": "geometry_function",
+    "stage": "asset_modeling",
+    "severity": "review",
+    "status": "open",
+    "message": "Mesh edge topology has gaps/nonmanifold edges; sections and volume/contact claims require separate repair/validation.",
+    "hardware_verified": false,
+    "asset_id": "object_0"
+  }
+}

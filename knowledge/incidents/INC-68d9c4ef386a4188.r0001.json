@@ -1,0 +1,39 @@
+{
+  "finding_code": "experience_review_missing",
+  "primary_category": "workflow_integrity",
+  "stage": "asset_modeling",
+  "severity": "review",
+  "asset_id": null,
+  "record_origin": "worker",
+  "summary": "No upstream experience checklist supplied. Query applicable cases before functional modeling; this worker does not directly import experience implementation.",
+  "observed_behavior": "No upstream experience checklist supplied. Query applicable cases before functional modeling; this worker does not directly import experience implementation.",
+  "mode": "offline",
+  "run_id": "f9c4e99a6e244044",
+  "task_id": "f9c4e99a6e244044:functional_geometry",
+  "diagnosis": {
+    "state": "unknown"
+  },
+  "evidence": [
+    {
+      "path": "knowledge/evidence/incidents/e8/e8a2bc914ee75e6dea9add11f7d41445b0dd18a1899a37de1930c14bd2ce2328.json",
+      "source_reference": ".runtime/tmp/incident-h466tadx/failure_result.json",
+      "sha256": "e8a2bc914ee75e6dea9add11f7d41445b0dd18a1899a37de1930c14bd2ce2328",
+      "bytes": 566
+    },
+    {
+      "path": "knowledge/evidence/incidents/e3/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.log",
+      "source_reference": "runs/f9c4e99a6e244044/functional_geometry/worker.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  ],
+  "declared_failure_category": "workflow_integrity",
+  "declared_failure_stage": "asset_modeling",
+  "validation_scope": "module_reported_failure_only_no_hardware_inference",
+  "schema_version": 1,
+  "record_type": "incident",
+  "incident_id": "INC-68d9c4ef386a4188",
+  "revision": 1,
+  "timestamp_utc": "2026-11-19T17:58:59.229586+00:00",
+  "hardware_verified": false
+}

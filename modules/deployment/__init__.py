@@ -14,5 +14,5 @@ def export(root,checkpoint,evaluation,output):
 
 def run(ctx):
     config=ctx["input"].get("deployment",{})
-    if not all(config.get(k) for k in ("checkpoint","evaluation")):return {"status":"needs_configuration","reason":"需要绑定评价与权重的部署输入；真实执行还需现场核验和批次授权"}
+    if not all(config.get(k) for k in ("checkpoint","evaluation")):return {"status":"needs_configuration","reason":"归档离线策略包需要绑定权重与配套评价报告"}
     root=Path(ctx["root"]).resolve();return export(root,root/config["checkpoint"],root/config["evaluation"],ctx["output_dir"])

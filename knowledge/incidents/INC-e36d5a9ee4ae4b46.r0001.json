@@ -1,0 +1,39 @@
+{
+  "finding_code": null,
+  "primary_category": "workflow_integrity",
+  "stage": "runtime",
+  "severity": null,
+  "asset_id": null,
+  "record_origin": "worker",
+  "summary": "Codex报告失败事件：Reconnecting... 2/5 (stream disconnected before completion: tls handshake eof)",
+  "observed_behavior": "Codex报告失败事件：Reconnecting... 2/5 (stream disconnected before completion: tls handshake eof)",
+  "mode": "offline",
+  "run_id": "f4d52d5a13ae4fdb",
+  "task_id": "f4d52d5a13ae4fdb:task_analysis",
+  "diagnosis": {
+    "state": "unknown"
+  },
+  "evidence": [
+    {
+      "path": "knowledge/evidence/incidents/b8/b8a778e869f262898bfb4486ac7dcba39ad64c525e2565ca5fbdf638c1098c78.json",
+      "source_reference": ".runtime/tmp/incident-qrl7kuba/failure_result.json",
+      "sha256": "b8a778e869f262898bfb4486ac7dcba39ad64c525e2565ca5fbdf638c1098c78",
+      "bytes": 1234
+    },
+    {
+      "path": "knowledge/evidence/incidents/e3/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.log",
+      "source_reference": "runs/f4d52d5a13ae4fdb/task_analysis/worker.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  ],
+  "declared_failure_category": null,
+  "declared_failure_stage": null,
+  "validation_scope": "module_reported_failure_only_no_hardware_inference",
+  "schema_version": 1,
+  "record_type": "incident",
+  "incident_id": "INC-e36d5a9ee4ae4b46",
+  "revision": 1,
+  "timestamp_utc": "2026-11-20T06:28:52.104855+00:00",
+  "hardware_verified": false
+}

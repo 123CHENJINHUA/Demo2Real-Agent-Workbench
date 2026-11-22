@@ -3,6 +3,7 @@ from pathlib import Path
 import json,hashlib
 import numpy as np
 from contracts.recovery import FEATURES,LABELS,OBSERVATION,ACTION,SOURCE,task_signature
+from contracts.artifacts import batch_directory
 
 def build(root,batches,output):
     root=Path(root).resolve();output=Path(output).resolve();output.relative_to(root);output.mkdir(parents=True,exist_ok=True)
@@ -13,7 +14,7 @@ def build(root,batches,output):
     if path.is_file():protected={r['run_id'] for r in json.loads(path.read_text())['runs'] if r.get('split')=='holdout'}
     producer=None
     for batch in batches:
-        folder=(root/'runs'/batch).resolve();folder.relative_to(root/'runs');submission=json.loads((folder/'submitted.json').read_text())
+        folder=batch_directory(root,batch);submission=json.loads((folder/'submitted.json').read_text())
         suite_snapshot=json.loads((folder/'suite.json').read_text());protected.update(suite_snapshot.get('protected_episode_ids',[]))
         if submission['suite_id'] not in ('connector_recovery_v1','connector_recovery_v2'):raise ValueError('Only declared real recovery collection is accepted')
         for entry in submission['runs']:

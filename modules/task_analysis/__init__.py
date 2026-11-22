@@ -54,6 +54,8 @@ def run(ctx: dict) -> dict:
         if isinstance(model, str):
             model = json.loads(model)
         result.update(status="completed", evidence_type=inputs.get("semantic_evidence_type", "configured_model_proposal"), proposal=validate_proposal(model, inputs.get("evidence_refs")))
+        if inputs.get("analysis_team"):
+            result["analysis_team"] = inputs["analysis_team"]
         result["next_gates"] = ["Review object identity and phase evidence", "Bind functional frames, calibration and observable success criteria", "Freeze independent evaluation before expert optimization"]
     else:
         result.update(status="needs_configuration", reason="needs_multimodal_analysis", proposal={"task_summary": None, "objects": [], "phases": [], "success_conditions": [], "required_assets": [], "unknowns": ["Configure a multimodal provider and supply sampled demo frames before semantic task analysis", "Metric depth, camera calibration and robot/object frames require explicit evidence", "Task intent and hidden mechanism completion cannot be inferred from file names"]})

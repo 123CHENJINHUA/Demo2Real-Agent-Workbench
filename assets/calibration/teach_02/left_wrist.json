@@ -1,0 +1,198 @@
+{
+  "serial": "213622077808",
+  "width": 640,
+  "height": 480,
+  "fps": 30,
+  "intrinsics": {
+    "K": [
+      [
+        607.52880859375,
+        0,
+        316.37353515625
+      ],
+      [
+        0,
+        606.138916015625,
+        246.71441650390625
+      ],
+      [
+        0,
+        0,
+        1
+      ]
+    ],
+    "distortion_model": "none",
+    "distortion_coefficients": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  "hand_eye": {
+    "mode": "eye-in-hand",
+    "passed": true,
+    "accepted_unvalidated": true,
+    "matrix": [
+      [
+        0.00014993023313414344,
+        -0.3646576567938138,
+        0.9311416491933816,
+        0.07501288267473481
+      ],
+      [
+        0.03207313590626901,
+        0.9306643637434246,
+        0.36446557589323136,
+        -0.08044465388557563
+      ],
+      [
+        -0.9994855133887951,
+        0.029809988253803738,
+        0.011835249310635287,
+        -0.017206879049036346
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "transform_name": "T_sdk_flange_color",
+    "parent_frame": "nero_left_follower/flange",
+    "measured_validation_passed": false,
+    "validation_basis": "user_override"
+  },
+  "T_color_depth": [
+    [
+      0.9999911785125732,
+      0.0039422414265573025,
+      0.0014633892569690943,
+      0.014871014282107353
+    ],
+    [
+      -0.003936909604817629,
+      0.9999856948852539,
+      -0.003628623206168413,
+      -2.1134503185749054e-05
+    ],
+    [
+      -0.0014776731841266155,
+      0.0036228299140930176,
+      0.9999923706054688,
+      -0.00015951217210385948
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "depth_scale_m": 0.0010000000474974513,
+  "source": {
+    "path": "calibration_workbench/runs/teach_02/left/result.json",
+    "sha256": "614836484134edb9b078be988f9aa431bac7844ce7d06535f2704ecf8bbedc5b",
+    "dataset_sha256": "e1629a3a68a24f2d28e121859f5f2a72a15a9857c7a670a9493966769f929fe4",
+    "validation_passed": false,
+    "original_result_passed": false,
+    "holdout_report": {
+      "count": 6,
+      "translation_mm": {
+        "rms": 4.526941909853799,
+        "median": 4.577503221949291,
+        "max": 6.816393581713808
+      },
+      "rotation_deg": {
+        "rms": 0.7721050207382327,
+        "median": 0.3655839164137736,
+        "max": 1.4252853196636934
+      },
+      "samples": [
+        {
+          "id": "0007",
+          "translation_mm": 5.056416995148977,
+          "rotation_deg": 0.2404956233361804,
+          "pnp_reprojection_rms_px": 0.31158657636674647,
+          "loop_reprojection_rms_px": 6.102729120427987
+        },
+        {
+          "id": "0016",
+          "translation_mm": 1.2794836198868849,
+          "rotation_deg": 0.31355925636448084,
+          "pnp_reprojection_rms_px": 0.25796343223188145,
+          "loop_reprojection_rms_px": 2.2552724228630874
+        },
+        {
+          "id": "0022",
+          "translation_mm": 2.638434448946383,
+          "rotation_deg": 1.0589443551121802,
+          "pnp_reprojection_rms_px": 0.36306900202121806,
+          "loop_reprojection_rms_px": 5.948550790701708
+        },
+        {
+          "id": "0024",
+          "translation_mm": 6.816393581713808,
+          "rotation_deg": 0.3831172652918785,
+          "pnp_reprojection_rms_px": 0.3081315998980005,
+          "loop_reprojection_rms_px": 7.8618547036653155
+        },
+        {
+          "id": "0025",
+          "translation_mm": 4.11752611783115,
+          "rotation_deg": 0.34805056753566865,
+          "pnp_reprojection_rms_px": 0.3103568133840767,
+          "loop_reprojection_rms_px": 3.932850769028499
+        },
+        {
+          "id": "0029",
+          "translation_mm": 5.037480326067432,
+          "rotation_deg": 1.4252853196636934,
+          "pnp_reprojection_rms_px": 0.30329183880591143,
+          "loop_reprojection_rms_px": 5.545648795552709
+        }
+      ],
+      "loop_reprojection_px": {
+        "rms": 5.56394805937912,
+        "median": 5.747099793127209,
+        "max": 7.8618547036653155
+      }
+    },
+    "limits": {
+      "translation_rms_mm": 5.0,
+      "rotation_rms_deg": 2.0,
+      "loop_reprojection_rms_px": 5.0
+    },
+    "accepted_unvalidated": true
+  },
+  "frame": "color_optical",
+  "user_acceptance": {
+    "accepted_unvalidated": true,
+    "accepted_by": "user",
+    "accepted_utc": "2026-11-12T14:11:24.818596+00:00",
+    "instruction": "validation_passed 就直接用true,然后TCP直接参考模型就行，不额外标定了",
+    "source_model": "original teach_02 factory intrinsics + nominal SDK FK; no diagnostic joint offsets applied",
+    "validation_passed": true,
+    "does_not_authorize_motion": true,
+    "validation_basis": "user_override",
+    "measured_validation_passed": false,
+    "tcp_source": "model",
+    "tcp_physically_calibrated": false
+  },
+  "measured_validation_passed": false,
+  "validation_passed": true,
+  "validation_basis": "user_override",
+  "user_acceptance_history": [
+    {
+      "accepted_unvalidated": true,
+      "accepted_by": "user",
+      "accepted_utc": "2026-11-12T14:03:45.021196+00:00",
+      "instruction": "先不管这个误差了，就用标定的结果，填入/home/cjh/Downloads/Demo2Real-Agent-Workbench/config 所需的地方",
+      "source_model": "original teach_02 factory intrinsics + nominal SDK FK; no diagnostic joint offsets applied",
+      "validation_passed": false,
+      "does_not_authorize_motion": true
+    }
+  ]
+}

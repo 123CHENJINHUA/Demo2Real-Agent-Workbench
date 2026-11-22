@@ -32,6 +32,7 @@ def test_expert_binds_only_checked_scene_and_explicit_reference(fixture):
     response=client.post('/api/runs/'+scene['id']+'/run-expert',json={'expected_revision':3,'spec_hash':'a'*64},headers=headers)
     assert response.status_code==200,response.text
     result=response.json();assert result['input']['expert_run'] is True
+    assert result['output_directory']==f"runs/{scene['input']['source_run_id']}/derived/{result['id']}"
     assert result['input']['scene_run_id']==scene['id'];assert result['input']['demo_path']=='data/reference/connector/converted/episode_000.npz'
     assert result['input']['expert_perception']=='simulator_ground_truth';assert result['input']['hardware_commands_sent']==0
     assert [t['stage'] for t in result['tasks']]==['experience','scene_validation','expert_plan','expert_execution','expert_validation']

@@ -21,10 +21,9 @@ def test_runtime_legacy_no_old_business_paths():
         assert "/home/cjh/Downloads/TP-KMPs-nero-isaacsim" not in p.read_text()
         assert "'/home/cjh" not in p.read_text()
 
-def test_sdk_imports_isolated():
+def test_offline_runtime_does_not_import_sdk():
     for base in ("backend","orchestration","contracts","modules","application","workers"):
         for p in (ROOT/base).rglob("*.py"):
-            if "robot_backends/nero_sdk" in str(p):continue
             assert not any(x.startswith("pyAgxArm") for x in imported(ast.parse(p.read_text()))),str(p)
 
 def test_local_environment_and_relative_configuration(tmp_path):

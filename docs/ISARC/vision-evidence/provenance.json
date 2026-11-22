@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "assets": [
+    {
+      "path": "workflow-images/10-d435i-foundationpose.png",
+      "source_project": "TP-KMPs-nero-isaacsim",
+      "source_path": "real_tpkmp/vision/runs/track_20261021_164401/snapshots/0001.png",
+      "sha256": "990f9e3de56e6d7ce822d42b9d290c511e5b259cadaa3cb266145429d9d100b9",
+      "scope": "legacy_d435i_camera_only"
+    },
+    {
+      "path": "vision-evidence/d435i_tracking_summary.json",
+      "source_project": "TP-KMPs-nero-isaacsim",
+      "source_path": "real_tpkmp/vision/runs/track_20261021_164401/summary.json",
+      "sha256": "c51819bf236cb67ac6d7045fa52d981aa0ad4e9e85a645b680834dcbaf0ef39b",
+      "scope": "legacy_d435i_camera_only"
+    },
+    {
+      "path": "workflow-images/11-isaac-foundationpose.png",
+      "source_project": "Demo2Real-Agent-Workbench",
+      "source_path": ".runtime/archived-runs/20261120T075232543831Z/runs/3035e6ca201844ef/simulation/isaac_1794326783548444122/trial_000/vision/visualization/frame_24.971/panels.png",
+      "sha256": "5356670ea39f6877518a127f9235c1c6e66e5d9a0111b1e285251adf363ed240",
+      "scope": "workbench_connector_simulation"
+    },
+    {
+      "path": "vision-evidence/connector_rgbd_report.json",
+      "source_project": "Demo2Real-Agent-Workbench",
+      "source_path": "runs/acceptance/vision/end_to_end_report.json",
+      "sha256": "103cb6b3602c356fd07d38dea0ca43d397dd71e79b58e1348dece5e20d1d5165",
+      "scope": "workbench_connector_simulation"
+    }
+  ]
+}

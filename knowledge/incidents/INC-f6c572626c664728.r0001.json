@@ -1,0 +1,39 @@
+{
+  "finding_code": "mesh_missing",
+  "primary_category": "geometry_function",
+  "stage": "asset_modeling",
+  "severity": "blocking",
+  "asset_id": "object_3",
+  "record_origin": "worker",
+  "summary": "object_3: no mesh or explicit primitive geometry supplied",
+  "observed_behavior": "object_3: no mesh or explicit primitive geometry supplied",
+  "mode": "offline",
+  "run_id": "fba8ce6288334f8d",
+  "task_id": "fba8ce6288334f8d:functional_geometry",
+  "diagnosis": {
+    "state": "unknown"
+  },
+  "evidence": [
+    {
+      "path": "knowledge/evidence/incidents/2e/2e93ac0bf9a00268eba1cacc98f871d60cf354686dbaef9ddb6538e4a00edc40.json",
+      "source_reference": ".runtime/tmp/incident-s8u1zhw3/failure_result.json",
+      "sha256": "2e93ac0bf9a00268eba1cacc98f871d60cf354686dbaef9ddb6538e4a00edc40",
+      "bytes": 382
+    },
+    {
+      "path": "knowledge/evidence/incidents/e3/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.log",
+      "source_reference": "runs/fba8ce6288334f8d/functional_geometry/worker.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  ],
+  "declared_failure_category": "geometry_function",
+  "declared_failure_stage": "asset_modeling",
+  "validation_scope": "module_reported_failure_only_no_hardware_inference",
+  "schema_version": 1,
+  "record_type": "incident",
+  "incident_id": "INC-f6c572626c664728",
+  "revision": 1,
+  "timestamp_utc": "2026-11-19T17:06:46.263498+00:00",
+  "hardware_verified": false
+}

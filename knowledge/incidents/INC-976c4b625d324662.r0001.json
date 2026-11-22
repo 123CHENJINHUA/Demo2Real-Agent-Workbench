@@ -1,0 +1,39 @@
+{
+  "finding_code": null,
+  "primary_category": "workflow_integrity",
+  "stage": "runtime",
+  "severity": null,
+  "asset_id": null,
+  "record_origin": "worker",
+  "summary": "worker failed",
+  "observed_behavior": "worker failed",
+  "mode": "offline",
+  "run_id": "99fd30fdc594464f",
+  "task_id": "99fd30fdc594464f:simulation",
+  "diagnosis": {
+    "state": "unknown"
+  },
+  "evidence": [
+    {
+      "path": "knowledge/evidence/incidents/52/523abbf7a134308203e0fa52a7ea22c8d6790fff1a79150b7d6a5e85668c0dc1.json",
+      "source_reference": ".runtime/tmp/incident-789ja384/failure_result.json",
+      "sha256": "523abbf7a134308203e0fa52a7ea22c8d6790fff1a79150b7d6a5e85668c0dc1",
+      "bytes": 9150
+    },
+    {
+      "path": "knowledge/evidence/incidents/e3/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.log",
+      "source_reference": "runs/f9c4e99a6e244044/derived/99fd30fdc594464f/simulation/worker.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  ],
+  "declared_failure_category": null,
+  "declared_failure_stage": null,
+  "validation_scope": "module_reported_failure_only_no_hardware_inference",
+  "schema_version": 1,
+  "record_type": "incident",
+  "incident_id": "INC-976c4b625d324662",
+  "revision": 1,
+  "timestamp_utc": "2026-11-20T06:57:39.755501+00:00",
+  "hardware_verified": false
+}

@@ -124,6 +124,7 @@ def test_api_historical_proposal_no_model_recall_and_pinned_scene_jobs(fixture,m
         build=client.post('/api/runs/'+rid+'/build-scene',json={'expected_revision':3,'preview':True},headers=headers).json()
         assert [task['stage'] for task in build['tasks']]==['experience','functional_geometry','scene_build','scene_validation']
         assert build['input']['spec_path']==frozen['spec_path'] and build['input']['contact_execution_authorized'] is False
+        assert build['output_directory']==f"runs/{rid}/derived/{build['id']}"
         assert load_snapshot(root,build['input']['spec_path'])['revision']==3
         store.transition(build['id']+':scene_build','succeeded',result={'task_spec_hash':'0'*64,'spec_revision':3})
         assert client.get('/api/runs/'+rid+'/task-spec').json()['scene_builds'][0]['stale'] is True

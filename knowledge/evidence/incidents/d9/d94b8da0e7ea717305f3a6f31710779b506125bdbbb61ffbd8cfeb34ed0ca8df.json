@@ -1,0 +1,8 @@
+{
+  "error": "Geometry assets must be copied inside project; symlinks rejected",
+  "result": {
+    "status": "failed",
+    "error": "Geometry assets must be copied inside project; symlinks rejected",
+    "exception": "ValueError"
+  }
+}

@@ -12,8 +12,7 @@ try:
   except OSError:time.sleep(.25)
  helper=(ROOT/'tests/frontend/browser_smoke.py').read_text().split("cdp('Page.enable');")[0].replace('127.0.0.1:9338','127.0.0.1:9339');exec(helper)
  OUT=output;cdp('Page.enable');cdp('Runtime.enable');cdp('Emulation.setDeviceMetricsOverride',{'width':1440,'height':1050,'deviceScaleFactor':1,'mobile':False});cdp('Page.navigate',{'url':BASE})
- wait("[...document.querySelectorAll('.task-row')].some(b=>b.textContent.includes("+json.dumps(rid)+"))")
- js("[...document.querySelectorAll('.task-row')].find(b=>b.textContent.includes("+json.dumps(rid)+")).click()")
+ open_run_card(rid)
  wait("document.querySelectorAll('.expert-criterion').length===6")
  assert js('document.querySelectorAll(".stage-card").length')==8
  wait("document.body.innerText.includes('本轮仅验收抓取')")

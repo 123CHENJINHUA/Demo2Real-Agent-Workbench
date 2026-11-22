@@ -144,13 +144,22 @@ def test_actual_video_decoder_sampling(project, tmp_path):
     (project / "config/environments.yaml").write_text(yaml.safe_dump({"environments": {"ffmpeg_executable": str(ffmpeg)}}))
     source = tmp_path / "video_demo"
     source.mkdir()
-    subprocess.run([str(ffmpeg), "-nostdin", "-hide_banner", "-loglevel", "error", "-y", "-f", "lavfi", "-i", "testsrc=size=160x120:rate=10", "-t", "1", "-pix_fmt", "yuv420p", str(source / "camera.mp4")], check=True, capture_output=True)
+    clip = tmp_path / "fixture.mp4"
+    subprocess.run([str(ffmpeg), "-nostdin", "-hide_banner", "-loglevel", "error", "-y", "-f", "lavfi", "-i", "testsrc=size=160x120:rate=10", "-t", "1", "-pix_fmt", "yuv420p", str(clip)], check=True, capture_output=True)
+    cameras = ["front", "left_wrist", "right_wrist", "side"]
+    for name in (*cameras, "side_depth"):
+        path = source / "videos" / ("observation.images." + name)
+        path.mkdir(parents=True)
+        shutil.copyfile(clip, path / "fixture.mp4")
     imported = import_demo(context(project, "demo_import", {"source_path": str(source)}))
     value = audit(context(project, "data_audit", {"import_result": imported, "frames_per_video": 3}))
-    assert value["videos"][0]["decoded"] is True
-    assert len(value["sample_frames"]) == 3
-    assert (project / value["videos"][0]["contact_sheet"]).is_file()
-    assert value["sample_frames"][0]["requested_timestamp_seconds"] > 0
+    assert [row["stream"] for row in value["videos"]] == ["observation.images." + name for name in cameras]
+    assert all(row["decoded"] and (project / row["contact_sheet"]).is_file() for row in value["videos"])
+    assert len(value["sample_frames"]) == 12
+    assert all(row["samples"][0]["requested_timestamp_seconds"]==0 for row in value["videos"])
+    from application.analysis_agents import _frames
+    chosen = _frames(context(project, "scene_layout", {}) | {"dependencies": {"data_audit": value}})
+    assert {str(path.relative_to(project)) for path in chosen} == {frame["path"] for frame in value["sample_frames"]}
 
 
 

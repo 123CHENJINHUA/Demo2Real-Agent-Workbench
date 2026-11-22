@@ -1,0 +1,1874 @@
+{
+  "error": "最终修正版场景的局部物理检查未通过",
+  "result": {
+    "status": "failed",
+    "checks": [
+      {
+        "id": "task_hash",
+        "passed": true,
+        "details": "Build must bind the exact task revision content, not latest mutable draft"
+      },
+      {
+        "id": "asset_hash:assets/nero/meshes/base_link.stl",
+        "passed": true,
+        "details": "Changed dependencies invalidate scene evidence"
+      },
+      {
+        "id": "asset_hash:assets/nero/meshes/gripper_base.stl",
+        "passed": true,
+        "details": "Changed dependencies invalidate scene evidence"
+      },
+      {
+        "id": "asset_hash:assets/nero/meshes/gripper_flange.stl",
+        "passed": true,
+        "details": "Changed dependencies invalidate scene evidence"
+      },
+      {
+        "id": "asset_hash:assets/nero/meshes/gripper_link1.stl",
+        "passed": true,
+        "details": "Changed dependencies invalidate scene evidence"
+      },
+      {
+        "id": "asset_hash:assets/nero/meshes/gripper_link2.stl",
+        "passed": true,
+        "details": "Changed dependencies invalidate scene evidence"
+      },
+      {
+        "id": "asset_hash:assets/nero/meshes/link1.stl",
+        "passed": true,
+        "details": "Changed dependencies invalidate scene evidence"
+      },
+      {
+        "id": "asset_hash:assets/nero/meshes/link2.stl",
+        "passed": true,
+        "details": "Changed dependencies invalidate scene evidence"
+      },
+      {
+        "id": "asset_hash:assets/nero/meshes/link3.stl",
+        "passed": true,
+        "details": "Changed dependencies invalidate scene evidence"
+      },
+      {
+        "id": "asset_hash:assets/nero/meshes/link4.stl",
+        "passed": true,
+        "details": "Changed dependencies invalidate scene evidence"
+      },
+      {
+        "id": "asset_hash:assets/nero/meshes/link5.stl",
+        "passed": true,
+        "details": "Changed dependencies invalidate scene evidence"
+      },
+      {
+        "id": "asset_hash:assets/nero/meshes/link6.stl",
+        "passed": true,
+        "details": "Changed dependencies invalidate scene evidence"
+      },
+      {
+        "id": "asset_hash:assets/nero/meshes/link7.stl",
+        "passed": true,
+        "details": "Changed dependencies invalidate scene evidence"
+      },
+      {
+        "id": "asset_hash:assets/nero/nero.urdf",
+        "passed": true,
+        "details": "Changed dependencies invalidate scene evidence"
+      },
+      {
+        "id": "asset_hash:assets/nero/nero_dual_2.urdf",
+        "passed": true,
+        "details": "Changed dependencies invalidate scene evidence"
+      },
+      {
+        "id": "asset_hash:runs/f8ea0d883671437e/geometry/models/2e8d605c46d0b97d/003/没有边的槽.stl",
+        "passed": true,
+        "details": "Changed dependencies invalidate scene evidence"
+      },
+      {
+        "id": "asset_hash:runs/f8ea0d883671437e/geometry/models/2e8d605c46d0b97d/002/有边的槽.stl",
+        "passed": true,
+        "details": "Changed dependencies invalidate scene evidence"
+      },
+      {
+        "id": "asset_hash:runs/f8ea0d883671437e/geometry/models/2e8d605c46d0b97d/001/SolarPanel_50k_27x18cm_m.obj",
+        "passed": true,
+        "details": "Changed dependencies invalidate scene evidence"
+      },
+      {
+        "id": "evidence_hash:assets/calibration/teach_02/bundle.json",
+        "passed": true,
+        "details": "Changed dependencies invalidate scene evidence"
+      },
+      {
+        "id": "evidence_hash:assets/calibration/teach_02/center.json",
+        "passed": true,
+        "details": "Changed dependencies invalidate scene evidence"
+      },
+      {
+        "id": "evidence_hash:assets/calibration/teach_02/left_tcp.json",
+        "passed": true,
+        "details": "Changed dependencies invalidate scene evidence"
+      },
+      {
+        "id": "evidence_hash:assets/calibration/teach_02/left_wrist.json",
+        "passed": true,
+        "details": "Changed dependencies invalidate scene evidence"
+      },
+      {
+        "id": "evidence_hash:assets/calibration/teach_02/right_tcp.json",
+        "passed": true,
+        "details": "Changed dependencies invalidate scene evidence"
+      },
+      {
+        "id": "evidence_hash:assets/calibration/teach_02/right_wrist.json",
+        "passed": true,
+        "details": "Changed dependencies invalidate scene evidence"
+      },
+      {
+        "id": "evidence_hash:runs/f8ea0d883671437e/data_audit/video_00/frame_000.jpg",
+        "passed": true,
+        "details": "Changed dependencies invalidate scene evidence"
+      },
+      {
+        "id": "evidence_hash:runs/f8ea0d883671437e/data_audit/video_00/frame_002.jpg",
+        "passed": true,
+        "details": "Changed dependencies invalidate scene evidence"
+      },
+      {
+        "id": "evidence_hash:runs/f8ea0d883671437e/data_audit/video_00/frame_003.jpg",
+        "passed": true,
+        "details": "Changed dependencies invalidate scene evidence"
+      },
+      {
+        "id": "evidence_hash:runs/f8ea0d883671437e/data_audit/video_00/frame_005.jpg",
+        "passed": true,
+        "details": "Changed dependencies invalidate scene evidence"
+      },
+      {
+        "id": "evidence_hash:runs/f8ea0d883671437e/data_audit/video_01/frame_000.jpg",
+        "passed": true,
+        "details": "Changed dependencies invalidate scene evidence"
+      },
+      {
+        "id": "evidence_hash:runs/f8ea0d883671437e/data_audit/video_01/frame_002.jpg",
+        "passed": true,
+        "details": "Changed dependencies invalidate scene evidence"
+      },
+      {
+        "id": "evidence_hash:runs/f8ea0d883671437e/data_audit/video_01/frame_003.jpg",
+        "passed": true,
+        "details": "Changed dependencies invalidate scene evidence"
+      },
+      {
+        "id": "evidence_hash:runs/f8ea0d883671437e/data_audit/video_01/frame_005.jpg",
+        "passed": true,
+        "details": "Changed dependencies invalidate scene evidence"
+      },
+      {
+        "id": "evidence_hash:runs/f8ea0d883671437e/data_audit/video_02/frame_000.jpg",
+        "passed": true,
+        "details": "Changed dependencies invalidate scene evidence"
+      },
+      {
+        "id": "evidence_hash:runs/f8ea0d883671437e/data_audit/video_02/frame_002.jpg",
+        "passed": true,
+        "details": "Changed dependencies invalidate scene evidence"
+      },
+      {
+        "id": "evidence_hash:runs/f8ea0d883671437e/data_audit/video_02/frame_003.jpg",
+        "passed": true,
+        "details": "Changed dependencies invalidate scene evidence"
+      },
+      {
+        "id": "evidence_hash:runs/f8ea0d883671437e/data_audit/video_02/frame_005.jpg",
+        "passed": true,
+        "details": "Changed dependencies invalidate scene evidence"
+      },
+      {
+        "id": "evidence_hash:runs/f8ea0d883671437e/data_audit/video_03/frame_000.jpg",
+        "passed": true,
+        "details": "Changed dependencies invalidate scene evidence"
+      },
+      {
+        "id": "evidence_hash:runs/f8ea0d883671437e/data_audit/video_03/frame_002.jpg",
+        "passed": true,
+        "details": "Changed dependencies invalidate scene evidence"
+      },
+      {
+        "id": "evidence_hash:runs/f8ea0d883671437e/data_audit/video_03/frame_003.jpg",
+        "passed": true,
+        "details": "Changed dependencies invalidate scene evidence"
+      },
+      {
+        "id": "evidence_hash:runs/f8ea0d883671437e/data_audit/video_03/frame_005.jpg",
+        "passed": true,
+        "details": "Changed dependencies invalidate scene evidence"
+      },
+      {
+        "id": "evidence_hash:runs/f8ea0d883671437e/demo_import/manifest.json",
+        "passed": true,
+        "details": "Changed dependencies invalidate scene evidence"
+      },
+      {
+        "id": "evidence_hash:runs/f8ea0d883671437e/experience/experience_checklist.json",
+        "passed": true,
+        "details": "Changed dependencies invalidate scene evidence"
+      },
+      {
+        "id": "evidence_hash:runs/f8ea0d883671437e/geometry/geometry_audit.json",
+        "passed": true,
+        "details": "Changed dependencies invalidate scene evidence"
+      },
+      {
+        "id": "evidence_hash:runs/f8ea0d883671437e/task_analysis/task_proposal.json",
+        "passed": true,
+        "details": "Changed dependencies invalidate scene evidence"
+      },
+      {
+        "id": "evidence_hash:runs/f8ea0d883671437e/data_audit/video_00/frame_001.jpg",
+        "passed": true,
+        "details": "Changed dependencies invalidate scene evidence"
+      },
+      {
+        "id": "evidence_hash:runs/f8ea0d883671437e/data_audit/video_01/frame_001.jpg",
+        "passed": true,
+        "details": "Changed dependencies invalidate scene evidence"
+      },
+      {
+        "id": "evidence_hash:runs/f8ea0d883671437e/data_audit/video_02/frame_001.jpg",
+        "passed": true,
+        "details": "Changed dependencies invalidate scene evidence"
+      },
+      {
+        "id": "evidence_hash:runs/f8ea0d883671437e/data_audit/video_03/frame_001.jpg",
+        "passed": true,
+        "details": "Changed dependencies invalidate scene evidence"
+      },
+      {
+        "id": "evidence_hash:runs/f8ea0d883671437e/scene_build/build_1795249715108473307/scene.png",
+        "passed": true,
+        "details": "Changed dependencies invalidate scene evidence"
+      },
+      {
+        "id": "evidence_hash:runs/f8ea0d883671437e/scene_build/build_1795249715108473307/camera_0_rgb.png",
+        "passed": true,
+        "details": "Changed dependencies invalidate scene evidence"
+      },
+      {
+        "id": "evidence_hash:runs/f8ea0d883671437e/scene_build/build_1795249715108473307/camera_1_rgb.png",
+        "passed": true,
+        "details": "Changed dependencies invalidate scene evidence"
+      },
+      {
+        "id": "evidence_hash:runs/f8ea0d883671437e/demo_import/dataset/data/chunk-000/file-000.parquet",
+        "passed": true,
+        "details": "Changed dependencies invalidate scene evidence"
+      },
+      {
+        "id": "evidence_hash:runs/f8ea0d883671437e/data_audit/data_audit.json",
+        "passed": true,
+        "details": "Changed dependencies invalidate scene evidence"
+      },
+      {
+        "id": "usd_composition",
+        "passed": true,
+        "details": {
+          "support_geometry_version": "used_vertices_and_analytic_support/v1",
+          "exact_object_bounds": {
+            "/World/Objects/object_0": {
+              "visual": {
+                "min": [
+                  0.27891669036570005,
+                  -0.3288445998953003,
+                  0.7498554543576436
+                ],
+                "max": [
+                  0.4595510404014277,
+                  -0.17063331114663502,
+                  0.9879042026409843
+                ]
+              },
+              "collision": {
+                "min": [
+                  0.27891669036570005,
+                  -0.3288445998953003,
+                  0.7498554543576436
+                ],
+                "max": [
+                  0.4595510404014277,
+                  -0.17063331114663502,
+                  0.9879042026409843
+                ]
+              }
+            },
+            "/World/Objects/object_1": {
+              "visual": {
+                "min": [
+                  0.2299877581947987,
+                  -0.30800001690609047,
+                  0.7499999602967216
+                ],
+                "max": [
+                  0.2700124765114763,
+                  -0.051999998531399666,
+                  0.7960043337408982
+                ]
+              },
+              "collision": {
+                "min": [
+                  0.2299877581947987,
+                  -0.30800001690609047,
+                  0.7499999602967216
+                ],
+                "max": [
+                  0.2700124765114763,
+                  -0.051999998531399666,
+                  0.7960043337408982
+                ]
+              }
+            },
+            "/World/Objects/object_2": {
+              "visual": {
+                "min": [
+                  -0.27001214883886626,
+                  -0.3079999999857428,
+                  0.7499999027237818
+                ],
+                "max": [
+                  -0.2299877038929967,
+                  -0.05199998548292786,
+                  0.7960042723042935
+                ]
+              },
+              "collision": {
+                "min": [
+                  -0.27001214883886626,
+                  -0.3079999999857428,
+                  0.7499999027237818
+                ],
+                "max": [
+                  -0.2299877038929967,
+                  -0.05199998548292786,
+                  0.7960042723042935
+                ]
+              }
+            },
+            "/World/Objects/object_3": {
+              "visual": {
+                "min": [
+                  0.21249996457801343,
+                  0.04499998908052134,
+                  0.7499999256367846
+                ],
+                "max": [
+                  0.2674999650885057,
+                  0.0849999912499459,
+                  0.7749999313120679
+                ]
+              },
+              "collision": {
+                "min": [
+                  0.21249996457801343,
+                  0.04499998908052134,
+                  0.7499999256367846
+                ],
+                "max": [
+                  0.2674999650885057,
+                  0.0849999912499459,
+                  0.7749999313120679
+                ]
+              }
+            },
+            "/World/Objects/object_4": {
+              "visual": {
+                "min": [
+                  0.06611713383747528,
+                  -0.130707369002443,
+                  0.7499999627922737
+                ],
+                "max": [
+                  0.19530431777803262,
+                  -0.059146949874906984,
+                  0.7680000035338553
+                ]
+              },
+              "collision": {
+                "min": [
+                  0.06611713383747528,
+                  -0.130707369002443,
+                  0.7499999627922737
+                ],
+                "max": [
+                  0.19530431777803262,
+                  -0.059146949874906984,
+                  0.7680000035338553
+                ]
+              }
+            }
+          },
+          "scene_signature_without_runtime_graphs": "4afb1bde80ed1b5638aef395b21abeb8189cbb2b1407b507f44f863ecbe86ec3",
+          "root_layer_sublayers": [
+            "./scene_data.usdc"
+          ],
+          "root_layer_specs": [],
+          "artifact_sha256": {
+            "runs/f8ea0d883671437e/scene_build/build_1795249808637891668/scene.usda": "8b343d09c6a3fff3cf8104ca097b9d4737cafe87c1830d8edd89625c70ff0f21",
+            "runs/f8ea0d883671437e/scene_build/build_1795249808637891668/scene_data.usdc": "ce526ca8b2c64ffa1048579c84b58e03efe58c67b08fbed717d2f795f1a1a691"
+          },
+          "joints": [
+            {
+              "path": "/World/nero/joints/joint1",
+              "type": "PhysicsRevoluteJoint",
+              "body0": [
+                "/World/nero/base_link"
+              ],
+              "body1": [
+                "/World/nero/link1"
+              ]
+            },
+            {
+              "path": "/World/nero/joints/joint2",
+              "type": "PhysicsRevoluteJoint",
+              "body0": [
+                "/World/nero/link1"
+              ],
+              "body1": [
+                "/World/nero/link2"
+              ]
+            },
+            {
+              "path": "/World/nero/joints/joint3",
+              "type": "PhysicsRevoluteJoint",
+              "body0": [
+                "/World/nero/link2"
+              ],
+              "body1": [
+                "/World/nero/link3"
+              ]
+            },
+            {
+              "path": "/World/nero/joints/joint4",
+              "type": "PhysicsRevoluteJoint",
+              "body0": [
+                "/World/nero/link3"
+              ],
+              "body1": [
+                "/World/nero/link4"
+              ]
+            },
+            {
+              "path": "/World/nero/joints/joint5",
+              "type": "PhysicsRevoluteJoint",
+              "body0": [
+                "/World/nero/link4"
+              ],
+              "body1": [
+                "/World/nero/link5"
+              ]
+            },
+            {
+              "path": "/World/nero/joints/joint6",
+              "type": "PhysicsRevoluteJoint",
+              "body0": [
+                "/World/nero/link5"
+              ],
+              "body1": [
+                "/World/nero/link6"
+              ]
+            },
+            {
+              "path": "/World/nero/joints/joint7",
+              "type": "PhysicsRevoluteJoint",
+              "body0": [
+                "/World/nero/link6"
+              ],
+              "body1": [
+                "/World/nero/link7"
+              ]
+            },
+            {
+              "path": "/World/nero/joints/gripper_flange_joint",
+              "type": "PhysicsFixedJoint",
+              "body0": [
+                "/World/nero/link7"
+              ],
+              "body1": [
+                "/World/nero/gripper_flange"
+              ]
+            },
+            {
+              "path": "/World/nero/joints/gripper_base_joint",
+              "type": "PhysicsFixedJoint",
+              "body0": [
+                "/World/nero/gripper_flange"
+              ],
+              "body1": [
+                "/World/nero/gripper_base"
+              ]
+            },
+            {
+              "path": "/World/nero/joints/gripper_joint1",
+              "type": "PhysicsPrismaticJoint",
+              "body0": [
+                "/World/nero/gripper_base"
+              ],
+              "body1": [
+                "/World/nero/gripper_link1"
+              ]
+            },
+            {
+              "path": "/World/nero/joints/gripper_joint2",
+              "type": "PhysicsPrismaticJoint",
+              "body0": [
+                "/World/nero/gripper_base"
+              ],
+              "body1": [
+                "/World/nero/gripper_link2"
+              ]
+            },
+            {
+              "path": "/World/nero/root_joint",
+              "type": "PhysicsFixedJoint",
+              "body0": [],
+              "body1": [
+                "/World/nero/base_link"
+              ]
+            },
+            {
+              "path": "/World/nero2/joints/joint1",
+              "type": "PhysicsRevoluteJoint",
+              "body0": [
+                "/World/nero2/base_link"
+              ],
+              "body1": [
+                "/World/nero2/link1"
+              ]
+            },
+            {
+              "path": "/World/nero2/joints/joint2",
+              "type": "PhysicsRevoluteJoint",
+              "body0": [
+                "/World/nero2/link1"
+              ],
+              "body1": [
+                "/World/nero2/link2"
+              ]
+            },
+            {
+              "path": "/World/nero2/joints/joint3",
+              "type": "PhysicsRevoluteJoint",
+              "body0": [
+                "/World/nero2/link2"
+              ],
+              "body1": [
+                "/World/nero2/link3"
+              ]
+            },
+            {
+              "path": "/World/nero2/joints/joint4",
+              "type": "PhysicsRevoluteJoint",
+              "body0": [
+                "/World/nero2/link3"
+              ],
+              "body1": [
+                "/World/nero2/link4"
+              ]
+            },
+            {
+              "path": "/World/nero2/joints/joint5",
+              "type": "PhysicsRevoluteJoint",
+              "body0": [
+                "/World/nero2/link4"
+              ],
+              "body1": [
+                "/World/nero2/link5"
+              ]
+            },
+            {
+              "path": "/World/nero2/joints/joint6",
+              "type": "PhysicsRevoluteJoint",
+              "body0": [
+                "/World/nero2/link5"
+              ],
+              "body1": [
+                "/World/nero2/link6"
+              ]
+            },
+            {
+              "path": "/World/nero2/joints/joint7",
+              "type": "PhysicsRevoluteJoint",
+              "body0": [
+                "/World/nero2/link6"
+              ],
+              "body1": [
+                "/World/nero2/link7"
+              ]
+            },
+            {
+              "path": "/World/nero2/joints/gripper_flange_joint",
+              "type": "PhysicsFixedJoint",
+              "body0": [
+                "/World/nero2/link7"
+              ],
+              "body1": [
+                "/World/nero2/gripper_flange"
+              ]
+            },
+            {
+              "path": "/World/nero2/joints/gripper_base_joint",
+              "type": "PhysicsFixedJoint",
+              "body0": [
+                "/World/nero2/gripper_flange"
+              ],
+              "body1": [
+                "/World/nero2/gripper_base"
+              ]
+            },
+            {
+              "path": "/World/nero2/joints/gripper_joint1",
+              "type": "PhysicsPrismaticJoint",
+              "body0": [
+                "/World/nero2/gripper_base"
+              ],
+              "body1": [
+                "/World/nero2/gripper_link1"
+              ]
+            },
+            {
+              "path": "/World/nero2/joints/gripper_joint2",
+              "type": "PhysicsPrismaticJoint",
+              "body0": [
+                "/World/nero2/gripper_base"
+              ],
+              "body1": [
+                "/World/nero2/gripper_link2"
+              ]
+            },
+            {
+              "path": "/World/nero2/root_joint",
+              "type": "PhysicsFixedJoint",
+              "body0": [],
+              "body1": [
+                "/World/nero2/base_link"
+              ]
+            }
+          ],
+          "cameras": [
+            "/World/nero/gripper_base/TaskCamera/Color",
+            "/World/nero2/gripper_base/TaskCamera/Color",
+            "/World/RegisteredCenterMount/Color",
+            "/World/PreviewCamera",
+            "/World/ReferenceView_front",
+            "/World/ReferenceView_side",
+            "/OmniverseKit_Persp",
+            "/OmniverseKit_Front",
+            "/OmniverseKit_Top",
+            "/OmniverseKit_Right"
+          ],
+          "camera_properties": {
+            "/World/nero/gripper_base/TaskCamera/Color": {
+              "parent_link_path": "/World/nero/gripper_base",
+              "T_parent_camera_optical": [
+                [
+                  -0.03207313590626901,
+                  -0.9306643637434245,
+                  -0.3644655758932315,
+                  0.08044465388557565
+                ],
+                [
+                  0.999485513388795,
+                  -0.029809988253803717,
+                  -0.011835249310635284,
+                  -0.006293120950963654
+                ],
+                [
+                  0.00014993023313406907,
+                  -0.3646576567938139,
+                  0.9311416491933816,
+                  0.03751288267473485
+                ],
+                [
+                  0.0,
+                  -0.0,
+                  -0.0,
+                  1.0
+                ]
+              ],
+              "projection_ndc_samples": [
+                [
+                  -0.011332702117189003,
+                  -0.02797673461089215
+                ],
+                [
+                  0.1785200463792853,
+                  -0.1542556753512823
+                ],
+                [
+                  -0.12999066992748545,
+                  0.2877206172400832
+                ]
+              ],
+              "focal_length_mm": 20.0,
+              "clipping_range": [
+                0.004999999888241291,
+                10.0
+              ]
+            },
+            "/World/nero2/gripper_base/TaskCamera/Color": {
+              "parent_link_path": "/World/nero2/gripper_base",
+              "T_parent_camera_optical": [
+                [
+                  -0.018773553092644467,
+                  -0.9238269520717461,
+                  -0.38234973039104553,
+                  0.07462720220449659
+                ],
+                [
+                  0.9995149743795309,
+                  -0.00783764945689544,
+                  -0.0301394632015326,
+                  0.0033595397928797843
+                ],
+                [
+                  0.02484692526980692,
+                  -0.38273010578842426,
+                  0.923526012859312,
+                  0.03858209561234327
+                ],
+                [
+                  0.0,
+                  -0.0,
+                  -0.0,
+                  1.0
+                ]
+              ],
+              "projection_ndc_samples": [
+                [
+                  0.019706345144004087,
+                  -0.06073881902989225
+                ],
+                [
+                  0.20833504463394303,
+                  -0.18623559345199667
+                ],
+                [
+                  -0.09818659203720774,
+                  0.25300311702536876
+                ]
+              ],
+              "focal_length_mm": 20.0,
+              "clipping_range": [
+                0.004999999888241291,
+                10.0
+              ]
+            },
+            "/World/RegisteredCenterMount/Color": {
+              "parent_link_path": "/World",
+              "T_parent_camera_optical": [
+                [
+                  0.999787590538533,
+                  0.014904598480651836,
+                  0.014234702289999355,
+                  -0.021267039086517447
+                ],
+                [
+                  -0.003049544491384333,
+                  -0.5760852814428458,
+                  0.8173839053855367,
+                  -0.43561207666297175
+                ],
+                [
+                  0.020383181389307926,
+                  -0.8172536946683373,
+                  -0.5759174632422627,
+                  1.182021048196888
+                ],
+                [
+                  0.0,
+                  -0.0,
+                  -0.0,
+                  1.0
+                ]
+              ],
+              "projection_ndc_samples": [
+                [
+                  0.005848026066520449,
+                  -0.0394252787379376
+                ],
+                [
+                  0.1949455794459637,
+                  -0.16522074844978968
+                ],
+                [
+                  -0.11233794479563156,
+                  0.27506339554169257
+                ]
+              ],
+              "focal_length_mm": 20.0,
+              "clipping_range": [
+                0.004999999888241291,
+                10.0
+              ]
+            },
+            "/World/PreviewCamera": {
+              "parent_link_path": "/",
+              "T_parent_camera_optical": [
+                [
+                  0.7682212795973759,
+                  0.28305235101149084,
+                  -0.5742102682473018,
+                  0.95
+                ],
+                [
+                  0.6401843996644799,
+                  -0.33966282121378893,
+                  0.6890523218967621,
+                  -1.14
+                ],
+                [
+                  0.0,
+                  -0.8969451122961525,
+                  -0.4421419065504225,
+                  1.5575
+                ],
+                [
+                  0.0,
+                  -0.0,
+                  -0.0,
+                  1.0
+                ]
+              ],
+              "projection_ndc_samples": [
+                [
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.13333333333333333,
+                  -0.10666666666666669
+                ],
+                [
+                  -0.08333333333333333,
+                  0.2666666666666667
+                ]
+              ],
+              "focal_length_mm": 24.0,
+              "clipping_range": [
+                0.009999999776482582,
+                20.0
+              ]
+            },
+            "/World/ReferenceView_front": {
+              "parent_link_path": "/",
+              "T_parent_camera_optical": [
+                [
+                  1.0,
+                  -0.0,
+                  -0.0,
+                  0.0
+                ],
+                [
+                  0.0,
+                  -0.21294966545836466,
+                  0.9770631709266144,
+                  -0.741
+                ],
+                [
+                  0.0,
+                  -0.9770631709266144,
+                  -0.21294966545836466,
+                  1.0065
+                ],
+                [
+                  0.0,
+                  -0.0,
+                  -0.0,
+                  1.0
+                ]
+              ],
+              "projection_ndc_samples": [
+                [
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.13333333333333333,
+                  -0.08888888888888889
+                ],
+                [
+                  -0.08333333333333333,
+                  0.2222222222222222
+                ]
+              ],
+              "focal_length_mm": 24.0,
+              "clipping_range": [
+                0.009999999776482582,
+                20.0
+              ]
+            },
+            "/World/ReferenceView_side": {
+              "parent_link_path": "/",
+              "T_parent_camera_optical": [
+                [
+                  0.12716431598536546,
+                  -0.1374073619997367,
+                  0.9823178984464487,
+                  -0.741
+                ],
+                [
+                  -0.9918816646858506,
+                  -0.017616328461504703,
+                  0.12593819210851906,
+                  -0.095
+                ],
+                [
+                  0.0,
+                  -0.9903579564176832,
+                  -0.13853201131937087,
+                  0.959
+                ],
+                [
+                  0.0,
+                  -0.0,
+                  -0.0,
+                  1.0
+                ]
+              ],
+              "projection_ndc_samples": [
+                [
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.13333333333333333,
+                  -0.08888888888888889
+                ],
+                [
+                  -0.08333333333333333,
+                  0.2222222222222222
+                ]
+              ],
+              "focal_length_mm": 24.0,
+              "clipping_range": [
+                0.009999999776482582,
+                20.0
+              ]
+            },
+            "/OmniverseKit_Persp": {
+              "parent_link_path": "",
+              "T_parent_camera_optical": [
+                [
+                  -0.7071067811865475,
+                  0.40824828396775353,
+                  -0.5773502737830689,
+                  5.0
+                ],
+                [
+                  0.7071067811865477,
+                  0.40824828396775353,
+                  -0.5773502737830687,
+                  5.0
+                ],
+                [
+                  1.110223037584573e-16,
+                  -0.8164965874238355,
+                  -0.5773502600027396,
+                  5.0
+                ],
+                [
+                  0.0,
+                  -0.0,
+                  -0.0,
+                  1.0
+                ]
+              ],
+              "projection_ndc_samples": [
+                [
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.17320507843521865,
+                  -0.1186828806517527
+                ],
+                [
+                  -0.10825317402201165,
+                  0.29670720162938174
+                ]
+              ],
+              "focal_length_mm": 18.14756202697754,
+              "clipping_range": [
+                0.009999999776482582,
+                10000000.0
+              ]
+            },
+            "/OmniverseKit_Front": {
+              "parent_link_path": "",
+              "T_parent_camera_optical": [
+                [
+                  2.220446049250313e-16,
+                  2.2204460492503136e-16,
+                  -1.0,
+                  5.0
+                ],
+                [
+                  1.0,
+                  2.2204460751691457e-16,
+                  2.2204460492503136e-16,
+                  0.0
+                ],
+                [
+                  2.220446075169146e-16,
+                  -1.0,
+                  -2.220446049250313e-16,
+                  0.0
+                ],
+                [
+                  0.0,
+                  -0.0,
+                  -0.0,
+                  1.0
+                ]
+              ],
+              "projection_ndc_samples": [
+                [
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.04000000000000001,
+                  -0.020000000000000004
+                ],
+                [
+                  -0.020000000000000004,
+                  0.04000000000000001
+                ]
+              ],
+              "focal_length_mm": 50.0,
+              "clipping_range": [
+                1.0,
+                10000000.0
+              ]
+            },
+            "/OmniverseKit_Top": {
+              "parent_link_path": "",
+              "T_parent_camera_optical": [
+                [
+                  2.220446049250313e-16,
+                  -1.0,
+                  -2.2204460751691457e-16,
+                  0.0
+                ],
+                [
+                  -1.0,
+                  -2.2204460492503128e-16,
+                  -1.224646769157485e-16,
+                  0.0
+                ],
+                [
+                  1.2246467691574846e-16,
+                  2.220446075169146e-16,
+                  -1.0,
+                  5.0
+                ],
+                [
+                  0.0,
+                  -0.0,
+                  -0.0,
+                  1.0
+                ]
+              ],
+              "projection_ndc_samples": [
+                [
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.04000000000000001,
+                  -0.020000000000000004
+                ],
+                [
+                  -0.020000000000000004,
+                  0.04000000000000001
+                ]
+              ],
+              "focal_length_mm": 50.0,
+              "clipping_range": [
+                1.0,
+                10000000.0
+              ]
+            },
+            "/OmniverseKit_Right": {
+              "parent_link_path": "",
+              "T_parent_camera_optical": [
+                [
+                  1.0,
+                  7.395571072774041e-32,
+                  -2.220446075169146e-16,
+                  0.0
+                ],
+                [
+                  2.220446075169146e-16,
+                  -2.220446049250313e-16,
+                  1.0,
+                  -5.0
+                ],
+                [
+                  2.465190357591347e-32,
+                  -1.0,
+                  -2.220446049250313e-16,
+                  0.0
+                ],
+                [
+                  0.0,
+                  -0.0,
+                  -0.0,
+                  1.0
+                ]
+              ],
+              "projection_ndc_samples": [
+                [
+                  0.0,
+                  0.0
+                ],
+                [
+                  0.04000000000000001,
+                  -0.020000000000000004
+                ],
+                [
+                  -0.020000000000000004,
+                  0.04000000000000001
+                ]
+              ],
+              "focal_length_mm": 50.0,
+              "clipping_range": [
+                1.0,
+                10000000.0
+              ]
+            }
+          },
+          "object_world_positions": {
+            "/World/Objects/object_0": [
+              0.36934128403663635,
+              -0.25175678730010986,
+              0.8676146268844604
+            ],
+            "/World/Objects/object_1": [
+              0.25000011920928955,
+              -0.18000000715255737,
+              0.7730021476745605
+            ],
+            "/World/Objects/object_2": [
+              -0.24999992549419403,
+              -0.17999999225139618,
+              0.7730020880699158
+            ],
+            "/World/Objects/object_3": [
+              0.23999996483325958,
+              0.06499999016523361,
+              0.7624999284744263
+            ],
+            "/World/Objects/object_4": [
+              0.12999999523162842,
+              -0.0950000137090683,
+              0.7590000033378601
+            ]
+          },
+          "status": "passed",
+          "outside": [],
+          "missing": [],
+          "layers": [
+            "/home/cjh/Downloads/Demo2Real-Agent-Workbench/runs/f8ea0d883671437e/scene_build/build_1795249808637891668/scene.usda",
+            "/home/cjh/Downloads/Demo2Real-Agent-Workbench/runs/f8ea0d883671437e/scene_build/build_1795249808637891668/scene_data.usdc"
+          ],
+          "rigid_bodies": [
+            "/World/nero/base_link",
+            "/World/nero/link1",
+            "/World/nero/link2",
+            "/World/nero/link3",
+            "/World/nero/link4",
+            "/World/nero/link5",
+            "/World/nero/link6",
+            "/World/nero/link7",
+            "/World/nero/gripper_flange",
+            "/World/nero/gripper_base",
+            "/World/nero/gripper_link1",
+            "/World/nero/gripper_link2",
+            "/World/nero2/base_link",
+            "/World/nero2/link1",
+            "/World/nero2/link2",
+            "/World/nero2/link3",
+            "/World/nero2/link4",
+            "/World/nero2/link5",
+            "/World/nero2/link6",
+            "/World/nero2/link7",
+            "/World/nero2/gripper_flange",
+            "/World/nero2/gripper_base",
+            "/World/nero2/gripper_link1",
+            "/World/nero2/gripper_link2",
+            "/World/Objects/object_0",
+            "/World/Objects/object_1",
+            "/World/Objects/object_2",
+            "/World/Objects/object_3",
+            "/World/Objects/object_4"
+          ],
+          "physics_scenes": [
+            "/physicsScene"
+          ],
+          "articulation_base_positions": {
+            "/World/nero": [
+              -0.3603512017935562,
+              -0.5360000000000001,
+              0.7414281653685635
+            ],
+            "/World/nero2": [
+              0.3603512017935562,
+              -0.536,
+              0.7585718346314365
+            ]
+          }
+        }
+      },
+      {
+        "id": "usd_physics_scene",
+        "passed": true,
+        "details": "USD must contain a real PhysicsScene"
+      },
+      {
+        "id": "usd_rigid_body:object_0",
+        "passed": true,
+        "details": "Independent USD inspection, not a manifest claim"
+      },
+      {
+        "id": "usd_pose_match:object_0",
+        "passed": true,
+        "details": {
+          "position_error_m": 0.0,
+          "tolerance_m": 0.002
+        }
+      },
+      {
+        "id": "usd_rigid_body:object_1",
+        "passed": true,
+        "details": "Independent USD inspection, not a manifest claim"
+      },
+      {
+        "id": "usd_pose_match:object_1",
+        "passed": true,
+        "details": {
+          "position_error_m": 0.0,
+          "tolerance_m": 0.002
+        }
+      },
+      {
+        "id": "usd_rigid_body:object_2",
+        "passed": true,
+        "details": "Independent USD inspection, not a manifest claim"
+      },
+      {
+        "id": "usd_pose_match:object_2",
+        "passed": true,
+        "details": {
+          "position_error_m": 0.0,
+          "tolerance_m": 0.002
+        }
+      },
+      {
+        "id": "usd_rigid_body:object_3",
+        "passed": true,
+        "details": "Independent USD inspection, not a manifest claim"
+      },
+      {
+        "id": "usd_pose_match:object_3",
+        "passed": true,
+        "details": {
+          "position_error_m": 0.0,
+          "tolerance_m": 0.002
+        }
+      },
+      {
+        "id": "usd_rigid_body:object_4",
+        "passed": true,
+        "details": "Independent USD inspection, not a manifest claim"
+      },
+      {
+        "id": "usd_pose_match:object_4",
+        "passed": true,
+        "details": {
+          "position_error_m": 0.0,
+          "tolerance_m": 0.002
+        }
+      },
+      {
+        "id": "usd_no_forbidden_object_attachment",
+        "passed": true,
+        "details": {
+          "forbidden_joints": [],
+          "scope": "Object-to-robot/world/other-object joints forbidden; only registered own passive latch spring allowed"
+        }
+      },
+      {
+        "id": "no_connector_pair_joint",
+        "passed": true,
+        "details": []
+      },
+      {
+        "id": "no_controller_or_hardware",
+        "passed": true,
+        "details": "Preview may not grant task/robot execution"
+      },
+      {
+        "id": "object_count",
+        "passed": true,
+        "details": "Each task object has a simulated pose"
+      },
+      {
+        "id": "exact_support_available:object_0",
+        "passed": true,
+        "details": "Actual mesh vertices and analytic surface bounds required"
+      },
+      {
+        "id": "collision_table_support:object_0",
+        "passed": true,
+        "details": {
+          "collision_bottom_m": 0.7498554543576436,
+          "table_top_m": 0.75,
+          "tolerance_m": 0.003
+        }
+      },
+      {
+        "id": "finite_state:object_0",
+        "passed": true,
+        "details": "Finite local PhysX state"
+      },
+      {
+        "id": "table_support:object_0",
+        "passed": true,
+        "details": {
+          "table_top_m": 0.75,
+          "visual_bottom_m": 0.7498554543576436,
+          "tolerance_m": 0.003,
+          "geometry_method": "used_vertices_and_analytic_support/v1"
+        }
+      },
+      {
+        "id": "within_table:object_0",
+        "passed": false,
+        "details": {
+          "bounds": {
+            "min": [
+              0.27891669036570005,
+              -0.3288445998953003,
+              0.7498554543576436
+            ],
+            "max": [
+              0.4595510404014277,
+              -0.17063331114663502,
+              0.9879042026409843
+            ]
+          }
+        }
+      },
+      {
+        "id": "settled:object_0",
+        "passed": false,
+        "details": {
+          "linear_speed_m_s": 0.4732448386667936,
+          "angular_speed_rad_s": 3.56866545293053,
+          "scope": "local settling only, no grasp validation"
+        }
+      },
+      {
+        "id": "exact_support_available:object_1",
+        "passed": true,
+        "details": "Actual mesh vertices and analytic surface bounds required"
+      },
+      {
+        "id": "collision_table_support:object_1",
+        "passed": true,
+        "details": {
+          "collision_bottom_m": 0.7499999602967216,
+          "table_top_m": 0.75,
+          "tolerance_m": 0.003
+        }
+      },
+      {
+        "id": "finite_state:object_1",
+        "passed": true,
+        "details": "Finite local PhysX state"
+      },
+      {
+        "id": "table_support:object_1",
+        "passed": true,
+        "details": {
+          "table_top_m": 0.75,
+          "visual_bottom_m": 0.7499999602967216,
+          "tolerance_m": 0.003,
+          "geometry_method": "used_vertices_and_analytic_support/v1"
+        }
+      },
+      {
+        "id": "within_table:object_1",
+        "passed": true,
+        "details": {
+          "bounds": {
+            "min": [
+              0.2299877581947987,
+              -0.30800001690609047,
+              0.7499999602967216
+            ],
+            "max": [
+              0.2700124765114763,
+              -0.051999998531399666,
+              0.7960043337408982
+            ]
+          }
+        }
+      },
+      {
+        "id": "settled:object_1",
+        "passed": true,
+        "details": {
+          "linear_speed_m_s": 0.00013501215281078196,
+          "angular_speed_rad_s": 0.0007353082332909441,
+          "scope": "local settling only, no grasp validation"
+        }
+      },
+      {
+        "id": "exact_support_available:object_2",
+        "passed": true,
+        "details": "Actual mesh vertices and analytic surface bounds required"
+      },
+      {
+        "id": "collision_table_support:object_2",
+        "passed": true,
+        "details": {
+          "collision_bottom_m": 0.7499999027237818,
+          "table_top_m": 0.75,
+          "tolerance_m": 0.003
+        }
+      },
+      {
+        "id": "finite_state:object_2",
+        "passed": true,
+        "details": "Finite local PhysX state"
+      },
+      {
+        "id": "table_support:object_2",
+        "passed": true,
+        "details": {
+          "table_top_m": 0.75,
+          "visual_bottom_m": 0.7499999027237818,
+          "tolerance_m": 0.003,
+          "geometry_method": "used_vertices_and_analytic_support/v1"
+        }
+      },
+      {
+        "id": "within_table:object_2",
+        "passed": true,
+        "details": {
+          "bounds": {
+            "min": [
+              -0.27001214883886626,
+              -0.3079999999857428,
+              0.7499999027237818
+            ],
+            "max": [
+              -0.2299877038929967,
+              -0.05199998548292786,
+              0.7960042723042935
+            ]
+          }
+        }
+      },
+      {
+        "id": "settled:object_2",
+        "passed": true,
+        "details": {
+          "linear_speed_m_s": 0.00012816645140441553,
+          "angular_speed_rad_s": 0.0007028778524484884,
+          "scope": "local settling only, no grasp validation"
+        }
+      },
+      {
+        "id": "exact_support_available:object_3",
+        "passed": true,
+        "details": "Actual mesh vertices and analytic surface bounds required"
+      },
+      {
+        "id": "collision_table_support:object_3",
+        "passed": true,
+        "details": {
+          "collision_bottom_m": 0.7499999256367846,
+          "table_top_m": 0.75,
+          "tolerance_m": 0.003
+        }
+      },
+      {
+        "id": "finite_state:object_3",
+        "passed": true,
+        "details": "Finite local PhysX state"
+      },
+      {
+        "id": "table_support:object_3",
+        "passed": true,
+        "details": {
+          "table_top_m": 0.75,
+          "visual_bottom_m": 0.7499999256367846,
+          "tolerance_m": 0.003,
+          "geometry_method": "used_vertices_and_analytic_support/v1"
+        }
+      },
+      {
+        "id": "within_table:object_3",
+        "passed": true,
+        "details": {
+          "bounds": {
+            "min": [
+              0.21249996457801343,
+              0.04499998908052134,
+              0.7499999256367846
+            ],
+            "max": [
+              0.2674999650885057,
+              0.0849999912499459,
+              0.7749999313120679
+            ]
+          }
+        }
+      },
+      {
+        "id": "settled:object_3",
+        "passed": true,
+        "details": {
+          "linear_speed_m_s": 1.6511082563115363e-05,
+          "angular_speed_rad_s": 9.007059150053687e-05,
+          "scope": "local settling only, no grasp validation"
+        }
+      },
+      {
+        "id": "exact_support_available:object_4",
+        "passed": true,
+        "details": "Actual mesh vertices and analytic surface bounds required"
+      },
+      {
+        "id": "collision_table_support:object_4",
+        "passed": true,
+        "details": {
+          "collision_bottom_m": 0.7499999627922737,
+          "table_top_m": 0.75,
+          "tolerance_m": 0.003
+        }
+      },
+      {
+        "id": "finite_state:object_4",
+        "passed": true,
+        "details": "Finite local PhysX state"
+      },
+      {
+        "id": "table_support:object_4",
+        "passed": true,
+        "details": {
+          "table_top_m": 0.75,
+          "visual_bottom_m": 0.7499999627922737,
+          "tolerance_m": 0.003,
+          "geometry_method": "used_vertices_and_analytic_support/v1"
+        }
+      },
+      {
+        "id": "within_table:object_4",
+        "passed": true,
+        "details": {
+          "bounds": {
+            "min": [
+              0.06611713383747528,
+              -0.130707369002443,
+              0.7499999627922737
+            ],
+            "max": [
+              0.19530431777803262,
+              -0.059146949874906984,
+              0.7680000035338553
+            ]
+          }
+        }
+      },
+      {
+        "id": "settled:object_4",
+        "passed": true,
+        "details": {
+          "linear_speed_m_s": 9.35872653665042e-06,
+          "angular_speed_rad_s": 0.0006089053703793287,
+          "scope": "local settling only, no grasp validation"
+        }
+      },
+      {
+        "id": "estimated_registration_manifest",
+        "passed": true,
+        "details": "Same estimate as the rendered task snapshot"
+      },
+      {
+        "id": "usd_estimated_robot_base:left",
+        "passed": true,
+        "details": {
+          "actual_m": [
+            -0.3603512017935562,
+            -0.5360000000000001,
+            0.7414281653685635
+          ],
+          "estimated_m": [
+            -0.3603512017935562,
+            -0.5360000000000001,
+            0.7414281653685635
+          ]
+        }
+      },
+      {
+        "id": "usd_estimated_robot_base:right",
+        "passed": true,
+        "details": {
+          "actual_m": [
+            0.3603512017935562,
+            -0.536,
+            0.7585718346314365
+          ],
+          "estimated_m": [
+            0.3603512017935562,
+            -0.536,
+            0.7585718346314365
+          ]
+        }
+      },
+      {
+        "id": "usd_camera_exists:overview",
+        "passed": true,
+        "details": "Camera must exist in independent USD inspection"
+      },
+      {
+        "id": "rendered_image:overview",
+        "passed": true,
+        "details": {
+          "path": "runs/f8ea0d883671437e/scene_build/build_1795249808637891668/scene.png",
+          "dimensions": [
+            1280,
+            800
+          ],
+          "decoded_contrast": 40.5820155798757,
+          "error": null
+        }
+      },
+      {
+        "id": "projection:overview",
+        "passed": true,
+        "details": {
+          "maximum_projection_error_px": 0.0,
+          "scope": "internal optical/USD geometry consistency, not hardware calibration"
+        }
+      },
+      {
+        "id": "usd_camera_exists:front",
+        "passed": true,
+        "details": "Camera must exist in independent USD inspection"
+      },
+      {
+        "id": "rendered_image:front",
+        "passed": true,
+        "details": {
+          "path": "runs/f8ea0d883671437e/scene_build/build_1795249808637891668/camera_0_rgb.png",
+          "dimensions": [
+            640,
+            480
+          ],
+          "decoded_contrast": 48.87733740717648,
+          "error": null
+        }
+      },
+      {
+        "id": "projection:front",
+        "passed": true,
+        "details": {
+          "maximum_projection_error_px": 0.0,
+          "scope": "internal optical/USD geometry consistency, not hardware calibration"
+        }
+      },
+      {
+        "id": "usd_camera_exists:side",
+        "passed": true,
+        "details": "Camera must exist in independent USD inspection"
+      },
+      {
+        "id": "rendered_image:side",
+        "passed": true,
+        "details": {
+          "path": "runs/f8ea0d883671437e/scene_build/build_1795249808637891668/camera_1_rgb.png",
+          "dimensions": [
+            640,
+            480
+          ],
+          "decoded_contrast": 36.913557135572134,
+          "error": null
+        }
+      },
+      {
+        "id": "projection:side",
+        "passed": true,
+        "details": {
+          "maximum_projection_error_px": 0.0,
+          "scope": "internal optical/USD geometry consistency, not hardware calibration"
+        }
+      },
+      {
+        "id": "usd_camera_exists:left",
+        "passed": true,
+        "details": "Camera must exist in independent USD inspection"
+      },
+      {
+        "id": "usd_calibrated_projection:left",
+        "passed": true,
+        "details": {
+          "pixel_error": 1.1742537253667251e-06,
+          "source": "reopened USD lens versus bound calibration"
+        }
+      },
+      {
+        "id": "usd_camera_mount:left",
+        "passed": true,
+        "details": {
+          "matrix_error": 1.1102230246251565e-16,
+          "parent": "/World/nero/gripper_base",
+          "source": "reopened USD camera versus task snapshot"
+        }
+      },
+      {
+        "id": "rendered_image:left",
+        "passed": true,
+        "details": {
+          "path": "runs/f8ea0d883671437e/scene_build/build_1795249808637891668/camera_2_rgb.png",
+          "dimensions": [
+            640,
+            480
+          ],
+          "decoded_contrast": 29.39899350065662,
+          "error": null
+        }
+      },
+      {
+        "id": "projection:left",
+        "passed": true,
+        "details": {
+          "maximum_projection_error_px": 1.1742537253667251e-06,
+          "scope": "internal optical/USD geometry consistency, not hardware calibration"
+        }
+      },
+      {
+        "id": "usd_camera_exists:right",
+        "passed": true,
+        "details": "Camera must exist in independent USD inspection"
+      },
+      {
+        "id": "usd_calibrated_projection:right",
+        "passed": true,
+        "details": {
+          "pixel_error": 2.3687993007115438e-06,
+          "source": "reopened USD lens versus bound calibration"
+        }
+      },
+      {
+        "id": "usd_camera_mount:right",
+        "passed": true,
+        "details": {
+          "matrix_error": 3.0531133177191805e-16,
+          "parent": "/World/nero2/gripper_base",
+          "source": "reopened USD camera versus task snapshot"
+        }
+      },
+      {
+        "id": "rendered_image:right",
+        "passed": true,
+        "details": {
+          "path": "runs/f8ea0d883671437e/scene_build/build_1795249808637891668/camera_3_rgb.png",
+          "dimensions": [
+            640,
+            480
+          ],
+          "decoded_contrast": 33.234601622529155,
+          "error": null
+        }
+      },
+      {
+        "id": "projection:right",
+        "passed": true,
+        "details": {
+          "maximum_projection_error_px": 2.3687993007115438e-06,
+          "scope": "internal optical/USD geometry consistency, not hardware calibration"
+        }
+      },
+      {
+        "id": "usd_camera_exists:center",
+        "passed": true,
+        "details": "Camera must exist in independent USD inspection"
+      },
+      {
+        "id": "usd_calibrated_projection:center",
+        "passed": true,
+        "details": {
+          "pixel_error": 1.917310925136917e-06,
+          "source": "reopened USD lens versus bound calibration"
+        }
+      },
+      {
+        "id": "usd_camera_mount:center",
+        "passed": true,
+        "details": {
+          "matrix_error": 0.0,
+          "parent": "/World",
+          "source": "reopened USD camera versus task snapshot"
+        }
+      },
+      {
+        "id": "rendered_image:center",
+        "passed": true,
+        "details": {
+          "path": "runs/f8ea0d883671437e/scene_build/build_1795249808637891668/camera_4_rgb.png",
+          "dimensions": [
+            640,
+            480
+          ],
+          "decoded_contrast": 37.69407753089551,
+          "error": null
+        }
+      },
+      {
+        "id": "projection:center",
+        "passed": true,
+        "details": {
+          "maximum_projection_error_px": 1.917310925136917e-06,
+          "scope": "internal optical/USD geometry consistency, not hardware calibration"
+        }
+      }
+    ],
+    "warnings": [
+      "Scene checks are local structure/render/settling checks. Full task action and retention have not been executed.",
+      "Robot/world calibration, unknown obstacles and engineering contact parameters remain independently unverified.",
+      "Scene uses approximated visual proxies. Local simulated checks do not verify real object dimensions or contact geometry."
+    ],
+    "scope": "scene_structure_camera_and_local_settling_only",
+    "task_spec_hash": "d70dd6f747440fcdfeb8a529c84b0ec186b8bb8ae1e79cf34df198488a24e15e",
+    "spec_revision": 1,
+    "full_task_evaluated": false,
+    "action_evaluation": "not_executed",
+    "retention_evaluation": "not_executed",
+    "hardware_verified": false,
+    "contact_execution_authorized": false,
+    "support_geometry_version": "used_vertices_and_analytic_support/v1",
+    "manifest_path": "runs/f8ea0d883671437e/scene_build/build_1795249808637891668/scene_manifest.json",
+    "scene_signature_without_runtime_graphs": "4afb1bde80ed1b5638aef395b21abeb8189cbb2b1407b507f44f863ecbe86ec3",
+    "artifact_sha256": {
+      "runs/f8ea0d883671437e/scene_build/build_1795249808637891668/scene.usda": "8b343d09c6a3fff3cf8104ca097b9d4737cafe87c1830d8edd89625c70ff0f21",
+      "runs/f8ea0d883671437e/scene_build/build_1795249808637891668/scene_data.usdc": "ce526ca8b2c64ffa1048579c84b58e03efe58c67b08fbed717d2f795f1a1a691",
+      "runs/f8ea0d883671437e/scene_build/build_1795249808637891668/scene_manifest.json": "5eee1e77b30ac827f70e409da0dd3b1d91dbbe5a6e43e1bffe89b3d8c3e70feb"
+    },
+    "report_path": "runs/f8ea0d883671437e/scene_build/refinement_2_1795249730901817130/validation/validation_report.json",
+    "error": "最终修正版场景的局部物理检查未通过",
+    "artifacts": []
+  }
+}

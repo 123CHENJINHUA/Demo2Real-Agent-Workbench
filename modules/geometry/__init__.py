@@ -66,11 +66,14 @@ def run(ctx: dict) -> dict:
     if not output.is_relative_to(root):
         raise ValueError("Geometry output outside project")
     output.mkdir(parents=True, exist_ok=True)
-    supplied = ctx.get("input", {}).get("asset_paths", [])
-    explicit_selection = bool(supplied)
+    inputs = ctx.get("input", {})
+    supplied = inputs.get("asset_paths") or []
     if isinstance(supplied, str):
         supplied = [supplied]
-    if not supplied and (root / "assets").is_dir():
+    selected_models = {item["path"]:item["sha256"] for item in inputs.get("object_models", [])}
+    supplied = [*supplied, *selected_models]
+    selection_scope = "explicit_task_assets" if supplied else "no_task_assets" if "object_models" in inputs else "project_inventory_unbound"
+    if selection_scope == "project_inventory_unbound" and (root / "assets").is_dir():
         supplied = ["assets"]
     paths = []
     for value in supplied:
@@ -99,6 +102,8 @@ def run(ctx: dict) -> dict:
                 ctx.get("check_cancel", lambda: None)()
                 digest.update(chunk)
         item = {"path": path.relative_to(root).as_posix(), "bytes": path.stat().st_size, "sha256": digest.hexdigest(), "status": "audited"}
+        if item["path"] in selected_models and selected_models[item["path"]]!=item["sha256"]:
+            raise ValueError("Copied model changed after import: "+item["path"])
         try:
             if path.stat().st_size > 512 * 1024**2:
                 raise ValueError("Asset exceeds 512 MiB lightweight audit budget")
@@ -119,7 +124,9 @@ def run(ctx: dict) -> dict:
             item.update(status="failed", error=str(exc))
         results.append(item)
         ctx.get("emit", lambda *args: None)("progress", {"unit": "assets", "completed": index + 1, "total": len(paths), "current_file": item["path"]})
-    report = {"schema_version": 1, "module_version": VERSION, "status": "completed" if paths else "needs_assets", "asset_selection_scope": "explicit_task_assets" if explicit_selection else "project_inventory_unbound", "task_identity_verified": False, "assets": results, "assets_changed": False, "functional_geometry_verified": False, "required_review": ["Record unit/scale and measured mating features", "Separate visual/collision/functional representations", "Validate positive and negative contact examples", "Consult related experience before assigning functional frames"]}
+    report = {"schema_version": 1, "module_version": VERSION, "status": "completed" if paths or selection_scope=="no_task_assets" else "needs_assets", "asset_selection_scope": selection_scope, "task_identity_verified": False, "assets": results, "assets_changed": False, "functional_geometry_verified": False, "required_review": ["Record unit/scale and measured mating features", "Separate visual/collision/functional representations", "Validate positive and negative contact examples", "Consult related experience before assigning functional frames"]}
+    if "object_models" in inputs:
+        report["object_models"] = inputs["object_models"]
     target = output / "geometry_audit.json"
     target.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
     if ctx.get("input", {}).get("functional_analysis"):

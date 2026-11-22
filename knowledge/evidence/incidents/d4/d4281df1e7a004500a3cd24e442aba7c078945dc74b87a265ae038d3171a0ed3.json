@@ -1,0 +1,2027 @@
+{
+  "error": "worker failed",
+  "result": {
+    "hardware_verified": false,
+    "hardware_commands_sent": 0,
+    "contact_execution_authorized": false,
+    "action_program": {
+      "strategy": "将带线矩形板从白座抬离，经双臂交接后竖直放入黄槽。正视和侧视中段可见板底已离白座，末段可见板降至黄槽处。右爪先闭、左爪后闭、随后右爪张开，这些实测变化支持将右爪起搬、左爪接载作为首个仿真候选。夹紧、承载转换、槽底接触、插入深度、线缆夹滞、锁止及释放后保持均未得到证实。未观察到的物理事件时间为 null。end_fraction 是候选程序边界，夹爪动作按同回合的实测变化布置，影像抽样与传感器的同步待核实。有损深度未用于公制估算。航点依据场景重置位姿和预览包络生成，板包络约为 0.180×0.02285×0.270 米，黄槽外形约为 0.040×0.256×0.046 米。XYZ 欧拉角按 Rz·Ry·Rx 表达，位置指夹爪基座沿局部 +Z 前伸 0.130 米的工具点，局部 Y 沿夹合方向。放置深度、开度、双臂可达性和夹持面均为待验证候选。白座与板共同做布局变化，黄槽可单独变化。初夹锚定板的重置位姿，抬升锚定白座，移送和交接后续目标锚定黄槽。逐布局检查逆解、连杆及夹指扫掠、实际双指接触与板体滑移。黄槽声明的凸包碰撞可能封住槽口，须核对有效内腔与承托面。只有确认槽可承重且线缆无夹滞后才开左爪，独立评估双爪脱离后的保持。录制关节轨迹用于对比和逆解初值。",
+      "phases": [
+        {
+          "name": "右爪张开并对准上框",
+          "instruction": "从给定回合起始工具点离开板面，在上框上方对准后张爪。沿近似板内向下方向进入上框两侧，局部 Y 沿板厚方向。取上缘下约 9 毫米的候选夹点，张开到位后再进入对准点，保持夹指与板框、背部接线部位及白座有间隙。阶段在实测右爪开始闭合的 0.1576 前结束。",
+          "end_fraction": 0.155,
+          "anchor": "object_0",
+          "arms": [
+            "right"
+          ],
+          "adjustment_m": [
+            0,
+            0,
+            0
+          ],
+          "rotation_adjustment_deg": [
+            0,
+            0,
+            0
+          ],
+          "grippers": [],
+          "contact_free": true,
+          "waypoints": [
+            {
+              "arm": "right",
+              "fraction": 0,
+              "relative_to": null,
+              "position_m": [
+                0.305914,
+                -0.203051,
+                1.058781
+              ],
+              "orientation_xyz_deg": null,
+              "opening_m": null
+            },
+            {
+              "arm": "right",
+              "fraction": 0.52,
+              "relative_to": "object_0",
+              "position_m": [
+                0.025,
+                -0.027,
+                0.169
+              ],
+              "orientation_xyz_deg": [
+                180,
+                0,
+                0
+              ],
+              "opening_m": null
+            },
+            {
+              "arm": "right",
+              "fraction": 0.77,
+              "relative_to": "object_0",
+              "position_m": [
+                0.042,
+                0,
+                0.169
+              ],
+              "orientation_xyz_deg": [
+                180,
+                0,
+                0
+              ],
+              "opening_m": null
+            },
+            {
+              "arm": "right",
+              "fraction": 0.878,
+              "relative_to": "object_0",
+              "position_m": [
+                0.042,
+                0,
+                0.169
+              ],
+              "orientation_xyz_deg": [
+                180,
+                0,
+                0
+              ],
+              "opening_m": 0.05
+            },
+            {
+              "arm": "right",
+              "fraction": 1,
+              "relative_to": "object_0",
+              "position_m": [
+                0.042,
+                0,
+                0.126
+              ],
+              "orientation_xyz_deg": [
+                180,
+                0,
+                0
+              ],
+              "opening_m": 0.05
+            }
+          ]
+        },
+        {
+          "name": "右爪夹住上框",
+          "instruction": "保持上一相对位姿，在回合 0.1576 至 0.1817 收拢右爪。闭合目标用于建立夹持，起抬前检查两指都接触框体并能传力。",
+          "end_fraction": 0.1817,
+          "anchor": "object_0",
+          "arms": [
+            "right"
+          ],
+          "adjustment_m": [
+            0,
+            0,
+            0
+          ],
+          "rotation_adjustment_deg": [
+            0,
+            0,
+            0
+          ],
+          "grippers": [],
+          "contact_free": false,
+          "waypoints": [
+            {
+              "arm": "right",
+              "fraction": 0.0974,
+              "relative_to": "object_0",
+              "position_m": [
+                0.042,
+                0,
+                0.126
+              ],
+              "orientation_xyz_deg": [
+                180,
+                0,
+                0
+              ],
+              "opening_m": 0.05
+            },
+            {
+              "arm": "right",
+              "fraction": 1,
+              "relative_to": "object_0",
+              "position_m": [
+                0.042,
+                0,
+                0.126
+              ],
+              "orientation_xyz_deg": [
+                180,
+                0,
+                0
+              ],
+              "opening_m": 0.016
+            }
+          ]
+        },
+        {
+          "name": "从白座抬离板件",
+          "instruction": "右爪保持承载，保持板的重置倾角并近竖直上抬约 80 毫米。核对板底全宽离开白座且线缆可随行，再开始横移。",
+          "end_fraction": 0.31,
+          "anchor": "object_1",
+          "arms": [
+            "right"
+          ],
+          "adjustment_m": [
+            0,
+            0,
+            0
+          ],
+          "rotation_adjustment_deg": [
+            0,
+            0,
+            0
+          ],
+          "grippers": [],
+          "contact_free": false,
+          "waypoints": [
+            {
+              "arm": "right",
+              "fraction": 1,
+              "relative_to": "object_1",
+              "position_m": [
+                -0.0316,
+                -0.042,
+                0.3625
+              ],
+              "orientation_xyz_deg": [
+                -173.2,
+                0,
+                -90
+              ],
+              "opening_m": null
+            }
+          ]
+        },
+        {
+          "name": "右臂移板至交接区",
+          "instruction": "板离座后向黄槽方向横移，保持抬升余量并逐步将板转至竖直。把板暂持在双臂重叠工作区，留出左爪从板的负世界 X 一侧接近侧框的通道。",
+          "end_fraction": 0.3977,
+          "anchor": "object_2",
+          "arms": [
+            "right"
+          ],
+          "adjustment_m": [
+            0,
+            0,
+            0
+          ],
+          "rotation_adjustment_deg": [
+            0,
+            0,
+            0
+          ],
+          "grippers": [],
+          "contact_free": false,
+          "waypoints": [
+            {
+              "arm": "right",
+              "fraction": 1,
+              "relative_to": "object_2",
+              "position_m": [
+                0,
+                -0.362,
+                0.363
+              ],
+              "orientation_xyz_deg": [
+                180,
+                0,
+                -90
+              ],
+              "opening_m": null
+            }
+          ]
+        },
+        {
+          "name": "左爪张开并对准侧框",
+          "instruction": "右臂定姿持板。左爪在 0.3977 至 0.4219 张开，先到侧框外，再沿近水平的世界 +X 方向套入约 10 毫米，夹合轴沿板厚。左爪在 0.5337 前完成对准。右爪持续接触板件，左爪在这一阶段保持间隙。",
+          "end_fraction": 0.531,
+          "anchor": "object_2",
+          "arms": [
+            "left"
+          ],
+          "adjustment_m": [
+            0,
+            0,
+            0
+          ],
+          "rotation_adjustment_deg": [
+            0,
+            0,
+            0
+          ],
+          "grippers": [],
+          "contact_free": false,
+          "waypoints": [
+            {
+              "arm": "left",
+              "fraction": 0.182,
+              "relative_to": "object_2",
+              "position_m": [
+                -0.035,
+                -0.158,
+                0.357
+              ],
+              "orientation_xyz_deg": [
+                0,
+                90,
+                -90
+              ],
+              "opening_m": 0.053
+            },
+            {
+              "arm": "left",
+              "fraction": 0.7,
+              "relative_to": "object_2",
+              "position_m": [
+                0,
+                -0.175,
+                0.307
+              ],
+              "orientation_xyz_deg": [
+                0,
+                90,
+                -90
+              ],
+              "opening_m": 0.053
+            },
+            {
+              "arm": "left",
+              "fraction": 1,
+              "relative_to": "object_2",
+              "position_m": [
+                0,
+                -0.24,
+                0.307
+              ],
+              "orientation_xyz_deg": [
+                0,
+                90,
+                -90
+              ],
+              "opening_m": 0.053
+            }
+          ]
+        },
+        {
+          "name": "左爪夹住侧框",
+          "instruction": "左爪定姿，于 0.5337 至 0.5565 收拢。右臂保持位姿和夹持。检查左爪双指确实夹住框体，并可在右爪卸载后维持板姿。",
+          "end_fraction": 0.5565,
+          "anchor": "object_2",
+          "arms": [
+            "left"
+          ],
+          "adjustment_m": [
+            0,
+            0,
+            0
+          ],
+          "rotation_adjustment_deg": [
+            0,
+            0,
+            0
+          ],
+          "grippers": [],
+          "contact_free": false,
+          "waypoints": [
+            {
+              "arm": "left",
+              "fraction": 0.1059,
+              "relative_to": "object_2",
+              "position_m": [
+                0,
+                -0.24,
+                0.307
+              ],
+              "orientation_xyz_deg": [
+                0,
+                90,
+                -90
+              ],
+              "opening_m": 0.053
+            },
+            {
+              "arm": "left",
+              "fraction": 1,
+              "relative_to": "object_2",
+              "position_m": [
+                0,
+                -0.24,
+                0.307
+              ],
+              "orientation_xyz_deg": [
+                0,
+                90,
+                -90
+              ],
+              "opening_m": 0.016
+            }
+          ]
+        },
+        {
+          "name": "交接承载并撤开右爪",
+          "instruction": "左臂定姿接载。右爪在 0.5883 至 0.6137 张开，先沿进爪方向反向上撤，再向白座一侧让开。确认板未滑移，且右臂退出后续移送包络。",
+          "end_fraction": 0.65,
+          "anchor": "object_2",
+          "arms": [
+            "right"
+          ],
+          "adjustment_m": [
+            0,
+            0,
+            0
+          ],
+          "rotation_adjustment_deg": [
+            0,
+            0,
+            0
+          ],
+          "grippers": [],
+          "contact_free": false,
+          "waypoints": [
+            {
+              "arm": "right",
+              "fraction": 0.34,
+              "relative_to": "object_2",
+              "position_m": [
+                0,
+                -0.362,
+                0.363
+              ],
+              "orientation_xyz_deg": [
+                180,
+                0,
+                -90
+              ],
+              "opening_m": null
+            },
+            {
+              "arm": "right",
+              "fraction": 0.6118,
+              "relative_to": "object_2",
+              "position_m": [
+                0,
+                -0.362,
+                0.363
+              ],
+              "orientation_xyz_deg": [
+                180,
+                0,
+                -90
+              ],
+              "opening_m": 0.055
+            },
+            {
+              "arm": "right",
+              "fraction": 0.8,
+              "relative_to": "object_2",
+              "position_m": [
+                0,
+                -0.362,
+                0.408
+              ],
+              "orientation_xyz_deg": [
+                180,
+                0,
+                -90
+              ],
+              "opening_m": null
+            },
+            {
+              "arm": "right",
+              "fraction": 1,
+              "relative_to": "object_2",
+              "position_m": [
+                -0.055,
+                -0.465,
+                0.405
+              ],
+              "orientation_xyz_deg": [
+                180,
+                0,
+                -90
+              ],
+              "opening_m": null
+            }
+          ]
+        },
+        {
+          "name": "左臂移板至黄槽上方",
+          "instruction": "左爪保持夹持和竖直板姿，横移至黄槽中心线上方。板底候选高度比槽外包络顶面高约 79 毫米。检查板长边、槽长轴、夹指和随行线缆的扫掠范围。",
+          "end_fraction": 0.79,
+          "anchor": "object_2",
+          "arms": [
+            "left"
+          ],
+          "adjustment_m": [
+            0,
+            0,
+            0
+          ],
+          "rotation_adjustment_deg": [
+            0,
+            0,
+            0
+          ],
+          "grippers": [],
+          "contact_free": false,
+          "waypoints": [
+            {
+              "arm": "left",
+              "fraction": 1,
+              "relative_to": "object_2",
+              "position_m": [
+                0,
+                0.08,
+                0.307
+              ],
+              "orientation_xyz_deg": [
+                0,
+                90,
+                -90
+              ],
+              "opening_m": null
+            }
+          ]
+        },
+        {
+          "name": "在黄槽内对中下放",
+          "instruction": "竖直降到候选槽口上方，先验证两端对中与横向净空，再沿同一竖线下放至承托候选点。末点的名义板底约低于槽外包络顶面 10 毫米，实际终点由仿真中的有效槽口和承托接触确定。若槽口被碰撞体封闭、板端卡阻或线缆夹滞，保持夹持并记录该候选失败。",
+          "end_fraction": 0.8907,
+          "anchor": "object_2",
+          "arms": [
+            "left"
+          ],
+          "adjustment_m": [
+            0,
+            0,
+            0
+          ],
+          "rotation_adjustment_deg": [
+            0,
+            0,
+            0
+          ],
+          "grippers": [],
+          "contact_free": false,
+          "waypoints": [
+            {
+              "arm": "left",
+              "fraction": 0.67,
+              "relative_to": "object_2",
+              "position_m": [
+                0,
+                0.08,
+                0.234
+              ],
+              "orientation_xyz_deg": [
+                0,
+                90,
+                -90
+              ],
+              "opening_m": null
+            },
+            {
+              "arm": "left",
+              "fraction": 1,
+              "relative_to": "object_2",
+              "position_m": [
+                0,
+                0.08,
+                0.218
+              ],
+              "orientation_xyz_deg": [
+                0,
+                90,
+                -90
+              ],
+              "opening_m": null
+            }
+          ]
+        },
+        {
+          "name": "左爪松开并退出侧框",
+          "instruction": "确认槽底有效承重、板姿稳定及线缆脱离接合面后，在 0.8907 至 0.9174 张开左爪。夹指与侧框形成净空后沿世界 −X 退出。末段左腕仍可见框边，退出距离和脱离状态须在仿真中核验。",
+          "end_fraction": 0.9174,
+          "anchor": "object_2",
+          "arms": [
+            "left"
+          ],
+          "adjustment_m": [
+            0,
+            0,
+            0
+          ],
+          "rotation_adjustment_deg": [
+            0,
+            0,
+            0
+          ],
+          "grippers": [],
+          "contact_free": false,
+          "waypoints": [
+            {
+              "arm": "left",
+              "fraction": 0.48,
+              "relative_to": "object_2",
+              "position_m": [
+                0,
+                0.08,
+                0.218
+              ],
+              "orientation_xyz_deg": [
+                0,
+                90,
+                -90
+              ],
+              "opening_m": 0.038
+            },
+            {
+              "arm": "left",
+              "fraction": 1,
+              "relative_to": "object_2",
+              "position_m": [
+                0,
+                0.132,
+                0.218
+              ],
+              "orientation_xyz_deg": [
+                0,
+                90,
+                -90
+              ],
+              "opening_m": 0.055
+            }
+          ]
+        },
+        {
+          "name": "脱离后收拢左爪",
+          "instruction": "将 0.9187 至 0.9403 的左爪收拢建模为脱离后的候选空爪动作。保持末端在框外，先检查双指收拢的扫掠范围与板、槽及线缆分离。",
+          "end_fraction": 0.9403,
+          "anchor": "object_2",
+          "arms": [
+            "left"
+          ],
+          "adjustment_m": [
+            0,
+            0,
+            0
+          ],
+          "rotation_adjustment_deg": [
+            0,
+            0,
+            0
+          ],
+          "grippers": [],
+          "contact_free": true,
+          "waypoints": [
+            {
+              "arm": "left",
+              "fraction": 0.0568,
+              "relative_to": "object_2",
+              "position_m": [
+                0,
+                0.132,
+                0.218
+              ],
+              "orientation_xyz_deg": [
+                0,
+                90,
+                -90
+              ],
+              "opening_m": 0.055
+            },
+            {
+              "arm": "left",
+              "fraction": 1,
+              "relative_to": "object_2",
+              "position_m": [
+                0,
+                0.132,
+                0.218
+              ],
+              "orientation_xyz_deg": [
+                0,
+                90,
+                -90
+              ],
+              "opening_m": 0.043
+            }
+          ]
+        },
+        {
+          "name": "复核黄槽独立承托",
+          "instruction": "双臂静止，核验双爪均已脱离、板仍竖直且由黄槽独立承托，并检查线缆是否承担支撑。此段是任务验收窗口，实录中的保持起点与持续时间仍为 null。",
+          "end_fraction": 1,
+          "anchor": "object_2",
+          "arms": [],
+          "adjustment_m": [
+            0,
+            0,
+            0
+          ],
+          "rotation_adjustment_deg": [
+            0,
+            0,
+            0
+          ],
+          "grippers": [],
+          "contact_free": true,
+          "waypoints": []
+        }
+      ],
+      "variation_groups": [
+        [
+          "object_0",
+          "object_1"
+        ],
+        [
+          "object_2"
+        ]
+      ],
+      "experience": [
+        {
+          "case_id": "CONN-005",
+          "decision": "use",
+          "reason": "逐布局检查两臂可达性、交接间距和碰撞，移送目标锚定固定场景物体。逆解不收敛时分别检查参考路径与位姿误差。"
+        },
+        {
+          "case_id": "CONN-006",
+          "decision": "use",
+          "reason": "分别验收下放、开爪和释放后独立承托。槽底被遮挡或锁止状态不可见时保留未知。"
+        },
+        {
+          "case_id": "INC-e63b326307af4aa0",
+          "decision": "use",
+          "reason": "对初夹、交接和入槽候选检查接近路径、关节限位及多初值逆解，分别记录平移和转角误差。"
+        },
+        {
+          "case_id": "INC-PHASE-ABORT-HOME",
+          "decision": "skip",
+          "reason": "当前证据覆盖正常移送，未观察到失夹或归位。本程序以黄槽承托验收结束。"
+        },
+        {
+          "case_id": "INC-e12fcb8b2a1e46ea",
+          "decision": "use",
+          "reason": "下阶段为释放后的静止验收记录仿真时间和状态，分别记录日志缺失与承托失败。"
+        },
+        {
+          "case_id": "INC-35d861969fb64513",
+          "decision": "use",
+          "reason": "交接前核验左爪双指接触、载荷转移和板体滑移。仅有开度稳定或末端到位时，保留承载未知。"
+        }
+      ]
+    },
+    "action_program_path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795360709493080032/action_program.json",
+    "experience_checklist_path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795360709493080032/experience_checklist.json",
+    "action_acceptance_path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795360709493080032/acceptance.json",
+    "replay_preflight_path": "runs/d89cc5bb00a24ba9/simulation/replay_check_1795360709647873898/replay_preflight.json",
+    "experiment_path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795360709493080032/experiment.json",
+    "scope": "offline_physx_task_action_program",
+    "learning_mode": "scene_waypoint_search",
+    "unmeasured_criteria": [
+      "板完全离开白色支座。中段抽帧已显示板底与白座之间有间隙。",
+      "拟议终态为板竖直落座于黄色槽位。末次抽样显示板已下放至槽位，实际落座待核实。",
+      "双爪完全脱离后，板仍由黄槽独立承托并保持原位。释放及保持过程待核实。"
+    ],
+    "episode_report_path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795360709493080032/episodes.json",
+    "simulated_runs": 18,
+    "reused_runs": 0,
+    "stopped_runs": 18,
+    "status": "failed",
+    "reason": "候选方案未通过示教布局筛选（从白座抬离板件），未启动位置泛化验收。已完成 18 轮场景目标点试验",
+    "validation_status": "not_started",
+    "generalization_evaluated": false,
+    "checks": [
+      {
+        "criterion": 0,
+        "phase": 0,
+        "kind": "unsupported",
+        "description": "腕视抽帧可见夹指靠近板框，右爪与上框的精确对准待核实。各阶段未观测的事件时刻均记为 null。视频请求时刻与传感器采集时刻的对应关系及跨视角同步均未经核实。",
+        "passed": false,
+        "measured": null,
+        "threshold": 0,
+        "evaluated": true
+      },
+      {
+        "criterion": 0,
+        "phase": 1,
+        "kind": "unsupported",
+        "description": "右爪记录显示开口减小 35.3 毫米。首次接触的位置、是否夹紧上框及夹持力均未知。",
+        "passed": false,
+        "measured": null,
+        "threshold": 0,
+        "evaluated": true
+      },
+      {
+        "criterion": 0,
+        "phase": 2,
+        "kind": "rise",
+        "description": "板中心在抬离阶段向上移动至少 25 毫米。侧视中段抽帧显示板底与白座之间有间隙，25 毫米为模型复核阈值，实际抬升量未知。",
+        "passed": false,
+        "measured": 1.1920928955078125e-07,
+        "threshold": 0.025,
+        "evaluated": true
+      },
+      {
+        "criterion": 0,
+        "phase": 2,
+        "kind": "region",
+        "description": "以白座实时坐标系检验板框完全越过白座顶面。按板框 180×22.85×270 毫米的外包尺寸，半对角线约为 162.7 毫米。加上白座约 23 毫米的半高，板中心相对高度达到 186 毫米时，板框在任意姿态下均高于白座。",
+        "passed": false,
+        "measured": 0.19765818662908058,
+        "threshold": 0,
+        "evaluated": true,
+        "correction_world_m": [
+          -1.3283058106547475e-08,
+          2.2421483779376118e-07,
+          0.6046580681478559
+        ]
+      }
+    ],
+    "early_falls": [],
+    "test_passed": 0,
+    "test_total": 0,
+    "holdout_total": 0,
+    "selected_candidate": "仿真迭代 1",
+    "approach_verified": false,
+    "report_path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795360709493080032/expert_learning_report.json",
+    "diagnosis_report_path": "runs/d89cc5bb00a24ba9/simulation/diagnosis_1795361081650061794/diagnosis.json",
+    "diagnosis": {
+      "diagnosis": "候选方案在示教布局筛选中未达到板中心上升 25 毫米的要求，板框越过白座顶面的区域检查也判为失败，因此位置泛化验收未启动。筛选失败已确定。右爪未夹住上框、抬升时滑脱或抬离检查取错阶段和坐标引用，均是待核实的假设。",
+      "evidence": "已完成 18 轮场景目标点试验。报告所列抬离上升量约为 0.00012 毫米，低于 25 毫米阈值。右爪开口减小 35.3 毫米，首次接触位置和夹持状态未知。示教侧视抽帧可见板底与白座之间有间隙，实际抬升量和跨视角同步仍待核实。区域检查读数为 0.1977 米，世界坐标竖直修正量为 0.6047 米。报告未定义区域读数的含义，无法直接将其与板中心相对白座的 186 毫米高度条件比较。",
+      "next_action": "复核生成这些检查结果的试验回合，按传感器采集时刻对齐右爪开口、腕部轨迹和腕视及侧视画面，追踪闭爪后上框是否随右爪上升、何时发生相对滑动。用同一抬离区间的板件与白座位姿，按现有判据复算板中心上升量和区域检查，核对阶段边界、对象引用及白座实时坐标系。",
+      "decision": "review"
+    },
+    "diagnosis_agent": "动作专家 Agent",
+    "artifacts": [
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795358494596082343/scene_repair_1795358494602654324/repair_history.json",
+        "name": "repair_history.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795358494596082343/scene_repair_1795358494602654324/attempt_1/corrected_task_spec.json",
+        "name": "corrected_task_spec.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795358494596082343/scene_repair_1795358494602654324/attempt_1/model_response.json",
+        "name": "model_response.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795358494596082343/scene_repair_1795358494602654324/attempt_1/visual_review_1795358555468517212/visual_comparison.json",
+        "name": "visual_comparison.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795358494596082343/scene_repair_1795358494602654324/attempt_1/visual_review_1795358555468517212/model_response.json",
+        "name": "model_response.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795358494596082343/scene_repair_1795358494602654324/attempt_1/visual_review_1795358555468517212/codex_cli/60bc1826f886429498800f4351f852a7/output_schema.json",
+        "name": "output_schema.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795358494596082343/scene_repair_1795358494602654324/attempt_1/visual_review_1795358555468517212/codex_cli/60bc1826f886429498800f4351f852a7/final.json",
+        "name": "final.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795358494596082343/scene_repair_1795358494602654324/attempt_1/visual_review_1795358555468517212/codex_cli/60bc1826f886429498800f4351f852a7/stderr.log",
+        "name": "stderr.log"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795358494596082343/scene_repair_1795358494602654324/attempt_1/visual_review_1795358555468517212/codex_cli/60bc1826f886429498800f4351f852a7/events.jsonl",
+        "name": "events.jsonl"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795358494596082343/scene_repair_1795358494602654324/attempt_1/visual_review_1795358555468517212/codex_cli/60bc1826f886429498800f4351f852a7/prompt.txt",
+        "name": "prompt.txt"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795358494596082343/scene_repair_1795358494602654324/attempt_1/build_1795358539590483568/camera_3_rgb.png",
+        "name": "camera_3_rgb.png"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795358494596082343/scene_repair_1795358494602654324/attempt_1/build_1795358539590483568/camera_3_depth_m.npy",
+        "name": "camera_3_depth_m.npy"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795358494596082343/scene_repair_1795358494602654324/attempt_1/build_1795358539590483568/kit.log",
+        "name": "kit.log"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795358494596082343/scene_repair_1795358494602654324/attempt_1/build_1795358539590483568/isaac_build.log",
+        "name": "isaac_build.log"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795358494596082343/scene_repair_1795358494602654324/attempt_1/build_1795358539590483568/camera_2_depth_m.npy",
+        "name": "camera_2_depth_m.npy"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795358494596082343/scene_repair_1795358494602654324/attempt_1/build_1795358539590483568/camera_4_depth_m.npy",
+        "name": "camera_4_depth_m.npy"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795358494596082343/scene_repair_1795358494602654324/attempt_1/build_1795358539590483568/camera_0_depth_m.npy",
+        "name": "camera_0_depth_m.npy"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795358494596082343/scene_repair_1795358494602654324/attempt_1/build_1795358539590483568/camera_0_depth.png",
+        "name": "camera_0_depth.png"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795358494596082343/scene_repair_1795358494602654324/attempt_1/build_1795358539590483568/scene_manifest.json",
+        "name": "scene_manifest.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795358494596082343/scene_repair_1795358494602654324/attempt_1/build_1795358539590483568/scene.png",
+        "name": "scene.png"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795358494596082343/scene_repair_1795358494602654324/attempt_1/build_1795358539590483568/camera_0_rgb.png",
+        "name": "camera_0_rgb.png"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795358494596082343/scene_repair_1795358494602654324/attempt_1/build_1795358539590483568/camera_4_axes.png",
+        "name": "camera_4_axes.png"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795358494596082343/scene_repair_1795358494602654324/attempt_1/build_1795358539590483568/task_spec.json",
+        "name": "task_spec.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795358494596082343/scene_repair_1795358494602654324/attempt_1/build_1795358539590483568/camera_4_rgb.png",
+        "name": "camera_4_rgb.png"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795358494596082343/scene_repair_1795358494602654324/attempt_1/build_1795358539590483568/camera_2_depth.png",
+        "name": "camera_2_depth.png"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795358494596082343/scene_repair_1795358494602654324/attempt_1/build_1795358539590483568/camera_1_depth.png",
+        "name": "camera_1_depth.png"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795358494596082343/scene_repair_1795358494602654324/attempt_1/build_1795358539590483568/camera_0_axes.png",
+        "name": "camera_0_axes.png"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795358494596082343/scene_repair_1795358494602654324/attempt_1/build_1795358539590483568/build_report.json",
+        "name": "build_report.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795358494596082343/scene_repair_1795358494602654324/attempt_1/build_1795358539590483568/camera_1_rgb.png",
+        "name": "camera_1_rgb.png"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795358494596082343/scene_repair_1795358494602654324/attempt_1/build_1795358539590483568/scene_data.usdc",
+        "name": "scene_data.usdc"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795358494596082343/scene_repair_1795358494602654324/attempt_1/build_1795358539590483568/camera_1_axes.png",
+        "name": "camera_1_axes.png"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795358494596082343/scene_repair_1795358494602654324/attempt_1/build_1795358539590483568/camera_2_axes.png",
+        "name": "camera_2_axes.png"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795358494596082343/scene_repair_1795358494602654324/attempt_1/build_1795358539590483568/camera_3_axes.png",
+        "name": "camera_3_axes.png"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795358494596082343/scene_repair_1795358494602654324/attempt_1/build_1795358539590483568/camera_2_rgb.png",
+        "name": "camera_2_rgb.png"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795358494596082343/scene_repair_1795358494602654324/attempt_1/build_1795358539590483568/camera_4_depth.png",
+        "name": "camera_4_depth.png"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795358494596082343/scene_repair_1795358494602654324/attempt_1/build_1795358539590483568/scene.usda",
+        "name": "scene.usda"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795358494596082343/scene_repair_1795358494602654324/attempt_1/build_1795358539590483568/camera_1_depth_m.npy",
+        "name": "camera_1_depth_m.npy"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795358494596082343/scene_repair_1795358494602654324/attempt_1/build_1795358539590483568/scene_axes.png",
+        "name": "scene_axes.png"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795358494596082343/scene_repair_1795358494602654324/attempt_1/build_1795358539590483568/camera_3_depth.png",
+        "name": "camera_3_depth.png"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795358494596082343/scene_repair_1795358494602654324/attempt_1/codex_cli/63beef47cdf54f87932e89ee5f76370b/output_schema.json",
+        "name": "output_schema.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795358494596082343/scene_repair_1795358494602654324/attempt_1/codex_cli/63beef47cdf54f87932e89ee5f76370b/final.json",
+        "name": "final.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795358494596082343/scene_repair_1795358494602654324/attempt_1/codex_cli/63beef47cdf54f87932e89ee5f76370b/stderr.log",
+        "name": "stderr.log"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795358494596082343/scene_repair_1795358494602654324/attempt_1/codex_cli/63beef47cdf54f87932e89ee5f76370b/events.jsonl",
+        "name": "events.jsonl"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795358494596082343/scene_repair_1795358494602654324/attempt_1/codex_cli/63beef47cdf54f87932e89ee5f76370b/prompt.txt",
+        "name": "prompt.txt"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795358494596082343/scene_repair_1795358494602654324/attempt_1/validation/usd_validation.json",
+        "name": "usd_validation.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795358494596082343/scene_repair_1795358494602654324/attempt_1/validation/validation_report.json",
+        "name": "validation_report.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795358494596082343/scene_repair_1795358494602654324/attempt_1/validation/usd_worker.log",
+        "name": "usd_worker.log"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795360709493080032/learning.json",
+        "name": "learning.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795360709493080032/003_demonstrated_layout.npz",
+        "name": "003_demonstrated_layout.npz"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795360709493080032/004_demonstrated_layout.npz",
+        "name": "004_demonstrated_layout.npz"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795360709493080032/experiment.json",
+        "name": "experiment.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795360709493080032/rollout_scene.usdc",
+        "name": "rollout_scene.usdc"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795360709493080032/kit.log",
+        "name": "kit.log"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795360709493080032/000_demonstrated_layout.npz",
+        "name": "000_demonstrated_layout.npz"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795360709493080032/009_demonstrated_layout.npz",
+        "name": "009_demonstrated_layout.npz"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795360709493080032/014_demonstrated_layout.npz",
+        "name": "014_demonstrated_layout.npz"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795360709493080032/acceptance.json",
+        "name": "acceptance.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795360709493080032/015_demonstrated_layout.npz",
+        "name": "015_demonstrated_layout.npz"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795360709493080032/010_demonstrated_layout.npz",
+        "name": "010_demonstrated_layout.npz"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795360709493080032/002_demonstrated_layout.npz",
+        "name": "002_demonstrated_layout.npz"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795360709493080032/007_demonstrated_layout.npz",
+        "name": "007_demonstrated_layout.npz"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795360709493080032/011_demonstrated_layout.npz",
+        "name": "011_demonstrated_layout.npz"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795360709493080032/isaac_learning.log",
+        "name": "isaac_learning.log"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795360709493080032/expert_learning_report.json",
+        "name": "expert_learning_report.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795360709493080032/016_demonstrated_layout.npz",
+        "name": "016_demonstrated_layout.npz"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795360709493080032/005_demonstrated_layout.npz",
+        "name": "005_demonstrated_layout.npz"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795360709493080032/experience_checklist.json",
+        "name": "experience_checklist.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795360709493080032/012_demonstrated_layout.npz",
+        "name": "012_demonstrated_layout.npz"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795360709493080032/008_demonstrated_layout.npz",
+        "name": "008_demonstrated_layout.npz"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795360709493080032/017_demonstrated_layout.npz",
+        "name": "017_demonstrated_layout.npz"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795360709493080032/episodes.json",
+        "name": "episodes.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795360709493080032/001_demonstrated_layout.npz",
+        "name": "001_demonstrated_layout.npz"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795360709493080032/006_demonstrated_layout.npz",
+        "name": "006_demonstrated_layout.npz"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795360709493080032/013_demonstrated_layout.npz",
+        "name": "013_demonstrated_layout.npz"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795360709493080032/action_program.json",
+        "name": "action_program.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795360709493080032/model_response.json",
+        "name": "model_response.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795360709493080032/verification/model_response.json",
+        "name": "model_response.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795360709493080032/verification/codex_cli/780057c500b144ea8612b48df276a5c5/output_schema.json",
+        "name": "output_schema.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795360709493080032/verification/codex_cli/780057c500b144ea8612b48df276a5c5/final.json",
+        "name": "final.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795360709493080032/verification/codex_cli/780057c500b144ea8612b48df276a5c5/stderr.log",
+        "name": "stderr.log"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795360709493080032/verification/codex_cli/780057c500b144ea8612b48df276a5c5/events.jsonl",
+        "name": "events.jsonl"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795360709493080032/verification/codex_cli/780057c500b144ea8612b48df276a5c5/prompt.txt",
+        "name": "prompt.txt"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795360709493080032/codex_cli/559001966bc04bf2949aebd2727fa626/output_schema.json",
+        "name": "output_schema.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795360709493080032/codex_cli/559001966bc04bf2949aebd2727fa626/final.json",
+        "name": "final.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795360709493080032/codex_cli/559001966bc04bf2949aebd2727fa626/stderr.log",
+        "name": "stderr.log"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795360709493080032/codex_cli/559001966bc04bf2949aebd2727fa626/events.jsonl",
+        "name": "events.jsonl"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795360709493080032/codex_cli/559001966bc04bf2949aebd2727fa626/prompt.txt",
+        "name": "prompt.txt"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795357649840240108/learning.json",
+        "name": "learning.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795357649840240108/003_demonstrated_layout.npz",
+        "name": "003_demonstrated_layout.npz"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795357649840240108/experiment.json",
+        "name": "experiment.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795357649840240108/rollout_scene.usdc",
+        "name": "rollout_scene.usdc"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795357649840240108/kit.log",
+        "name": "kit.log"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795357649840240108/000_demonstrated_layout.npz",
+        "name": "000_demonstrated_layout.npz"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795357649840240108/002_demonstrated_layout.npz",
+        "name": "002_demonstrated_layout.npz"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795357649840240108/isaac_learning.log",
+        "name": "isaac_learning.log"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795357649840240108/expert_learning_report.json",
+        "name": "expert_learning_report.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795357649840240108/episodes.json",
+        "name": "episodes.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795357649840240108/001_demonstrated_layout.npz",
+        "name": "001_demonstrated_layout.npz"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795357649840240108/replay_check_1795357649841429271/recorded_trajectory.npz",
+        "name": "recorded_trajectory.npz"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795357649840240108/replay_check_1795357649841429271/replay_preflight.json",
+        "name": "replay_preflight.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795357649840240108/replay_check_1795357649841429271/bounded_replay_trajectory.npz",
+        "name": "bounded_replay_trajectory.npz"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795357649840240108/replay_check_1795357649841429271/replay_check.log",
+        "name": "replay_check.log"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795355681812640613/learning.json",
+        "name": "learning.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795355681812640613/experiment.json",
+        "name": "experiment.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795355681812640613/rollout_scene.usdc",
+        "name": "rollout_scene.usdc"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795355681812640613/kit.log",
+        "name": "kit.log"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795355681812640613/000_demonstrated_layout.npz",
+        "name": "000_demonstrated_layout.npz"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795355681812640613/acceptance.json",
+        "name": "acceptance.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795355681812640613/isaac_learning.log",
+        "name": "isaac_learning.log"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795355681812640613/expert_learning_report.json",
+        "name": "expert_learning_report.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795355681812640613/experience_checklist.json",
+        "name": "experience_checklist.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795355681812640613/episodes.json",
+        "name": "episodes.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795355681812640613/action_program.json",
+        "name": "action_program.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795355681812640613/model_response.json",
+        "name": "model_response.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795355681812640613/verification/model_response.json",
+        "name": "model_response.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795355681812640613/verification/codex_cli/f5c5ccaa098b4e9681398e29654537db/output_schema.json",
+        "name": "output_schema.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795355681812640613/verification/codex_cli/f5c5ccaa098b4e9681398e29654537db/final.json",
+        "name": "final.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795355681812640613/verification/codex_cli/f5c5ccaa098b4e9681398e29654537db/stderr.log",
+        "name": "stderr.log"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795355681812640613/verification/codex_cli/f5c5ccaa098b4e9681398e29654537db/events.jsonl",
+        "name": "events.jsonl"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795355681812640613/verification/codex_cli/f5c5ccaa098b4e9681398e29654537db/prompt.txt",
+        "name": "prompt.txt"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795355681812640613/codex_cli/7c2874292641403186263f4827794ab5/output_schema.json",
+        "name": "output_schema.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795355681812640613/codex_cli/7c2874292641403186263f4827794ab5/final.json",
+        "name": "final.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795355681812640613/codex_cli/7c2874292641403186263f4827794ab5/stderr.log",
+        "name": "stderr.log"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795355681812640613/codex_cli/7c2874292641403186263f4827794ab5/events.jsonl",
+        "name": "events.jsonl"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795355681812640613/codex_cli/7c2874292641403186263f4827794ab5/prompt.txt",
+        "name": "prompt.txt"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795357466408371484/scene_repair_1795357466416057092/repair_history.json",
+        "name": "repair_history.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795357466408371484/scene_repair_1795357466416057092/attempt_1/corrected_task_spec.json",
+        "name": "corrected_task_spec.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795357466408371484/scene_repair_1795357466416057092/attempt_1/model_response.json",
+        "name": "model_response.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795357466408371484/scene_repair_1795357466416057092/attempt_1/visual_review_1795357557523561647/visual_comparison.json",
+        "name": "visual_comparison.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795357466408371484/scene_repair_1795357466416057092/attempt_1/visual_review_1795357557523561647/model_response.json",
+        "name": "model_response.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795357466408371484/scene_repair_1795357466416057092/attempt_1/visual_review_1795357557523561647/codex_cli/8f6e1c80a871417eb9b3cb4cf931c8ea/output_schema.json",
+        "name": "output_schema.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795357466408371484/scene_repair_1795357466416057092/attempt_1/visual_review_1795357557523561647/codex_cli/8f6e1c80a871417eb9b3cb4cf931c8ea/final.json",
+        "name": "final.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795357466408371484/scene_repair_1795357466416057092/attempt_1/visual_review_1795357557523561647/codex_cli/8f6e1c80a871417eb9b3cb4cf931c8ea/stderr.log",
+        "name": "stderr.log"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795357466408371484/scene_repair_1795357466416057092/attempt_1/visual_review_1795357557523561647/codex_cli/8f6e1c80a871417eb9b3cb4cf931c8ea/events.jsonl",
+        "name": "events.jsonl"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795357466408371484/scene_repair_1795357466416057092/attempt_1/visual_review_1795357557523561647/codex_cli/8f6e1c80a871417eb9b3cb4cf931c8ea/prompt.txt",
+        "name": "prompt.txt"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795357466408371484/scene_repair_1795357466416057092/attempt_1/codex_cli/e806903219424adcaf04f7f86a3c0546/output_schema.json",
+        "name": "output_schema.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795357466408371484/scene_repair_1795357466416057092/attempt_1/codex_cli/e806903219424adcaf04f7f86a3c0546/final.json",
+        "name": "final.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795357466408371484/scene_repair_1795357466416057092/attempt_1/codex_cli/e806903219424adcaf04f7f86a3c0546/stderr.log",
+        "name": "stderr.log"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795357466408371484/scene_repair_1795357466416057092/attempt_1/codex_cli/e806903219424adcaf04f7f86a3c0546/events.jsonl",
+        "name": "events.jsonl"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795357466408371484/scene_repair_1795357466416057092/attempt_1/codex_cli/e806903219424adcaf04f7f86a3c0546/prompt.txt",
+        "name": "prompt.txt"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795357466408371484/scene_repair_1795357466416057092/attempt_1/build_1795357540895200401/camera_3_rgb.png",
+        "name": "camera_3_rgb.png"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795357466408371484/scene_repair_1795357466416057092/attempt_1/build_1795357540895200401/camera_3_depth_m.npy",
+        "name": "camera_3_depth_m.npy"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795357466408371484/scene_repair_1795357466416057092/attempt_1/build_1795357540895200401/kit.log",
+        "name": "kit.log"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795357466408371484/scene_repair_1795357466416057092/attempt_1/build_1795357540895200401/isaac_build.log",
+        "name": "isaac_build.log"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795357466408371484/scene_repair_1795357466416057092/attempt_1/build_1795357540895200401/camera_2_depth_m.npy",
+        "name": "camera_2_depth_m.npy"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795357466408371484/scene_repair_1795357466416057092/attempt_1/build_1795357540895200401/camera_4_depth_m.npy",
+        "name": "camera_4_depth_m.npy"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795357466408371484/scene_repair_1795357466416057092/attempt_1/build_1795357540895200401/camera_0_depth_m.npy",
+        "name": "camera_0_depth_m.npy"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795357466408371484/scene_repair_1795357466416057092/attempt_1/build_1795357540895200401/camera_0_depth.png",
+        "name": "camera_0_depth.png"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795357466408371484/scene_repair_1795357466416057092/attempt_1/build_1795357540895200401/scene_manifest.json",
+        "name": "scene_manifest.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795357466408371484/scene_repair_1795357466416057092/attempt_1/build_1795357540895200401/scene.png",
+        "name": "scene.png"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795357466408371484/scene_repair_1795357466416057092/attempt_1/build_1795357540895200401/camera_0_rgb.png",
+        "name": "camera_0_rgb.png"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795357466408371484/scene_repair_1795357466416057092/attempt_1/build_1795357540895200401/camera_4_axes.png",
+        "name": "camera_4_axes.png"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795357466408371484/scene_repair_1795357466416057092/attempt_1/build_1795357540895200401/task_spec.json",
+        "name": "task_spec.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795357466408371484/scene_repair_1795357466416057092/attempt_1/build_1795357540895200401/camera_4_rgb.png",
+        "name": "camera_4_rgb.png"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795357466408371484/scene_repair_1795357466416057092/attempt_1/build_1795357540895200401/camera_2_depth.png",
+        "name": "camera_2_depth.png"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795357466408371484/scene_repair_1795357466416057092/attempt_1/build_1795357540895200401/camera_1_depth.png",
+        "name": "camera_1_depth.png"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795357466408371484/scene_repair_1795357466416057092/attempt_1/build_1795357540895200401/camera_0_axes.png",
+        "name": "camera_0_axes.png"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795357466408371484/scene_repair_1795357466416057092/attempt_1/build_1795357540895200401/build_report.json",
+        "name": "build_report.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795357466408371484/scene_repair_1795357466416057092/attempt_1/build_1795357540895200401/camera_1_rgb.png",
+        "name": "camera_1_rgb.png"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795357466408371484/scene_repair_1795357466416057092/attempt_1/build_1795357540895200401/scene_data.usdc",
+        "name": "scene_data.usdc"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795357466408371484/scene_repair_1795357466416057092/attempt_1/build_1795357540895200401/camera_1_axes.png",
+        "name": "camera_1_axes.png"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795357466408371484/scene_repair_1795357466416057092/attempt_1/build_1795357540895200401/camera_2_axes.png",
+        "name": "camera_2_axes.png"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795357466408371484/scene_repair_1795357466416057092/attempt_1/build_1795357540895200401/camera_3_axes.png",
+        "name": "camera_3_axes.png"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795357466408371484/scene_repair_1795357466416057092/attempt_1/build_1795357540895200401/camera_2_rgb.png",
+        "name": "camera_2_rgb.png"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795357466408371484/scene_repair_1795357466416057092/attempt_1/build_1795357540895200401/camera_4_depth.png",
+        "name": "camera_4_depth.png"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795357466408371484/scene_repair_1795357466416057092/attempt_1/build_1795357540895200401/scene.usda",
+        "name": "scene.usda"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795357466408371484/scene_repair_1795357466416057092/attempt_1/build_1795357540895200401/camera_1_depth_m.npy",
+        "name": "camera_1_depth_m.npy"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795357466408371484/scene_repair_1795357466416057092/attempt_1/build_1795357540895200401/scene_axes.png",
+        "name": "scene_axes.png"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795357466408371484/scene_repair_1795357466416057092/attempt_1/build_1795357540895200401/camera_3_depth.png",
+        "name": "camera_3_depth.png"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795357466408371484/scene_repair_1795357466416057092/attempt_1/validation/usd_validation.json",
+        "name": "usd_validation.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795357466408371484/scene_repair_1795357466416057092/attempt_1/validation/validation_report.json",
+        "name": "validation_report.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795357466408371484/scene_repair_1795357466416057092/attempt_1/validation/usd_worker.log",
+        "name": "usd_worker.log"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795357661685326550/learning.json",
+        "name": "learning.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795357661685326550/experiment.json",
+        "name": "experiment.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795357661685326550/rollout_scene.usdc",
+        "name": "rollout_scene.usdc"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795357661685326550/kit.log",
+        "name": "kit.log"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795357661685326550/000_demonstrated_layout.npz",
+        "name": "000_demonstrated_layout.npz"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795357661685326550/002_demonstrated_layout.npz",
+        "name": "002_demonstrated_layout.npz"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795357661685326550/isaac_learning.log",
+        "name": "isaac_learning.log"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795357661685326550/expert_learning_report.json",
+        "name": "expert_learning_report.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795357661685326550/episodes.json",
+        "name": "episodes.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795357661685326550/001_demonstrated_layout.npz",
+        "name": "001_demonstrated_layout.npz"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795357661685326550/replay_check_1795357661686526336/recorded_trajectory.npz",
+        "name": "recorded_trajectory.npz"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795357661685326550/replay_check_1795357661686526336/replay_preflight.json",
+        "name": "replay_preflight.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795357661685326550/replay_check_1795357661686526336/bounded_replay_trajectory.npz",
+        "name": "bounded_replay_trajectory.npz"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795357661685326550/replay_check_1795357661686526336/replay_check.log",
+        "name": "replay_check.log"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/replay_check_1795358200250943168/recorded_trajectory.npz",
+        "name": "recorded_trajectory.npz"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/replay_check_1795358200250943168/replay_preflight.json",
+        "name": "replay_preflight.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/replay_check_1795358200250943168/bounded_replay_trajectory.npz",
+        "name": "bounded_replay_trajectory.npz"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/replay_check_1795358200250943168/replay_check.log",
+        "name": "replay_check.log"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795357221856795449/learning.json",
+        "name": "learning.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795357221856795449/experiment.json",
+        "name": "experiment.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795357221856795449/rollout_scene.usdc",
+        "name": "rollout_scene.usdc"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795357221856795449/kit.log",
+        "name": "kit.log"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795357221856795449/000_demonstrated_layout.npz",
+        "name": "000_demonstrated_layout.npz"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795357221856795449/acceptance.json",
+        "name": "acceptance.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795357221856795449/isaac_learning.log",
+        "name": "isaac_learning.log"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795357221856795449/expert_learning_report.json",
+        "name": "expert_learning_report.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795357221856795449/experience_checklist.json",
+        "name": "experience_checklist.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795357221856795449/episodes.json",
+        "name": "episodes.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795357221856795449/action_program.json",
+        "name": "action_program.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795357221856795449/model_response.json",
+        "name": "model_response.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795357221856795449/verification/model_response.json",
+        "name": "model_response.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795357221856795449/verification/codex_cli/a79c307ca8bf409aaf618da03fc696d2/output_schema.json",
+        "name": "output_schema.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795357221856795449/verification/codex_cli/a79c307ca8bf409aaf618da03fc696d2/final.json",
+        "name": "final.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795357221856795449/verification/codex_cli/a79c307ca8bf409aaf618da03fc696d2/stderr.log",
+        "name": "stderr.log"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795357221856795449/verification/codex_cli/a79c307ca8bf409aaf618da03fc696d2/events.jsonl",
+        "name": "events.jsonl"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795357221856795449/verification/codex_cli/a79c307ca8bf409aaf618da03fc696d2/prompt.txt",
+        "name": "prompt.txt"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795357221856795449/codex_cli/b47983bd8b6e4d0aa030bd2149ba4be9/output_schema.json",
+        "name": "output_schema.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795357221856795449/codex_cli/b47983bd8b6e4d0aa030bd2149ba4be9/final.json",
+        "name": "final.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795357221856795449/codex_cli/b47983bd8b6e4d0aa030bd2149ba4be9/stderr.log",
+        "name": "stderr.log"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795357221856795449/codex_cli/b47983bd8b6e4d0aa030bd2149ba4be9/events.jsonl",
+        "name": "events.jsonl"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795357221856795449/codex_cli/b47983bd8b6e4d0aa030bd2149ba4be9/prompt.txt",
+        "name": "prompt.txt"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/replay_check_1795355906485025456/recorded_trajectory.npz",
+        "name": "recorded_trajectory.npz"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/replay_check_1795355906485025456/replay_preflight.json",
+        "name": "replay_preflight.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/replay_check_1795355906485025456/bounded_replay_trajectory.npz",
+        "name": "bounded_replay_trajectory.npz"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/replay_check_1795355906485025456/replay_check.log",
+        "name": "replay_check.log"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/replay_check_1795357457185444168/recorded_trajectory.npz",
+        "name": "recorded_trajectory.npz"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/replay_check_1795357457185444168/replay_preflight.json",
+        "name": "replay_preflight.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/replay_check_1795357457185444168/bounded_replay_trajectory.npz",
+        "name": "bounded_replay_trajectory.npz"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/replay_check_1795357457185444168/replay_check.log",
+        "name": "replay_check.log"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795358613801902297/learning.json",
+        "name": "learning.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795358613801902297/003_demonstrated_layout.npz",
+        "name": "003_demonstrated_layout.npz"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795358613801902297/experiment.json",
+        "name": "experiment.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795358613801902297/rollout_scene.usdc",
+        "name": "rollout_scene.usdc"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795358613801902297/kit.log",
+        "name": "kit.log"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795358613801902297/000_demonstrated_layout.npz",
+        "name": "000_demonstrated_layout.npz"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795358613801902297/002_demonstrated_layout.npz",
+        "name": "002_demonstrated_layout.npz"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795358613801902297/isaac_learning.log",
+        "name": "isaac_learning.log"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795358613801902297/expert_learning_report.json",
+        "name": "expert_learning_report.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795358613801902297/episodes.json",
+        "name": "episodes.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795358613801902297/001_demonstrated_layout.npz",
+        "name": "001_demonstrated_layout.npz"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795358613801902297/replay_check_1795358613803117452/recorded_trajectory.npz",
+        "name": "recorded_trajectory.npz"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795358613801902297/replay_check_1795358613803117452/replay_preflight.json",
+        "name": "replay_preflight.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795358613801902297/replay_check_1795358613803117452/bounded_replay_trajectory.npz",
+        "name": "bounded_replay_trajectory.npz"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795358613801902297/replay_check_1795358613803117452/replay_check.log",
+        "name": "replay_check.log"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795358625915068307/learning.json",
+        "name": "learning.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795358625915068307/003_demonstrated_layout.npz",
+        "name": "003_demonstrated_layout.npz"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795358625915068307/004_demonstrated_layout.npz",
+        "name": "004_demonstrated_layout.npz"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795358625915068307/experiment.json",
+        "name": "experiment.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795358625915068307/rollout_scene.usdc",
+        "name": "rollout_scene.usdc"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795358625915068307/kit.log",
+        "name": "kit.log"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795358625915068307/000_demonstrated_layout.npz",
+        "name": "000_demonstrated_layout.npz"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795358625915068307/002_demonstrated_layout.npz",
+        "name": "002_demonstrated_layout.npz"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795358625915068307/isaac_learning.log",
+        "name": "isaac_learning.log"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795358625915068307/expert_learning_report.json",
+        "name": "expert_learning_report.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795358625915068307/episodes.json",
+        "name": "episodes.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795358625915068307/001_demonstrated_layout.npz",
+        "name": "001_demonstrated_layout.npz"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795358625915068307/replay_check_1795358625916297804/recorded_trajectory.npz",
+        "name": "recorded_trajectory.npz"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795358625915068307/replay_check_1795358625916297804/replay_preflight.json",
+        "name": "replay_preflight.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795358625915068307/replay_check_1795358625916297804/bounded_replay_trajectory.npz",
+        "name": "bounded_replay_trajectory.npz"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795358625915068307/replay_check_1795358625916297804/replay_check.log",
+        "name": "replay_check.log"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795355915903931080/scene_repair_1795355915910963191/repair_history.json",
+        "name": "repair_history.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795355915903931080/scene_repair_1795355915910963191/attempt_1/model_response.json",
+        "name": "model_response.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795355915903931080/scene_repair_1795355915910963191/attempt_1/codex_cli/8db767e7d0164d3fbfcbf0854c8600c4/output_schema.json",
+        "name": "output_schema.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795355915903931080/scene_repair_1795355915910963191/attempt_1/codex_cli/8db767e7d0164d3fbfcbf0854c8600c4/final.json",
+        "name": "final.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795355915903931080/scene_repair_1795355915910963191/attempt_1/codex_cli/8db767e7d0164d3fbfcbf0854c8600c4/stderr.log",
+        "name": "stderr.log"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795355915903931080/scene_repair_1795355915910963191/attempt_1/codex_cli/8db767e7d0164d3fbfcbf0854c8600c4/events.jsonl",
+        "name": "events.jsonl"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/approach_scene_recheck_1795355915903931080/scene_repair_1795355915910963191/attempt_1/codex_cli/8db767e7d0164d3fbfcbf0854c8600c4/prompt.txt",
+        "name": "prompt.txt"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795358200095506740/learning.json",
+        "name": "learning.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795358200095506740/experiment.json",
+        "name": "experiment.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795358200095506740/rollout_scene.usdc",
+        "name": "rollout_scene.usdc"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795358200095506740/kit.log",
+        "name": "kit.log"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795358200095506740/000_demonstrated_layout.npz",
+        "name": "000_demonstrated_layout.npz"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795358200095506740/acceptance.json",
+        "name": "acceptance.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795358200095506740/isaac_learning.log",
+        "name": "isaac_learning.log"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795358200095506740/expert_learning_report.json",
+        "name": "expert_learning_report.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795358200095506740/experience_checklist.json",
+        "name": "experience_checklist.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795358200095506740/episodes.json",
+        "name": "episodes.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795358200095506740/action_program.json",
+        "name": "action_program.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795358200095506740/model_response.json",
+        "name": "model_response.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795358200095506740/verification/model_response.json",
+        "name": "model_response.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795358200095506740/verification/codex_cli/4d818467466443f7b9ac267a12253c28/output_schema.json",
+        "name": "output_schema.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795358200095506740/verification/codex_cli/4d818467466443f7b9ac267a12253c28/final.json",
+        "name": "final.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795358200095506740/verification/codex_cli/4d818467466443f7b9ac267a12253c28/stderr.log",
+        "name": "stderr.log"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795358200095506740/verification/codex_cli/4d818467466443f7b9ac267a12253c28/events.jsonl",
+        "name": "events.jsonl"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795358200095506740/verification/codex_cli/4d818467466443f7b9ac267a12253c28/prompt.txt",
+        "name": "prompt.txt"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795358200095506740/codex_cli/83c4ab410d5c4187bfe3aa1ab7b56a0d/output_schema.json",
+        "name": "output_schema.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795358200095506740/codex_cli/83c4ab410d5c4187bfe3aa1ab7b56a0d/final.json",
+        "name": "final.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795358200095506740/codex_cli/83c4ab410d5c4187bfe3aa1ab7b56a0d/stderr.log",
+        "name": "stderr.log"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795358200095506740/codex_cli/83c4ab410d5c4187bfe3aa1ab7b56a0d/events.jsonl",
+        "name": "events.jsonl"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795358200095506740/codex_cli/83c4ab410d5c4187bfe3aa1ab7b56a0d/prompt.txt",
+        "name": "prompt.txt"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/replay_check_1795360709647873898/recorded_trajectory.npz",
+        "name": "recorded_trajectory.npz"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/replay_check_1795360709647873898/replay_preflight.json",
+        "name": "replay_preflight.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/replay_check_1795360709647873898/bounded_replay_trajectory.npz",
+        "name": "bounded_replay_trajectory.npz"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/replay_check_1795360709647873898/replay_check.log",
+        "name": "replay_check.log"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/diagnosis_1795361081650061794/diagnosis.json",
+        "name": "diagnosis.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/diagnosis_1795361081650061794/codex_cli/fa1296ce39fe444bbbe3e0eb6f7e437e/output_schema.json",
+        "name": "output_schema.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/diagnosis_1795361081650061794/codex_cli/fa1296ce39fe444bbbe3e0eb6f7e437e/final.json",
+        "name": "final.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/diagnosis_1795361081650061794/codex_cli/fa1296ce39fe444bbbe3e0eb6f7e437e/stderr.log",
+        "name": "stderr.log"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/diagnosis_1795361081650061794/codex_cli/fa1296ce39fe444bbbe3e0eb6f7e437e/events.jsonl",
+        "name": "events.jsonl"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/diagnosis_1795361081650061794/codex_cli/fa1296ce39fe444bbbe3e0eb6f7e437e/prompt.txt",
+        "name": "prompt.txt"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795353894277089437/experience_checklist.json",
+        "name": "experience_checklist.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795353894277089437/action_program.json",
+        "name": "action_program.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795353894277089437/model_response.json",
+        "name": "model_response.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795353894277089437/verification/codex_cli/f43886660c7149a6b1d27dc15181a8d6/output_schema.json",
+        "name": "output_schema.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795353894277089437/verification/codex_cli/f43886660c7149a6b1d27dc15181a8d6/final.json",
+        "name": "final.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795353894277089437/verification/codex_cli/f43886660c7149a6b1d27dc15181a8d6/stderr.log",
+        "name": "stderr.log"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795353894277089437/verification/codex_cli/f43886660c7149a6b1d27dc15181a8d6/events.jsonl",
+        "name": "events.jsonl"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795353894277089437/verification/codex_cli/f43886660c7149a6b1d27dc15181a8d6/prompt.txt",
+        "name": "prompt.txt"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795353894277089437/codex_cli/7c1f2da735fe401cbc036cc159e37c6e/output_schema.json",
+        "name": "output_schema.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795353894277089437/codex_cli/7c1f2da735fe401cbc036cc159e37c6e/final.json",
+        "name": "final.json"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795353894277089437/codex_cli/7c1f2da735fe401cbc036cc159e37c6e/stderr.log",
+        "name": "stderr.log"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795353894277089437/codex_cli/7c1f2da735fe401cbc036cc159e37c6e/events.jsonl",
+        "name": "events.jsonl"
+      },
+      {
+        "path": "runs/d89cc5bb00a24ba9/simulation/action_program_1795353894277089437/codex_cli/7c1f2da735fe401cbc036cc159e37c6e/prompt.txt",
+        "name": "prompt.txt"
+      }
+    ]
+  }
+}

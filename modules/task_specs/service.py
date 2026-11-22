@@ -24,9 +24,13 @@ def _hash(path):
         while chunk:=stream.read(1024*1024):digest.update(chunk)
     return digest.hexdigest()
 
-def _folder(root,task_id):
+def _folder(root,task_id,run_dir=None):
     if not re.fullmatch(r'[A-Za-z0-9_-]{1,80}',str(task_id)):raise ValueError('Invalid task identity')
-    root=Path(root).resolve();path=root/'runs'/task_id/'task_spec';current=path
+    root=Path(root).resolve();runs=root/'runs'
+    directory=root/run_dir if run_dir is not None else runs/task_id
+    if not directory.is_relative_to(runs) or directory.name!=task_id or '..' in directory.parts:
+        raise ValueError('Task directory does not match run identity')
+    path=directory/'task_spec';current=path
     while current!=root:
         if current.is_symlink():raise ValueError('Task revision directories cannot traverse symlinks')
         current=current.parent
@@ -34,8 +38,8 @@ def _folder(root,task_id):
     return path
 
 @contextmanager
-def _locked(root,task_id):
-    directory=_folder(root,task_id);directory.mkdir(parents=True,exist_ok=True)
+def _locked(root,task_id,run_dir):
+    directory=_folder(root,task_id,run_dir);directory.mkdir(parents=True,exist_ok=True)
     with (directory/'.revision.lock').open('a') as stream:
         fcntl.flock(stream,fcntl.LOCK_EX)
         try:yield directory
@@ -63,24 +67,24 @@ def _profile(root,identifier):
         if item['id']==identifier:return item
     raise ValueError('Profile is not registered; select an explicit registered profile')
 
-def _latest(root,task_id):
-    paths=sorted((_folder(root,task_id)/'revisions').glob('r*.json'))
+def _latest(directory):
+    paths=sorted((directory/'revisions').glob('r*.json'))
     if not paths:return None
     path=paths[-1];spec=json.loads(path.read_text());validate_task_spec(spec)
     if spec.get('content_hash')!=canonical_hash(spec):raise ValueError('Stored task revision content hash mismatch')
     return spec,path
 
-def _wrapper(root,task_id,latest=None):
-    latest=latest or _latest(root,task_id)
+def _wrapper(root,directory,latest=None):
+    latest=latest or _latest(directory)
     if latest is None:raise FileNotFoundError('Task spec has not been generated')
-    spec,path=latest;directory=_folder(root,task_id)
+    spec,path=latest
     history=[]
     for file in sorted((directory/'revisions').glob('r*.json')):
         value=json.loads(file.read_text());history.append({k:value.get(k) for k in ('revision','state','content_hash','created_at','profile_id')}|{'spec_path':str(file.relative_to(root))})
     snapshots=[str(p.relative_to(root)) for p in sorted((directory/'frozen').glob('*.json'))]
     return {'spec':spec,'spec_path':str(path.relative_to(root)),'etag':'"r'+str(spec['revision'])+'-'+spec['content_hash']+'"','history':history,'freeze_snapshots':snapshots,'contact_execution_authorized':False,'artifacts':[{'path':str(path.relative_to(root)),'sha256':_hash(path),'name':'Task spec r'+str(spec['revision'])}]}
 
-def get(root,task_id):return _wrapper(Path(root).resolve(),task_id)
+def get(root,task_id,*,run_dir=None):return _wrapper(Path(root).resolve(),_folder(root,task_id,run_dir))
 
 def _expect(current,expected_revision=None,etag=None):
     if current is None:
@@ -113,6 +117,8 @@ def _assets(root,spec):
             if arm.get(key):refs.append(arm[key])
         camera=arm.get('camera') or {}
         if camera.get('calibration_path'):refs.append(camera['calibration_path'])
+    recorded=robot.get('recorded_rig') or {}
+    refs.extend(recorded.get('assets',{}))
     result={str(_file(root,value).relative_to(root)):_hash(_file(root,value)) for value in sorted(set(refs))}
     profile=_profile(root,spec.get('profile_id'))
     if profile:
@@ -146,9 +152,9 @@ def _commit(root,directory,spec):
     spec['dependency_hashes']['evidence']=_reference_hashes(root,spec)
     spec['content_hash']=canonical_hash(spec);validate_task_spec(spec)
     path=directory/'revisions'/('r'+str(spec['revision']).zfill(6)+'.json');_write(path,spec)
-    return _wrapper(root,spec['task_id'],(spec,path))
+    return _wrapper(root,directory,(spec,path))
 
-def generate(root,task_id,*,inputs=None,dependencies=None,profile_id=None,expected_revision=None,etag=None):
+def generate(root,task_id,*,inputs=None,dependencies=None,profile_id=None,expected_revision=None,etag=None,run_dir=None):
     root=Path(root).resolve();inputs=inputs or {};dependencies=dependencies or {}
     profile_id=profile_id if profile_id is not None else inputs.get('profile_id')
     geometry=dependencies.get('geometry') or {}
@@ -163,14 +169,14 @@ def generate(root,task_id,*,inputs=None,dependencies=None,profile_id=None,expect
     selection_scope=geometry.get('asset_selection_scope','explicit_task_assets' if inputs.get('asset_paths') else 'project_inventory_unbound')
     if profile_id is None and len(matches)==1 and selection_scope=='explicit_task_assets':profile_id=matches[0];assignment='hash_matched_template_draft'
     profile=_profile(root,profile_id)
-    with _locked(root,task_id) as directory:
-        current=_latest(root,task_id);_expect(current,expected_revision,etag)
+    with _locked(root,task_id,run_dir) as directory:
+        current=_latest(directory);_expect(current,expected_revision,etag)
         defaults=copy.deepcopy(profile.get('defaults',{})) if profile else {}
         source={'run_id':task_id,'synthetic_test_fixture':profile.get('synthetic_test_fixture',False) if profile else False};evidence={};unresolved=[]
         bindings={'manifest_path':('demo_import','manifest_path','demo_import/manifest.json'),'proposal_path':('task_analysis','report_path','task_analysis/task_proposal.json'),'geometry_report_path':('geometry','report_path','geometry/geometry_audit.json')}
         for name,(stage,key,fallback) in bindings.items():
             value=(dependencies.get(stage) or {}).get(key)
-            if not value and (root/'runs'/task_id/fallback).is_file():value=str((root/'runs'/task_id/fallback).relative_to(root))
+            if not value and (directory.parent/fallback).is_file():value=str((directory.parent/fallback).relative_to(root))
             source[name]=value
             if value:
                 path=_file(root,value);source[name]=str(path.relative_to(root));evidence[source[name]]=_hash(path)
@@ -219,13 +225,24 @@ def generate(root,task_id,*,inputs=None,dependencies=None,profile_id=None,expect
         if assignment=='hash_matched_template_draft':
             spec['assumptions'].append('Unique registered mesh path+hash match binds a template draft only; poses, mass, calibration and contact assumptions remain unverified for this demonstration.')
             spec['field_provenance']['/assumptions/'+str(len(spec['assumptions'])-1)]={'source':'geometry_hash_match','evidence_refs':[source['geometry_report_path']] if source.get('geometry_report_path') else [],'validation_scope':'unverified_template_binding'}
+        from modules.rig_binding import discover
+        metadata=(dependencies.get('demo_import') or {}).get('metadata',{})
+        rig=discover(root,metadata,inputs.get('calibration_bundle'))
+        if rig:
+            spec['robot']['recorded_rig']=rig
+            spec['dependency_hashes']['assets'].update(rig['assets'])
+            refs={item['path']:item['sha256'] for item in rig['calibration_files'].values()}
+            spec['dependency_hashes']['evidence'].update(refs)
+            spec['field_provenance']['/robot/recorded_rig']={'source':'local_robot_and_calibration',
+                'evidence_refs':list(refs),'validation_scope':rig['status']}
+            spec['unresolved'].append(rig['message'])
         spec['unresolved']=[value for value in spec['unresolved'] if not isinstance(value,str) or not value.startswith('schema_unknown: ')]+task_unknowns(spec)
         return _commit(root,directory,spec)
 
-def save(root,task_id,value,*,expected_revision=None,etag=None):
+def save(root,task_id,value,*,expected_revision=None,etag=None,run_dir=None):
     root=Path(root).resolve()
-    with _locked(root,task_id) as directory:
-        current=_latest(root,task_id)
+    with _locked(root,task_id,run_dir) as directory:
+        current=_latest(directory)
         if current is None:raise FileNotFoundError('Generate a task spec before editing')
         _expect(current,expected_revision,etag);previous=current[0];_verify_dependencies(root,previous)
         spec=copy.deepcopy(value)
@@ -241,17 +258,17 @@ def save(root,task_id,value,*,expected_revision=None,etag=None):
         spec['unresolved']=[value for value in spec['unresolved'] if not isinstance(value,str) or not value.startswith('schema_unknown: ')]+task_unknowns(spec)
         return _commit(root,directory,spec)
 
-def freeze(root,task_id,*,expected_revision=None,etag=None,scope=None):
+def freeze(root,task_id,*,expected_revision=None,etag=None,scope=None,run_dir=None):
     if scope!='offline_contract':raise ValueError('Freeze scope must explicitly be offline_contract; no execution permission is granted')
     root=Path(root).resolve()
-    with _locked(root,task_id) as directory:
-        current=_latest(root,task_id)
+    with _locked(root,task_id,run_dir) as directory:
+        current=_latest(directory)
         if current is None:raise FileNotFoundError('Task spec does not exist')
         _expect(current,expected_revision,etag);_verify_dependencies(root,current[0])
         spec=copy.deepcopy(current[0])
         if spec['state']!='frozen':
             spec.update(revision=spec['revision']+1,state='frozen',created_at=_time(),frozen_at=_time());result=_commit(root,directory,spec)
-        else:result=_wrapper(root,task_id,current)
+        else:result=_wrapper(root,directory,current)
         snapshot=directory/'frozen'/(spec['content_hash']+'.json')
         if not snapshot.exists():_write(snapshot,spec)
         result['freeze_snapshots']=[str(p.relative_to(root)) for p in sorted((directory/'frozen').glob('*.json'))]
@@ -259,19 +276,22 @@ def freeze(root,task_id,*,expected_revision=None,etag=None,scope=None):
         result['artifacts'].append({'path':str(snapshot.relative_to(root)),'sha256':_hash(snapshot),'name':'Frozen offline contract'})
         return result
 
-def pin(root,task_id,*,expected_revision=None,etag=None):
+def pin(root,task_id,*,expected_revision=None,etag=None,run_dir=None):
     root=Path(root).resolve()
-    with _locked(root,task_id):
-        current=_latest(root,task_id)
+    with _locked(root,task_id,run_dir) as directory:
+        current=_latest(directory)
         if current is None:raise FileNotFoundError('Task spec does not exist')
-        _expect(current,expected_revision,etag);_verify_dependencies(root,current[0]);return _wrapper(root,task_id,current)
+        _expect(current,expected_revision,etag);_verify_dependencies(root,current[0]);return _wrapper(root,directory,current)
 
 def run(ctx):
     root=Path(ctx['root']).resolve();task_id=ctx['run_id']
-    if _latest(root,task_id) is not None:result=get(root,task_id)
-    else:result=generate(root,task_id,inputs=ctx['input'],dependencies=ctx.get('dependencies',{}),profile_id=ctx['input'].get('profile_id'))
+    run_dir=Path(ctx['output_dir']).parent
+    if _latest(_folder(root,task_id,run_dir)) is not None:result=get(root,task_id,run_dir=run_dir)
+    else:result=generate(root,task_id,inputs=ctx['input'],dependencies=ctx.get('dependencies',{}),profile_id=ctx['input'].get('profile_id'),run_dir=run_dir)
     ctx['emit']('task_spec.generated',{'revision':result['spec']['revision'],'content_hash':result['spec']['content_hash'],'profile_id':result['spec']['profile_id']})
-    return {'status':'completed','spec_path':result['spec_path'],'spec_hash':result['spec']['content_hash'],'revision':result['spec']['revision'],'profile_id':result['spec']['profile_id'],'state':result['spec']['state'],'unresolved':result['spec']['unresolved'],'quality_state':'draft_unverified','contact_execution_authorized':False}
+    spec=result['spec'];rig=spec['robot'].get('recorded_rig')
+    return {'status':'completed','spec_path':result['spec_path'],'spec_hash':spec['content_hash'],'revision':spec['revision'],'profile_id':spec['profile_id'],'state':spec['state'],'unresolved':spec['unresolved'],'quality_state':'draft_unverified','contact_execution_authorized':False,
+            **({'rig_binding_status':rig['status'],'calibration_bundle':rig.get('bundle_id')} if rig else {})}
 
 
 def load_snapshot(root,spec_path,expected_hash=None):

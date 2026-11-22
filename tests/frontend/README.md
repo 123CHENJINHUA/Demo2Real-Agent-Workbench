@@ -5,7 +5,7 @@
 - `browser_smoke.py`：首次页面/目录浏览/转换数据任务创建。会创建一个真实任务。
 - `real_demo_acceptance.py`：本次历史验收run的重试和原始LeRobot示教复制审查，绑定本次run ID。
 - `layout_acceptance.py`：复用已存在原始示教run，核验联系图、全部工件访问、分类/搜索/限高和移动布局。不导入新数据。
-- `policy_acceptance.py`：应用当前脚本策略离线配置，核验无权重神经策略拒绝，并读取硬件状态确认未连接和发送数为0。
+- `policy_acceptance.py`：应用离线脚本策略配置，核验无权重神经策略被拒绝、实际策略包清单可读、移动端无横向溢出，并检查页面请求。
 
 依赖：宿主Chrome、Python websocket-client。测试服务/调试端口为8787/9338。截图与报告位于 `runs/acceptance/frontend/`。Chrome启动参数见 `frontend/README.md`。
 

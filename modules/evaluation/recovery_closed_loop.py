@@ -3,13 +3,14 @@ from pathlib import Path
 import json,hashlib
 import numpy as np
 from backend.store import Store
+from contracts.artifacts import batch_directory
 
 def evaluate(root,batch_id,learning_run):
  root=Path(root).resolve();store=Store(root/'.runtime/workbench.sqlite3');learning=store.get_run(learning_run)
  deployed=next(t['result'] for t in learning['tasks'] if t['stage']=='recovery_deployment' and t['status']=='succeeded');package=root/deployed['package'];policy=package/'policy.npz';policy_sha=hashlib.sha256(policy.read_bytes()).hexdigest()
  manifest=json.loads((package/'manifest.json').read_text());classification=json.loads((package/'evaluation.json').read_text())
  if policy_sha!=manifest['policy_sha256'] or policy_sha!=classification['checkpoint_sha256']:raise ValueError('Deployed weights changed after classification evaluation')
- batch=root/'runs'/batch_id;submission=json.loads((batch/'submitted.json').read_text());suite=json.loads((batch/'suite.json').read_text())
+ batch=batch_directory(root,batch_id);submission=json.loads((batch/'submitted.json').read_text());suite=json.loads((batch/'suite.json').read_text())
  if suite['id'] not in ('connector_recovery_student_v1','connector_recovery_student_v2'):raise ValueError('Explicit student suite required')
  if len(suite['cases'])!=6 or len(submission['runs'])!=6 or {e['case_id'] for e in submission['runs']}!={c['id'] for c in suite['cases']}:raise ValueError('All six frozen student cases required')
  results=[]

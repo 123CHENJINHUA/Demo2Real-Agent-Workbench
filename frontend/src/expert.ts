@@ -25,9 +25,10 @@ export function expertOutcome(tasks:any[],report:any=null){
  const overall=metric('full_task_passed');const action=metric('action_passed');
  return {grasp:stage('grasp',grasp),insertion:stage('insertion',null),release:stage('release',raw.released_from_fingers),retention,action,overall:retention===false?false:overall,inconsistent:overall===true&&retention===false,independent};
 }
-export function selectExpertArtifacts(runId:string,artifacts:any[],tasks:any[]){
- const local=artifacts.filter(a=>a.id&&a.path?.startsWith('runs/'+runId+'/'));
+export function selectExpertArtifacts(runId:string,artifacts:any[],tasks:any[],outputDirectory?:string){
+ const prefix=(outputDirectory||'runs/'+runId)+'/';
+ const local=artifacts.filter(a=>a.id&&a.path?.startsWith(prefix));
  const execution=tasks.find(t=>t.stage==='expert_execution')?.result||{};const validation=tasks.find(t=>t.stage==='expert_validation')?.result||{};
- const match=(path:string|undefined,suffix:string,stage:string)=>local.find(a=>path&&a.path===path)||local.filter(a=>a.path.startsWith('runs/'+runId+'/'+stage+'/')&&a.path.endsWith('/'+suffix)).sort((a,b)=>(b.created_at||0)-(a.created_at||0))[0]||null;
+ const match=(path:string|undefined,suffix:string,stage:string)=>local.find(a=>path&&a.path===path)||local.filter(a=>a.path.startsWith(prefix+stage+'/')&&a.path.endsWith('/'+suffix)).sort((a,b)=>(b.created_at||0)-(a.created_at||0))[0]||null;
  return {report:match(execution.report_path,'expert_report.json','expert_execution'),validation:match(validation.report_path,'validation_report.json','expert_validation'),trajectory:execution.trajectory_path?local.find(a=>a.path===execution.trajectory_path)||null:null};
 }

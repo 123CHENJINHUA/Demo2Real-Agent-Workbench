@@ -42,10 +42,14 @@ def create(root,role,*,clock=None,reference=None):
     raise ValueError("Unimplemented policy")
 
 def list_packages(root):
-    root=Path(root).resolve();items=[];directory=root/"deployments"
-    if directory.exists():
-        for p in directory.glob("*/manifest.json"):
-            if p.is_symlink() or not p.resolve().is_relative_to(root):continue
+    root=Path(root).resolve();items=[]
+    patterns=("deployments/*/manifest.json","runs/*/deployment/manifest.json",
+              "runs/*/recovery_deployment/*/manifest.json",
+              "runs/*/derived/*/deployment/manifest.json",
+              "runs/*/derived/*/recovery_deployment/*/manifest.json")
+    for pattern in patterns:
+        for p in sorted(root.glob(pattern)):
+            if p.resolve()!=p:continue
             try:
                 m=json.loads(p.read_text());items.append({"path":str(p.parent.relative_to(root)),"manifest":m})
             except (ValueError,OSError):continue

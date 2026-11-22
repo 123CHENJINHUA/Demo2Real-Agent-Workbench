@@ -1,9 +1,13 @@
 export type ProviderKind='openai_compatible'|'codex_cli';
-export interface ProviderDraft{kind:ProviderKind;model:string;base_url?:string;api_key?:string;timeout?:number}
+export interface ProviderDraft{kind:ProviderKind;model:string;base_url?:string;api_key?:string;timeout?:number;reasoning_effort?:string}
 export function buildProviderPayload(draft:ProviderDraft){
  if(!['openai_compatible','codex_cli'].includes(draft.kind))throw new Error('未知模型服务类型');
  const timeout=Number(draft.timeout??90);if(!Number.isFinite(timeout)||timeout<1||timeout>300)throw new Error('模型请求超时须在1–300秒内');
- if(draft.kind==='codex_cli')return {kind:'codex_cli',model:draft.model.trim(),timeout};
+ if(draft.kind==='codex_cli'){
+  const effort=draft.reasoning_effort?.trim();
+  if(effort&&!/^[a-z][a-z0-9_-]{0,31}$/.test(effort))throw new Error('推理强度须填写模型支持的值，例如 high，或留空');
+  return {kind:'codex_cli',model:draft.model.trim(),timeout,...(effort===undefined?{}:{reasoning_effort:effort})};
+ }
  const payload:{kind:string;model:string;timeout:number;base_url:string;api_key?:string}={kind:'openai_compatible',model:draft.model.trim(),timeout,base_url:(draft.base_url||'').trim()};
  if(draft.api_key?.trim())payload.api_key=draft.api_key.trim();
  return payload;

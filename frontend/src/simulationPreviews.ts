@@ -1,7 +1,7 @@
 export interface PreviewArtifact {id:string;path:string;name?:string;media_type?:string;created_at?:number}
-export function selectLatestSimulationPanel(artifacts:PreviewArtifact[],runId:string|undefined){
+export function selectLatestSimulationPanel(artifacts:PreviewArtifact[],runId:string|undefined,outputDirectory?:string){
  if(!runId)return null;
- const prefix='runs/'+runId+'/simulation/';
+ const prefix=(outputDirectory||'runs/'+runId)+'/simulation/';
  const candidates=artifacts.flatMap(artifact=>{
   if(!artifact.id||!artifact.path?.startsWith(prefix))return [];
   const match=artifact.path.slice(prefix.length).match(/^isaac_(\d+)\/(?:[^/]+\/)*vision\/visualization\/frame_(\d+(?:\.\d+)?)\/panels\.png$/);

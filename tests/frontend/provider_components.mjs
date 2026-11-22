@@ -8,6 +8,10 @@ import {buildProviderPayload,codexConnectionView,officialDeviceLoginUrl,resultMo
 const local=buildProviderPayload({kind:'codex_cli',model:'',base_url:'http://not-used.invalid',api_key:'test-fixture-key',timeout:180});
 assert.deepEqual(local,{kind:'codex_cli',model:'',timeout:180});
 assert.ok(!('api_key' in local)&&!('base_url' in local));
+assert.equal(buildProviderPayload({kind:'codex_cli',model:'gpt-6.2-sol',reasoning_effort:' high '}).reasoning_effort,'high');
+assert.equal(buildProviderPayload({kind:'codex_cli',model:'gpt-6.2-sol',reasoning_effort:''}).reasoning_effort,'');
+assert.throws(()=>buildProviderPayload({kind:'codex_cli',model:'gpt-6.2-sol',reasoning_effort:'high invalid'}));
+assert.ok(!('reasoning_effort' in buildProviderPayload({kind:'openai_compatible',model:'test-model',reasoning_effort:'high'})));
 assert.deepEqual(buildProviderPayload({kind:'openai_compatible',model:' test-model ',base_url:' http://127.0.0.1:8000/v1 ',api_key:'',timeout:90}),{kind:'openai_compatible',model:'test-model',base_url:'http://127.0.0.1:8000/v1',timeout:90});
 assert.equal(buildProviderPayload({kind:'openai_compatible',model:'m',api_key:' test-only ',timeout:90}).api_key,'test-only');
 for(const timeout of [0,301,NaN,Infinity])assert.throws(()=>buildProviderPayload({kind:'codex_cli',model:'',timeout}));
@@ -28,8 +32,10 @@ const fixture={available:true,authenticated:false,status:'needs_login',executabl
 const html=renderToStaticMarkup(React.createElement(Card,{status:fixture,busy:false,onRefresh:()=>{}}));
 assert.match(html,/项目内待登录/);assert.match(html,/codex fixture-version/);assert.match(html,/\/project\/\.runtime\/codex-home/);assert.ok(!html.includes('项目内已登录'));
 const ready=renderToStaticMarkup(React.createElement(Card,{status:{...fixture,authenticated:true,status:'ready'},busy:false,onRefresh:()=>{}}));assert.match(ready,/项目内已登录/);
-const codexHtml=renderToStaticMarkup(React.createElement(Settings,{notify:()=>{},initialProvider:{kind:'codex_cli',model:''}}));
+const codexHtml=renderToStaticMarkup(React.createElement(Settings,{notify:()=>{},initialProvider:{kind:'codex_cli',model:'gpt-6.2-sol',reasoning_effort:'high'}}));
 assert.ok(!codexHtml.includes('id="api-key"'));assert.ok(!codexHtml.includes('id="base-url"'));assert.match(codexHtml,/开始官方设备登录/);assert.match(codexHtml,/仅/);assert.match(codexHtml,/当前聊天上下文/);
+assert.match(codexHtml,/id="reasoning-effort"[^>]*value="high"/);
 const httpHtml=renderToStaticMarkup(React.createElement(Settings,{notify:()=>{},initialProvider:{kind:'openai_compatible',model:''}}));assert.ok(httpHtml.includes('id="api-key"')&&httpHtml.includes('id="base-url"'));
-const report={status:'passed',pure_payload_and_status_checks:22,component_checks:['project-local unauthenticated status','actual CLI metadata fields','authenticated status requires true flag','Codex hides HTTP address and key','HTTP keeps original fields','no login or inference triggered by SSR'],test_fixtures_only:true,credentials_read:false,official_login_started:false,actual_model_inference_requested:false,backend_restarted:false};
+assert.ok(!httpHtml.includes('id="reasoning-effort"'));
+const report={status:'passed',pure_payload_and_status_checks:26,component_checks:['project-local unauthenticated status','actual CLI metadata fields','authenticated status requires true flag','Codex hides HTTP address and key','Codex renders the configured effort','HTTP keeps original fields','no login or inference triggered by SSR'],test_fixtures_only:true,credentials_read:false,official_login_started:false,actual_model_inference_requested:false,backend_restarted:false};
 const out=new URL('../../runs/acceptance/frontend/',import.meta.url);await mkdir(out,{recursive:true});await writeFile(new URL('codex-components-report.json',out),JSON.stringify(report,null,2));console.log(JSON.stringify(report));

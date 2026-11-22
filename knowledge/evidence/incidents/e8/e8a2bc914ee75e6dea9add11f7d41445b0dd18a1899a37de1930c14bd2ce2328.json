@@ -1,0 +1,12 @@
+{
+  "error": "No upstream experience checklist supplied. Query applicable cases before functional modeling; this worker does not directly import experience implementation.",
+  "result": {
+    "code": "experience_review_missing",
+    "primary_category": "workflow_integrity",
+    "stage": "asset_modeling",
+    "severity": "review",
+    "status": "open",
+    "message": "No upstream experience checklist supplied. Query applicable cases before functional modeling; this worker does not directly import experience implementation.",
+    "hardware_verified": false
+  }
+}

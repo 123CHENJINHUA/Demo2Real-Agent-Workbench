@@ -8,8 +8,16 @@ from pathlib import Path
 import re
 import uuid
 import yaml
+from contracts.experience import IncidentConflict
 
 VERSION = "experience.v1.1"
+FINDING_LABELS = {
+    "functional_frame_unverified": "功能坐标尚未验证",
+    "engineering_profile_geometry_difference": "工程碰撞模型与网格有差异",
+    "grasp_roll_ambiguity": "抓取滚转方向存在歧义",
+    "single_convex_hull_would_fill_voids": "单一凸包会封住网格凹槽",
+    "engineering_profile_unmeasured": "工程参数缺少实测依据",
+}
 
 
 def _root_path(root, relative):
@@ -85,7 +93,7 @@ def _incident_search_record(incident: dict) -> dict:
         "record_type": "incident_unreviewed",
         "source_record_type": "incident",
         "case_id": incident["incident_id"],
-        "title": incident.get("title") or summary[:140] or incident["incident_id"],
+        "title": incident.get("title") or incident.get("finding_title") or summary[:140] or incident["incident_id"],
         "summary": summary,
         "stages": incident.get("stages") or ([incident["stage"]] if incident.get("stage") else []),
         "diagnosis": diagnosis,
@@ -101,7 +109,7 @@ def _incident_search_record(incident: dict) -> dict:
     }
 
 
-def search(root, query: str = "", category=None, stage=None, limit: int = 20) -> list[dict]:
+def search(root, query: str = "", category=None, stage=None, limit: int = 20, *, cases_only=False) -> list[dict]:
     root = Path(root).resolve()
     taxonomy = _load(_root_path(root, "knowledge/taxonomy.yaml"))
     normalized = query.casefold().strip()
@@ -120,7 +128,9 @@ def search(root, query: str = "", category=None, stage=None, limit: int = 20) ->
             matched_features.add(feature)
             feature_matches[feature] = matched
     found = []
-    records = list_cases(root) + [_incident_search_record(item) for item in list_incidents(root)]
+    records = list_cases(root)
+    if not cases_only:
+        records += [_incident_search_record(incident_display(root, item)) for item in list_incidents(root)]
     for case in records:
         if category and category not in [case.get("primary_category"), *case.get("secondary_categories", [])]:
             continue
@@ -144,11 +154,23 @@ def search(root, query: str = "", category=None, stage=None, limit: int = 20) ->
                 reasons.append({"type": "keyword_fragment", "matched": fragment})
         if normalized and not score:
             continue
-        found.append(case | {"match_score": score, "match_reasons": reasons, "reuse_boundary": "Similarity is a review suggestion; revalidate functional frames, dimensions, physics and success criteria in this task. No parameters are applied automatically.", "evidence_verification": verify_evidence(root, case)})
-    return sorted(found, key=lambda c: (-c["match_score"], c["case_id"]))[:max(0, min(int(limit), 100))]
+        found.append(case | {"match_score": score, "match_reasons": reasons, "reuse_boundary": "Similarity is a review suggestion; revalidate functional frames, dimensions, physics and success criteria in this task. No parameters are applied automatically."})
+    found.sort(key=lambda c: (-c["match_score"], c.get("review_status")=="unreviewed"))
+    selected = []
+    seen = set()
+    for case in found:
+        if len(selected) >= max(0, min(int(limit), 100)):
+            break
+        key = finding_key(case)
+        if key is not None and key in seen:
+            continue
+        if key is not None:
+            seen.add(key)
+        selected.append(case | {"evidence_verification": verify_evidence(root, case)})
+    return selected
 
 
-def record_incident(root, payload: dict) -> dict:
+def record_incident(root, payload: dict, *, expected_revision=None) -> dict:
     """Persist an immutable revision; never overwrite original failures or evidence."""
     root = Path(root).resolve()
     taxonomy = _load(_root_path(root, "knowledge/taxonomy.yaml"))
@@ -171,9 +193,12 @@ def record_incident(root, payload: dict) -> dict:
     directory.mkdir(parents=True, exist_ok=True)
     previous = sorted(directory.glob(incident_id + ".r*.json"))
     revision = max([int(path.stem.rsplit(".r", 1)[1]) for path in previous] + [0]) + 1
+    if expected_revision is not None and expected_revision != revision - 1:
+        raise IncidentConflict("记录已有新修订，请重新打开后再提交")
     if revision > 1 and not payload.get("revision_reason"):
         raise ValueError("A revision_reason is required for an existing incident")
     evidence = []
+    snapshotted = set()
     for item in payload.get("evidence", []):
         reference = item if isinstance(item, str) else item.get("path", "")
         if not reference:
@@ -185,8 +210,13 @@ def record_incident(root, payload: dict) -> dict:
         if size > 1024**3:
             raise ValueError("Incident evidence exceeds 1 GiB snapshot budget")
         digest = _digest(path)
+        if isinstance(item, dict) and item.get("sha256") and item["sha256"] != digest:
+            raise ValueError("原证据已变化，不能作为同一份快照追加")
         suffix = path.suffix if re.fullmatch(r"\.[A-Za-z0-9]{1,10}", path.suffix) else ".bin"
         snapshot = _root_path(root, f"knowledge/evidence/incidents/{digest[:2]}/{digest}{suffix}")
+        if snapshot in snapshotted:
+            continue
+        snapshotted.add(snapshot)
         snapshot.parent.mkdir(parents=True, exist_ok=True)
         if not snapshot.exists():
             temporary = snapshot.with_name(snapshot.name + "." + uuid.uuid4().hex + ".tmp")
@@ -206,7 +236,10 @@ def record_incident(root, payload: dict) -> dict:
             temporary.unlink()
         if _digest(snapshot) != digest:
             raise ValueError("Existing evidence snapshot integrity failed")
-        evidence.append({"path": snapshot.relative_to(root).as_posix(), "source_reference": path.relative_to(root).as_posix(), "sha256": digest, "bytes": size})
+        original_path = path.relative_to(root).as_posix()
+        if isinstance(item, dict) and path == snapshot and item.get("sha256") == digest:
+            original_path = item.get("source_reference") or original_path
+        evidence.append({"path": snapshot.relative_to(root).as_posix(), "source_reference": original_path, "sha256": digest, "bytes": size})
     value = dict(payload) | {"schema_version": 1, "record_type": "incident", "incident_id": incident_id, "revision": revision, "timestamp_utc": datetime.now(timezone.utc).isoformat(), "primary_category": category, "stage": stage, "evidence": evidence, "hardware_verified": False}
     # Recording an incident never confers a hardware validation or enables motion.
     path = directory / f"{incident_id}.r{revision:04d}.json"
@@ -221,7 +254,7 @@ def record_incident(root, payload: dict) -> dict:
             # Readers see a complete immutable revision; concurrent writers never overwrite.
             os.link(temporary, path)
         except FileExistsError as exc:
-            raise ValueError("Concurrent revision collision; retry append") from exc
+            raise IncidentConflict("记录已有新修订，请重新打开后再提交") from exc
     finally:
         temporary.unlink(missing_ok=True)
     return value | {"record_path": path.relative_to(root).as_posix()}
@@ -247,6 +280,83 @@ def list_incidents(root, category=None) -> list[dict]:
     return sorted(selected, key=lambda value: (value.get("timestamp_utc", ""), value["incident_id"]), reverse=True)
 
 
+def finding_metadata(result):
+    """Map both validation findings and worker failure records to incident fields."""
+    return {
+        "finding_code": result.get("code"),
+        "primary_category": result.get("failure_category") or result.get("primary_category"),
+        "stage": result.get("failure_stage") or result.get("stage"),
+        "severity": result.get("severity"),
+        "asset_id": result.get("asset_id"),
+        "record_origin": "worker",
+    }
+
+
+def finding_key(incident):
+    code = incident.get("finding_code")
+    if code and incident.get("record_origin")=="worker" and incident.get("revision")==1:
+        return (code, incident.get("primary_category"), incident.get("stage"), incident.get("severity"), incident.get("summary"))
+    return None
+
+
+def incident_display(root, incident):
+    """Recover generic legacy headings from the original, integrity-checked snapshot."""
+    code = incident.get("finding_code")
+    if code:
+        return incident | {"finding_title": FINDING_LABELS.get(code)}
+    if incident.get("summary") != "Partial validation failed" or incident.get("revision") != 1:
+        return incident
+    for item in incident.get("evidence", []):
+        if not isinstance(item, dict) or Path(item.get("source_reference", "")).name != "failure_result.json":
+            continue
+        try:
+            path = _root_path(root, item["path"])
+            if path.stat().st_size > 65536:
+                continue
+            raw = path.read_bytes()
+            if hashlib.sha256(raw).hexdigest() != item.get("sha256"):
+                continue
+            result = json.loads(raw).get("result") or {}
+            if isinstance(result.get("message"), str) and result.get("code"):
+                return incident | finding_metadata(result) | {
+                    "summary": result["message"], "observed_behavior": result["message"],
+                    "finding_title": FINDING_LABELS.get(result["code"]),
+                }
+        except (OSError, ValueError, KeyError, AttributeError):
+            continue
+    return incident
+
+
+def incident_history(root, incident_id):
+    root = Path(root).resolve()
+    if not re.fullmatch(r"INC-[A-Za-z0-9_-]{1,64}", incident_id):
+        return []
+    directory = _root_path(root, "knowledge/incidents")
+    revisions = [
+        json.loads(path.read_text()) | {"record_path": path.relative_to(root).as_posix()}
+        for path in directory.glob(incident_id + ".r*.json")
+        if not path.is_symlink() and path.resolve().is_relative_to(root)
+    ]
+    return sorted(revisions, key=lambda value: int(value["revision"]), reverse=True)
+
+
+def append_incident(root, incident_id, expected_revision, note, check="", evidence=()):
+    history = incident_history(root, incident_id)
+    if not history:
+        raise FileNotFoundError("找不到问题记录")
+    latest = history[0]
+    if expected_revision != latest["revision"]:
+        raise IncidentConflict("记录已有新修订，请重新打开后再提交")
+    viewed = incident_display(root, latest)
+    updated = dict(viewed)
+    updated.pop("record_path", None)
+    updated.pop("finding_title", None)
+    updated.update(revision_reason="追加人工跟进", revision_note=note, evidence=[*latest.get("evidence", []), *evidence])
+    if check:
+        updated["reusable_checklist"] = [*latest.get("reusable_checklist", []), check]
+    return record_incident(root, updated, expected_revision=expected_revision)
+
+
 def run(ctx: dict) -> dict:
     root = Path(ctx["root"]).resolve()
     output = Path(ctx["output_dir"]).resolve()
@@ -258,7 +368,8 @@ def run(ctx: dict) -> dict:
     features = value.get("features", [])
     if isinstance(features, list):
         query += " " + " ".join(str(x) for x in features)
-    cases = search(root, query, value.get("category"), value.get("stage"))
+    filters = (value.get("category"), value.get("stage"))
+    cases = search(root, query, *filters) if query.strip() or any(filters) else []
     checklist = []
     for case in cases:
         for index, check in enumerate(case.get("preventive_checks", [])):

@@ -2,6 +2,8 @@
 
 当前已提供分类检索、证据hash、不可变incident及追加修订、前端页面和任务检查表。自动Worker失败归档已接入；新的incident可参与后续任务检索，保持未审核和已验证范围。
 
+工作台从“经验案例”查看可复用检查项，从“问题记录”按类别、阶段和状态查找实际发生。重复的自动检查可以展开查看各次记录。“追加跟进”保存处理结果、新证据和复用建议，保留原始记录。
+
 - [设计与复用流程](../docs/EXPERIENCE_AND_FAILURE_MEMORY.md)
 - [分类定义](taxonomy.yaml)
 - [单次问题模板](templates/incident_template.yaml)

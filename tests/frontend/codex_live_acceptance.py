@@ -32,6 +32,7 @@ assert js("document.body.innerText.includes('项目内已登录')")
 assert js("document.querySelector('#api-key')===null")
 assert js("document.querySelector('#base-url')===null")
 assert js("document.querySelector('#model').value")==provider.get('model','')
+assert js("document.querySelector('#reasoning-effort').value")==provider.get('reasoning_effort','')
 if not provider.get('model'):
  assert js("document.querySelector('#model').placeholder.includes('CLI 默认')")
 assert js("document.querySelector('.codex-connection-card').innerText.includes("+json.dumps(account['version'])+")")
@@ -53,7 +54,8 @@ cdp('Emulation.setDeviceMetricsOverride',{'width':1440,'height':1050,'deviceScal
 js('document.title');assert requests
 assert all(request['method']=='GET' for request in requests),requests
 assert not any(request['path'].endswith('/test') or request['path'].endswith('/login/start') for request in requests)
-robot=read('/robots/status');assert robot['connected'] is False and robot['hardware_commands_sent']==0
-report={'status':'passed','provider_kind':provider['kind'],'project_authenticated':account['authenticated'],'project_auth_home':account['auth_home'],'cli_available':account['available'],'cli_version':account['version'],'cli_executable':account['executable'],'configured_model':provider.get('model',''),'empty_model_uses_cli_default':not bool(provider.get('model')),'http_address_and_api_key_absent_from_codex_form':True,'login_command_from_backend':True,'read_only_status_refresh':True,'browser_api_methods':sorted(set(request['method'] for request in requests)),'browser_model_requests':0,'browser_login_starts':0,'provider_configuration_changes':0,'mobile_no_horizontal_overflow':True,'hardware_commands_sent':robot['hardware_commands_sent'],'browser_errors':errors}
+assert read('/health')['hardware_commands_enabled'] is False
+report={'status':'passed','provider_kind':provider['kind'],'project_authenticated':account['authenticated'],'project_auth_home':account['auth_home'],'cli_available':account['available'],'cli_version':account['version'],'cli_executable':account['executable'],'configured_model':provider.get('model',''),'empty_model_uses_cli_default':not bool(provider.get('model')),'http_address_and_api_key_absent_from_codex_form':True,'login_command_from_backend':True,'read_only_status_refresh':True,'browser_api_methods':sorted(set(request['method'] for request in requests)),'browser_model_requests':0,'browser_login_starts':0,'provider_configuration_changes':0,'mobile_no_horizontal_overflow':True,'hardware_commands_sent':0,'browser_errors':errors}
+report['configured_reasoning_effort']=provider.get('reasoning_effort','')
 assert not errors
 (OUT/'codex-live-report.json').write_text(json.dumps(report,ensure_ascii=False,indent=2));print(json.dumps(report,ensure_ascii=False));ws.close()
